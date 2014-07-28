@@ -38,13 +38,22 @@ class PlaylistController: UIViewController, UIActionSheetDelegate {
             }}))
 
         //handler: ((UIAlertAction!) -> Void)!)
-        alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: {action in
-            println("ok chosen")
+        alert.addAction(UIAlertAction(title: "Liked", style: .Default, handler: {action in
+            println("liked chosen")
+            /* run a query to see all items > 1 star in itunes
+                merge this with current liked */
+
         }))
         
         alert.addAction(UIAlertAction(title: "New", style: .Default, handler: { action in
             println("new chosen")
             }))
+        
+        if let currentSong = MusicPlayer.currentSong() {
+            alert.addAction(UIAlertAction(title: "More \(currentSong.albumArtist)", style: .Default, handler: { action in
+                println("new chosen")
+                }))
+        }
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
             println("cancel chosen")

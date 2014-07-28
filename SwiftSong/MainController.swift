@@ -40,12 +40,11 @@ class MainController: UIViewController {
 
     @IBAction func dislikeTapped(sender: AnyObject) { handleDislikeTapped()}
     @IBAction func likeTapped(sender: AnyObject) { handleLikeTapped()}
-    @IBAction func playTapped(AnyObject) { musicPlayer.playPressed() }
-    @IBAction func prevTapped(AnyObject) { musicPlayer.reverse() }
-    @IBAction func nextTapped(AnyObject) { musicPlayer.forward() }
+    @IBAction func playTapped(AnyObject) { MusicPlayer.playPressed() }
+    @IBAction func prevTapped(AnyObject) { MusicPlayer.reverse() }
+    @IBAction func nextTapped(AnyObject) { MusicPlayer.forward() }
 
     //MARK: instance variables
-    let musicPlayer = MusicPlayer.get()
     let inSimulator = Utils.inSimulator()
     var lyricsAvailable = false
     var lyricState = LyricState.NotAvailable
@@ -88,11 +87,11 @@ class MainController: UIViewController {
     
     func handleLikeTapped() {
         //if its already liked this will reset it and unset the selected image
-        if gLibraryManager.isLiked(musicPlayer.currentSong()) {
-            gLibraryManager.removeFromLiked(musicPlayer.currentSong())
+        if LibraryManager.isLiked(MusicPlayer.currentSong()) {
+            LibraryManager.removeFromLiked(MusicPlayer.currentSong())
             btnLike.setImage(UIImage(named: "1116-slayer-hand.png"), forState: UIControlState.Normal)
         } else {
-            gLibraryManager.addToLiked(musicPlayer.currentSong())
+            LibraryManager.addToLiked(MusicPlayer.currentSong())
             btnLike.setImage(UIImage(named: "1116-slayer-hand-selected.png"), forState: UIControlState.Normal)
             let v = UIAlertView()
             v.title = "Title"
@@ -103,7 +102,7 @@ class MainController: UIViewController {
     }
     
     func handleDislikeTapped() {
-        gLibraryManager.addToDisliked(musicPlayer.currentSong())
+        LibraryManager.addToDisliked(MusicPlayer.currentSong())
         //reset the liked state
         btnLike.setImage(UIImage(named: "1116-slayer-hand.png"), forState: UIControlState.Normal)
     }
@@ -120,8 +119,8 @@ class MainController: UIViewController {
        
         center.addObserverForName(MPMusicPlayerControllerNowPlayingItemDidChangeNotification,
             object: nil, queue:nil) { _ in
-                if self.musicPlayer.currentSong() != nil {
-                    println("Song changed to \(self.musicPlayer.currentSong().title)")
+                if MusicPlayer.currentSong() != nil {
+                    println("Song changed to \(MusicPlayer.currentSong().title)")
                 }
                 self.updateSongInfo()
                 self.updatePlayState()
@@ -137,12 +136,12 @@ class MainController: UIViewController {
     
     //MARK: notification handlers
     func updateSongInfo() {
-        var item = musicPlayer.currentSong()
+        var item = MusicPlayer.currentSong()
         if item != nil {
             lblArtist.text = "\(item.albumArtist) - \(item.albumTitle)"
             lblSong.text = item.title
             //if it was a liked item, change the state
-            var image = gLibraryManager.isLiked(item) ?
+            var image = LibraryManager.isLiked(item) ?
                 "1116-slayer-hand-selected.png" : "1116-slayer-hand.png"
             btnLike.setImage(UIImage(named: image), forState: UIControlState.Normal)
             //flip back to artwork
@@ -167,7 +166,7 @@ class MainController: UIViewController {
     
     func updatePlayState() {
         var image: UIImage;
-        if musicPlayer.isPlaying() {
+        if MusicPlayer.isPlaying() {
             println("playing")
             image = UIImage(named:"1242-pause.png");
         }
@@ -180,7 +179,7 @@ class MainController: UIViewController {
     
     func updateLyricState() {
         let url = Utils.inSimulator() ? Lyrics.getUrlFor(nil) :
-            Lyrics.getUrlFor(self.musicPlayer.currentSong())
+            Lyrics.getUrlFor(MusicPlayer.currentSong())
         if (url) {
             webView.loadRequest(NSURLRequest(URL: url))
             lyricState = .Available

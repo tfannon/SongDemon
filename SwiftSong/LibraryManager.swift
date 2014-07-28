@@ -1,15 +1,9 @@
-//
-//  LibraryManager.swift
-//  SwiftSong
-//
-//  Created by Tommy Fannon on 6/19/14.
-//  Copyright (c) 2014 crazy8dev. All rights reserved.
-//
+
 import MediaPlayer
 
 let LIKED_LIST = "Liked"
 let DISLIKED_LIST = "Disliked"
-let gLibraryManager = LibraryManager()
+private let LM = LibraryManager()
 
 class LibraryManager {
     
@@ -37,21 +31,21 @@ class LibraryManager {
         }
     }
 
-    func addToLiked(item:MPMediaItem) {
-        addToList(LIKED_LIST, list: &LikedSongs, item: item)
+    class func addToLiked(item:MPMediaItem) {
+        addToList(LIKED_LIST, list: &LM.LikedSongs, item: item)
     }
     
-    func removeFromLiked(item:MPMediaItem) {
-        removeFromList(LIKED_LIST, list: &LikedSongs, item: item)
+    class func removeFromLiked(item:MPMediaItem) {
+        removeFromList(LIKED_LIST, list: &LM.LikedSongs, item: item)
     }
     
-    func addToDisliked(item:MPMediaItem) {
-        addToList(DISLIKED_LIST, list: &DislikedSongs, item: item)
+    class func addToDisliked(item:MPMediaItem) {
+        addToList(DISLIKED_LIST, list: &LM.DislikedSongs, item: item)
         //adding it to disliked will remove it from liked
         removeFromLiked(item)
     }
     
-    private func addToList(listName:String, inout list:Dictionary<String,String>, item:MPMediaItem) {
+    private class func addToList(listName:String, inout list:Dictionary<String,String>, item:MPMediaItem) {
         if (item != nil) {
             list[getHashKey(item)] = item.title
             let userDefaults = NSUserDefaults.standardUserDefaults()
@@ -61,7 +55,7 @@ class LibraryManager {
         }
     }
     
-    private func removeFromList(listName:String, inout list:Dictionary<String,String>, item:MPMediaItem) {
+    private class func removeFromList(listName:String, inout list:Dictionary<String,String>, item:MPMediaItem) {
         if (item != nil) {
             list.removeValueForKey(getHashKey(item));
             let userDefaults = NSUserDefaults.standardUserDefaults()
@@ -69,23 +63,23 @@ class LibraryManager {
         }
     }
     
-    private func getHashKey(item:MPMediaItem) -> String {
+    private class func getHashKey(item:MPMediaItem) -> String {
         return item.persistentID.description
     }
 
-    func addToPlaylist(items:[MPMediaItem]) -> Void {
+    class func addToPlaylist(items:[MPMediaItem]) -> Void {
         for item in items {
-           LikedSongs[getHashKey(item)] = item.title
+           LM.LikedSongs[getHashKey(item)] = item.title
         }
         let userDefaults = NSUserDefaults.standardUserDefaults()
-        userDefaults.setObject(LikedSongs, forKey: LIKED_LIST)
+        userDefaults.setObject(LM.LikedSongs, forKey: LIKED_LIST)
         println ("added \(items.count) songs")
         //dumpNSUserDefaults(LIKED_LIST)
     }
     
-    func isLiked(item:MPMediaItem) -> Bool {
+    class func isLiked(item:MPMediaItem) -> Bool {
         if item != nil {
-            if let oldSong = LikedSongs[getHashKey(item)] {
+            if let oldSong = LM.LikedSongs[getHashKey(item)] {
                 return true;
             }
         }

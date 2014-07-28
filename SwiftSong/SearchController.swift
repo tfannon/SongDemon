@@ -56,7 +56,7 @@ class SearchController: UIViewController, MPMediaPickerControllerDelegate {
     func mediaPicker(mediaPicker: MPMediaPickerController, didPickMediaItems  mediaItems:MPMediaItemCollection) -> Void
     {
         let items = mediaItems.items as [MPMediaItem]
-        gLibraryManager.addToPlaylist(items)
+        LibraryManager.addToPlaylist(items)
 //        dispatch_async(dispatch_get_main_queue(), {
             let v = UIAlertView()
             v.title = "Title"

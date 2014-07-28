@@ -1,53 +1,47 @@
 import MediaPlayer
 
+private let MP = MusicPlayer()
 
 class MusicPlayer {
-    struct Static {
-        static var instance: MusicPlayer?
-    }
 
     init() {
         applePlayer.beginGeneratingPlaybackNotifications()
     }
     
-    class func get() -> MusicPlayer {
-        if !Static.instance {
-            Static.instance = MusicPlayer()
-        }
-        return Static.instance!
+    private let applePlayer = MPMusicPlayerController()
+    private var skipToBegin = false
+    
+    class func currentSong() -> MPMediaItem! {
+        return MP.applePlayer.nowPlayingItem
     }
     
-    let applePlayer = MPMusicPlayerController()
-    var skipToBegin = false
-    
-    func currentSong() -> MPMediaItem! {
-        return applePlayer.nowPlayingItem
-    }
-    
-    func isPlaying() -> Bool {
+    class func isPlaying() -> Bool {
         //return applePlayer.currentPlaybackRate > 0;
-        return applePlayer.playbackState == MPMusicPlaybackState.Playing
+        return MP.applePlayer.playbackState == MPMusicPlaybackState.Playing
     }
     
-    func playPressed() {
+    class func playPressed() {
         //println ("current state: \(isPlaying()) .. play tapped")
-        isPlaying() ?  applePlayer.pause() : applePlayer.play()
+        isPlaying() ?  MP.applePlayer.pause() : MP.applePlayer.play()
     }
     
-    func forward() {
-        applePlayer.skipToNextItem()
-        skipToBegin = false
+    class func forward() {
+        MP.applePlayer.skipToNextItem()
+        MP.skipToBegin = false
     }
     
-    func reverse() {
-        if !skipToBegin {
-            applePlayer.skipToBeginning()
-            skipToBegin = true
+    class func reverse() {
+        if !MP.skipToBegin {
+            MP.applePlayer.skipToBeginning()
+            MP.skipToBegin = true
             //do a timer
         } else {
-            skipToBegin = false
-            applePlayer.skipToPreviousItem()
+            MP.skipToBegin = false
+            MP.applePlayer.skipToPreviousItem()
         }
     }
     
+    class func Play(items: [MPMediaItem]) {
+        //MP.applePlayer.setQueueWithItemCollection(items)
+    }
 }
