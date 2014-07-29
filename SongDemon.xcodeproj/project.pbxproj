@@ -10,6 +10,7 @@
 		65164C37196CF62400644EF4 /* UIHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65164C36196CF62400644EF4 /* UIHelpers.swift */; };
 		65304F0D196CAB9E00F985D3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65304F0C196CAB9E00F985D3 /* Utils.swift */; };
 		6553B7DA1973727B0002568A /* PlaylistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6553B7D91973727B0002568A /* PlaylistController.swift */; };
+		657693B919883069008E25E6 /* LyricsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657693B819883069008E25E6 /* LyricsController.swift */; };
 		658F13E819836903008267F1 /* 1116-slayer-hand.png in Resources */ = {isa = PBXBuildFile; fileRef = 658F13E619836903008267F1 /* 1116-slayer-hand.png */; };
 		658F13E919836903008267F1 /* 1116-slayer-hand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 658F13E719836903008267F1 /* 1116-slayer-hand@2x.png */; };
 		658F13EE198369EB008267F1 /* 1241-play.png in Resources */ = {isa = PBXBuildFile; fileRef = 658F13EA198369EB008267F1 /* 1241-play.png */; };
@@ -87,6 +88,7 @@
 		65164C39196D007E00644EF4 /* Test.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Test.playground; sourceTree = "<group>"; };
 		65304F0C196CAB9E00F985D3 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		6553B7D91973727B0002568A /* PlaylistController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistController.swift; sourceTree = "<group>"; };
+		657693B819883069008E25E6 /* LyricsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsController.swift; sourceTree = "<group>"; };
 		658F13E619836903008267F1 /* 1116-slayer-hand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1116-slayer-hand.png"; sourceTree = "<group>"; };
 		658F13E719836903008267F1 /* 1116-slayer-hand@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1116-slayer-hand@2x.png"; sourceTree = "<group>"; };
 		658F13EA198369EB008267F1 /* 1241-play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1241-play.png"; sourceTree = "<group>"; };
@@ -170,6 +172,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		657693BA198834D4008E25E6 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				65F3BAF219876E28009916C1 /* RootController.swift */,
+				657693B819883069008E25E6 /* LyricsController.swift */,
+				65B68C471960733500CE9BD5 /* SearchController.swift */,
+				65B66E7219524A8300947DCE /* MainController.swift */,
+				6553B7D91973727B0002568A /* PlaylistController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		657693BB19883510008E25E6 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				65B2A5A219529B0E00C3BE89 /* ITunesUtils.swift */,
+				65E0487E1953A5D50080031C /* LibraryManager.swift */,
+				65A9112D196B9C49007B59D6 /* Lyrics.swift */,
+				65E048811953B1DB0080031C /* MusicPlayer.swift */,
+				65F3BABD198749B7009916C1 /* SongInfo.swift */,
+				65164C36196CF62400644EF4 /* UIHelpers.swift */,
+				65304F0C196CAB9E00F985D3 /* Utils.swift */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
 		65B66DDA195246AB00947DCE = {
 			isa = PBXGroup;
 			children = (
@@ -190,21 +218,12 @@
 		65B66DE5195246AB00947DCE /* SongDemon */ = {
 			isa = PBXGroup;
 			children = (
+				65B66DE7195246AB00947DCE /* Info.plist */,
 				65164C39196D007E00644EF4 /* Test.playground */,
 				65B66DEE195246AB00947DCE /* Main.storyboard */,
-				65B66DE7195246AB00947DCE /* Info.plist */,
 				65B66DE8195246AB00947DCE /* AppDelegate.swift */,
-				6553B7D91973727B0002568A /* PlaylistController.swift */,
-				65B2A5A219529B0E00C3BE89 /* ITunesUtils.swift */,
-				65E0487E1953A5D50080031C /* LibraryManager.swift */,
-				65A9112D196B9C49007B59D6 /* Lyrics.swift */,
-				65B66E7219524A8300947DCE /* MainController.swift */,
-				65E048811953B1DB0080031C /* MusicPlayer.swift */,
-				65F3BAF219876E28009916C1 /* RootController.swift */,
-				65B68C471960733500CE9BD5 /* SearchController.swift */,
-				65F3BABD198749B7009916C1 /* SongInfo.swift */,
-				65164C36196CF62400644EF4 /* UIHelpers.swift */,
-				65304F0C196CAB9E00F985D3 /* Utils.swift */,
+				657693BB19883510008E25E6 /* Classes */,
+				657693BA198834D4008E25E6 /* Controllers */,
 				65B66DF1195246AB00947DCE /* Images.xcassets */,
 				65E7743219528D6100DD31DB /* Resources */,
 			);
@@ -431,6 +450,7 @@
 				65E048821953B1DB0080031C /* MusicPlayer.swift in Sources */,
 				65B2A5A319529B0E00C3BE89 /* ITunesUtils.swift in Sources */,
 				6553B7DA1973727B0002568A /* PlaylistController.swift in Sources */,
+				657693B919883069008E25E6 /* LyricsController.swift in Sources */,
 				65B66DE9195246AB00947DCE /* AppDelegate.swift in Sources */,
 				65304F0D196CAB9E00F985D3 /* Utils.swift in Sources */,
 				65F3BAF319876E28009916C1 /* RootController.swift in Sources */,

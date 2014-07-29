@@ -8,16 +8,25 @@
 
 import UIKit
 
-class RootController: UIPageViewController, UIPageViewControllerDelegate {
-
+class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
+    
+    var mainController: UIViewController!
+    var lyricsController: UIViewController!
+    var controllers : [UIViewController] = []
+  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self;
+        self.dataSource = self;
         
-        //let startingViewController = MainController()
-        //let viewControllers = [startingViewController]
-        //self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
+        mainController = self.storyboard.instantiateViewControllerWithIdentifier("MainController") as UIViewController
+        lyricsController = self.storyboard.instantiateViewControllerWithIdentifier("LyricsController") as UIViewController
+        controllers = [mainController, lyricsController]
 
+        //set the initial controller to the main one
+        let viewControllers : [UIViewController] = [mainController]
+        self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
         // Do any additional setup after loading the view.
     }
 
@@ -26,15 +35,31 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: - Page View Controller Data Source
+    func presentationCountForPageViewController(pageViewController: UIPageViewController!) -> Int {
+        return controllers.count
     }
-    */
 
+    func presentationIndexForPageViewController(pageViewController: UIPageViewController!) -> Int {
+        return 0
+    }
+
+
+    //get the controller before the current one displayed
+    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController : UIViewController) -> UIViewController? {
+        var index = find(controllers, viewControllerBeforeViewController) as Int
+        if index == 0  {
+            return nil
+        }
+        return controllers[index]
+    }
+
+    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController : UIViewController) -> UIViewController? {
+        var index = find(controllers, viewControllerAfterViewController) as Int
+        index++
+        if index == controllers.count {
+            return nil
+        }
+        return controllers[index]
+    }
 }

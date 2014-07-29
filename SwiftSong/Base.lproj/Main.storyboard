@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.11" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="8YX-ce-x5E">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.11" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="0dw-RJ-QCg">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6190.4"/>
     </dependencies>
@@ -7,7 +7,7 @@
         <!--Main-->
         <scene sceneID="W3I-pn-N6e">
             <objects>
-                <viewController title="Main" id="CZ4-MO-1fc" customClass="MainController" customModule="SongDemon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainController" title="Main" id="CZ4-MO-1fc" customClass="MainController" customModule="SongDemon" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6Ji-vJ-seK"/>
                         <viewControllerLayoutGuide type="bottom" id="uhI-fT-rTT"/>
@@ -170,13 +170,39 @@
             </objects>
             <point key="canvasLocation" x="661" y="-148"/>
         </scene>
-        <!--Root Controller-->
+        <!--Page-->
         <scene sceneID="Wg0-1b-cbP">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="0dw-RJ-QCg" customClass="RootController" customModule="SongDemon" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="0dw-RJ-QCg" userLabel="Page" customClass="RootController" customModule="SongDemon" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Byq-Df-Kjd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-275" y="672"/>
+        </scene>
+        <!--Lyrics-->
+        <scene sceneID="V5l-cd-rGw">
+            <objects>
+                <viewController storyboardIdentifier="LyricsController" title="I am Lyrics Page" id="hFm-Kc-PaG" userLabel="Lyrics" customClass="LyricsController" customModule="SongDemon" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Meg-58-6J3"/>
+                        <viewControllerLayoutGuide type="bottom" id="Bhr-Wx-b6v"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EcB-FE-Ncj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jhm-Oh-AYM">
+                                <rect key="frame" x="137" y="37" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CFf-bu-eAV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-270" y="1317"/>
         </scene>
         <!--Settings-->
         <scene sceneID="Ymr-pH-gmC">
@@ -255,10 +281,10 @@
             </objects>
             <point key="canvasLocation" x="653" y="1209"/>
         </scene>
-        <!--Root-->
+        <!--TabBar-->
         <scene sceneID="Vex-rW-GRa">
             <objects>
-                <tabBarController title="Root" id="8YX-ce-x5E" sceneMemberID="viewController">
+                <tabBarController title="Root" id="8YX-ce-x5E" userLabel="TabBar" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="JQR-rB-NYL">
                         <rect key="frame" x="0.0" y="431" width="320" height="49"/>

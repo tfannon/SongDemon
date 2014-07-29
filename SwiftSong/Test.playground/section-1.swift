@@ -9,6 +9,13 @@ func backwards(s1: String, s2: String) -> Bool {
     return s1 > s2
 }
 
+
+find(names,"Alexa")
+
+
+
+
+
 //function is defined
 var reversed = sorted(names, backwards)
 
