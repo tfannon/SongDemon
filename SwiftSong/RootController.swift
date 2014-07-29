@@ -14,9 +14,9 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate {
         super.viewDidLoad()
         self.delegate = self;
         
-        let startingViewController = MainController()
-        let viewControllers = [startingViewController]
-        self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
+        //let startingViewController = MainController()
+        //let viewControllers = [startingViewController]
+        //self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
 
         // Do any additional setup after loading the view.
     }
