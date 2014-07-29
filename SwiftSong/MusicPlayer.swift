@@ -21,7 +21,6 @@ class MusicPlayer {
     }
     
     class func playPressed() {
-        //println ("current state: \(isPlaying()) .. play tapped")
         isPlaying() ?  MP.applePlayer.pause() : MP.applePlayer.play()
     }
     
@@ -42,10 +41,10 @@ class MusicPlayer {
     }
     
     class func play(items: [MPMediaItem]) {
-        //if items != nil {
+        if items.count > 0 {
             var coll = MPMediaItemCollection(items: items)
             MP.applePlayer.setQueueWithItemCollection(coll)
             MP.applePlayer.play()
-        //}
+        }
     }
 }

@@ -69,6 +69,7 @@
 		65E7749B19528D6100DD31DB /* youtube.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E7746619528D6100DD31DB /* youtube.png */; };
 		65E7749C19528D6100DD31DB /* youtube@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E7746719528D6100DD31DB /* youtube@2x.png */; };
 		65F3BABE198749B7009916C1 /* SongInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F3BABD198749B7009916C1 /* SongInfo.swift */; };
+		65F3BAF319876E28009916C1 /* RootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F3BAF219876E28009916C1 /* RootController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -148,6 +149,7 @@
 		65E7746619528D6100DD31DB /* youtube.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = youtube.png; sourceTree = "<group>"; };
 		65E7746719528D6100DD31DB /* youtube@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "youtube@2x.png"; sourceTree = "<group>"; };
 		65F3BABD198749B7009916C1 /* SongInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongInfo.swift; sourceTree = "<group>"; };
+		65F3BAF219876E28009916C1 /* RootController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +200,7 @@
 				65A9112D196B9C49007B59D6 /* Lyrics.swift */,
 				65B66E7219524A8300947DCE /* MainController.swift */,
 				65E048811953B1DB0080031C /* MusicPlayer.swift */,
+				65F3BAF219876E28009916C1 /* RootController.swift */,
 				65B68C471960733500CE9BD5 /* SearchController.swift */,
 				65F3BABD198749B7009916C1 /* SongInfo.swift */,
 				65164C36196CF62400644EF4 /* UIHelpers.swift */,
@@ -430,6 +433,7 @@
 				6553B7DA1973727B0002568A /* PlaylistController.swift in Sources */,
 				65B66DE9195246AB00947DCE /* AppDelegate.swift in Sources */,
 				65304F0D196CAB9E00F985D3 /* Utils.swift in Sources */,
+				65F3BAF319876E28009916C1 /* RootController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

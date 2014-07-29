@@ -6,12 +6,12 @@ let DISLIKED_LIST = "Disliked"
 private let LM = LibraryManager()
 
 class LibraryManager {
-    
-    final var LikedSongs = Dictionary<String, String>()
-    final var DislikedSongs = Dictionary<String, String>()
+    //the finals are to get around a performance bug where adding items to a dictionary is very slow
+    private final var LikedSongs = Dictionary<String, String>()
+    private final var DislikedSongs = Dictionary<String, String>()
     //computed at load
-    final var RatedSongs = Array<String>()
-    final var LowRatedSongs = Array<String>()
+    private final var RatedSongs = Array<String>()
+    private final var LowRatedSongs = Array<String>()
     private var scanned = false
 
     init() {
@@ -39,21 +39,23 @@ class LibraryManager {
         var start = NSDate()
         if let allSongs = ITunesUtils.getAllSongs() {
             for song in allSongs {
-                //println("\(song.albumArtist) - \(song.title)")
-                //an album must have
+                //an album must have an album artist and title and a rating to make the cut
                 if song.albumArtist != nil && song.title != nil && song.rating >= 1 {
                     var info = SongInfo(id: song.persistentID.description, rating:song.rating, playCount:song.playCount)
                     switch (info.rating) {
-                        case 1:     LM.LowRatedSongs.append(info.Id)
-                        case 2<5:   LM.RatedSongs.append(info.Id)
-                    default:""
+                        case 0:""
+                        case 1:
+                            LM.LowRatedSongs.append(info.Id);
+                            println("Low: \(song.title)")
+                        default:
+                            LM.RatedSongs.append(info.Id)
+                            println("High: \(song.title)")
                     }
                 }
-                
             }
         }
         let time = NSDate().timeIntervalSinceDate(start) * 1000
-        println("Scanned iTunes in \(time)ms")
+        println("Scanned iTunes in \(time)ms.  \(LM.RatedSongs.count) songs with >1 rating  \(LM.LowRatedSongs.count) songs with =1 rating")
         LM.scanned = true;
     }
 
