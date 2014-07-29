@@ -68,6 +68,7 @@
 		65E7749A19528D6100DD31DB /* sliderlabel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E7746519528D6100DD31DB /* sliderlabel@2x.png */; };
 		65E7749B19528D6100DD31DB /* youtube.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E7746619528D6100DD31DB /* youtube.png */; };
 		65E7749C19528D6100DD31DB /* youtube@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E7746719528D6100DD31DB /* youtube@2x.png */; };
+		65F3BABE198749B7009916C1 /* SongInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F3BABD198749B7009916C1 /* SongInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +147,7 @@
 		65E7746519528D6100DD31DB /* sliderlabel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sliderlabel@2x.png"; sourceTree = "<group>"; };
 		65E7746619528D6100DD31DB /* youtube.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = youtube.png; sourceTree = "<group>"; };
 		65E7746719528D6100DD31DB /* youtube@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "youtube@2x.png"; sourceTree = "<group>"; };
+		65F3BABD198749B7009916C1 /* SongInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +199,7 @@
 				65B66E7219524A8300947DCE /* MainController.swift */,
 				65E048811953B1DB0080031C /* MusicPlayer.swift */,
 				65B68C471960733500CE9BD5 /* SearchController.swift */,
+				65F3BABD198749B7009916C1 /* SongInfo.swift */,
 				65164C36196CF62400644EF4 /* UIHelpers.swift */,
 				65304F0C196CAB9E00F985D3 /* Utils.swift */,
 				65B66DF1195246AB00947DCE /* Images.xcassets */,
@@ -417,6 +420,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65E0487F1953A5D50080031C /* LibraryManager.swift in Sources */,
+				65F3BABE198749B7009916C1 /* SongInfo.swift in Sources */,
 				65B68C481960733500CE9BD5 /* SearchController.swift in Sources */,
 				65A9112E196B9C49007B59D6 /* Lyrics.swift in Sources */,
 				65164C37196CF62400644EF4 /* UIHelpers.swift in Sources */,

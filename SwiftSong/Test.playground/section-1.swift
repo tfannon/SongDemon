@@ -36,6 +36,15 @@ inferred = sorted(names, { $0 > $1 } )
 //just absurd inference of params from an operator
 inferred = sorted(names, >)
 
+var x = NSDate()
+
+var y = NSDate()
+
+var time = y.timeIntervalSinceDate(x) * 1000
+
+
+
+
 
 
 

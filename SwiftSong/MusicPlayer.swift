@@ -41,7 +41,11 @@ class MusicPlayer {
         }
     }
     
-    class func Play(items: [MPMediaItem]) {
-        //MP.applePlayer.setQueueWithItemCollection(items)
+    class func play(items: [MPMediaItem]) {
+        //if items != nil {
+            var coll = MPMediaItemCollection(items: items)
+            MP.applePlayer.setQueueWithItemCollection(coll)
+            MP.applePlayer.play()
+        //}
     }
 }

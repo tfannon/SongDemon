@@ -42,6 +42,8 @@ class PlaylistController: UIViewController, UIActionSheetDelegate {
             println("liked chosen")
             /* run a query to see all items > 1 star in itunes
                 merge this with current liked */
+            var songs = LibraryManager.getLikedSongs()
+            MusicPlayer.play(songs!)
 
         }))
         

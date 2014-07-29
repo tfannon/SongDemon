@@ -9,7 +9,10 @@ class LibraryManager {
     
     final var LikedSongs = Dictionary<String, String>()
     final var DislikedSongs = Dictionary<String, String>()
-    
+    //computed at load
+    final var RatedSongs = Array<String>()
+    final var LowRatedSongs = Array<String>()
+    private var scanned = false
 
     init() {
         println("storage objects being initialized from NSDefaults")
@@ -29,6 +32,29 @@ class LibraryManager {
                 DislikedSongs[x] = y
             }
         }
+    }
+    
+    class func scanLibrary() {
+        if LM.scanned { return };
+        var start = NSDate()
+        if let allSongs = ITunesUtils.getAllSongs() {
+            for song in allSongs {
+                //println("\(song.albumArtist) - \(song.title)")
+                //an album must have
+                if song.albumArtist != nil && song.title != nil && song.rating >= 1 {
+                    var info = SongInfo(id: song.persistentID.description, rating:song.rating, playCount:song.playCount)
+                    switch (info.rating) {
+                        case 1:     LM.LowRatedSongs.append(info.Id)
+                        case 2<5:   LM.RatedSongs.append(info.Id)
+                    default:""
+                    }
+                }
+                
+            }
+        }
+        let time = NSDate().timeIntervalSinceDate(start) * 1000
+        println("Scanned iTunes in \(time)ms")
+        LM.scanned = true;
     }
 
     class func addToLiked(item:MPMediaItem) {
@@ -84,6 +110,25 @@ class LibraryManager {
             }
         }
         return false;
+    }
+    
+    class func getLikedSongs() -> [MPMediaItem]? {
+        scanLibrary()
+        let start = NSDate()
+        var allLiked = [MPMediaItem]()
+        for (x,y) in LM.LikedSongs {
+            if let item = ITunesUtils.getSongFrom(x) {
+                allLiked.append(item)
+            }
+        }
+        for x in LM.RatedSongs {
+            if let item = ITunesUtils.getSongFrom(x) {
+                allLiked.append(item)
+            }
+        }
+        let time = NSDate().timeIntervalSinceDate(start) * 1000
+        println("Built liked list in \(time)ms")
+        return allLiked
     }
     
     func dumpNSUserDefaults(forKey:String) -> Void {
