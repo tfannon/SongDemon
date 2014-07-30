@@ -52,14 +52,20 @@ class MainController: UIViewController {
 
     //MARK: setup
     func setupAppearance() {
+        //scrubber.hidden = true
         imgSong.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleImageTapped"))
+        
+        var swipeUp = UISwipeGestureRecognizer(target: self, action: "handleSwipeUp")
+        swipeUp.direction = .Up
+        imgSong.addGestureRecognizer(swipeUp)
     }
     
     func setupSimulator() {
         updateLyricState()
     }
     
-    //MARK: button handlers
+   
+    //MARK: image gesture handlers
     func handleImageTapped() {
         /*
         switch lyricState {
@@ -77,6 +83,43 @@ class MainController: UIViewController {
         */
     }
     
+    func handleSwipeUp() {
+        var alert = UIAlertController(title: "Choose playlist", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        //handler: ((UIAlertAction!) -> Void)!)
+        //style: default is blue, destructive is red, cancel is a seperate cancel button
+        alert.addAction(UIAlertAction(title: "Mix", style: .Default, handler: { action in
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Liked", style: .Default, handler: {action in
+            /* run a query to see all items > 1 star in itunes and merge this with current liked */
+            var songs = LibraryManager.getLikedSongs()
+            MusicPlayer.play(songs!)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "New", style: .Default, handler: { action in
+            println("new chosen")
+        }))
+        
+        if let currentSong = MusicPlayer.currentSong() {
+            alert.addAction(UIAlertAction(title: "All \(currentSong.albumArtist)", style: .Default, handler: { action in
+                println("artist chosen")
+                }))
+            
+            alert.addAction(UIAlertAction(title: "\(currentSong.albumTitle)", style: .Default, handler: { action in
+                println("album chosen")
+                }))
+        }
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
+            println("cancel chosen")
+        }))
+        //no matter what option is chosen switch the window back to main
+        self.presentViewController(alert, animated: true, completion: {
+            println("something selected")
+        })
+    }
+    
+     //MARK: button handlers
     func handleLikeTapped() {
         //if its already liked this will reset it and unset the selected image
         if LibraryManager.isLiked(MusicPlayer.currentSong()) {
@@ -128,8 +171,10 @@ class MainController: UIViewController {
     
     //MARK: notification handlers
     func updateSongInfo() {
-        var item = MusicPlayer.currentSong()
-        if item != nil {
+        if Utils.inSimulator() {
+            return
+        }
+        if let item = MusicPlayer.currentSong() {
             lblArtist.text = "\(item.albumArtist) - \(item.albumTitle)"
             lblSong.text = item.title
             //if it was a liked item, change the state

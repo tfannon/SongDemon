@@ -43,10 +43,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func setupAppearance() {
-        //UITabBar.appearance().tintColor = UIColor.whiteColor()
+        //UISlider.appearance().tintColor = UIColor.whiteColor()
         //UISlider.appearance().setThumbImage(UIImage(named:"sliderhandle.png"), forState: UIControlState.Normal)
         //UISlider.appearance().setThumbImage(UIImage(named:"1194-file-type-sound-recording-selected.png"), forState: UIControlState.Selected)
-        //UISlider.appearance().thumbTintColor = UIColor.whiteColor();
+        UISlider.appearance().setThumbImage(UIImage(named: "slider.png"), forState: .Normal)
+        UISlider.appearance().setMaximumTrackImage(UIImage(named: "slider_maximum.png"), forState: .Normal)
+        UISlider.appearance().setMinimumTrackImage(UIImage(named: "slider_minimum.png"), forState: .Normal)
     }
 }
 
