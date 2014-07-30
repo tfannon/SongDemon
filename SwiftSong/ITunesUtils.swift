@@ -33,15 +33,30 @@ class ITunesUtils {
         */
     }
     
-    class func getLikedSongs() -> [MPMediaItem]? {
+    class func getNewSongs() -> [MPMediaItem]? {
+        var songs = [MPMediaItem]()
         var query = MPMediaQuery.songsQuery()
-        //query.groupingType = MPMediaGrouping.
-        var pred = MPMediaPropertyPredicate(value: "2", forProperty: MPMediaItemPropertyRating, comparisonType: MPMediaPredicateComparison.EqualTo)
+        var pred = MPMediaPropertyPredicate(value: "0", forProperty: MPMediaItemPropertyPlayCount, comparisonType: MPMediaPredicateComparison.EqualTo)
+        
         query.addFilterPredicate(pred)
         for song : MPMediaItem in query.items as [MPMediaItem] {
-            println("\(song.albumArtist) - \(song.title)")
+            //println("\(song.albumArtist) - \(song.title)  plays:\(song.playCount)")
+            songs.append(song)
         }
-        return nil
+        println("0 play:  \(query.items.count)")
+        query = MPMediaQuery.songsQuery()
+        pred = MPMediaPropertyPredicate(value: "1", forProperty: MPMediaItemPropertyPlayCount, comparisonType: MPMediaPredicateComparison.EqualTo)
+        for song : MPMediaItem in query.items as [MPMediaItem] {
+            songs.append(song)
+        }
+        println("1 play:  \(query.items.count)")
+        query = MPMediaQuery.songsQuery()
+        pred = MPMediaPropertyPredicate(value: "2", forProperty: MPMediaItemPropertyPlayCount, comparisonType: MPMediaPredicateComparison.EqualTo)
+        for song : MPMediaItem in query.items as [MPMediaItem] {
+            songs.append(song)
+        }
+        println("2 plays:  \(query.items.count)")
+        return songs
     }
     
     class func getSongFrom(persistentId : String) -> MPMediaItem? {

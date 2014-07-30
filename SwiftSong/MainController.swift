@@ -97,6 +97,7 @@ class MainController: UIViewController {
         }))
         
         alert.addAction(UIAlertAction(title: "New", style: .Default, handler: { action in
+            LibraryManager.getNewSongs()
             println("new chosen")
         }))
         

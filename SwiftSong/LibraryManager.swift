@@ -12,6 +12,7 @@ class LibraryManager {
     //computed at load
     private final var RatedSongs = Array<String>()
     private final var LowRatedSongs = Array<String>()
+    private final var NotPlayedSongs = Array<String>()
     private var scanned = false
 
     init() {
@@ -36,6 +37,7 @@ class LibraryManager {
     
     class func scanLibrary() {
         if LM.scanned { return };
+        var unplayed = 0;
         var start = NSDate()
         if let allSongs = ITunesUtils.getAllSongs() {
             for song in allSongs {
@@ -51,11 +53,15 @@ class LibraryManager {
                             LM.RatedSongs.append(info.Id)
                             println("High: \(song.title)")
                     }
+                    if song.playCount == 0 || song.playCount == 1 {
+                        LM.NotPlayedSongs.append(info.Id)
+                        unplayed++
+                    }
                 }
             }
         }
         let time = NSDate().timeIntervalSinceDate(start) * 1000
-        println("Scanned iTunes in \(time)ms.  \(LM.RatedSongs.count) songs with >1 rating  \(LM.LowRatedSongs.count) songs with =1 rating")
+        println("Scanned iTunes in \(time)ms.  \(LM.RatedSongs.count) songs with >1 rating  \(LM.LowRatedSongs.count) songs with =1 rating  \(unplayed) songs with playcount of 0 or 1")
         LM.scanned = true;
     }
 
@@ -129,8 +135,24 @@ class LibraryManager {
             }
         }
         let time = NSDate().timeIntervalSinceDate(start) * 1000
-        println("Built liked list in \(time)ms")
+        println("Built liked list with \(allLiked.count) songs in \(time)ms")
         return allLiked
+    }
+    
+    class func getNewSongs() -> [MPMediaItem] {
+        scanLibrary()
+        var newSongs = [MPMediaItem]()
+        let start = NSDate()
+        var i = 0
+        while i < LM.NotPlayedSongs.count && i < 50 {
+            if let item = ITunesUtils.getSongFrom(LM.NotPlayedSongs[i]) {
+                newSongs.append(item)
+            }
+            i++
+        }
+        let time = NSDate().timeIntervalSinceDate(start) * 1000
+        println("Built new song list with \(newSongs.count) songs in \(time)ms")
+        return newSongs
     }
     
     func dumpNSUserDefaults(forKey:String) -> Void {
