@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func setupAppearance() {
-        UITabBar.appearance().tintColor = UIColor.whiteColor()
+        //UITabBar.appearance().tintColor = UIColor.whiteColor()
         //UISlider.appearance().setThumbImage(UIImage(named:"sliderhandle.png"), forState: UIControlState.Normal)
         //UISlider.appearance().setThumbImage(UIImage(named:"1194-file-type-sound-recording-selected.png"), forState: UIControlState.Selected)
         //UISlider.appearance().thumbTintColor = UIColor.whiteColor();

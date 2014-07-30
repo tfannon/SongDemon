@@ -4,16 +4,16 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6190.4"/>
     </dependencies>
     <scenes>
-        <!--Main-->
+        <!--MainController-->
         <scene sceneID="W3I-pn-N6e">
             <objects>
-                <viewController storyboardIdentifier="MainController" title="Main" id="CZ4-MO-1fc" customClass="MainController" customModule="SongDemon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainController" title="Main" id="CZ4-MO-1fc" userLabel="MainController" customClass="MainController" customModule="SongDemon" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6Ji-vJ-seK"/>
                         <viewControllerLayoutGuide type="bottom" id="uhI-fT-rTT"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="2VE-Yg-loa">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="104-Dg-ZbI" userLabel="View - Artwork">
@@ -22,11 +22,6 @@
                                     <imageView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sample-album-art.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="cfx-bf-GNN" userLabel="Image - Artwork">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="290"/>
                                     </imageView>
-                                    <webView contentMode="scaleToFill" fixedFrame="YES" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dDb-Sl-4dT" userLabel="Webview - Lyrics">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="290"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <dataDetectorType key="dataDetectorTypes"/>
-                                    </webView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -81,6 +76,13 @@
                                             <action selector="likeTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="kfa-HH-Ov5"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HOx-of-8Lk" userLabel="Button - Play">
+                                        <rect key="frame" x="127" y="-12" width="64" height="64"/>
+                                        <state key="normal" image="1241-play.png"/>
+                                        <connections>
+                                            <action selector="playTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="f18-QI-sRN"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="86" userLabel="Button - Dislike">
                                         <rect key="frame" x="20" y="-6" width="52" height="52"/>
                                         <state key="normal" title="" image="778-thumbs-down.png"/>
@@ -89,21 +91,23 @@
                                             <action selector="dislikeTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="m7a-uO-gtg"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HOx-of-8Lk" userLabel="Button - Play">
-                                        <rect key="frame" x="127" y="-12" width="64" height="64"/>
-                                        <state key="normal" image="1241-play.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="playTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="f18-QI-sRN"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sCl-Dq-BgM" userLabel="View - Indicators">
+                                <rect key="frame" x="0.0" y="319" width="320" height="38"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="16" userLabel="Button - Share">
+                                <rect key="frame" x="-5" y="0.0" width="46" height="30"/>
+                                <color key="tintColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="" image="702-share.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                             <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PyT-BI-o0u" userLabel="View - Scrubber">
-                                <rect key="frame" x="20" y="231" width="280" height="57"/>
+                                <rect key="frame" x="20" y="511" width="280" height="57"/>
                                 <subviews>
                                     <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Ob5-lK-eQ6" userLabel="Scrubber">
                                         <rect key="frame" x="55" y="12" width="170" height="31"/>
@@ -112,48 +116,17 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sCl-Dq-BgM" userLabel="View - Indicators">
-                                <rect key="frame" x="0.0" y="319" width="320" height="38"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18" userLabel="Button - Lyrics">
-                                        <rect key="frame" x="60" y="8" width="46" height="30"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
-                                        <color key="tintColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="Lyrics"/>
-                                        <connections>
-                                            <action selector="lyricTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="NKi-Oy-hEy"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="19" userLabel="Button - YouTube">
-                                        <rect key="frame" x="12" y="8" width="46" height="30"/>
-                                        <state key="normal" title="" image="youtube.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="16" userLabel="Button - Share">
-                                        <rect key="frame" x="102" y="5" width="46" height="30"/>
-                                        <color key="tintColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="" image="702-share.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Playing" image="898-music-note.png" id="u1e-5L-l1D"/>
                     <toolbarItems/>
                     <connections>
                         <outlet property="btnDislike" destination="86" id="750-VG-yNm"/>
                         <outlet property="btnLike" destination="76" id="XWh-ct-hNa"/>
-                        <outlet property="btnLyrics" destination="18" id="name-outlet-18"/>
                         <outlet property="btnNext" destination="Ifu-ai-RdL" id="HeO-tI-MJ3"/>
                         <outlet property="btnPlay" destination="HOx-of-8Lk" id="72v-wN-1B6"/>
                         <outlet property="btnPrev" destination="Apr-UP-LMO" id="Osc-8m-k6r"/>
                         <outlet property="btnShare" destination="16" id="name-outlet-16"/>
-                        <outlet property="btnYouTube" destination="19" id="name-outlet-19"/>
                         <outlet property="imgSong" destination="cfx-bf-GNN" id="b8b-4y-1k9"/>
                         <outlet property="lblArtist" destination="38" id="name-outlet-38"/>
                         <outlet property="lblSong" destination="39" id="name-outlet-39"/>
@@ -168,20 +141,20 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qh2-T1-AhA" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="661" y="-148"/>
+            <point key="canvasLocation" x="-80" y="251"/>
         </scene>
-        <!--Page-->
+        <!--RootController-->
         <scene sceneID="Wg0-1b-cbP">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="0dw-RJ-QCg" userLabel="Page" customClass="RootController" customModule="SongDemon" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController storyboardIdentifier="RootController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="0dw-RJ-QCg" userLabel="RootController" customClass="RootController" customModule="SongDemon" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Byq-Df-Kjd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-275" y="672"/>
+            <point key="canvasLocation" x="-443" y="251"/>
         </scene>
-        <!--Lyrics-->
+        <!--LyricsController-->
         <scene sceneID="V5l-cd-rGw">
             <objects>
-                <viewController storyboardIdentifier="LyricsController" title="I am Lyrics Page" id="hFm-Kc-PaG" userLabel="Lyrics" customClass="LyricsController" customModule="SongDemon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LyricsController" id="hFm-Kc-PaG" userLabel="LyricsController" customClass="LyricsController" customModule="SongDemon" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Meg-58-6J3"/>
                         <viewControllerLayoutGuide type="bottom" id="Bhr-Wx-b6v"/>
@@ -190,74 +163,46 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jhm-Oh-AYM">
-                                <rect key="frame" x="137" y="37" width="46" height="30"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dDb-Sl-4dT" userLabel="Webview - Lyrics">
+                                <rect key="frame" x="0.0" y="27" width="320" height="487"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <dataDetectorType key="dataDetectorTypes"/>
+                            </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="webView" destination="dDb-Sl-4dT" id="G1s-Y0-GCa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CFf-bu-eAV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-270" y="1317"/>
+            <point key="canvasLocation" x="258" y="251"/>
         </scene>
-        <!--Settings-->
-        <scene sceneID="Ymr-pH-gmC">
-            <objects>
-                <tableViewController title="Settings" id="Cme-7a-Qnp" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="E6i-bP-BbE">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Z3l-XQ-pEk">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z3l-XQ-pEk" id="up6-LH-NQH">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Cme-7a-Qnp" id="YsN-wA-C0k"/>
-                            <outlet property="delegate" destination="Cme-7a-Qnp" id="gei-qx-yuO"/>
-                        </connections>
-                    </tableView>
-                    <tabBarItem key="tabBarItem" title="Settings" image="742-wrench.png" id="sF0-iC-VtW"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pxv-zm-JnS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="171" y="1002"/>
-        </scene>
-        <!--Playlist-->
+        <!--PlaylistController-->
         <scene sceneID="vUF-L9-eJg">
             <objects>
-                <viewController id="eEF-7y-Lpf" customClass="PlaylistController" customModule="SongDemon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PlaylistController" id="eEF-7y-Lpf" userLabel="PlaylistController" customClass="PlaylistController" customModule="SongDemon" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QNN-ue-h7J"/>
                         <viewControllerLayoutGuide type="bottom" id="3pR-2f-L00"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="zHb-Vw-D23">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Playlist" image="729-top-list.png" id="dp2-9B-G2A"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Ch-tE-orb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="653" y="570"/>
+            <point key="canvasLocation" x="-80" y="894"/>
         </scene>
-        <!--Videos-->
+        <!--VideosController-->
         <scene sceneID="igp-vW-c7Z">
             <objects>
-                <tableViewController title="Videos" id="Iye-M1-8qi" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="VideosController" title="Videos" id="Iye-M1-8qi" userLabel="VideosController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="avJ-ot-eWg">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -275,38 +220,15 @@
                             <outlet property="delegate" destination="Iye-M1-8qi" id="u13-bD-86Y"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Videos" image="1045-clapboard.png" id="NiV-h0-yAv"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xhn-OD-ZCr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="653" y="1209"/>
+            <point key="canvasLocation" x="258" y="888"/>
         </scene>
-        <!--TabBar-->
-        <scene sceneID="Vex-rW-GRa">
-            <objects>
-                <tabBarController title="Root" id="8YX-ce-x5E" userLabel="TabBar" sceneMemberID="viewController">
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="JQR-rB-NYL">
-                        <rect key="frame" x="0.0" y="431" width="320" height="49"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="CZ4-MO-1fc" kind="relationship" relationship="viewControllers" id="SUk-Ux-ee1"/>
-                        <segue destination="eEF-7y-Lpf" kind="relationship" relationship="viewControllers" id="YGV-e9-KTb"/>
-                        <segue destination="Iye-M1-8qi" kind="relationship" relationship="viewControllers" id="g3J-9v-4S8"/>
-                        <segue destination="Cme-7a-Qnp" kind="relationship" relationship="viewControllers" id="aRT-3J-SHy"/>
-                        <segue destination="61" kind="relationship" relationship="viewControllers" id="67"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FNP-y4-bzi" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="19" y="23"/>
-        </scene>
-        <!--Search-->
+        <!--SearchController-->
         <scene sceneID="60">
             <objects>
-                <viewController id="61" customClass="SearchController" customModule="SongDemon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchController" id="61" userLabel="SearchController" customClass="SearchController" customModule="SongDemon" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="63"/>
                         <viewControllerLayoutGuide type="bottom" id="64"/>
@@ -316,29 +238,22 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Search" image="708-search.png" id="69"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="65" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1202" y="326"/>
+            <point key="canvasLocation" x="657" y="256"/>
         </scene>
     </scenes>
     <resources>
-        <image name="1045-clapboard.png" width="28" height="28"/>
         <image name="1116-slayer-hand.png" width="18" height="25"/>
         <image name="1241-play.png" width="28" height="28"/>
         <image name="1245-rewind.png" width="28" height="28"/>
         <image name="1246-fast-forward.png" width="28" height="28"/>
         <image name="702-share.png" width="21" height="28"/>
-        <image name="708-search.png" width="28" height="28"/>
-        <image name="729-top-list.png" width="28" height="22"/>
-        <image name="742-wrench.png" width="28" height="28"/>
         <image name="778-thumbs-down-selected.png" width="26" height="28"/>
         <image name="778-thumbs-down.png" width="26" height="28"/>
-        <image name="898-music-note.png" width="28" height="28"/>
         <image name="sample-album-art.jpg" width="1500" height="1500"/>
-        <image name="youtube.png" width="64" height="64"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

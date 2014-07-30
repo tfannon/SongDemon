@@ -1,24 +1,27 @@
-//
-//  Lyrics.swift
-//  SwiftSong
-//
-//  Created by Tommy Fannon on 7/7/14.
-//  Copyright (c) 2014 crazy8dev. All rights reserved.
-//
-
 import MediaPlayer
+
+let gLyrics = Lyrics()
 
 enum LyricState {
     case Available
     case Displayed
     case NotAvailable
+    case Fetching
 }
 
 class Lyrics {
     
-    class func getUrlFor(item: MPMediaItem?) -> NSURL? {
+    var State = LyricState.Fetching
+    var Url : NSURL! = nil
+    var NeedsRefresh = true
+
+    class func fetchUrlFor(item: MPMediaItem?) {
+        gLyrics.State = .Fetching
+        
         if Utils.inSimulator() {
-            return NSURL.URLWithString("http://www.darklyrics.com/lyrics/goatwhore/carvingouttheeyesofgod.html#7")
+            gLyrics.NeedsRefresh = true
+            gLyrics.Url = NSURL.URLWithString("http://www.darklyrics.com/lyrics/goatwhore/carvingouttheeyesofgod.html#7")
+            return
         }
         if item != nil && item!.artist != nil && item!.albumArtist != nil {
             var artist = item!.albumArtist.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).stringByReplacingOccurrencesOfString(" ", withString: "", options: .LiteralSearch, range: nil)
@@ -26,9 +29,12 @@ class Lyrics {
             var track = String(item!.albumTrackNumber)
             var urlStr = "http://www.darklyrics.com/lyrics/\(artist)/\(album).html#\(track)"
             println(urlStr)
-            return NSURL.URLWithString(urlStr)
+            gLyrics.Url = NSURL.URLWithString(urlStr)
+            gLyrics.State = .Available
         } else {
-            return nil
+            gLyrics.Url = nil
+            gLyrics.State = .NotAvailable
         }
+        gLyrics.NeedsRefresh = true
     }
 }

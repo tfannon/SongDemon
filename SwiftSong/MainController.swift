@@ -14,11 +14,8 @@ class MainController: UIViewController {
     //MARK: outlets
     @IBOutlet var viewArtwork: UIView!
     @IBOutlet var imgSong: UIImageView!
-    @IBOutlet var webView: UIWebView!
 
     @IBOutlet var viewIndicators: UIView!
-    @IBOutlet var btnYouTube: UIButton!
-    @IBOutlet var btnLyrics: UIButton!
     @IBOutlet var btnShare: UIButton!
 
     @IBOutlet var viewSongInfo: UIView!
@@ -36,8 +33,6 @@ class MainController: UIViewController {
     @IBOutlet var scrubber: UISlider!
 
     //MARK: actions
-    @IBAction func lyricTapped(AnyObject) { handleLyricsTapped() }
-
     @IBAction func dislikeTapped(sender: AnyObject) { handleDislikeTapped()}
     @IBAction func likeTapped(sender: AnyObject) { handleLikeTapped()}
     @IBAction func playTapped(AnyObject) { MusicPlayer.playPressed() }
@@ -45,9 +40,7 @@ class MainController: UIViewController {
     @IBAction func nextTapped(AnyObject) { MusicPlayer.forward() }
 
     //MARK: instance variables
-    let inSimulator = Utils.inSimulator()
-    var lyricsAvailable = false
-    var lyricState = LyricState.NotAvailable
+   
 
     //MARK: controller methods
     override func viewDidLoad() {
@@ -59,10 +52,7 @@ class MainController: UIViewController {
 
     //MARK: setup
     func setupAppearance() {
-        webView.hidden = true
-        imgSong.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleLyricsTapped"))
-        //not working
-        //webView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "webviewTap"))
+        imgSong.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleImageTapped"))
     }
     
     func setupSimulator() {
@@ -70,19 +60,21 @@ class MainController: UIViewController {
     }
     
     //MARK: button handlers
-    func handleLyricsTapped() {
+    func handleImageTapped() {
+        /*
         switch lyricState {
             //case .NotAvailable://
         case .Available:
             lyricState = .Displayed
             imgSong.hidden = true
-            webView.hidden = false
+            //webView.hidden = false
         case .Displayed:
             lyricState = .Available
             imgSong.hidden = false
-            webView.hidden = true
+            //webView.hidden = true
         default:""
         }
+        */
     }
     
     func handleLikeTapped() {
@@ -144,10 +136,6 @@ class MainController: UIViewController {
             var image = LibraryManager.isLiked(item) ?
                 "1116-slayer-hand-selected.png" : "1116-slayer-hand.png"
             btnLike.setImage(UIImage(named: image), forState: UIControlState.Normal)
-            //flip back to artwork
-            lyricState = .Available
-            imgSong.hidden = false
-            webView.hidden = true
             if (item.artwork != nil) {
                 imgSong.image = item.artwork.imageWithSize(imgSong.frame.size)
                 return;
@@ -178,15 +166,6 @@ class MainController: UIViewController {
     }
     
     func updateLyricState() {
-        let url = Utils.inSimulator() ? Lyrics.getUrlFor(nil) :
-            Lyrics.getUrlFor(MusicPlayer.currentSong())
-        if (url) {
-            webView.loadRequest(NSURLRequest(URL: url))
-            lyricState = .Available
-            btnLyrics.tintColor = UIColor.whiteColor()
-        } else {
-            lyricState = .NotAvailable
-            self.btnLyrics.tintColor = UIColor.lightGrayColor()
-        }
+        Lyrics.fetchUrlFor(MusicPlayer.currentSong())
     }
 }

@@ -10,15 +10,21 @@ import UIKit
 
 class LyricsController: UIViewController {
 
+    @IBOutlet var webView: UIWebView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        if gLyrics.NeedsRefresh && gLyrics.Url != nil {
+            webView.loadRequest(NSURLRequest(URL: gLyrics.Url))
+        }
+        gLyrics.NeedsRefresh = false
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 
