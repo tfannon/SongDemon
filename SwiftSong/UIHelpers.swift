@@ -7,8 +7,15 @@
 //
 
 import Foundation
+import UIKit
 
 
-class WebViewGestureRecognizer  {
-    
+class UIHelpers  {
+    class func messageBox(title:String, message:String = "") {
+        let v = UIAlertView()
+        v.title = title
+        v.message = message
+        v.addButtonWithTitle("Ok")
+        v.show()
+    }
 }

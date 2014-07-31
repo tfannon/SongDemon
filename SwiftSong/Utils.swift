@@ -14,17 +14,23 @@ class Utils {
         let device = UIDevice.currentDevice().model
         return NSString(string:device).containsString("Simulator")
     }
+    
+    class func random(max : Int) -> Int {
+        return Int(arc4random_uniform((UInt32(max))))
+    }
 }
 
+  /* crashes compiler
 extension MPMediaItem {
     var songInfo: String {
         return "\(self.albumArtist) - \(self.albumTitle) : \(self.title)"
     }
 
-    /* crashes compiler
+  
     //provides a way to persist
     var hashKey: String {
         return self.persistentID.description;
     }
-    */
 }
+*/
+

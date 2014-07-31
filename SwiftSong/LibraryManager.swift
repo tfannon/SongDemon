@@ -14,6 +14,8 @@ class LibraryManager {
     private final var LowRatedSongs = Array<String>()
     private final var NotPlayedSongs = Array<String>()
     private var scanned = false
+    //playlist 
+    private final var Playlist = Array<MPMediaItem>()
 
     init() {
         println("storage objects being initialized from NSDefaults")
@@ -23,7 +25,7 @@ class LibraryManager {
             //construct the liked songs from the defaults
             for (x,y) in result {
                LikedSongs[x] = y
-               println("\(x):\(y)")
+               //println("\(x):\(y)")
             }
         }
         if let result = userDefaults.objectForKey(DISLIKED_LIST) as? Dictionary<String,String> {
@@ -42,26 +44,29 @@ class LibraryManager {
         if let allSongs = ITunesUtils.getAllSongs() {
             for song in allSongs {
                 //an album must have an album artist and title and a rating to make the cut
-                if song.albumArtist != nil && song.title != nil && song.rating >= 1 {
-                    var info = SongInfo(id: song.persistentID.description, rating:song.rating, playCount:song.playCount)
-                    switch (info.rating) {
+                if song.albumArtist != nil && song.title != nil {
+                    if song.rating >= 1 {
+                        //var info = SongInfo(id: song.persistentID.description, rating:song.rating, playCount:song.playCount)
+                        switch (song.rating) {
                         case 0:""
                         case 1:
-                            LM.LowRatedSongs.append(info.Id);
-                            println("Low: \(song.title)")
+                            LM.LowRatedSongs.append(getHashKey(song))
+                            //println("Low: \(song.title)")
                         default:
-                            LM.RatedSongs.append(info.Id)
-                            println("High: \(song.title)")
+                            LM.RatedSongs.append(getHashKey(song))
+                            //println("High: \(song.title)")
+                        }
                     }
-                    if song.playCount == 0 || song.playCount == 1 {
-                        LM.NotPlayedSongs.append(info.Id)
+                    else if song.playCount == 0 || song.playCount == 1 {
+                        LM.NotPlayedSongs.append(getHashKey(song))
                         unplayed++
                     }
                 }
             }
+            println("Indexed \(allSongs.count) songs")
         }
         let time = NSDate().timeIntervalSinceDate(start) * 1000
-        println("Scanned iTunes in \(time)ms.  \(LM.RatedSongs.count) songs with >1 rating  \(LM.LowRatedSongs.count) songs with =1 rating  \(unplayed) songs with playcount of 0 or 1")
+        println("Scanned iTunes in \(time)ms. \n  \(LM.RatedSongs.count) songs with >1 rating \n  \(LM.LowRatedSongs.count) songs with =1 rating \n  \(unplayed) songs with playcount of 0 or 1")
         LM.scanned = true;
     }
 
@@ -100,6 +105,10 @@ class LibraryManager {
     private class func getHashKey(item:MPMediaItem) -> String {
         return item.persistentID.description
     }
+    
+    class func getSongInfo(item:MPMediaItem) -> String {
+         return "\(item.albumArtist) - \(item.albumTitle) : \(item.title)"
+    }
 
     class func addToPlaylist(items:[MPMediaItem]) -> Void {
         for item in items {
@@ -120,10 +129,14 @@ class LibraryManager {
         return false;
     }
     
-    class func getLikedSongs() -> [MPMediaItem]? {
+    //MARK: functions for grabbing songs from iTunes
+    
+     /* run a query to see all items > 1 star in itunes and merge this with current liked */
+    class func getLikedSongs() -> [MPMediaItem] {
         scanLibrary()
         let start = NSDate()
         var allLiked = [MPMediaItem]()
+        var randomLiked = [MPMediaItem]()
         for (x,y) in LM.LikedSongs {
             if let item = ITunesUtils.getSongFrom(x) {
                 allLiked.append(item)
@@ -134,9 +147,18 @@ class LibraryManager {
                 allLiked.append(item)
             }
         }
+        var i = 0
+        while i < allLiked.count && i < 50 {
+            var idx = Utils.random(allLiked.count-1)
+            var item = allLiked[idx]
+            randomLiked.append(item)
+            println(getSongInfo(item))
+            i++
+        }
         let time = NSDate().timeIntervalSinceDate(start) * 1000
-        println("Built liked list with \(allLiked.count) songs in \(time)ms")
-        return allLiked
+        println("Built liked list with \(randomLiked.count) songs in \(time)ms")
+        LM.Playlist = randomLiked
+        return randomLiked
     }
     
     class func getNewSongs() -> [MPMediaItem] {
@@ -145,13 +167,16 @@ class LibraryManager {
         let start = NSDate()
         var i = 0
         while i < LM.NotPlayedSongs.count && i < 50 {
-            if let item = ITunesUtils.getSongFrom(LM.NotPlayedSongs[i]) {
+            var idx = Utils.random(LM.NotPlayedSongs.count-1)
+            if let item = ITunesUtils.getSongFrom(LM.NotPlayedSongs[idx]) {
                 newSongs.append(item)
+                println(getSongInfo(item))
             }
             i++
         }
         let time = NSDate().timeIntervalSinceDate(start) * 1000
         println("Built new song list with \(newSongs.count) songs in \(time)ms")
+        LM.Playlist = newSongs
         return newSongs
     }
     

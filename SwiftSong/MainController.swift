@@ -84,30 +84,33 @@ class MainController: UIViewController {
     }
     
     func handleSwipeUp() {
-        var alert = UIAlertController(title: "Choose playlist", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        var alert = UIAlertController(title: "Choose songs to play", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         //handler: ((UIAlertAction!) -> Void)!)
         //style: default is blue, destructive is red, cancel is a seperate cancel button
+        var message = ""
         alert.addAction(UIAlertAction(title: "Mix", style: .Default, handler: { action in
+            UIHelpers.messageBox("Mix is playing")
         }))
         
         alert.addAction(UIAlertAction(title: "Liked", style: .Default, handler: {action in
-            /* run a query to see all items > 1 star in itunes and merge this with current liked */
             var songs = LibraryManager.getLikedSongs()
-            MusicPlayer.play(songs!)
+            MusicPlayer.play(songs)
+            UIHelpers.messageBox("Liked songs are playing")
         }))
         
         alert.addAction(UIAlertAction(title: "New", style: .Default, handler: { action in
-            LibraryManager.getNewSongs()
-            println("new chosen")
+            var songs = LibraryManager.getNewSongs()
+            MusicPlayer.play(songs)
+            UIHelpers.messageBox("New songs are playing")
         }))
         
         if let currentSong = MusicPlayer.currentSong() {
             alert.addAction(UIAlertAction(title: "All \(currentSong.albumArtist)", style: .Default, handler: { action in
-                println("artist chosen")
+                message = "Songs from \(currentSong.albumArtist) are playing"
                 }))
             
             alert.addAction(UIAlertAction(title: "\(currentSong.albumTitle)", style: .Default, handler: { action in
-                println("album chosen")
+                message = "Songs from \(currentSong.albumTitle) are playing"
                 }))
         }
         
@@ -116,7 +119,6 @@ class MainController: UIViewController {
         }))
         //no matter what option is chosen switch the window back to main
         self.presentViewController(alert, animated: true, completion: {
-            println("something selected")
         })
     }
     

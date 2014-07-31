@@ -50,6 +50,14 @@ var y = NSDate()
 var time = y.timeIntervalSinceDate(x) * 1000
 
 
+   var r = Int(arc4random_uniform((UInt32(50))))
+
+
+
+
+
+
+
 
 
 

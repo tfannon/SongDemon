@@ -193,24 +193,6 @@
             </objects>
             <point key="canvasLocation" x="278" y="273"/>
         </scene>
-        <!--PlaylistController-->
-        <scene sceneID="vUF-L9-eJg">
-            <objects>
-                <viewController storyboardIdentifier="PlaylistController" id="eEF-7y-Lpf" userLabel="PlaylistController" customClass="PlaylistController" customModule="SongDemon" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="QNN-ue-h7J"/>
-                        <viewControllerLayoutGuide type="bottom" id="3pR-2f-L00"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="zHb-Vw-D23">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5Ch-tE-orb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-80" y="894"/>
-        </scene>
         <!--VideosController-->
         <scene sceneID="igp-vW-c7Z">
             <objects>

@@ -11,7 +11,6 @@ class ITunesUtils {
 
     class func getAllSongs() -> Array<MPMediaItem>? {
         let query = MPMediaQuery.songsQuery()
-        println("Indexed \(query.items.count) songs")
         return query.items as [MPMediaItem]?;
         
         /*
