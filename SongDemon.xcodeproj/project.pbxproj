@@ -33,6 +33,8 @@
 		65B66DF2195246AB00947DCE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65B66DF1195246AB00947DCE /* Images.xcassets */; };
 		65B66E7319524A8300947DCE /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B66E7219524A8300947DCE /* MainController.swift */; };
 		65B68C481960733500CE9BD5 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B68C471960733500CE9BD5 /* SearchController.swift */; };
+		65DC55E4198B3D0000ABE255 /* 1176-bulleted-list.png in Resources */ = {isa = PBXBuildFile; fileRef = 65DC55E2198B3D0000ABE255 /* 1176-bulleted-list.png */; };
+		65DC55E5198B3D0000ABE255 /* 1176-bulleted-list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65DC55E3198B3D0000ABE255 /* 1176-bulleted-list@2x.png */; };
 		65E0487F1953A5D50080031C /* LibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0487E1953A5D50080031C /* LibraryManager.swift */; };
 		65E048821953B1DB0080031C /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E048811953B1DB0080031C /* MusicPlayer.swift */; };
 		65E7746A19528D6100DD31DB /* 702-share.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E7743519528D6100DD31DB /* 702-share.png */; };
@@ -98,6 +100,8 @@
 		65B66DF7195246AB00947DCE /* SongDemonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SongDemonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		65B66E7219524A8300947DCE /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		65B68C471960733500CE9BD5 /* SearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
+		65DC55E2198B3D0000ABE255 /* 1176-bulleted-list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1176-bulleted-list.png"; sourceTree = "<group>"; };
+		65DC55E3198B3D0000ABE255 /* 1176-bulleted-list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1176-bulleted-list@2x.png"; sourceTree = "<group>"; };
 		65E0487E1953A5D50080031C /* LibraryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryManager.swift; sourceTree = "<group>"; };
 		65E048811953B1DB0080031C /* MusicPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
 		65E7743519528D6100DD31DB /* 702-share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "702-share.png"; sourceTree = "<group>"; };
@@ -203,6 +207,8 @@
 		65E7743219528D6100DD31DB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				65DC55E2198B3D0000ABE255 /* 1176-bulleted-list.png */,
+				65DC55E3198B3D0000ABE255 /* 1176-bulleted-list@2x.png */,
 				653F785E1988C3F800707054 /* slider.png */,
 				65E7743519528D6100DD31DB /* 702-share.png */,
 				65E7743619528D6100DD31DB /* 702-share@2x.png */,
@@ -340,6 +346,7 @@
 				653F785F1988C3F800707054 /* slider.png in Resources */,
 				658F13FF19837404008267F1 /* devilhorns120x120.png in Resources */,
 				65E7748019528D6100DD31DB /* note120x120.png in Resources */,
+				65DC55E4198B3D0000ABE255 /* 1176-bulleted-list.png in Resources */,
 				658F13E919836903008267F1 /* 1116-slayer-hand@2x.png in Resources */,
 				65E7749619528D6100DD31DB /* slider_minimum@2x.png in Resources */,
 				65E7749919528D6100DD31DB /* sliderlabel.png in Resources */,
@@ -348,6 +355,7 @@
 				65E7749C19528D6100DD31DB /* youtube@2x.png in Resources */,
 				658F140F1984BAF5008267F1 /* 1116-slayer-hand-selected@2x.png in Resources */,
 				65E7746B19528D6100DD31DB /* 702-share@2x.png in Resources */,
+				65DC55E5198B3D0000ABE255 /* 1176-bulleted-list@2x.png in Resources */,
 				65E7749319528D6100DD31DB /* slider_maximum.png in Resources */,
 				65E7747B19528D6100DD31DB /* 778-thumbs-down@2x.png in Resources */,
 				65E7749519528D6100DD31DB /* slider_minimum.png in Resources */,

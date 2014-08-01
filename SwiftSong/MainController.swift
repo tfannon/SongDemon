@@ -17,6 +17,7 @@ class MainController: UIViewController {
 
     @IBOutlet var viewIndicators: UIView!
     @IBOutlet var btnShare: UIButton!
+    @IBOutlet var btnPlaylist: UIButton!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
     @IBOutlet var viewSongInfo: UIView!
@@ -39,6 +40,7 @@ class MainController: UIViewController {
     @IBAction func playTapped(AnyObject) { MusicPlayer.playPressed() }
     @IBAction func prevTapped(AnyObject) { MusicPlayer.reverse() }
     @IBAction func nextTapped(AnyObject) { MusicPlayer.forward() }
+    @IBAction func playlistTapped(AnyObject) { handlePlaylist() }
 
     //MARK: instance variables
    
@@ -56,7 +58,7 @@ class MainController: UIViewController {
         //scrubber.hidden = true
         imgSong.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleImageTapped"))
         
-        var swipeUp = UISwipeGestureRecognizer(target: self, action: "handleSwipeUp")
+        var swipeUp = UISwipeGestureRecognizer(target: self, action: "handlePlaylist")
         swipeUp.direction = .Up
         imgSong.addGestureRecognizer(swipeUp)
     }
@@ -84,31 +86,26 @@ class MainController: UIViewController {
         */
     }
     
-    func handleSwipeUp() {
+    func handlePlaylist() {
         var alert = UIAlertController(title: "Choose songs to play", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         //handler: ((UIAlertAction!) -> Void)!)
         //style: default is blue, destructive is red, cancel is a seperate cancel button
+        imgSong.hidden = true
         activityIndicator.startAnimating()
         var message = ""
         alert.addAction(UIAlertAction(title: "Mix", style: .Default, handler: { action in
             var songs = LibraryManager.getMixOfSongs()
-            MusicPlayer.play(songs)
-            UIHelpers.messageBox("Mix is playing")
-            self.activityIndicator.stopAnimating()
+            self.postPlaylistSelection("Mix is playing", songs: songs)
         }))
         
         alert.addAction(UIAlertAction(title: "Liked", style: .Default, handler: {action in
             var songs = LibraryManager.getLikedSongs()
-            MusicPlayer.play(songs)
-            UIHelpers.messageBox("Liked songs are playing")
-            self.activityIndicator.stopAnimating()
+            self.postPlaylistSelection("Liked songs are playing", songs: songs)
         }))
         
         alert.addAction(UIAlertAction(title: "New", style: .Default, handler: { action in
             var songs = LibraryManager.getNewSongs()
-            MusicPlayer.play(songs)
-            UIHelpers.messageBox("New songs are playing")
-            self.activityIndicator.stopAnimating()
+            self.postPlaylistSelection("New songs are playing", songs: songs)
         }))
         
         if let currentSong = MusicPlayer.currentSong() {
@@ -127,6 +124,13 @@ class MainController: UIViewController {
         //no matter what option is chosen switch the window back to main
         self.presentViewController(alert, animated: true, completion: {
         })
+    }
+    
+    func postPlaylistSelection(message : String, songs: [MPMediaItem]) {
+        MusicPlayer.play(songs)
+        UIHelpers.messageBox(message)
+        activityIndicator.stopAnimating()
+        imgSong.hidden = false
     }
     
      //MARK: button handlers
