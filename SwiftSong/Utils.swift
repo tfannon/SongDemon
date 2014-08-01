@@ -18,6 +18,24 @@ class Utils {
     class func random(max : Int) -> Int {
         return Int(arc4random_uniform((UInt32(max))))
     }
+    
+    class func shuffle<T>(var list: Array<T>) -> Array<T> {
+        for i in 0..<list.count {
+            let j = Int(arc4random_uniform(UInt32(list.count - i))) + i
+            list.insert(list.removeAtIndex(j), atIndex: i)
+        }
+        return list
+    }
+}
+
+extension Array {
+    func shuffle<T>(var list: Array<T>) -> Array<T> {
+        for i in 0..<list.count {
+            let j = Int(arc4random_uniform(UInt32(list.count - i))) + i
+            list.insert(list.removeAtIndex(j), atIndex: i)
+        }
+        return list
+    }
 }
 
   /* crashes compiler

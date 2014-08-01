@@ -31,7 +31,7 @@ class ITunesUtils {
         return nil
         */
     }
-    
+    /*
     class func getNewSongs() -> [MPMediaItem]? {
         var songs = [MPMediaItem]()
         var query = MPMediaQuery.songsQuery()
@@ -57,6 +57,7 @@ class ITunesUtils {
         println("2 plays:  \(query.items.count)")
         return songs
     }
+*/
     
     class func getSongFrom(persistentId : String) -> MPMediaItem? {
         let query = MPMediaQuery.songsQuery()

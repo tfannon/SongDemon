@@ -17,7 +17,8 @@ class MainController: UIViewController {
 
     @IBOutlet var viewIndicators: UIView!
     @IBOutlet var btnShare: UIButton!
-
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+    
     @IBOutlet var viewSongInfo: UIView!
     @IBOutlet var lblArtist: UILabel!
     @IBOutlet var lblSong: UILabel!
@@ -87,21 +88,27 @@ class MainController: UIViewController {
         var alert = UIAlertController(title: "Choose songs to play", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         //handler: ((UIAlertAction!) -> Void)!)
         //style: default is blue, destructive is red, cancel is a seperate cancel button
+        activityIndicator.startAnimating()
         var message = ""
         alert.addAction(UIAlertAction(title: "Mix", style: .Default, handler: { action in
+            var songs = LibraryManager.getMixOfSongs()
+            MusicPlayer.play(songs)
             UIHelpers.messageBox("Mix is playing")
+            self.activityIndicator.stopAnimating()
         }))
         
         alert.addAction(UIAlertAction(title: "Liked", style: .Default, handler: {action in
             var songs = LibraryManager.getLikedSongs()
             MusicPlayer.play(songs)
             UIHelpers.messageBox("Liked songs are playing")
+            self.activityIndicator.stopAnimating()
         }))
         
         alert.addAction(UIAlertAction(title: "New", style: .Default, handler: { action in
             var songs = LibraryManager.getNewSongs()
             MusicPlayer.play(songs)
             UIHelpers.messageBox("New songs are playing")
+            self.activityIndicator.stopAnimating()
         }))
         
         if let currentSong = MusicPlayer.currentSong() {

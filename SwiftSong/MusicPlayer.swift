@@ -40,9 +40,10 @@ class MusicPlayer {
         }
     }
     
-    class func play(items: [MPMediaItem]) {
+    class func play(items: [MPMediaItem], shuffle : Bool = false) {
         if items.count > 0 {
             var coll = MPMediaItemCollection(items: items)
+            MP.applePlayer.shuffleMode = MPMusicShuffleMode.Off
             MP.applePlayer.setQueueWithItemCollection(coll)
             MP.applePlayer.play()
         }

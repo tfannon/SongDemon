@@ -50,7 +50,17 @@ var y = NSDate()
 var time = y.timeIntervalSinceDate(x) * 1000
 
 
-   var r = Int(arc4random_uniform((UInt32(50))))
+var r = Int(arc4random_uniform((UInt32(50))))
+
+func shuffle<T>(var list: Array<T>) -> Array<T> {
+    for i in 0..<list.count {
+        let j = Int(arc4random_uniform(UInt32(list.count - i))) + i
+        list.insert(list.removeAtIndex(j), atIndex: i)
+    }
+    return list
+}
+shuffle([1, 2, 3, 4, 5, 6, 7, 8])        // e.g., [6, 1, 8, 3, 2, 4, 7, 5]
+shuffle(["hello", "goodbye", "ciao"])    // e.g., ["ciao", "goodbye", "hello"]
 
 
 
