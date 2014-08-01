@@ -90,9 +90,7 @@ class MainController: UIViewController {
         var alert = UIAlertController(title: "Choose songs to play", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         //handler: ((UIAlertAction!) -> Void)!)
         //style: default is blue, destructive is red, cancel is a seperate cancel button
-        imgSong.hidden = true
-        activityIndicator.startAnimating()
-        var message = ""
+               var message = ""
         alert.addAction(UIAlertAction(title: "Mix", style: .Default, handler: { action in
             var songs = LibraryManager.getMixOfSongs()
             self.postPlaylistSelection("Mix is playing", songs: songs)
@@ -123,12 +121,14 @@ class MainController: UIViewController {
         }))
         //no matter what option is chosen switch the window back to main
         self.presentViewController(alert, animated: true, completion: {
+            self.imgSong.hidden = true
+            self.activityIndicator.startAnimating()
         })
     }
     
     func postPlaylistSelection(message : String, songs: [MPMediaItem]) {
         MusicPlayer.play(songs)
-        UIHelpers.messageBox(message)
+        //UIHelpers.messageBox(message)
         activityIndicator.stopAnimating()
         imgSong.hidden = false
     }
