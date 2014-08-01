@@ -76,7 +76,7 @@
                                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Repeat" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ytQ-fF-1wT">
+                                    <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Search" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ytQ-fF-1wT">
                                         <rect key="frame" x="11" y="8" width="49" height="28"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -153,6 +153,7 @@
                         <outlet property="btnShare" destination="16" id="name-outlet-16"/>
                         <outlet property="imgSong" destination="cfx-bf-GNN" id="b8b-4y-1k9"/>
                         <outlet property="lblArtist" destination="38" id="name-outlet-38"/>
+                        <outlet property="lblSearch" destination="ytQ-fF-1wT" id="on9-dZ-7xy"/>
                         <outlet property="lblSong" destination="39" id="name-outlet-39"/>
                         <outlet property="scrubber" destination="Ob5-lK-eQ6" id="E8e-cf-2Q7"/>
                         <outlet property="viewArtwork" destination="104-Dg-ZbI" id="drK-ha-Vbx"/>
@@ -229,26 +230,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xhn-OD-ZCr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="258" y="888"/>
-        </scene>
-        <!--SearchController-->
-        <scene sceneID="60">
-            <objects>
-                <viewController storyboardIdentifier="SearchController" id="61" userLabel="SearchController" customClass="SearchController" customModule="SongDemon" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="63"/>
-                        <viewControllerLayoutGuide type="bottom" id="64"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="62">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                    </view>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="65" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="657" y="256"/>
+            <point key="canvasLocation" x="622" y="273"/>
         </scene>
     </scenes>
     <resources>

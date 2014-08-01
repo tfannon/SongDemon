@@ -9,7 +9,7 @@
 import UIKit
 import MediaPlayer
 
-class MainController: UIViewController {
+class MainController: UIViewController, MPMediaPickerControllerDelegate {
 
     //MARK: outlets
     @IBOutlet var viewArtwork: UIView!
@@ -33,6 +33,8 @@ class MainController: UIViewController {
     
     @IBOutlet var viewScrubber: UIView!
     @IBOutlet var scrubber: UISlider!
+    
+    @IBOutlet var lblSearch: UILabel!
 
     //MARK: actions
     @IBAction func dislikeTapped(sender: AnyObject) { handleDislikeTapped()}
@@ -40,7 +42,7 @@ class MainController: UIViewController {
     @IBAction func playTapped(AnyObject) { MusicPlayer.playPressed() }
     @IBAction func prevTapped(AnyObject) { MusicPlayer.reverse() }
     @IBAction func nextTapped(AnyObject) { MusicPlayer.forward() }
-    @IBAction func playlistTapped(AnyObject) { handlePlaylist() }
+    @IBAction func playlistTapped(AnyObject) { handlePlaylistTapped() }
 
     //MARK: instance variables
    
@@ -55,10 +57,12 @@ class MainController: UIViewController {
 
     //MARK: setup
     func setupAppearance() {
-        //scrubber.hidden = true
+
         imgSong.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleImageTapped"))
-        
-        var swipeUp = UISwipeGestureRecognizer(target: self, action: "handlePlaylist")
+        //tapping the search label
+        lblSearch.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleSearchTapped"))
+        //swiping up allows user to select playlist
+        var swipeUp = UISwipeGestureRecognizer(target: self, action: "handlePlaylistTapped")
         swipeUp.direction = .Up
         imgSong.addGestureRecognizer(swipeUp)
     }
@@ -68,25 +72,18 @@ class MainController: UIViewController {
     }
     
    
-    //MARK: image gesture handlers
+    //MARK: Action handlers
     func handleImageTapped() {
-        /*
-        switch lyricState {
-            //case .NotAvailable://
-        case .Available:
-            lyricState = .Displayed
-            imgSong.hidden = true
-            //webView.hidden = false
-        case .Displayed:
-            lyricState = .Available
-            imgSong.hidden = false
-            //webView.hidden = true
-        default:""
-        }
-        */
     }
     
-    func handlePlaylist() {
+    func handleSearchTapped() {
+        let mediaPicker = MPMediaPickerController(mediaTypes: .Music)
+        mediaPicker.delegate = self
+        mediaPicker.allowsPickingMultipleItems = true
+        presentViewController(mediaPicker, animated: true, completion: {})
+    }
+    
+    func handlePlaylistTapped() {
         var alert = UIAlertController(title: "Choose songs to play", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         //handler: ((UIAlertAction!) -> Void)!)
         //style: default is blue, destructive is red, cancel is a seperate cancel button
@@ -107,11 +104,11 @@ class MainController: UIViewController {
         }))
         
         if let currentSong = MusicPlayer.currentSong() {
-            alert.addAction(UIAlertAction(title: "All \(currentSong.albumArtist)", style: .Default, handler: { action in
-                message = "Songs from \(currentSong.albumArtist) are playing"
+            alert.addAction(UIAlertAction(title: "All \(currentSong.albumArtist) songs", style: .Default, handler: { action in
+                message = "All songs from \(currentSong.albumArtist) are playing"
                 }))
             
-            alert.addAction(UIAlertAction(title: "\(currentSong.albumTitle)", style: .Default, handler: { action in
+            alert.addAction(UIAlertAction(title: "Songs from \(currentSong.albumTitle)", style: .Default, handler: { action in
                 message = "Songs from \(currentSong.albumTitle) are playing"
                 }))
         }
@@ -133,7 +130,6 @@ class MainController: UIViewController {
         imgSong.hidden = false
     }
     
-     //MARK: button handlers
     func handleLikeTapped() {
         //if its already liked this will reset it and unset the selected image
         if LibraryManager.isLiked(MusicPlayer.currentSong()) {
@@ -142,11 +138,6 @@ class MainController: UIViewController {
         } else {
             LibraryManager.addToLiked(MusicPlayer.currentSong())
             btnLike.setImage(UIImage(named: "1116-slayer-hand-selected.png"), forState: UIControlState.Normal)
-            let v = UIAlertView()
-            v.title = "Title"
-            v.message = "Song added"
-            v.addButtonWithTitle("Ok")
-            v.show()
         }
     }
     
@@ -227,4 +218,23 @@ class MainController: UIViewController {
     func updateLyricState() {
         Lyrics.fetchUrlFor(MusicPlayer.currentSong())
     }
+    
+    
+    //MARK: MPMediaPickerControllerDelegate
+    func mediaPicker(mediaPicker: MPMediaPickerController, didPickMediaItems  mediaItems:MPMediaItemCollection) -> Void
+    {
+        let items = mediaItems.items as [MPMediaItem]
+        if items.count > 0 {
+            LibraryManager.makePlaylistFromSongs(items)
+            MusicPlayer.play(items, shuffle:false)
+        }
+        self.dismissViewControllerAnimated(true, completion: {
+            UIHelpers.messageBox("Now playing your \(items.count) songs")
+        });
+    }
+    
+    func mediaPickerDidCancel(mediaPicker: MPMediaPickerController) {
+        self.dismissViewControllerAnimated(true, completion: {});
+    }
+
 }

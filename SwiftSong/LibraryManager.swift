@@ -220,6 +220,10 @@ class LibraryManager {
         return randomSongs
     }
     
+    class func makePlaylistFromSongs(songs: [MPMediaItem]) {
+        
+    }
+    
     
     func dumpNSUserDefaults(forKey:String) -> Void {
         println("Current dictionary: \(self.LikedSongs)")

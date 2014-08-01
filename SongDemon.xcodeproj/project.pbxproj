@@ -32,7 +32,6 @@
 		65B66DF0195246AB00947DCE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65B66DEE195246AB00947DCE /* Main.storyboard */; };
 		65B66DF2195246AB00947DCE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65B66DF1195246AB00947DCE /* Images.xcassets */; };
 		65B66E7319524A8300947DCE /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B66E7219524A8300947DCE /* MainController.swift */; };
-		65B68C481960733500CE9BD5 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B68C471960733500CE9BD5 /* SearchController.swift */; };
 		65DC55E4198B3D0000ABE255 /* 1176-bulleted-list.png in Resources */ = {isa = PBXBuildFile; fileRef = 65DC55E2198B3D0000ABE255 /* 1176-bulleted-list.png */; };
 		65DC55E5198B3D0000ABE255 /* 1176-bulleted-list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65DC55E3198B3D0000ABE255 /* 1176-bulleted-list@2x.png */; };
 		65E0487F1953A5D50080031C /* LibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0487E1953A5D50080031C /* LibraryManager.swift */; };
@@ -99,7 +98,6 @@
 		65B66DF1195246AB00947DCE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		65B66DF7195246AB00947DCE /* SongDemonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SongDemonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		65B66E7219524A8300947DCE /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
-		65B68C471960733500CE9BD5 /* SearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		65DC55E2198B3D0000ABE255 /* 1176-bulleted-list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1176-bulleted-list.png"; sourceTree = "<group>"; };
 		65DC55E3198B3D0000ABE255 /* 1176-bulleted-list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1176-bulleted-list@2x.png"; sourceTree = "<group>"; };
 		65E0487E1953A5D50080031C /* LibraryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryManager.swift; sourceTree = "<group>"; };
@@ -150,7 +148,6 @@
 				65F3BAF219876E28009916C1 /* RootController.swift */,
 				65B66E7219524A8300947DCE /* MainController.swift */,
 				657693B819883069008E25E6 /* LyricsController.swift */,
-				65B68C471960733500CE9BD5 /* SearchController.swift */,
 				653F785C1988C28F00707054 /* CustomSlider.swift */,
 			);
 			name = Controllers;
@@ -387,7 +384,6 @@
 				65E0487F1953A5D50080031C /* LibraryManager.swift in Sources */,
 				653F785D1988C28F00707054 /* CustomSlider.swift in Sources */,
 				65F3BABE198749B7009916C1 /* SongInfo.swift in Sources */,
-				65B68C481960733500CE9BD5 /* SearchController.swift in Sources */,
 				65A9112E196B9C49007B59D6 /* Lyrics.swift in Sources */,
 				65164C37196CF62400644EF4 /* UIHelpers.swift in Sources */,
 				65B66E7319524A8300947DCE /* MainController.swift in Sources */,
