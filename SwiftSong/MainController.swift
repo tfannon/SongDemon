@@ -139,17 +139,29 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         //if its already liked this will reset it and unset the selected image
         if LibraryManager.isLiked(MusicPlayer.currentSong()) {
             LibraryManager.removeFromLiked(MusicPlayer.currentSong())
-            btnLike.setImage(UIImage(named: "1116-slayer-hand.png"), forState: UIControlState.Normal)
+            changeLikeState(.None)
         } else {
             LibraryManager.addToLiked(MusicPlayer.currentSong())
-            btnLike.setImage(UIImage(named: "1116-slayer-hand-selected.png"), forState: UIControlState.Normal)
+            changeLikeState(.Liked)
         }
+    }
+    
+    func changeLikeState(state : LikeState) {
+        //btnLike.setImage(UIImage(named: "1116-slayer-hand-selected.png"), forState: UIControlState.Normal)
+        switch state {
+        case (.Liked) : btnLike.imageView.tintColor = UIColor.greenColor()
+        case (.Disliked) : ""
+        case (.None) : btnLike.imageView.tintColor = UIColor.grayColor()
+        default: ""
+        }
+        
     }
     
     func handleDislikeTapped() {
         LibraryManager.addToDisliked(MusicPlayer.currentSong())
+        MusicPlayer.forward()
         //reset the liked state
-        btnLike.setImage(UIImage(named: "1116-slayer-hand.png"), forState: UIControlState.Normal)
+        changeLikeState(.None)
     }
  
     //MARK: notifications
@@ -165,7 +177,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         center.addObserverForName(MPMusicPlayerControllerNowPlayingItemDidChangeNotification,
             object: nil, queue:nil) { _ in
                 if MusicPlayer.currentSong() != nil {
-                    println("Song changed to \(MusicPlayer.currentSong().title)")
+                    println("Song changed to \(LibraryManager.getSongInfo(MusicPlayer.currentSong()))")
                 }
                 self.updateSongInfo()
                 self.updatePlayState()
@@ -188,9 +200,9 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
             lblArtist.text = "\(item.albumArtist) - \(item.albumTitle)"
             lblSong.text = item.title
             //if it was a liked item, change the state
-            var image = LibraryManager.isLiked(item) ?
-                "1116-slayer-hand-selected.png" : "1116-slayer-hand.png"
-            btnLike.setImage(UIImage(named: image), forState: UIControlState.Normal)
+            var state = LibraryManager.isLiked(item) ?
+                LikeState.Liked : LikeState.None
+            changeLikeState(state)
             if (item.artwork != nil) {
                 imgSong.image = item.artwork.imageWithSize(imgSong.frame.size)
                 return;
@@ -210,11 +222,11 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     func updatePlayState() {
         var image: UIImage;
         if MusicPlayer.isPlaying() {
-            println("playing")
+            //println("playing")
             image = UIImage(named:"pause.png");
         }
         else {
-            println("paused")
+            //println("paused")
             image = UIImage(named:"play.png");
         }
         btnPlay.setImage(image, forState: UIControlState.Normal)

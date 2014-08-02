@@ -5,6 +5,13 @@ let LIKED_LIST = "Liked"
 let DISLIKED_LIST = "Disliked"
 private let LM = LibraryManager()
 
+
+enum LikeState {
+    case Liked
+    case Disliked
+    case None
+}
+
 class LibraryManager {
     //the finals are to get around a performance bug where adding items to a dictionary is very slow
     private final var LikedSongs = Dictionary<String, String>()
@@ -19,23 +26,25 @@ class LibraryManager {
     private final var Playlist = Array<MPMediaItem>()
 
     init() {
-        println("storage objects being initialized from NSDefaults")
+        println("storage objects being initialized from NSDefaults\n")
         let userDefaults = NSUserDefaults.standardUserDefaults();
         if let result = userDefaults.objectForKey(LIKED_LIST) as? Dictionary<String,String> {
-            //println("all liked songs: \(result)")
+            println("all liked songs:")
             //construct the liked songs from the defaults
             for (x,y) in result {
                LikedSongs[x] = y
-               //println("\(x):\(y)")
+               println("\(y)")
             }
         }
         if let result = userDefaults.objectForKey(DISLIKED_LIST) as? Dictionary<String,String> {
-            println("all disliked songs: \(result)")
+            println("\nall disliked songs:")
             //construct the disliked songs from the defaults
             for (x,y) in result {
                 DislikedSongs[x] = y
+                println("\(y)")
             }
         }
+        println()
     }
     
     class func scanLibrary() {
@@ -105,7 +114,7 @@ class LibraryManager {
         return item.persistentID.description
     }
     
-    private class func getSongInfo(item:MPMediaItem) -> String {
+    class func getSongInfo(item:MPMediaItem) -> String {
          return "\(item.albumArtist) - \(item.albumTitle) : \(item.title)"
     }
 

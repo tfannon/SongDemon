@@ -28,7 +28,7 @@ class Lyrics {
             var album = item!.albumTitle.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).stringByReplacingOccurrencesOfString(" ", withString: "", options: .LiteralSearch, range: nil)
             var track = String(item!.albumTrackNumber)
             var urlStr = "http://www.darklyrics.com/lyrics/\(artist)/\(album).html#\(track)"
-            println(urlStr)
+            //println(urlStr)
             gLyrics.Url = NSURL.URLWithString(urlStr)
             gLyrics.State = .Available
         } else {
