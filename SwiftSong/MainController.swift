@@ -57,7 +57,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
 
     //MARK: setup
     func setupAppearance() {
-
+       
         imgSong.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleImageTapped"))
         //tapping the search label
         lblSearch.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleSearchTapped"))
@@ -105,16 +105,17 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         
         if let currentSong = MusicPlayer.currentSong() {
             alert.addAction(UIAlertAction(title: "All \(currentSong.albumArtist) songs", style: .Default, handler: { action in
-                message = "All songs from \(currentSong.albumArtist) are playing"
-                }))
+                self.postPlaylistSelection("All songs from \(currentSong.albumArtist) are playing")
+            }))
             
             alert.addAction(UIAlertAction(title: "Songs from \(currentSong.albumTitle)", style: .Default, handler: { action in
-                message = "Songs from \(currentSong.albumTitle) are playing"
-                }))
+                self.postPlaylistSelection("Songs from \(currentSong.albumTitle) are playing")
+            }))
         }
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
             println("cancel chosen")
+            self.postPlaylistSelection("")
         }))
         //no matter what option is chosen switch the window back to main
         self.presentViewController(alert, animated: true, completion: {
@@ -123,9 +124,13 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         })
     }
     
-    func postPlaylistSelection(message : String, songs: [MPMediaItem]) {
-        MusicPlayer.play(songs)
-        //UIHelpers.messageBox(message)
+    func postPlaylistSelection(message : String, songs: [MPMediaItem]=[MPMediaItem]()) {
+        if songs.count > 0 {
+            MusicPlayer.play(songs)
+        }
+        if message.utf16Count > 0 {
+            UIHelpers.messageBox(message)
+        }
         activityIndicator.stopAnimating()
         imgSong.hidden = false
     }
@@ -197,7 +202,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         //if we got here there was no song
         else {
             imgSong.image = nil
-            lblArtist.text = "[No item in queue]"
+            lblArtist.text = "[No playlist selected]"
             lblSong.text = ""
         }
     }
@@ -206,11 +211,11 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         var image: UIImage;
         if MusicPlayer.isPlaying() {
             println("playing")
-            image = UIImage(named:"1242-pause.png");
+            image = UIImage(named:"pause.png");
         }
         else {
             println("paused")
-            image = UIImage(named:"1241-play.png");
+            image = UIImage(named:"play.png");
         }
         btnPlay.setImage(image, forState: UIControlState.Normal)
     }
