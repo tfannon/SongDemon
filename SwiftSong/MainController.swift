@@ -33,8 +33,8 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     
     @IBOutlet var viewScrubber: UIView!
     @IBOutlet var scrubber: UISlider!
-    
-    @IBOutlet var lblSearch: UILabel!
+    @IBOutlet var btnSearch: UIButton!
+
 
     //MARK: actions
     @IBAction func dislikeTapped(sender: AnyObject) { handleDislikeTapped()}
@@ -43,6 +43,9 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     @IBAction func prevTapped(AnyObject) { MusicPlayer.reverse() }
     @IBAction func nextTapped(AnyObject) { MusicPlayer.forward() }
     @IBAction func playlistTapped(AnyObject) { handlePlaylistTapped() }
+
+    @IBAction func searchTapped(sender: AnyObject) { handleSearchTapped() }
+    @IBAction func shuffleTapped(sender: AnyObject) { handleShuffleTapped()}
 
     //MARK: instance variables
    
@@ -59,8 +62,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     func setupAppearance() {
        
         imgSong.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleImageTapped"))
-        //tapping the search label
-        lblSearch.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleSearchTapped"))
+
         //swiping up allows user to select playlist
         var swipeUp = UISwipeGestureRecognizer(target: self, action: "handlePlaylistTapped")
         swipeUp.direction = .Up
@@ -77,17 +79,31 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     }
     
     func handleSearchTapped() {
+        waiting()
         let mediaPicker = MPMediaPickerController(mediaTypes: .Music)
         mediaPicker.delegate = self
         mediaPicker.allowsPickingMultipleItems = true
-        presentViewController(mediaPicker, animated: true, completion: {})
+        presentViewController(mediaPicker, animated: true, completion: {
+            self.doneWaiting() })
+    }
+    
+    func handleShuffleTapped() {
+       
+    }
+    
+    func waiting() {
+        activityIndicator.startAnimating()
+        imgSong.hidden = true
+    }
+    
+    func doneWaiting() {
+        activityIndicator.stopAnimating()
+        imgSong.hidden = false
     }
     
     func handlePlaylistTapped() {
         var alert = UIAlertController(title: "Choose songs to play", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
-        //handler: ((UIAlertAction!) -> Void)!)
-        //style: default is blue, destructive is red, cancel is a seperate cancel button
-               var message = ""
+        
         alert.addAction(UIAlertAction(title: "Mix", style: .Default, handler: { action in
             var songs = LibraryManager.getMixOfSongs()
             self.postPlaylistSelection("Mix is playing", songs: songs)
@@ -104,12 +120,14 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         }))
         
         if let currentSong = MusicPlayer.currentSong() {
-            alert.addAction(UIAlertAction(title: "All \(currentSong.albumArtist) songs", style: .Default, handler: { action in
-                self.postPlaylistSelection("All songs from \(currentSong.albumArtist) are playing")
+            alert.addAction(UIAlertAction(title: "\(currentSong.albumArtist) songs", style: .Default, handler: { action in
+                var songs = LibraryManager.getArtistSongs(currentSong);
+                self.postPlaylistSelection("Songs from \(currentSong.albumArtist) are playing", songs: songs)
             }))
             
             alert.addAction(UIAlertAction(title: "Songs from \(currentSong.albumTitle)", style: .Default, handler: { action in
-                self.postPlaylistSelection("Songs from \(currentSong.albumTitle) are playing")
+                var songs = LibraryManager.getAlbumSongs(currentSong);
+                self.postPlaylistSelection("Songs from \(currentSong.albumTitle) are playing", songs: songs)
             }))
         }
         
@@ -119,8 +137,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         }))
         //no matter what option is chosen switch the window back to main
         self.presentViewController(alert, animated: true, completion: {
-            self.imgSong.hidden = true
-            self.activityIndicator.startAnimating()
+            self.waiting()
         })
     }
     
@@ -132,8 +149,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         if !message.isEmpty {
             UIHelpers.messageBox(message)
         }
-        activityIndicator.stopAnimating()
-        imgSong.hidden = false
+        doneWaiting()
     }
     
     func handleLikeTapped() {

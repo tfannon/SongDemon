@@ -32,11 +32,12 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="41" userLabel="View - Play">
                                 <rect key="frame" x="0.0" y="448" width="320" height="59"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Apr-UP-LMO" userLabel="Button - Back">
-                                        <rect key="frame" x="66" y="-5" width="64" height="64"/>
-                                        <state key="normal" image="rewind.png"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="76" userLabel="Button - Like">
+                                        <rect key="frame" x="247" y="-5" width="64" height="64"/>
+                                        <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="" image="777-thumbs-up.png"/>
                                         <connections>
-                                            <action selector="prevTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="tAu-q4-Vyq"/>
+                                            <action selector="likeTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="kfa-HH-Ov5"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="86" userLabel="Button - Dislike">
@@ -62,12 +63,11 @@
                                             <action selector="nextTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="aww-9X-0Eu"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="76" userLabel="Button - Like">
-                                        <rect key="frame" x="247" y="-5" width="64" height="64"/>
-                                        <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal" title="" image="777-thumbs-up.png"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Apr-UP-LMO" userLabel="Button - Back">
+                                        <rect key="frame" x="66" y="-5" width="64" height="64"/>
+                                        <state key="normal" image="rewind.png"/>
                                         <connections>
-                                            <action selector="likeTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="kfa-HH-Ov5"/>
+                                            <action selector="prevTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="tAu-q4-Vyq"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -77,18 +77,28 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PyT-BI-o0u" userLabel="View - Scrubber">
                                 <rect key="frame" x="0.0" y="501" width="320" height="41"/>
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SEARCH" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ytQ-fF-1wT">
-                                        <rect key="frame" x="5" y="-1" width="70" height="50"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Hu-hE-hdb" userLabel="Button - Search">
+                                        <rect key="frame" x="-8" y="-6" width="95" height="54"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SHUFFLE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VQ7-c7-evB">
-                                        <rect key="frame" x="246" y="-1" width="74" height="50"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                        <state key="normal" title="SEARCH">
+                                            <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="searchTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="lie-76-rqf"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d8i-9X-Lro" userLabel="Button - Shuffle">
+                                        <rect key="frame" x="232" y="-6" width="95" height="54"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <state key="normal" title="SHUFFLE">
+                                            <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="shuffleTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="R1W-R8-ZcH"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
@@ -146,10 +156,10 @@
                         <outlet property="btnPlay" destination="HOx-of-8Lk" id="72v-wN-1B6"/>
                         <outlet property="btnPlaylist" destination="WZR-39-m7B" id="MV4-MQ-KvJ"/>
                         <outlet property="btnPrev" destination="Apr-UP-LMO" id="Osc-8m-k6r"/>
+                        <outlet property="btnSearch" destination="5Hu-hE-hdb" id="2Cf-c0-hwY"/>
                         <outlet property="btnShare" destination="16" id="name-outlet-16"/>
                         <outlet property="imgSong" destination="cfx-bf-GNN" id="b8b-4y-1k9"/>
                         <outlet property="lblArtist" destination="38" id="name-outlet-38"/>
-                        <outlet property="lblSearch" destination="ytQ-fF-1wT" id="on9-dZ-7xy"/>
                         <outlet property="lblSong" destination="39" id="name-outlet-39"/>
                         <outlet property="scrubber" destination="Ob5-lK-eQ6" id="E8e-cf-2Q7"/>
                         <outlet property="viewArtwork" destination="104-Dg-ZbI" id="drK-ha-Vbx"/>

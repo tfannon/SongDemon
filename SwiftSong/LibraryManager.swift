@@ -209,25 +209,80 @@ class LibraryManager {
         LM.Playlist = mixedSongs
         return mixedSongs;
     }
+    
+    //grab a bunch of songs by current artist
+    class func getArtistSongs(currentSong : MPMediaItem) -> [MPMediaItem] {
+        var songs = [MPMediaItem]()
+        if currentSong != nil {
+            var query = MPMediaQuery.songsQuery()
+            var pred = MPMediaPropertyPredicate(value: currentSong.albumArtist, forProperty: MPMediaItemPropertyAlbumArtist)
+            query.addFilterPredicate(pred)
+            var artistSongs = query.items as [MPMediaItem]
+            songs = getRandomSongs(200, sourceSongs: artistSongs)
+        }
+        LM.Playlist = songs
+        return songs
+    }
+    
+    class func getAlbumSongs(currentSong : MPMediaItem) -> [MPMediaItem] {
+        var songs = [MPMediaItem]()
+        if currentSong != nil {
+            var query = MPMediaQuery.songsQuery()
+            var pred = MPMediaPropertyPredicate(value: currentSong.albumTitle, forProperty: MPMediaItemPropertyAlbumTitle)
+            query.addFilterPredicate(pred)
+            var albumSongs = query.items as [MPMediaItem]
+            songs = albumSongs;
+            for x in songs {
+                println(getSongInfo(x))
+            }
+            //songs = getRandomSongs(count, sourceSongs: artistSongs)
+        }
+        LM.Playlist = songs
+        return songs
+    }
+    
+    
+    
 
     private class func getRandomSongs(count : Int, sourceSongs : [String]) -> [MPMediaItem] {
         var randomSongs = [MPMediaItem]()
+        var songsPicked = 0
         var i = 0
-        while i < sourceSongs.count && i < count {
+        while i < sourceSongs.count && songsPicked < count {
             var idx = Utils.random(sourceSongs.count-1)
             if let item = ITunesUtils.getSongFrom(sourceSongs[idx]) {
                 //if it hasnt been disliked or already added
                 if !isDisliked(item) && find(randomSongs, item) == nil {
                     randomSongs.append(item)
                     println(getSongInfo(item))
-                    i++
+                    songsPicked++
                 } else {
                     //println("dup detected")
                 }
             }
+            i++
         }
         return randomSongs
     }
+    
+    private class func getRandomSongs(count : Int, sourceSongs : [MPMediaItem]) -> [MPMediaItem] {
+        var randomSongs = [MPMediaItem]()
+        var songsPicked = 0
+        var i = 0
+        while i < sourceSongs.count && songsPicked < count {
+            var idx = Utils.random(sourceSongs.count-1)
+            var item = sourceSongs[idx]
+            //if it hasnt been disliked or already added
+            if !isDisliked(item) && find(randomSongs, item) == nil {
+                randomSongs.append(item)
+                println(getSongInfo(item))
+                songsPicked++
+            }
+            i++
+        }
+        return randomSongs
+    }
+    
     
     class func makePlaylistFromSongs(songs: [MPMediaItem]) {
         
