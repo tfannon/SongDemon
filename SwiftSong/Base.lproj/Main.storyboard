@@ -137,7 +137,7 @@
                                             <action selector="playlistTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="BTc-4f-33H"/>
                                         </connections>
                                     </button>
-                                    <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Ob5-lK-eQ6" userLabel="Scrubber" customClass="CustomSlider">
+                                    <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Ob5-lK-eQ6" userLabel="Scrubber">
                                         <rect key="frame" x="56" y="11" width="209" height="31"/>
                                     </slider>
                                 </subviews>
@@ -181,6 +181,60 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Byq-Df-Kjd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-443" y="251"/>
+        </scene>
+        <!--PlaylistController-->
+        <scene sceneID="1kS-kk-1NF">
+            <objects>
+                <tableViewController storyboardIdentifier="PlaylistController" id="1gp-PQ-YUc" userLabel="PlaylistController" customClass="PlaylistController" customModule="SongDemon" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="22" sectionFooterHeight="22" id="OhQ-hs-ikC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="PlaylistCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlaylistCell" rowHeight="50" id="RSj-dW-u7a" customClass="PlaylistCell" customModule="SongDemon" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RSj-dW-u7a" id="Sby-zE-jQA">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sample-album-art.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="KAr-Pc-sp7" userLabel="Artwork">
+                                            <rect key="frame" x="20" y="2" width="45" height="45"/>
+                                        </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="In Deathless Tradition" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QMH-IQ-dKQ" userLabel="Song Title">
+                                            <rect key="frame" x="73" y="4" width="200" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Goatwhore - Blood For The Master" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fOI-gI-XE2" userLabel="Artist - Album">
+                                            <rect key="frame" x="73" y="22" width="200" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="1241-play-toolbar-selected.png" translatesAutoresizingMaskIntoConstraints="NO" id="Rd3-Gb-Nrc">
+                                            <rect key="frame" x="285" y="12" width="25" height="25"/>
+                                        </imageView>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="imgArtwork" destination="KAr-Pc-sp7" id="emC-Ie-Bx5"/>
+                                    <outlet property="imgStatus" destination="Rd3-Gb-Nrc" id="lAI-Er-4Jy"/>
+                                    <outlet property="lblArtistAlbum" destination="fOI-gI-XE2" id="Tc0-Ka-24R"/>
+                                    <outlet property="lblTitle" destination="QMH-IQ-dKQ" id="gy9-Al-Glf"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="1gp-PQ-YUc" id="aqt-8t-1aU"/>
+                            <outlet property="delegate" destination="1gp-PQ-YUc" id="C6C-B4-fbH"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9dA-Oa-nHP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-443" y="873"/>
         </scene>
         <!--LyricsController-->
         <scene sceneID="V5l-cd-rGw">
@@ -241,6 +295,7 @@
     </scenes>
     <resources>
         <image name="1176-bulleted-list.png" width="28" height="19"/>
+        <image name="1241-play-toolbar-selected.png" width="22" height="22"/>
         <image name="702-share.png" width="21" height="28"/>
         <image name="777-thumbs-up.png" width="26" height="28"/>
         <image name="778-thumbs-down-selected.png" width="26" height="28"/>

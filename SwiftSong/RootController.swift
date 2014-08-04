@@ -12,6 +12,7 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     
     var mainController: UIViewController!
     var lyricsController: UIViewController!
+    var playlistController: UITableViewController!
     var controllers : [UIViewController] = []
   
     
@@ -22,7 +23,8 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         
         mainController = self.storyboard.instantiateViewControllerWithIdentifier("MainController") as UIViewController
         lyricsController = self.storyboard.instantiateViewControllerWithIdentifier("LyricsController") as UIViewController
-        controllers = [mainController, lyricsController]
+        playlistController = self.storyboard.instantiateViewControllerWithIdentifier("PlaylistController") as UITableViewController
+        controllers = [playlistController, mainController, lyricsController]
 
         //set the initial controller to the main one
         let viewControllers : [UIViewController] = [mainController]
@@ -41,8 +43,7 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     }
 
     func presentationIndexForPageViewController(pageViewController: UIPageViewController!) -> Int {
-        return 0
-    }
+        return 1    }
 
 
     //get the controller before the current one displayed
@@ -51,6 +52,7 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         if index == 0  {
             return nil
         }
+        index--
         return controllers[index]
     }
 

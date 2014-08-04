@@ -47,6 +47,10 @@ class LibraryManager {
         println()
     }
     
+    class var currentPlaylist : [MPMediaItem]  {
+        return LM.Playlist
+    }
+    
     class func scanLibrary() {
         if LM.scanned { return };
         var unplayed = 0;
