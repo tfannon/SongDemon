@@ -128,7 +128,8 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         if songs.count > 0 {
             MusicPlayer.play(songs)
         }
-        if message.utf16Count > 0 {
+        //string contains characters
+        if !message.isEmpty {
             UIHelpers.messageBox(message)
         }
         activityIndicator.stopAnimating()
@@ -147,21 +148,26 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     }
     
     func changeLikeState(state : LikeState) {
-        //btnLike.setImage(UIImage(named: "1116-slayer-hand-selected.png"), forState: UIControlState.Normal)
+        var image : String
         switch state {
-        case (.Liked) : btnLike.imageView.tintColor = UIColor.greenColor()
-        case (.Disliked) : ""
-        case (.None) : btnLike.imageView.tintColor = UIColor.grayColor()
-        default: ""
+        case (.Liked) :
+            image = "777-thumbs-up-selected.png"
+        case (.Disliked) :
+            image = "777-thumbs-up.png"
+        case (.None) :
+            image = "777-thumbs-up.png"
+        default: image = ""
         }
-        
+        if !image.isEmpty {
+            btnLike.setImage(UIImage(named: image), forState: UIControlState.Normal)
+        }
     }
     
     func handleDislikeTapped() {
         LibraryManager.addToDisliked(MusicPlayer.currentSong())
         MusicPlayer.forward()
         //reset the liked state
-        changeLikeState(.None)
+        changeLikeState(.Disliked)
     }
  
     //MARK: notifications
@@ -222,11 +228,9 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     func updatePlayState() {
         var image: UIImage;
         if MusicPlayer.isPlaying() {
-            //println("playing")
             image = UIImage(named:"pause.png");
         }
         else {
-            //println("paused")
             image = UIImage(named:"play.png");
         }
         btnPlay.setImage(image, forState: UIControlState.Normal)

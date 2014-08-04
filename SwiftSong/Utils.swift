@@ -38,6 +38,12 @@ extension Array {
     }
 }
 
+extension String {
+    var isEmpty : Bool {
+        return self.utf16Count == 0
+    }
+}
+
   /* crashes compiler
 extension MPMediaItem {
     var songInfo: String {
