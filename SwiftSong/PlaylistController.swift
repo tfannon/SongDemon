@@ -32,6 +32,11 @@ class PlaylistController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+        var index = LibraryManager.currentPlaylistIndex
+        if index > 0 {
+            var indexPath = NSIndexPath(forRow: index, inSection: 0)
+            tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
+        }
     }
 
 
@@ -73,6 +78,8 @@ class PlaylistController: UITableViewController {
         cell.lblArtistAlbum.text = "\(song.albumArtist) - \(song.albumTitle)"
         if LibraryManager.currentPlaylistIndex == indexPath.row {
             cell.imgStatus.image = playingSongImage
+        } else {
+            cell.imgStatus.image = nil
         }
         if song.artwork != nil {
             cell.imgArtwork.image = song.artwork.imageWithSize(cell.imgArtwork.frame.size)
