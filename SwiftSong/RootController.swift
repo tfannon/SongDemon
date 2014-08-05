@@ -48,7 +48,7 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
 
     //get the controller before the current one displayed
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController : UIViewController) -> UIViewController? {
-        var index = find(controllers, viewControllerBeforeViewController) as Int
+        var index = find(controllers, viewControllerBeforeViewController)!
         if index == 0  {
             return nil
         }
@@ -57,7 +57,7 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     }
 
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController : UIViewController) -> UIViewController? {
-        var index = find(controllers, viewControllerAfterViewController) as Int
+        var index = find(controllers, viewControllerAfterViewController)!
         index++
         if index == controllers.count {
             return nil

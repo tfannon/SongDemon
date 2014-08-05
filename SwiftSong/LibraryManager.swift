@@ -24,6 +24,8 @@ class LibraryManager {
     private var scanned = false
     //playlist 
     private final var Playlist = Array<MPMediaItem>()
+    private var PlaylistIndex = 0
+
 
     init() {
         println("storage objects being initialized from NSDefaults\n")
@@ -47,9 +49,23 @@ class LibraryManager {
         println()
     }
     
+    //MARK: no class properties yet
     class var currentPlaylist : [MPMediaItem]  {
         return LM.Playlist
     }
+    
+    class var currentPlaylistIndex : Int {
+        return LM.PlaylistIndex
+    }
+    
+    class func changePlaylistIndex(currentSong : MPMediaItem) {
+        var index = find(LM.Playlist, currentSong)
+        if index != nil {
+            LM.PlaylistIndex = index!
+            println("Setting playlist index to: \(getSongInfo(currentSong))")
+        }
+    }
+    
     
     class func scanLibrary() {
         if LM.scanned { return };
@@ -150,10 +166,10 @@ class LibraryManager {
     }
     
     
-    //MARK: functions for grabbing songs from iTunes
+    //MARK: functions for getting playlists
     
      /* run a query to see all items > 1 star in itunes and merge this with current liked */
-    class func getLikedSongs(count : Int = 50) -> [MPMediaItem] {
+    class func getLikedSongs(count : Int = 50, dumpSongs : Bool = true) -> [MPMediaItem] {
         scanLibrary()
         let start = NSDate()
         var allLiked = [MPMediaItem]()
@@ -178,25 +194,33 @@ class LibraryManager {
             //make sure it has not already been added
             if find(randomLiked, item) == nil {
                 randomLiked.append(item)
-                println(getSongInfo(item))
+                //println(getSongInfo(item))
                 i++
             } else {
                 //println("dup detected")
             }
         }
         let time = NSDate().timeIntervalSinceDate(start) * 1000
-        println("Built liked list with \(randomLiked.count) songs in \(time)ms")
+        if dumpSongs {
+            println("Built liked list with \(randomLiked.count) songs in \(time)ms")
+            outputSongs(randomLiked)
+        }
         LM.Playlist = randomLiked
+        LM.PlaylistIndex = 0
         return randomLiked
     }
     
-    class func getNewSongs(count : Int = 50) -> [MPMediaItem] {
+    class func getNewSongs(count : Int = 50, dumpSongs : Bool = true) -> [MPMediaItem] {
         scanLibrary()
         let start = NSDate()
         var newSongs = getRandomSongs(count, sourceSongs: LM.NotPlayedSongs)
         let time = NSDate().timeIntervalSinceDate(start) * 1000
-        println("Built new song list with \(newSongs.count) songs in \(time)ms")
+        if dumpSongs {
+            println("Built new song list with \(newSongs.count) songs in \(time)ms")
+            outputSongs(newSongs)
+        }
         LM.Playlist = newSongs
+        LM.PlaylistIndex = 0
         return newSongs
     }
     
@@ -204,13 +228,15 @@ class LibraryManager {
     class func getMixOfSongs() -> [MPMediaItem] {
         scanLibrary()
         let start = NSDate()
-        var newSongs = getNewSongs(count: 20)
-        var ratedSongs = getLikedSongs(count: 20)
+        var newSongs = getNewSongs(count: 20, dumpSongs:false)
+        var ratedSongs = getLikedSongs(count: 20, dumpSongs:false)
         var otherSongs = getRandomSongs(10, sourceSongs: LM.OtherSongs)
         var mixedSongs = Utils.shuffle(newSongs + ratedSongs + otherSongs)
         let time = NSDate().timeIntervalSinceDate(start) * 1000
         println("Built mixed song list with \(mixedSongs.count) songs in \(time)ms")
+        outputSongs(mixedSongs)
         LM.Playlist = mixedSongs
+        LM.PlaylistIndex = 0
         return mixedSongs;
     }
     
@@ -224,7 +250,10 @@ class LibraryManager {
             var artistSongs = query.items as [MPMediaItem]
             songs = getRandomSongs(200, sourceSongs: artistSongs)
         }
+        println("Built artist songlist with \(songs.count) songs in \(time)ms")
+        outputSongs(songs)
         LM.Playlist = songs
+        LM.PlaylistIndex = 0
         return songs
     }
     
@@ -236,17 +265,21 @@ class LibraryManager {
             query.addFilterPredicate(pred)
             var albumSongs = query.items as [MPMediaItem]
             songs = albumSongs;
-            for x in songs {
-                println(getSongInfo(x))
-            }
             //songs = getRandomSongs(count, sourceSongs: artistSongs)
         }
+        outputSongs(songs)
         LM.Playlist = songs
+        LM.PlaylistIndex = 0
         return songs
     }
     
     
+    class func makePlaylistFromSongs(songs: [MPMediaItem]) {
+        LM.Playlist = songs
+        LM.PlaylistIndex = 0
+    }
     
+    //MARK: private helper functions
 
     private class func getRandomSongs(count : Int, sourceSongs : [String]) -> [MPMediaItem] {
         var randomSongs = [MPMediaItem]()
@@ -258,10 +291,7 @@ class LibraryManager {
                 //if it hasnt been disliked or already added
                 if !isDisliked(item) && find(randomSongs, item) == nil {
                     randomSongs.append(item)
-                    println(getSongInfo(item))
                     songsPicked++
-                } else {
-                    //println("dup detected")
                 }
             }
             i++
@@ -279,19 +309,19 @@ class LibraryManager {
             //if it hasnt been disliked or already added
             if !isDisliked(item) && find(randomSongs, item) == nil {
                 randomSongs.append(item)
-                println(getSongInfo(item))
                 songsPicked++
             }
             i++
         }
-        return randomSongs
+         return randomSongs
     }
     
     
-    class func makePlaylistFromSongs(songs: [MPMediaItem]) {
-        
+    private class func outputSongs(songs: [MPMediaItem]) {
+        for i in songs {
+            println(getSongInfo(i))
+        }
     }
-    
     
     func dumpNSUserDefaults(forKey:String) -> Void {
         println("Current dictionary: \(self.LikedSongs)")

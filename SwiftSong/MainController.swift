@@ -225,13 +225,9 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
             var state = LibraryManager.isLiked(item) ?
                 LikeState.Liked : LikeState.None
             changeLikeState(state)
-            if (item.artwork != nil) {
-                imgSong.image = item.artwork.imageWithSize(imgSong.frame.size)
-                return;
-            } else {
-                imgSong.image = nil
-                return;
-            }
+            imgSong.image = (item.artwork != nil) ?
+                item.artwork.imageWithSize(imgSong.frame.size) : nil
+            LibraryManager.changePlaylistIndex(item)
         }
         //if we got here there was no song
         else {
@@ -258,6 +254,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     
     
     //MARK: MPMediaPickerControllerDelegate
+    
     func mediaPicker(mediaPicker: MPMediaPickerController, didPickMediaItems  mediaItems:MPMediaItemCollection) -> Void
     {
         let items = mediaItems.items as [MPMediaItem]

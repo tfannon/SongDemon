@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.11" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="0dw-RJ-QCg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6205" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="0dw-RJ-QCg">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6190.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6198"/>
     </dependencies>
     <scenes>
         <!--MainController-->
@@ -44,7 +44,7 @@
                                         <rect key="frame" x="9" y="-3" width="64" height="64"/>
                                         <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" title="" image="778-thumbs-down.png"/>
-                                        <state key="selected" image="778-thumbs-down-selected.png"/>
+                                        <state key="selected" image="778-thumbs-down.png"/>
                                         <connections>
                                             <action selector="dislikeTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="m7a-uO-gtg"/>
                                         </connections>
@@ -298,7 +298,6 @@
         <image name="1241-play-toolbar-selected.png" width="22" height="22"/>
         <image name="702-share.png" width="21" height="28"/>
         <image name="777-thumbs-up.png" width="26" height="28"/>
-        <image name="778-thumbs-down-selected.png" width="26" height="28"/>
         <image name="778-thumbs-down.png" width="26" height="28"/>
         <image name="fast-forward.png" width="38" height="38"/>
         <image name="play.png" width="50" height="50"/>

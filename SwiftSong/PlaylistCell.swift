@@ -15,7 +15,11 @@ class PlaylistCell: UITableViewCell {
     @IBOutlet var lblArtistAlbum: UILabel!
     @IBOutlet var imgStatus: UIImageView!
     
-    init(style: UITableViewCellStyle, reuseIdentifier: String) {
+    required init(coder aDecoder: NSCoder!) {
+        super.init(coder: aDecoder)
+    }
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         // Initialization code
     }

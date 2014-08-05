@@ -15,8 +15,12 @@ class PlaylistController: UITableViewController {
     var sampleSongs = ["In Deathless Tradition", "FBS"]
     var sampleImages = ["sample-album-art.jpg", "sample-album-art2.jpg"]
     
+    var playingSongImage = UIImage(named: "1241-play-toolbar-selected.png")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        playingSongImage = playingSongImage.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -27,6 +31,7 @@ class PlaylistController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.reloadData()
     }
 
 
@@ -58,17 +63,22 @@ class PlaylistController: UITableViewController {
             cell.lblTitle.text = sampleSongs[indexPath.row]
             cell.lblArtistAlbum.text = "\(sampleArtists[indexPath.row]) - \(sampleAlbums[indexPath.row])"
             cell.imgArtwork.image = UIImage(named: sampleImages[indexPath.row])
-            var image = UIImage(named: "1241-play-toolbar-selected.png")
-            image = image.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-            //cell.imgStatus.tintColor = UIColor(red:0.35, green:0.85, blue: 0.91, alpha: 1)
             cell.imgStatus.tintColor = UIColor.lightGrayColor()
-            cell.imgStatus.image = image
+            cell.imgStatus.image = playingSongImage
             return cell
         }
         
         let song = LibraryManager.currentPlaylist[indexPath.row]
         cell.lblTitle.text = song.title
         cell.lblArtistAlbum.text = "\(song.albumArtist) - \(song.albumTitle)"
+        if LibraryManager.currentPlaylistIndex == indexPath.row {
+            cell.imgStatus.image = playingSongImage
+        }
+        if song.artwork != nil {
+            cell.imgArtwork.image = song.artwork.imageWithSize(cell.imgArtwork.frame.size)
+        } else {
+            cell.imgArtwork.image = nil
+        }
         return cell
     }
 
