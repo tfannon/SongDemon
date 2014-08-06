@@ -94,6 +94,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     func waiting() {
         activityIndicator.startAnimating()
         imgSong.hidden = true
+        imgSong.image = nil
     }
     
     func doneWaiting() {
@@ -132,8 +133,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         }
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
-            println("cancel chosen")
-            self.postPlaylistSelection("")
+            self.doneWaiting()
         }))
         //no matter what option is chosen switch the window back to main
         self.presentViewController(alert, animated: true, completion: {
@@ -145,9 +145,8 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         if songs.count > 0 {
             MusicPlayer.play(songs)
         }
-        //string contains characters
         if !message.isEmpty {
-            UIHelpers.messageBox(message)
+            ""//UIHelpers.messageBox(message)
         }
         doneWaiting()
     }

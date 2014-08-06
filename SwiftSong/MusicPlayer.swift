@@ -48,4 +48,8 @@ class MusicPlayer {
             MP.applePlayer.play()
         }
     }
+    
+    class func playSongInPlaylist(song : MPMediaItem) {
+        MP.applePlayer.nowPlayingItem = song
+    }
 }

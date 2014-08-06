@@ -64,4 +64,10 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         }
         return controllers[index]
     }
+    
+    class func switchToMainView() {
+        var app = UIApplication.sharedApplication().keyWindow.rootViewController as RootController
+        let viewControllers : [UIViewController] = [app.mainController]
+        app.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
+    }
 }

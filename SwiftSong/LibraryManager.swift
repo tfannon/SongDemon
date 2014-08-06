@@ -23,8 +23,8 @@ class LibraryManager {
     private final var OtherSongs = Array<String>()
     private var scanned = false
     //playlist 
-    private final var Playlist = Array<MPMediaItem>()
-    private var PlaylistIndex = 0
+    private var Playlist = Array<MPMediaItem>()
+    private var PlaylistIndex = -1
 
 
     init() {

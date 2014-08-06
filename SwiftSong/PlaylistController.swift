@@ -31,9 +31,13 @@ class PlaylistController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        redrawList()
+    }
+    
+    func redrawList() {
         tableView.reloadData()
         var index = LibraryManager.currentPlaylistIndex
-        if index > 0 {
+        if index >= 0 {
             var indexPath = NSIndexPath(forRow: index, inSection: 0)
             tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
         }
@@ -88,6 +92,14 @@ class PlaylistController: UITableViewController {
         }
         return cell
     }
+    
+    override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+        println("didSelectRowAtIndexPath called")
+        var song = LibraryManager.currentPlaylist[indexPath.row]
+        MusicPlayer.playSongInPlaylist(song)
+        RootController.switchToMainView()
+    }
+
 
 
     /*
