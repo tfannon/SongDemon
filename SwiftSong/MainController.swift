@@ -60,6 +60,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
 
     //MARK: setup
     func setupAppearance() {
+        //self.view.backgroundColor = UIColor.blackColor()
        
         imgSong.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleImageTapped"))
 
@@ -92,9 +93,9 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     }
     
     func waiting() {
-        activityIndicator.startAnimating()
-        imgSong.hidden = true
-        imgSong.image = nil
+        self.activityIndicator.startAnimating()
+        self.imgSong.hidden = true
+        //self.imgSong.image = nil
     }
     
     func doneWaiting() {
@@ -105,9 +106,9 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     func handlePlaylistTapped() {
         var alert = UIAlertController(title: "Choose songs to play", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         
-        alert.addAction(UIAlertAction(title: "Mix", style: .Default, handler: { action in
+        alert.addAction(UIAlertAction(title: "Random mix", style: .Default, handler: { action in
             var songs = LibraryManager.getMixOfSongs()
-            self.postPlaylistSelection("Mix is playing", songs: songs)
+            self.postPlaylistSelection("Random mix is playing", songs: songs)
         }))
         
         alert.addAction(UIAlertAction(title: "Liked", style: .Default, handler: {action in
@@ -121,12 +122,16 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         }))
         
         if let currentSong = MusicPlayer.currentSong() {
-            alert.addAction(UIAlertAction(title: "\(currentSong.albumArtist) songs", style: .Default, handler: { action in
+            //var message = "\(currentSong.albumArtist) songs"
+            var message = "Songs from this artist"
+            alert.addAction(UIAlertAction(title: message, style: .Default, handler: { action in
                 var songs = LibraryManager.getArtistSongs(currentSong);
                 self.postPlaylistSelection("Songs from \(currentSong.albumArtist) are playing", songs: songs)
             }))
             
-            alert.addAction(UIAlertAction(title: "Songs from \(currentSong.albumTitle)", style: .Default, handler: { action in
+            //let message = "Songs from \(currentSong.albumTitle)"
+            message = "Songs from this album"
+            alert.addAction(UIAlertAction(title: message, style: .Default, handler: { action in
                 var songs = LibraryManager.getAlbumSongs(currentSong);
                 self.postPlaylistSelection("Songs from \(currentSong.albumTitle) are playing", songs: songs)
             }))

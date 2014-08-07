@@ -225,6 +225,31 @@
                                     <outlet property="lblTitle" destination="QMH-IQ-dKQ" id="gy9-Al-Glf"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="PlaylistHeaderCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlaylistHeaderCell" rowHeight="50" id="yww-Hj-f0s" customClass="PlaylistHeaderCell" customModule="SongDemon" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yww-Hj-f0s" id="F4N-II-mlE">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SongDemon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A0G-OO-rG1" userLabel="Song Title">
+                                            <rect key="frame" x="73" y="4" width="200" height="22"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="My husband is handsome and smart" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGm-zT-zCT" userLabel="Artist - Album">
+                                            <rect key="frame" x="73" y="22" width="203" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="lblArtistAlbum" destination="rGm-zT-zCT" id="C0a-R3-1Vz"/>
+                                    <outlet property="lblTitle" destination="A0G-OO-rG1" id="W45-Fu-gsl"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="1gp-PQ-YUc" id="aqt-8t-1aU"/>

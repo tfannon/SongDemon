@@ -21,6 +21,7 @@ class PlaylistController: UITableViewController {
         super.viewDidLoad()
         
         playingSongImage = playingSongImage.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        //self.tableView.backgroundColor = UIColor.blackColor()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -98,6 +99,10 @@ class PlaylistController: UITableViewController {
         var song = LibraryManager.currentPlaylist[indexPath.row]
         MusicPlayer.playSongInPlaylist(song)
         RootController.switchToMainView()
+    }
+    
+    override func tableView(tableView: UITableView!, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
     }
 
 
