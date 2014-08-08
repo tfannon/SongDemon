@@ -20,6 +20,10 @@ class MusicPlayer {
         return MP.applePlayer.playbackState == MPMusicPlaybackState.Playing
     }
     
+    class func elapsed() {
+        //MP.applePlayer.c
+    }
+    
     class func playPressed() {
         isPlaying() ?  MP.applePlayer.pause() : MP.applePlayer.play()
     }

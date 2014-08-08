@@ -18,12 +18,19 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     @IBOutlet var viewIndicators: UIView!
     @IBOutlet var btnShare: UIButton!
     @IBOutlet var btnPlaylist: UIButton!
+   
+    @IBOutlet weak var lblTimeElapsed: UILabel!
+    @IBOutlet weak var lblTimeRemaining: UILabel!
+    @IBOutlet var scrubber: UISlider!
+    @IBAction func scrubberChanged(sender: AnyObject) {
+    }
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
     @IBOutlet var viewSongInfo: UIView!
     @IBOutlet var lblArtist: UILabel!
     @IBOutlet var lblSong: UILabel!
 
+    
     @IBOutlet var viewPlayButtons: UIView!
     @IBOutlet var btnDislike: UIButton!
     @IBOutlet var btnPrev: UIButton!
@@ -32,7 +39,6 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     @IBOutlet var btnLike: UIButton!
     
     @IBOutlet var viewScrubber: UIView!
-    @IBOutlet var scrubber: UISlider!
     @IBOutlet var btnSearch: UIButton!
 
 
@@ -232,6 +238,16 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
             imgSong.image = (item.artwork != nil) ?
                 item.artwork.imageWithSize(imgSong.frame.size) : nil
             LibraryManager.changePlaylistIndex(item)
+            let foo = item.playTime
+            //update the scrubber
+            //var totalPlaybackTime = Int(item.playbackDuration)
+            println(foo)
+            lblTimeRemaining.text = foo.description
+            //var tHours = (totalPlaybackTime / 3600)
+            //var tMins = ((totalPlaybackTime/60) - tHours*60)
+            //var tSecs = (totalPlaybackTime % 60 )
+            //println("\(tHours) : \(tMins) : \(tSecs)")
+            
         }
         //if we got here there was no song
         else {

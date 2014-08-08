@@ -62,16 +62,6 @@
 		65F3BAF319876E28009916C1 /* RootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F3BAF219876E28009916C1 /* RootController.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		65B66DF8195246AB00947DCE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 65B66DDB195246AB00947DCE /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 65B66DE2195246AB00947DCE;
-			remoteInfo = SwiftSong;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		65164C36196CF62400644EF4 /* UIHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHelpers.swift; sourceTree = "<group>"; };
 		65164C39196D007E00644EF4 /* Test.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Test.playground; sourceTree = "<group>"; };
@@ -106,7 +96,6 @@
 		65B66DE8195246AB00947DCE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		65B66DEF195246AB00947DCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		65B66DF1195246AB00947DCE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		65B66DF7195246AB00947DCE /* SongDemonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SongDemonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		65B66E7219524A8300947DCE /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		65DC55E2198B3D0000ABE255 /* 1176-bulleted-list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1176-bulleted-list.png"; sourceTree = "<group>"; };
 		65DC55E3198B3D0000ABE255 /* 1176-bulleted-list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1176-bulleted-list@2x.png"; sourceTree = "<group>"; };
@@ -134,13 +123,6 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		65B66DE0195246AB00947DCE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		65B66DF4195246AB00947DCE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -190,7 +172,6 @@
 			isa = PBXGroup;
 			children = (
 				65B66DE3195246AB00947DCE /* SongDemon.app */,
-				65B66DF7195246AB00947DCE /* SongDemonTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -274,24 +255,6 @@
 			productReference = 65B66DE3195246AB00947DCE /* SongDemon.app */;
 			productType = "com.apple.product-type.application";
 		};
-		65B66DF6195246AB00947DCE /* SongDemonTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 65B66E04195246AB00947DCE /* Build configuration list for PBXNativeTarget "SongDemonTests" */;
-			buildPhases = (
-				65B66DF3195246AB00947DCE /* Sources */,
-				65B66DF4195246AB00947DCE /* Frameworks */,
-				65B66DF5195246AB00947DCE /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				65B66DF9195246AB00947DCE /* PBXTargetDependency */,
-			);
-			name = SongDemonTests;
-			productName = SwiftSongTests;
-			productReference = 65B66DF7195246AB00947DCE /* SongDemonTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -310,10 +273,6 @@
 							};
 						};
 					};
-					65B66DF6195246AB00947DCE = {
-						CreatedOnToolsVersion = 6.0;
-						TestTargetID = 65B66DE2195246AB00947DCE;
-					};
 				};
 			};
 			buildConfigurationList = 65B66DDE195246AB00947DCE /* Build configuration list for PBXProject "SongDemon" */;
@@ -330,7 +289,6 @@
 			projectRoot = "";
 			targets = (
 				65B66DE2195246AB00947DCE /* SongDemon */,
-				65B66DF6195246AB00947DCE /* SongDemonTests */,
 			);
 		};
 /* End PBXProject section */
@@ -381,13 +339,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		65B66DF5195246AB00947DCE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -413,22 +364,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		65B66DF3195246AB00947DCE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		65B66DF9195246AB00947DCE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 65B66DE2195246AB00947DCE /* SongDemon */;
-			targetProxy = 65B66DF8195246AB00947DCE /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		65B66DEE195246AB00947DCE /* Main.storyboard */ = {
@@ -476,7 +412,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				METAL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -512,7 +448,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -548,42 +484,6 @@
 			};
 			name = Release;
 		};
-		65B66E05195246AB00947DCE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SwiftSong.app/SwiftSong";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = SwiftSongTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				METAL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = SongDemonTests;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-			};
-			name = Debug;
-		};
-		65B66E06195246AB00947DCE /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SwiftSong.app/SwiftSong";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = SwiftSongTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				METAL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = SongDemonTests;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -601,15 +501,6 @@
 			buildConfigurations = (
 				65B66E02195246AB00947DCE /* Debug */,
 				65B66E03195246AB00947DCE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		65B66E04195246AB00947DCE /* Build configuration list for PBXNativeTarget "SongDemonTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				65B66E05195246AB00947DCE /* Debug */,
-				65B66E06195246AB00947DCE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

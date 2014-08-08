@@ -74,7 +74,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PyT-BI-o0u" userLabel="View - Scrubber">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PyT-BI-o0u" userLabel="View - Text Buttons">
                                 <rect key="frame" x="0.0" y="501" width="320" height="41"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Hu-hE-hdb" userLabel="Button - Search">
@@ -138,8 +138,23 @@
                                         </connections>
                                     </button>
                                     <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Ob5-lK-eQ6" userLabel="Scrubber">
-                                        <rect key="frame" x="56" y="11" width="209" height="31"/>
+                                        <rect key="frame" x="56" y="8" width="214" height="31"/>
+                                        <connections>
+                                            <action selector="scrubberChanged:" destination="CZ4-MO-1fc" eventType="valueChanged" id="5T8-BK-uJO"/>
+                                        </connections>
                                     </slider>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LIo-Ui-hM7" userLabel="Label - Elapsed">
+                                        <rect key="frame" x="51" y="5" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="4:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1p1-Xx-UsT" userLabel="Label - Duration">
+                                        <rect key="frame" x="233" y="5" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -161,6 +176,8 @@
                         <outlet property="imgSong" destination="cfx-bf-GNN" id="b8b-4y-1k9"/>
                         <outlet property="lblArtist" destination="38" id="name-outlet-38"/>
                         <outlet property="lblSong" destination="39" id="name-outlet-39"/>
+                        <outlet property="lblTimeElapsed" destination="LIo-Ui-hM7" id="gzy-KE-Jgi"/>
+                        <outlet property="lblTimeRemaining" destination="1p1-Xx-UsT" id="kza-f5-tcx"/>
                         <outlet property="scrubber" destination="Ob5-lK-eQ6" id="E8e-cf-2Q7"/>
                         <outlet property="viewArtwork" destination="104-Dg-ZbI" id="drK-ha-Vbx"/>
                         <outlet property="viewIndicators" destination="sCl-Dq-BgM" id="iuP-JH-LNd"/>
