@@ -20,10 +20,6 @@ class MusicPlayer {
         return MP.applePlayer.playbackState == MPMusicPlaybackState.Playing
     }
     
-    class func elapsed() {
-        //MP.applePlayer.c
-    }
-    
     class func playPressed() {
         isPlaying() ?  MP.applePlayer.pause() : MP.applePlayer.play()
     }
@@ -56,4 +52,14 @@ class MusicPlayer {
     class func playSongInPlaylist(song : MPMediaItem) {
         MP.applePlayer.nowPlayingItem = song
     }
+    
+    class var playbackTime : Int {
+        get {
+            return Int(MP.applePlayer.currentPlaybackTime)
+        }
+        set(seconds) {
+            MP.applePlayer.currentPlaybackTime = Double(seconds)
+        }
+    }
+    
 }

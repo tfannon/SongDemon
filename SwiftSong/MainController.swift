@@ -22,8 +22,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     @IBOutlet weak var lblTimeElapsed: UILabel!
     @IBOutlet weak var lblTimeRemaining: UILabel!
     @IBOutlet var scrubber: UISlider!
-    @IBAction func scrubberChanged(sender: AnyObject) {
-    }
+    @IBAction func scrubberChanged(sender: AnyObject) { handleScrubberChanged() }
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
     @IBOutlet var viewSongInfo: UIView!
@@ -63,7 +62,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         setupNotifications()
         setupSimulator()
     }
-
+  
     //MARK: setup
     func setupAppearance() {
         //self.view.backgroundColor = UIColor.blackColor()
@@ -238,22 +237,18 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
             imgSong.image = (item.artwork != nil) ?
                 item.artwork.imageWithSize(imgSong.frame.size) : nil
             LibraryManager.changePlaylistIndex(item)
-            let foo = item.playTime
-            //update the scrubber
-            //var totalPlaybackTime = Int(item.playbackDuration)
-            println(foo)
-            lblTimeRemaining.text = foo.description
-            //var tHours = (totalPlaybackTime / 3600)
-            //var tMins = ((totalPlaybackTime/60) - tHours*60)
-            //var tSecs = (totalPlaybackTime % 60 )
-            //println("\(tHours) : \(tMins) : \(tSecs)")
-            
+            //set the scrubber initial values
+            scrubber.minimumValue = 0
+            scrubber.maximumValue = Float(item.playTime.totalSeconds)
+            scrubber.value = 0
+            startPlaybackTimer()
         }
         //if we got here there was no song
         else {
             imgSong.image = nil
             lblArtist.text = "[No playlist selected]"
             lblSong.text = ""
+            self.timer.invalidate()
         }
     }
     
@@ -290,5 +285,34 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     func mediaPickerDidCancel(mediaPicker: MPMediaPickerController) {
         self.dismissViewControllerAnimated(true, completion: {});
     }
-
+    
+    //MARK: Song scrubber
+    var timer = NSTimer()
+    
+    func handleScrubberChanged() {
+        if let currentSong = MusicPlayer.currentSong() {
+            if scrubber.timeValue.totalSeconds < currentSong.playTime.totalSeconds {
+                println("scrubber changed: \(scrubber.value)")
+                MusicPlayer.playbackTime = scrubber.timeValue.totalSeconds
+                startPlaybackTimer()
+            } else {
+            }
+        }
+    }
+    
+    func startPlaybackTimer() {
+        println("scrubber timer started")
+        timer.invalidate()
+        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector:"updateScrubber", userInfo:nil, repeats:true)
+    }
+    
+    func updateScrubber() {
+        let cur : Int = MusicPlayer.playbackTime;
+        let tot : Int = Int(MusicPlayer.currentSong().playbackDuration)
+        let rem : Int = tot - cur
+        //println("Total:\(tot)  Current:\(cur)  Remaining:\(rem)")
+        scrubber.value = Float(cur)
+        lblTimeRemaining.text = String(rem)
+        lblTimeElapsed.text = String(cur)
+    }
 }
