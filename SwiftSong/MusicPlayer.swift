@@ -11,8 +11,10 @@ class MusicPlayer {
     private let applePlayer = MPMusicPlayerController()
     private var skipToBegin = false
     
-    class func currentSong() -> MPMediaItem! {
-        return MP.applePlayer.nowPlayingItem
+    class var currentSong : MPMediaItem! {
+        get {
+            return MP.applePlayer.nowPlayingItem
+        }
     }
     
     class func isPlaying() -> Bool {

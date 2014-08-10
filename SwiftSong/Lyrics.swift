@@ -18,7 +18,7 @@ class Lyrics {
     class func fetchUrlFor(item: MPMediaItem?) {
         gLyrics.State = .Fetching
         
-        if Utils.inSimulator() {
+        if Utils.inSimulator {
             gLyrics.NeedsRefresh = true
             gLyrics.Url = NSURL.URLWithString("http://www.darklyrics.com/lyrics/goatwhore/carvingouttheeyesofgod.html#7")
             return

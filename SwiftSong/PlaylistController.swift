@@ -59,7 +59,7 @@ class PlaylistController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
-        if Utils.inSimulator() {
+        if Utils.inSimulator {
             return sampleSongs.count
         }
         
@@ -69,7 +69,7 @@ class PlaylistController: UITableViewController {
     override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         let cell = tableView.dequeueReusableCellWithIdentifier("PlaylistCell", forIndexPath: indexPath) as PlaylistCell
         
-        if Utils.inSimulator() {
+        if Utils.inSimulator {
             cell.lblTitle.text = sampleSongs[indexPath.row]
             cell.lblArtistAlbum.text = "\(sampleArtists[indexPath.row]) - \(sampleAlbums[indexPath.row])"
             cell.imgArtwork.image = UIImage(named: sampleImages[indexPath.row])

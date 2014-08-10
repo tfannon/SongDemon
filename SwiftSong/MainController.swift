@@ -14,46 +14,45 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     //MARK: outlets
     @IBOutlet var viewArtwork: UIView!
     @IBOutlet var imgSong: UIImageView!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet var lblStatus: UILabel!
 
     @IBOutlet var viewIndicators: UIView!
-    @IBOutlet var btnShare: UIButton!
-    @IBOutlet var btnPlaylist: UIButton!
-   
-    @IBOutlet weak var lblTimeElapsed: UILabel!
-    @IBOutlet weak var lblTimeRemaining: UILabel!
+    @IBOutlet var lblTimeElapsed: UILabel!
+    @IBOutlet var lblTimeRemaining: UILabel!
     @IBOutlet var scrubber: UISlider!
     @IBAction func scrubberChanged(sender: AnyObject) { handleScrubberChanged() }
-    @IBOutlet var activityIndicator: UIActivityIndicatorView!
-    
+    @IBOutlet var btnShare: UIButton!
+    @IBOutlet var btnPlaylist: UIButton!
+    @IBAction func playlistTapped(AnyObject) { handlePlaylistTapped() }
+   
     @IBOutlet var viewSongInfo: UIView!
     @IBOutlet var lblArtist: UILabel!
     @IBOutlet var lblSong: UILabel!
 
-    
     @IBOutlet var viewPlayButtons: UIView!
     @IBOutlet var btnDislike: UIButton!
     @IBOutlet var btnPrev: UIButton!
     @IBOutlet var btnPlay: UIButton!
     @IBOutlet var btnNext: UIButton!
     @IBOutlet var btnLike: UIButton!
-    
-    @IBOutlet var viewScrubber: UIView!
-    @IBOutlet var btnSearch: UIButton!
-
-
-    //MARK: actions
     @IBAction func dislikeTapped(sender: AnyObject) { handleDislikeTapped()}
     @IBAction func likeTapped(sender: AnyObject) { handleLikeTapped()}
     @IBAction func playTapped(AnyObject) { MusicPlayer.playPressed() }
     @IBAction func prevTapped(AnyObject) { MusicPlayer.reverse() }
     @IBAction func nextTapped(AnyObject) { MusicPlayer.forward() }
-    @IBAction func playlistTapped(AnyObject) { handlePlaylistTapped() }
-
+    
+    @IBOutlet var viewBottomButtons: UIView!
+    @IBOutlet var btnSearch: UIButton!
+    @IBOutlet var btnRecord: UIButton!
     @IBAction func searchTapped(sender: AnyObject) { handleSearchTapped() }
     @IBAction func shuffleTapped(sender: AnyObject) { handleShuffleTapped()}
+    @IBAction func recordTapped(sender: UIButton) { handleRecordTapped() }
+    
 
     //MARK: instance variables
-   
+    var recording = false
+    var startRecordTime = 0
 
     //MARK: controller methods
     override func viewDidLoad() {
@@ -65,14 +64,27 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
   
     //MARK: setup
     func setupAppearance() {
-        //self.view.backgroundColor = UIColor.blackColor()
+        lblStatus.hidden = true
        
-        imgSong.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleImageTapped"))
+        viewArtwork.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleImageTapped"))
 
         //swiping up allows user to select playlist
         var swipeUp = UISwipeGestureRecognizer(target: self, action: "handlePlaylistTapped")
         swipeUp.direction = .Up
-        imgSong.addGestureRecognizer(swipeUp)
+        viewArtwork.addGestureRecognizer(swipeUp)
+       
+        /*
+        var gr = UILongPressGestureRecognizer(target: self, action: "handleScrubberLongPress:")
+        gr.delaysTouchesEnded = true
+        scrubber.addGestureRecognizer(gr)
+        */
+    }
+    
+
+    func handleScrubberLongPress(gr: UILongPressGestureRecognizer) {
+        if gr.state == UIGestureRecognizerState.Ended {
+            println("Long press detected")
+        }
     }
     
     func setupSimulator() {
@@ -82,6 +94,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
    
     //MARK: Action handlers
     func handleImageTapped() {
+        imgSong.hidden = !imgSong.hidden
     }
     
     func handleSearchTapped() {
@@ -94,13 +107,30 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     }
     
     func handleShuffleTapped() {
-       
+        UIHelpers.messageBox("Shuffle not implemented yet")
+    }
+    
+    func handleRecordTapped() {
+        if MusicPlayer.currentSong == nil && !Utils.inSimulator {
+            return
+        }
+        var image : String
+        if recording {
+            imgSong.hidden = false
+            lblStatus.hidden = true
+            image = "1244-record.png"
+        } else {
+            imgSong.hidden = true
+            lblStatus.hidden = false
+            image = "1244-record-selected.png"
+        }
+        recording = !recording
+        btnRecord.setImage(UIImage(named: image), forState: UIControlState.Normal)
     }
     
     func waiting() {
         self.activityIndicator.startAnimating()
         self.imgSong.hidden = true
-        //self.imgSong.image = nil
     }
     
     func doneWaiting() {
@@ -110,7 +140,13 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     
     func handlePlaylistTapped() {
         var alert = UIAlertController(title: "Choose songs to play", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
-        
+
+        //destructive makes it show up in red
+        alert.addAction(UIAlertAction(title: "Riff mode", style: .Destructive, handler: { action in
+            var songs = LibraryManager.getMixOfSongs()
+            self.postPlaylistSelection("Random mix is playing", songs: songs)
+        }))
+
         alert.addAction(UIAlertAction(title: "Random mix", style: .Default, handler: { action in
             var songs = LibraryManager.getMixOfSongs()
             self.postPlaylistSelection("Random mix is playing", songs: songs)
@@ -126,7 +162,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
             self.postPlaylistSelection("New songs are playing", songs: songs)
         }))
         
-        if let currentSong = MusicPlayer.currentSong() {
+        if let currentSong = MusicPlayer.currentSong {
             //var message = "\(currentSong.albumArtist) songs"
             var message = "Songs from this artist"
             alert.addAction(UIAlertAction(title: message, style: .Default, handler: { action in
@@ -163,11 +199,11 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     
     func handleLikeTapped() {
         //if its already liked this will reset it and unset the selected image
-        if LibraryManager.isLiked(MusicPlayer.currentSong()) {
-            LibraryManager.removeFromLiked(MusicPlayer.currentSong())
+        if LibraryManager.isLiked(MusicPlayer.currentSong) {
+            LibraryManager.removeFromLiked(MusicPlayer.currentSong)
             changeLikeState(.None)
         } else {
-            LibraryManager.addToLiked(MusicPlayer.currentSong())
+            LibraryManager.addToLiked(MusicPlayer.currentSong)
             changeLikeState(.Liked)
         }
     }
@@ -189,7 +225,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     }
     
     func handleDislikeTapped() {
-        LibraryManager.addToDisliked(MusicPlayer.currentSong())
+        LibraryManager.addToDisliked(MusicPlayer.currentSong)
         MusicPlayer.forward()
         //reset the liked state
         changeLikeState(.Disliked)
@@ -207,8 +243,8 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
        
         center.addObserverForName(MPMusicPlayerControllerNowPlayingItemDidChangeNotification,
             object: nil, queue:nil) { _ in
-                if MusicPlayer.currentSong() != nil {
-                    println("Song changed to \(LibraryManager.getSongInfo(MusicPlayer.currentSong()))")
+                if MusicPlayer.currentSong != nil {
+                    println("Song changed to \(LibraryManager.getSongInfo(MusicPlayer.currentSong))")
                 }
                 self.updateSongInfo()
                 self.updatePlayState()
@@ -224,16 +260,25 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     
     //MARK: notification handlers
     func updateSongInfo() {
-        if Utils.inSimulator() {
+        if recording {
+            println("discarding riff record")
+        }
+
+        recording = false
+        lblStatus.hidden = true
+        imgSong.hidden = false
+        
+        if Utils.inSimulator {
             return
         }
-        if let item = MusicPlayer.currentSong() {
+        if let item = MusicPlayer.currentSong {
             lblArtist.text = "\(item.albumArtist) - \(item.albumTitle)"
             lblSong.text = item.title
             //if it was a liked item, change the state
             var state = LibraryManager.isLiked(item) ?
                 LikeState.Liked : LikeState.None
             changeLikeState(state)
+         
             imgSong.image = (item.artwork != nil) ?
                 item.artwork.imageWithSize(imgSong.frame.size) : nil
             LibraryManager.changePlaylistIndex(item)
@@ -264,7 +309,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     }
     
     func updateLyricState() {
-        Lyrics.fetchUrlFor(MusicPlayer.currentSong())
+        Lyrics.fetchUrlFor(MusicPlayer.currentSong)
     }
     
     
@@ -290,7 +335,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     var timer = NSTimer()
     
     func handleScrubberChanged() {
-        if let currentSong = MusicPlayer.currentSong() {
+        if let currentSong = MusicPlayer.currentSong {
             if scrubber.timeValue.totalSeconds < currentSong.playTime.totalSeconds {
                 println("scrubber changed: \(scrubber.value)")
                 MusicPlayer.playbackTime = scrubber.timeValue.totalSeconds
@@ -308,7 +353,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     
     func updateScrubber() {
         let cur : Int = MusicPlayer.playbackTime;
-        let tot : Int = Int(MusicPlayer.currentSong().playbackDuration)
+        let tot : Int = Int(MusicPlayer.currentSong.playbackDuration)
         let rem : Int = tot - cur
         //println("Total:\(tot)  Current:\(cur)  Remaining:\(rem)")
         scrubber.value = Float(cur)
