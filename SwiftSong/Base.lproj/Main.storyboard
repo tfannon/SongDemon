@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="104-Dg-ZbI" userLabel="View - Artwork">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="104-Dg-ZbI" userLabel="View - Main">
                                 <rect key="frame" x="0.0" y="32" width="320" height="300"/>
                                 <subviews>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="w3o-mH-5EK" userLabel="Activity Indicator">
@@ -26,8 +26,39 @@
                                     <imageView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sample-album-art.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="cfx-bf-GNN" userLabel="Image - Artwork">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="RECORDING RIFF" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gaY-EO-FW8">
-                                        <rect key="frame" x="84" y="175" width="152" height="21"/>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hal-WZ-zLr" userLabel="View - Play Overlay">
+                                        <rect key="frame" x="0.0" y="123" width="320" height="97"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Apr-UP-LMO" userLabel="Button - Back">
+                                                <rect key="frame" x="14" y="11" width="80" height="80"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <state key="normal" image="rewind.png"/>
+                                                <connections>
+                                                    <action selector="prevTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="tAu-q4-Vyq"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ifu-ai-RdL" userLabel="Button - Next">
+                                                <rect key="frame" x="232" y="11" width="80" height="80"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <state key="normal" image="fast-forward.png"/>
+                                                <connections>
+                                                    <action selector="nextTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="aww-9X-0Eu"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HOx-of-8Lk" userLabel="Button - Play">
+                                                <rect key="frame" x="123" y="11" width="75" height="75"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <state key="normal" image="play-75.png"/>
+                                                <connections>
+                                                    <action selector="playTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="f18-QI-sRN"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="RECORDING RIFF" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gaY-EO-FW8" userLabel="Label - Recording Status">
+                                        <rect key="frame" x="78" y="101" width="152" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -35,67 +66,43 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sCl-Dq-BgM" userLabel="View - Indicators">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sCl-Dq-BgM" userLabel="View - Scrubber">
                                 <rect key="frame" x="0.0" y="332" width="320" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="16" userLabel="Button - Share">
-                                        <rect key="frame" x="272" y="4" width="46" height="30"/>
-                                        <state key="normal" title="" image="702-share.png"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZR-39-m7B" userLabel="Button - Playlist">
-                                        <rect key="frame" x="2" y="7" width="46" height="30"/>
-                                        <state key="normal" image="1176-bulleted-list.png"/>
-                                        <connections>
-                                            <action selector="playlistTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="BTc-4f-33H"/>
-                                        </connections>
-                                    </button>
                                     <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Ob5-lK-eQ6" userLabel="Scrubber">
                                         <rect key="frame" x="53" y="18" width="214" height="31"/>
                                         <connections>
                                             <action selector="scrubberChanged:" destination="CZ4-MO-1fc" eventType="valueChanged" id="5T8-BK-uJO"/>
                                         </connections>
                                     </slider>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LIo-Ui-hM7" userLabel="Label - Elapsed">
-                                        <rect key="frame" x="51" y="4" width="42" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="4:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1p1-Xx-UsT" userLabel="Label - Duration">
-                                        <rect key="frame" x="233" y="2" width="42" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B8d-Qf-q9F" userLabel="View - Song Info">
-                                <rect key="frame" x="0.0" y="375" width="320" height="53"/>
+                                <rect key="frame" x="0.0" y="375" width="320" height="62"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Goatwhore - Blood For The Master" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="38" userLabel="Label - Artist Album">
                                         <rect key="frame" x="0.0" y="5" width="320" height="21"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="In Deathless Tradition" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="39" userLabel="Label - Song Title">
                                         <rect key="frame" x="0.0" y="26" width="320" height="21"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="41" userLabel="View - Play">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="41" userLabel="View - Other buttons">
                                 <rect key="frame" x="0.0" y="435" width="320" height="59"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="76" userLabel="Button - Like">
-                                        <rect key="frame" x="247" y="-5" width="64" height="64"/>
+                                        <rect key="frame" x="202" y="8" width="45" height="45"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" title="" image="777-thumbs-up.png"/>
                                         <connections>
@@ -103,7 +110,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="86" userLabel="Button - Dislike">
-                                        <rect key="frame" x="9" y="-3" width="64" height="64"/>
+                                        <rect key="frame" x="260" y="11" width="45" height="45"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" title="" image="778-thumbs-down.png"/>
                                         <state key="selected" image="778-thumbs-down.png"/>
@@ -111,67 +118,34 @@
                                             <action selector="dislikeTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="m7a-uO-gtg"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HOx-of-8Lk" userLabel="Button - Play">
-                                        <rect key="frame" x="128" y="0.0" width="64" height="54"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal" image="play.png"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZR-39-m7B" userLabel="Button - Playlist">
+                                        <rect key="frame" x="8" y="12" width="45" height="45"/>
+                                        <state key="normal" image="1176-bulleted-list.png"/>
                                         <connections>
-                                            <action selector="playTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="f18-QI-sRN"/>
+                                            <action selector="playlistTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="BTc-4f-33H"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ifu-ai-RdL" userLabel="Button - Next">
-                                        <rect key="frame" x="190" y="-5" width="64" height="64"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal" image="fast-forward.png"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h9c-8w-ZHK" userLabel="Button - Record">
+                                        <rect key="frame" x="138" y="11" width="45" height="45"/>
+                                        <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" image="1244-record.png"/>
                                         <connections>
-                                            <action selector="nextTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="aww-9X-0Eu"/>
+                                            <action selector="recordTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="Jfo-D7-fbY"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Apr-UP-LMO" userLabel="Button - Back">
-                                        <rect key="frame" x="66" y="-5" width="64" height="64"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal" image="rewind.png"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QdN-QZ-wnH" userLabel="Button - Search">
+                                        <rect key="frame" x="71" y="12" width="45" height="45"/>
+                                        <state key="normal" image="708-search-toolbar.png"/>
                                         <connections>
-                                            <action selector="prevTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="tAu-q4-Vyq"/>
+                                            <action selector="searchTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="YvE-Gw-P30"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PyT-BI-o0u" userLabel="View - Text Buttons">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PyT-BI-o0u" userLabel="View - Bottom Panel">
                                 <rect key="frame" x="0.0" y="495" width="320" height="41"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Hu-hE-hdb" userLabel="Button - Search">
-                                        <rect key="frame" x="-8" y="-6" width="95" height="54"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <state key="normal" title="SEARCH">
-                                            <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="searchTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="lie-76-rqf"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d8i-9X-Lro" userLabel="Button - Shuffle">
-                                        <rect key="frame" x="232" y="-6" width="95" height="54"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <state key="normal" title="SHUFFLE">
-                                            <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="shuffleTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="R1W-R8-ZcH"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h9c-8w-ZHK" userLabel="Button - Record">
-                                        <rect key="frame" x="119" y="5" width="83" height="28"/>
-                                        <state key="normal" image="1244-record.png"/>
-                                        <connections>
-                                            <action selector="recordTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="Jfo-D7-fbY"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -188,19 +162,17 @@
                         <outlet property="btnPlaylist" destination="WZR-39-m7B" id="MV4-MQ-KvJ"/>
                         <outlet property="btnPrev" destination="Apr-UP-LMO" id="Osc-8m-k6r"/>
                         <outlet property="btnRecord" destination="h9c-8w-ZHK" id="IkT-ZU-MDl"/>
-                        <outlet property="btnSearch" destination="5Hu-hE-hdb" id="2Cf-c0-hwY"/>
-                        <outlet property="btnShare" destination="16" id="name-outlet-16"/>
+                        <outlet property="btnSearch" destination="QdN-QZ-wnH" id="egI-ku-wNf"/>
                         <outlet property="imgSong" destination="cfx-bf-GNN" id="b8b-4y-1k9"/>
                         <outlet property="lblArtist" destination="38" id="name-outlet-38"/>
                         <outlet property="lblSong" destination="39" id="name-outlet-39"/>
                         <outlet property="lblStatus" destination="gaY-EO-FW8" id="ctC-Op-F91"/>
-                        <outlet property="lblTimeElapsed" destination="LIo-Ui-hM7" id="gzy-KE-Jgi"/>
-                        <outlet property="lblTimeRemaining" destination="1p1-Xx-UsT" id="kza-f5-tcx"/>
                         <outlet property="scrubber" destination="Ob5-lK-eQ6" id="E8e-cf-2Q7"/>
                         <outlet property="viewArtwork" destination="104-Dg-ZbI" id="drK-ha-Vbx"/>
-                        <outlet property="viewBottomButtons" destination="PyT-BI-o0u" id="dP5-5m-LbV"/>
-                        <outlet property="viewIndicators" destination="sCl-Dq-BgM" id="iuP-JH-LNd"/>
-                        <outlet property="viewPlayButtons" destination="41" id="msD-ou-OvF"/>
+                        <outlet property="viewMain" destination="104-Dg-ZbI" id="747-Li-Xm7"/>
+                        <outlet property="viewOtherButtons" destination="41" id="HkE-5w-xpF"/>
+                        <outlet property="viewPlayOverlay" destination="Hal-WZ-zLr" id="l5h-qb-e43"/>
+                        <outlet property="viewScrubber" destination="sCl-Dq-BgM" id="FVJ-hP-hoz"/>
                         <outlet property="viewSongInfo" destination="B8d-Qf-q9F" id="0AY-kR-VUU"/>
                         <outlet property="webView" destination="dDb-Sl-4dT" id="XMB-KH-a5u"/>
                     </connections>
@@ -329,11 +301,11 @@
         <image name="1176-bulleted-list.png" width="28" height="19"/>
         <image name="1241-play-toolbar-selected.png" width="22" height="22"/>
         <image name="1244-record.png" width="28" height="28"/>
-        <image name="702-share.png" width="21" height="28"/>
+        <image name="708-search-toolbar.png" width="22" height="22"/>
         <image name="777-thumbs-up.png" width="26" height="28"/>
         <image name="778-thumbs-down.png" width="26" height="28"/>
         <image name="fast-forward.png" width="38" height="38"/>
-        <image name="play.png" width="50" height="50"/>
+        <image name="play-75.png" width="75" height="75"/>
         <image name="rewind.png" width="38" height="38"/>
         <image name="sample-album-art.jpg" width="1500" height="1500"/>
     </resources>

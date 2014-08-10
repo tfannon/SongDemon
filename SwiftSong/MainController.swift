@@ -12,44 +12,42 @@ import MediaPlayer
 class MainController: UIViewController, MPMediaPickerControllerDelegate {
 
     //MARK: outlets
+    @IBOutlet var viewMain: UIView!
     @IBOutlet var viewArtwork: UIView!
     @IBOutlet var imgSong: UIImageView!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var lblStatus: UILabel!
 
-    @IBOutlet var viewIndicators: UIView!
-    @IBOutlet var lblTimeElapsed: UILabel!
-    @IBOutlet var lblTimeRemaining: UILabel!
-    @IBOutlet var scrubber: UISlider!
-    @IBAction func scrubberChanged(sender: AnyObject) { handleScrubberChanged() }
-    @IBOutlet var btnShare: UIButton!
-    @IBOutlet var btnPlaylist: UIButton!
-    @IBAction func playlistTapped(AnyObject) { handlePlaylistTapped() }
-   
-    @IBOutlet var viewSongInfo: UIView!
-    @IBOutlet var lblArtist: UILabel!
-    @IBOutlet var lblSong: UILabel!
-
-    @IBOutlet var viewPlayButtons: UIView!
-    @IBOutlet var btnDislike: UIButton!
+    @IBOutlet var viewPlayOverlay: UIView!
     @IBOutlet var btnPrev: UIButton!
     @IBOutlet var btnPlay: UIButton!
     @IBOutlet var btnNext: UIButton!
-    @IBOutlet var btnLike: UIButton!
-    @IBAction func dislikeTapped(sender: AnyObject) { handleDislikeTapped()}
-    @IBAction func likeTapped(sender: AnyObject) { handleLikeTapped()}
-    @IBAction func playTapped(AnyObject) { MusicPlayer.playPressed() }
     @IBAction func prevTapped(AnyObject) { MusicPlayer.reverse() }
+    @IBAction func playTapped(AnyObject) { MusicPlayer.playPressed() }
     @IBAction func nextTapped(AnyObject) { MusicPlayer.forward() }
+
+    @IBOutlet var viewScrubber: UIView!
+    @IBOutlet var scrubber: UISlider!
+    @IBAction func scrubberChanged(sender: AnyObject) { handleScrubberChanged() }
     
-    @IBOutlet var viewBottomButtons: UIView!
+    @IBOutlet var viewSongInfo: UIView!
+    @IBOutlet var lblArtist: UILabel!
+    @IBOutlet var lblSong: UILabel!
+    
+    @IBOutlet var viewOtherButtons: UIView!
+    @IBOutlet var btnPlaylist: UIButton!
     @IBOutlet var btnSearch: UIButton!
     @IBOutlet var btnRecord: UIButton!
-    @IBAction func searchTapped(sender: AnyObject) { handleSearchTapped() }
-    @IBAction func shuffleTapped(sender: AnyObject) { handleShuffleTapped()}
-    @IBAction func recordTapped(sender: UIButton) { handleRecordTapped() }
-    
+    @IBOutlet var btnLike: UIButton!
+    @IBOutlet var btnDislike: UIButton!
 
+    @IBAction func playlistTapped(AnyObject) { handlePlaylistTapped() }
+    @IBAction func searchTapped(sender: AnyObject) { handleSearchTapped() }
+    @IBAction func recordTapped(sender: UIButton) { handleRecordTapped() }
+    @IBAction func likeTapped(sender: AnyObject) { handleLikeTapped()}
+    @IBAction func dislikeTapped(sender: AnyObject) { handleDislikeTapped()}
+
+   
     //MARK: instance variables
     var recording = false
     var startRecordTime = 0
@@ -66,6 +64,14 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     func setupAppearance() {
         lblStatus.hidden = true
        
+        //these allow the large system images to scale
+        btnPlay.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Fill
+        btnPlay.contentVerticalAlignment = UIControlContentVerticalAlignment.Fill
+        //btnPrev.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Fill
+        //btnPrev.contentVerticalAlignment = UIControlContentVerticalAlignment.Fill
+        //btnNext.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Fill
+        //btnNext.contentVerticalAlignment = UIControlContentVerticalAlignment.Fill
+        
         viewArtwork.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleImageTapped"))
 
         //swiping up allows user to select playlist
@@ -357,7 +363,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         let rem : Int = tot - cur
         //println("Total:\(tot)  Current:\(cur)  Remaining:\(rem)")
         scrubber.value = Float(cur)
-        lblTimeRemaining.text = String(rem)
-        lblTimeElapsed.text = String(cur)
+        //lblTimeRemaining.text = String(rem)
+        //lblTimeElapsed.text = String(cur)
     }
 }
