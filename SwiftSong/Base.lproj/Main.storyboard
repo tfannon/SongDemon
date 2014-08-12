@@ -148,7 +148,6 @@
                                 <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems/>
                     <connections>
@@ -172,7 +171,6 @@
                         <outlet property="viewPlayOverlay" destination="Hal-WZ-zLr" id="l5h-qb-e43"/>
                         <outlet property="viewScrubber" destination="sCl-Dq-BgM" id="FVJ-hP-hoz"/>
                         <outlet property="viewSongInfo" destination="B8d-Qf-q9F" id="0AY-kR-VUU"/>
-                        <outlet property="webView" destination="dDb-Sl-4dT" id="XMB-KH-a5u"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qh2-T1-AhA" sceneMemberID="firstResponder"/>
@@ -278,9 +276,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dDb-Sl-4dT" userLabel="Webview - Lyrics">
-                                <rect key="frame" x="0.0" y="39" width="320" height="490"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <webView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dDb-Sl-4dT" userLabel="Webview - Lyrics">
+                                <rect key="frame" x="0.0" y="32" width="320" height="505"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <dataDetectorType key="dataDetectorTypes"/>
                             </webView>
                         </subviews>

@@ -18,9 +18,10 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //self.view.backgroundColor = UIColor.redColor()
         self.delegate = self;
         self.dataSource = self;
-        
+        println("root view controller didload")
         mainController = self.storyboard.instantiateViewControllerWithIdentifier("MainController") as UIViewController
         lyricsController = self.storyboard.instantiateViewControllerWithIdentifier("LyricsController") as UIViewController
         playlistController = self.storyboard.instantiateViewControllerWithIdentifier("PlaylistController") as UITableViewController
@@ -31,6 +32,25 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
         // Do any additional setup after loading the view.
     }
+    
+    /* this code will shift all view controllers down 20px
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        var screen = UIScreen.mainScreen().bounds
+        if self.navigationController != nil {
+            
+        } else {
+            if self.respondsToSelector("containerView") {
+                println("code reached")
+            } else {
+                var frame = self.view.frame
+                frame.origin.y = 20
+                frame.size.height = screen.size.height - 20
+                self.view.frame = frame
+            }
+        }
+    }
+    */
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

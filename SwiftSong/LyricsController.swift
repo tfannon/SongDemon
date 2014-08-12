@@ -11,6 +11,7 @@ import UIKit
 class LyricsController: UIViewController {
 
     @IBOutlet var webView: UIWebView!
+    //note: we are setting opaque property to NO so it takes on color of background before loading otherwise it is white
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -47,6 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UISlider.appearance().setThumbImage(UIImage(named:"pentagram.png"), forState: UIControlState.Normal)
         UISlider.appearance().setMaximumTrackImage(UIImage(named: "slider_maximum.png"), forState: .Normal)
         UISlider.appearance().setMinimumTrackImage(UIImage(named: "slider_minimum.png"), forState: .Normal)
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
     }
 }
 
