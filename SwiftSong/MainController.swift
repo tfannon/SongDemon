@@ -22,9 +22,9 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     @IBOutlet var btnPrev: UIButton!
     @IBOutlet var btnPlay: UIButton!
     @IBOutlet var btnNext: UIButton!
-    @IBAction func prevTapped(AnyObject) { MusicPlayer.reverse() }
-    @IBAction func playTapped(AnyObject) { MusicPlayer.playPressed() }
-    @IBAction func nextTapped(AnyObject) { MusicPlayer.forward() }
+    @IBAction func prevTapped(AnyObject) { handlePrevTapped() }
+    @IBAction func playTapped(AnyObject) { handlePlayTapped() }
+    @IBAction func nextTapped(AnyObject) { handleNextTapped() }
 
     @IBOutlet var viewScrubber: UIView!
     @IBOutlet var scrubber: UISlider!
@@ -51,6 +51,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     //MARK: instance variables
     var recording = false
     var startRecordTime = 0
+    var playButtonsVisible = false
 
     //MARK: controller methods
     override func viewDidLoad() {
@@ -62,7 +63,8 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
   
     //MARK: setup
     func setupAppearance() {
-        lblStatus.hidden = true
+
+        lblStatus.text = ""
        
         //these allow the large system images to scale
         btnPlay.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Fill
@@ -86,21 +88,62 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         */
     }
     
-
+    /*
     func handleScrubberLongPress(gr: UILongPressGestureRecognizer) {
         if gr.state == UIGestureRecognizerState.Ended {
             println("Long press detected")
         }
     }
+    */
     
     func setupSimulator() {
         updateLyricState()
     }
     
-   
+  
     //MARK: Action handlers
     func handleImageTapped() {
-        imgSong.hidden = !imgSong.hidden
+        println("image tapped")
+        if playButtonsVisible {
+            fadePlayButtonsOut()
+        }
+        else {
+            fadePlayButtonsIn()
+        }
+            //let toImage = flip ? UIImage(named:"sample-album-art.jpg") : UIImage(named:"sample-album-art2.jpg")
+            //UIView.transitionWithView(imgSong, duration: 1, options: .TransitionCrossDissolve, animations: { self.imgSong.image = toImage }, completion: nil)
+    }
+    
+    func fadePlayButtonsIn() {
+        imgSong.alpha = 0.4
+        viewPlayOverlay.alpha = 1.0
+        playButtonsVisible = true
+        //imgSong.hidden = true
+        //viewPlayOverlay.tintColor = UIColor.whiteColor()
+        //var t = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector:"fadeIn", userInfo:nil, repeats:false)
+    }
+    
+    func fadePlayButtonsOut() {
+        imgSong.alpha = 1.0
+        viewPlayOverlay.alpha = 0.2
+        playButtonsVisible = false
+        //imgSong.hidden = false
+        //viewPlayOverlay.tintColor = UIColor.clearColor()
+    }
+    
+    func handlePrevTapped() {
+        //println("prev tapped")
+        MusicPlayer.reverse()
+    }
+    
+    func handlePlayTapped() {
+        //println("play tapped")
+        MusicPlayer.playPressed()
+    }
+    
+    func handleNextTapped() {
+        //println("next tapped")
+        MusicPlayer.forward()
     }
     
     func handleSearchTapped() {
@@ -121,17 +164,21 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
             return
         }
         var image : String
+        var tintColor : UIColor = viewOtherButtons.tintColor
         if recording {
             imgSong.hidden = false
             lblStatus.hidden = true
             image = "1244-record.png"
+            
         } else {
             imgSong.hidden = true
             lblStatus.hidden = false
             image = "1244-record-selected.png"
+            tintColor = UIColor.redColor()
         }
         recording = !recording
-        btnRecord.setImage(UIImage(named: image), forState: UIControlState.Normal)
+        //btnRecord.setImage(UIImage(named: image), forState: UIControlState.Normal)
+        btnRecord.tintColor = tintColor
     }
     
     func waiting() {
@@ -266,13 +313,9 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     
     //MARK: notification handlers
     func updateSongInfo() {
-        if recording {
-            println("discarding riff record")
-        }
-
         recording = false
-        lblStatus.hidden = true
-        imgSong.hidden = false
+        lblStatus.text = ""
+        fadePlayButtonsOut()
         
         if Utils.inSimulator {
             return
@@ -307,9 +350,14 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         var image: UIImage;
         if MusicPlayer.isPlaying() {
             image = UIImage(named:"pause.png");
+            fadePlayButtonsOut()
+            lblStatus.text = ""
         }
         else {
             image = UIImage(named:"play.png");
+            fadePlayButtonsIn()
+            lblStatus.text = "Paused"
+            lblStatus.textColor = UIColor.orangeColor()
         }
         btnPlay.setImage(image, forState: UIControlState.Normal)
     }
