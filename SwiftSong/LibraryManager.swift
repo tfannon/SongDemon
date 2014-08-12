@@ -62,7 +62,7 @@ class LibraryManager {
         var index = find(LM.Playlist, currentSong)
         if index != nil {
             LM.PlaylistIndex = index!
-            println("Setting playlist index to: \(getSongInfo(currentSong))")
+            println("Setting playlist index to: \(currentSong.songInfo))")
         }
     }
     
@@ -130,13 +130,17 @@ class LibraryManager {
         }
     }
     
+   
     private class func getHashKey(item:MPMediaItem) -> String {
         return item.persistentID.description
     }
     
+     /*
     class func getSongInfo(item:MPMediaItem) -> String {
          return "\(item.albumArtist) - \(item.albumTitle) : \(item.title)"
     }
+    */
+
 
     class func addToPlaylist(items:[MPMediaItem]) -> Void {
         for item in items {
@@ -319,8 +323,9 @@ class LibraryManager {
     
     private class func outputSongs(songs: [MPMediaItem]) {
         for i in songs {
-            println(getSongInfo(i))
+            println(i.songInfo)
         }
+        println()
     }
     
     func dumpNSUserDefaults(forKey:String) -> Void {

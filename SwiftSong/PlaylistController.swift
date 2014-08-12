@@ -101,7 +101,7 @@ class PlaylistController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-        println("didSelectRowAtIndexPath called")
+        //println("didSelectRowAtIndexPath called")
         var song = LibraryManager.currentPlaylist[indexPath.row]
         MusicPlayer.playSongInPlaylist(song)
         RootController.switchToMainView()

@@ -53,6 +53,7 @@ class MusicPlayer {
     
     class func playSongInPlaylist(song : MPMediaItem) {
         MP.applePlayer.nowPlayingItem = song
+        MP.applePlayer.play()
     }
     
     class var playbackTime : Int {

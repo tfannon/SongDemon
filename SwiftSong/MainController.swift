@@ -132,17 +132,14 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     }
     
     func handlePrevTapped() {
-        //println("prev tapped")
         MusicPlayer.reverse()
     }
     
     func handlePlayTapped() {
-        //println("play tapped")
         MusicPlayer.playPressed()
     }
     
     func handleNextTapped() {
-        //println("next tapped")
         MusicPlayer.forward()
     }
     
@@ -173,7 +170,6 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
             tintColor = UIColor.redColor()
         }
         recording = !recording
-        //btnRecord.setImage(UIImage(named: image), forState: UIControlState.Normal)
         btnRecord.tintColor = tintColor
     }
     
@@ -185,6 +181,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     func doneWaiting() {
         activityIndicator.stopAnimating()
         imgSong.hidden = false
+        lblStatus.text = ""
     }
     
     func handlePlaylistTapped() {
@@ -232,6 +229,8 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         }))
         //no matter what option is chosen switch the window back to main
         self.presentViewController(alert, animated: true, completion: {
+            self.lblStatus.text = "Generating playlist"
+            self.lblStatus.textColor = UIColor.orangeColor()
             self.waiting()
         })
     }
@@ -293,7 +292,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         center.addObserverForName(MPMusicPlayerControllerNowPlayingItemDidChangeNotification,
             object: nil, queue:nil) { _ in
                 if MusicPlayer.currentSong != nil {
-                    println("Song changed to \(LibraryManager.getSongInfo(MusicPlayer.currentSong))")
+                    println("Song changed to \(MusicPlayer.currentSong.songInfo)")
                 }
                 self.updateSongInfo()
                 self.updatePlayState()
@@ -396,7 +395,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     }
     
     func startPlaybackTimer() {
-        println("scrubber timer started")
+        //println("scrubber timer started")
         timer.invalidate()
         timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector:"updateScrubber", userInfo:nil, repeats:true)
     }
@@ -405,9 +404,6 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         let cur : Int = MusicPlayer.playbackTime;
         let tot : Int = Int(MusicPlayer.currentSong.playbackDuration)
         let rem : Int = tot - cur
-        //println("Total:\(tot)  Current:\(cur)  Remaining:\(rem)")
         scrubber.value = Float(cur)
-        //lblTimeRemaining.text = String(rem)
-        //lblTimeElapsed.text = String(cur)
     }
 }
