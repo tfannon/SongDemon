@@ -15,7 +15,6 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     @IBOutlet var viewMain: UIView!
     @IBOutlet var viewArtwork: UIView!
     @IBOutlet var imgSong: UIImageView!
-    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var lblStatus: UILabel!
 
     @IBOutlet var viewPlayOverlay: UIView!
@@ -151,6 +150,8 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     }
     
     func handleSearchTapped() {
+        lblStatus.textColor = UIColor.orangeColor()
+        lblStatus.text = "Querying iTunes"
         waiting()
         let mediaPicker = MPMediaPickerController(mediaTypes: .Music)
         mediaPicker.delegate = self
@@ -181,12 +182,10 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     }
     
     func waiting() {
-        self.activityIndicator.startAnimating()
         self.imgSong.hidden = true
     }
     
     func doneWaiting() {
-        activityIndicator.stopAnimating()
         imgSong.hidden = false
         lblStatus.text = ""
     }

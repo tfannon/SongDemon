@@ -19,10 +19,6 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="104-Dg-ZbI" userLabel="View - Main">
                                 <rect key="frame" x="0.0" y="32" width="320" height="300"/>
                                 <subviews>
-                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="w3o-mH-5EK" userLabel="Activity Indicator">
-                                        <rect key="frame" x="140" y="80" width="37" height="37"/>
-                                        <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    </activityIndicatorView>
                                     <imageView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sample-album-art.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="cfx-bf-GNN" userLabel="Image - Artwork">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
                                     </imageView>
@@ -151,7 +147,6 @@
                     </view>
                     <toolbarItems/>
                     <connections>
-                        <outlet property="activityIndicator" destination="w3o-mH-5EK" id="or0-ud-2RK"/>
                         <outlet property="btnDislike" destination="86" id="750-VG-yNm"/>
                         <outlet property="btnLike" destination="76" id="XWh-ct-hNa"/>
                         <outlet property="btnNext" destination="Ifu-ai-RdL" id="HeO-tI-MJ3"/>
