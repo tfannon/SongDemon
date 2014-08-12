@@ -17,11 +17,15 @@ class PlaylistController: UITableViewController {
     
     var playingSongImage = UIImage(named: "1241-play-toolbar-selected.png")
     
+    @IBOutlet var lblHeaderTitle: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         playingSongImage = playingSongImage.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         self.tableView.backgroundColor = UIColor.blackColor()
+        
+        self.tableView.tableFooterView = UIView(frame: CGRectZero)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -37,6 +41,8 @@ class PlaylistController: UITableViewController {
     
     func redrawList() {
         tableView.reloadData()
+        var text = LibraryManager.currentPlaylist.count == 0 ? "No playlist selected" : ""
+        lblHeaderTitle.text = text
         var index = LibraryManager.currentPlaylistIndex
         if index >= 0 {
             var indexPath = NSIndexPath(forRow: index, inSection: 0)
@@ -101,13 +107,16 @@ class PlaylistController: UITableViewController {
         RootController.switchToMainView()
     }
     
+    /*
     override func tableView(tableView: UITableView!, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }
+
     
     override func tableView(tableView: UITableView!, willDisplayHeaderView view: UIView!, forSection section: Int) {
         view.tintColor = UIColor.blackColor()
     }
+    */
     
 
 
