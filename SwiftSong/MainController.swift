@@ -103,33 +103,40 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
   
     //MARK: Action handlers
     func handleImageTapped() {
-        println("image tapped")
+        //println("image tapped")
         if playButtonsVisible {
             fadePlayButtonsOut()
         }
         else {
             fadePlayButtonsIn()
         }
+        /* this code can dissolve between two images
             //let toImage = flip ? UIImage(named:"sample-album-art.jpg") : UIImage(named:"sample-album-art2.jpg")
             //UIView.transitionWithView(imgSong, duration: 1, options: .TransitionCrossDissolve, animations: { self.imgSong.image = toImage }, completion: nil)
+        */
     }
-    
+
+    /* we will animate the transition of the background image when buttons fade in and out */
     func fadePlayButtonsIn() {
-        imgSong.alpha = 0.4
+        NSTimer.scheduledTimerWithTimeInterval(0.1, target:self, selector:"fadeOutImage", userInfo:nil, repeats:false);
         viewPlayOverlay.alpha = 1.0
         playButtonsVisible = true
-        //imgSong.hidden = true
-        //viewPlayOverlay.tintColor = UIColor.whiteColor()
-        //var t = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector:"fadeIn", userInfo:nil, repeats:false)
+    }
+    
+    func fadeOutImage() {
+        UIView.animateWithDuration(0.25, animations: { self.imgSong.alpha = 0.2 })
     }
     
     func fadePlayButtonsOut() {
-        imgSong.alpha = 1.0
+        NSTimer.scheduledTimerWithTimeInterval(0.1, target:self, selector:"fadeInImage", userInfo:nil, repeats:false);
         viewPlayOverlay.alpha = 0.2  //alpha = 0.0 dont receive touch events
         playButtonsVisible = false
-        //imgSong.hidden = false
-        //viewPlayOverlay.tintColor = UIColor.clearColor()
     }
+    
+    func fadeInImage() {
+        UIView.animateWithDuration(0.25, animations: { self.imgSong.alpha = 1.0 })
+    }
+
     
     func handlePrevTapped() {
         MusicPlayer.reverse()
@@ -310,7 +317,6 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     func updateSongInfo() {
         recording = false
         lblStatus.text = ""
-        fadePlayButtonsOut()
         
         if Utils.inSimulator {
             return
@@ -322,9 +328,15 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
             var state = LibraryManager.isLiked(item) ?
                 LikeState.Liked : LikeState.None
             changeLikeState(state)
-         
+    
+            /* old non-fancy way
             imgSong.image = (item.artwork != nil) ?
                 item.artwork.imageWithSize(imgSong.frame.size) : nil
+            */
+            var newImage = (item.artwork != nil) ?
+                item.artwork.imageWithSize(imgSong.frame.size) : nil
+            transitionSongImage(newImage)
+            
             LibraryManager.changePlaylistIndex(item)
             //set the scrubber initial values
             scrubber.minimumValue = 0
@@ -338,6 +350,15 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
             lblArtist.text = "[No playlist selected]"
             lblSong.text = ""
             self.timer.invalidate()
+        }
+        fadePlayButtonsOut()
+    }
+
+    func transitionSongImage(toImage : UIImage?) {
+        if toImage != nil {
+            UIView.transitionWithView(imgSong, duration: 1, options: .TransitionCrossDissolve, animations: { self.imgSong.image = toImage }, completion: nil)
+        } else {
+            self.imgSong.image = nil
         }
     }
     
