@@ -20,14 +20,14 @@
                                 <rect key="frame" x="0.0" y="32" width="320" height="300"/>
                                 <subviews>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="w3o-mH-5EK" userLabel="Activity Indicator">
-                                        <rect key="frame" x="150" y="130" width="37" height="37"/>
+                                        <rect key="frame" x="140" y="80" width="37" height="37"/>
                                         <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </activityIndicatorView>
                                     <imageView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sample-album-art.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="cfx-bf-GNN" userLabel="Image - Artwork">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
                                     </imageView>
                                     <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hal-WZ-zLr" userLabel="View - Play Overlay">
-                                        <rect key="frame" x="0.0" y="123" width="320" height="97"/>
+                                        <rect key="frame" x="0.0" y="124" width="320" height="97"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Apr-UP-LMO" userLabel="Button - Back">
                                                 <rect key="frame" x="14" y="11" width="80" height="80"/>
@@ -138,7 +138,7 @@
                                 <rect key="frame" x="0.0" y="487" width="320" height="49"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="RECORDING RIFF" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gaY-EO-FW8" userLabel="Label - Recording Status">
-                                        <rect key="frame" x="84" y="17" width="152" height="21"/>
+                                        <rect key="frame" x="84" y="13" width="152" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>

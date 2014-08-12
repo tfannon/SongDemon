@@ -11,7 +11,7 @@ import MediaPlayer
 
 class MainController: UIViewController, MPMediaPickerControllerDelegate {
 
-    //MARK: outlets
+    //MARK: outlets and actions
     @IBOutlet var viewMain: UIView!
     @IBOutlet var viewArtwork: UIView!
     @IBOutlet var imgSong: UIImageView!
@@ -125,7 +125,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     
     func fadePlayButtonsOut() {
         imgSong.alpha = 1.0
-        viewPlayOverlay.alpha = 0.2
+        viewPlayOverlay.alpha = 0.2  //alpha = 0.0 dont receive touch events
         playButtonsVisible = false
         //imgSong.hidden = false
         //viewPlayOverlay.tintColor = UIColor.clearColor()
@@ -155,10 +155,6 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
             self.doneWaiting() })
     }
     
-    func handleShuffleTapped() {
-        UIHelpers.messageBox("Shuffle not implemented yet")
-    }
-    
     func handleRecordTapped() {
         if MusicPlayer.currentSong == nil && !Utils.inSimulator {
             return
@@ -166,13 +162,13 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         var image : String
         var tintColor : UIColor = viewOtherButtons.tintColor
         if recording {
-            imgSong.hidden = false
-            lblStatus.hidden = true
+            lblStatus.text = ""
+            lblStatus.textColor = UIColor.orangeColor()
             image = "1244-record.png"
             
         } else {
-            imgSong.hidden = true
-            lblStatus.hidden = false
+            lblStatus.text = "Recording Riff"
+            lblStatus.textColor = UIColor.redColor()
             image = "1244-record-selected.png"
             tintColor = UIColor.redColor()
         }
