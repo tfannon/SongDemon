@@ -1,5 +1,5 @@
 //
-//  PlaylistArtistModeCell.swift
+//  PlaylistAlbumTitleCell.swift
 //  SongDemon
 //
 //  Created by Tommy Fannon on 8/20/14.
@@ -8,26 +8,28 @@
 
 import UIKit
 
-class PlaylistArtistModeCell: UITableViewCell {
+class PlaylistAlbumTitleCell: UITableViewCell {
     
-    
-    @IBOutlet var lblTrack: UILabel!
-    @IBOutlet var lblTitle: UILabel!
-    @IBOutlet var imgStatus: UIImageView!
-    
+    @IBOutlet var lblArtist: UILabel!
+    @IBOutlet var lblAlbum: UILabel!
+    @IBOutlet var imgArtwork: UIImageView!
+
     required init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
     }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        // Initialization code
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        // Initialization code
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
+    
 }

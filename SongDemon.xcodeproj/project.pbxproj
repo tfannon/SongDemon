@@ -38,7 +38,8 @@
 		65B66DF0195246AB00947DCE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65B66DEE195246AB00947DCE /* Main.storyboard */; };
 		65B66DF2195246AB00947DCE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65B66DF1195246AB00947DCE /* Images.xcassets */; };
 		65B66E7319524A8300947DCE /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B66E7219524A8300947DCE /* MainController.swift */; };
-		65D4F0B619A58CB600FB30A2 /* PlaylistArtistModeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D4F0B519A58CB600FB30A2 /* PlaylistArtistModeCell.swift */; };
+		65D4F0B619A58CB600FB30A2 /* PlaylistAlbumSongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D4F0B519A58CB600FB30A2 /* PlaylistAlbumSongCell.swift */; };
+		65D4F0B819A59B2100FB30A2 /* PlaylistAlbumTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D4F0B719A59B2100FB30A2 /* PlaylistAlbumTitleCell.swift */; };
 		65DC55E4198B3D0000ABE255 /* 1176-bulleted-list.png in Resources */ = {isa = PBXBuildFile; fileRef = 65DC55E2198B3D0000ABE255 /* 1176-bulleted-list.png */; };
 		65DC55E5198B3D0000ABE255 /* 1176-bulleted-list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65DC55E3198B3D0000ABE255 /* 1176-bulleted-list@2x.png */; };
 		65E0487F1953A5D50080031C /* LibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0487E1953A5D50080031C /* LibraryManager.swift */; };
@@ -105,7 +106,8 @@
 		65B66DEF195246AB00947DCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		65B66DF1195246AB00947DCE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		65B66E7219524A8300947DCE /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
-		65D4F0B519A58CB600FB30A2 /* PlaylistArtistModeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistArtistModeCell.swift; sourceTree = "<group>"; };
+		65D4F0B519A58CB600FB30A2 /* PlaylistAlbumSongCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistAlbumSongCell.swift; sourceTree = "<group>"; };
+		65D4F0B719A59B2100FB30A2 /* PlaylistAlbumTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistAlbumTitleCell.swift; sourceTree = "<group>"; };
 		65DC55E2198B3D0000ABE255 /* 1176-bulleted-list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1176-bulleted-list.png"; sourceTree = "<group>"; };
 		65DC55E3198B3D0000ABE255 /* 1176-bulleted-list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1176-bulleted-list@2x.png"; sourceTree = "<group>"; };
 		65E0487E1953A5D50080031C /* LibraryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryManager.swift; sourceTree = "<group>"; };
@@ -156,7 +158,8 @@
 				657693B819883069008E25E6 /* LyricsController.swift */,
 				65B1ED7F198F41060024F984 /* PlaylistController.swift */,
 				65B1ED85199016930024F984 /* PlaylistCell.swift */,
-				65D4F0B519A58CB600FB30A2 /* PlaylistArtistModeCell.swift */,
+				65D4F0B519A58CB600FB30A2 /* PlaylistAlbumSongCell.swift */,
+				65D4F0B719A59B2100FB30A2 /* PlaylistAlbumTitleCell.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -390,7 +393,8 @@
 				6557D9F01997414600A0A87E /* Extensions.swift in Sources */,
 				65B66DE9195246AB00947DCE /* AppDelegate.swift in Sources */,
 				65304F0D196CAB9E00F985D3 /* Utils.swift in Sources */,
-				65D4F0B619A58CB600FB30A2 /* PlaylistArtistModeCell.swift in Sources */,
+				65D4F0B619A58CB600FB30A2 /* PlaylistAlbumSongCell.swift in Sources */,
+				65D4F0B819A59B2100FB30A2 /* PlaylistAlbumTitleCell.swift in Sources */,
 				65B1ED80198F41060024F984 /* PlaylistController.swift in Sources */,
 				65F3BAF319876E28009916C1 /* RootController.swift in Sources */,
 			);

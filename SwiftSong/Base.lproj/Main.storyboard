@@ -238,26 +238,55 @@
                                     <outlet property="lblTitle" destination="QMH-IQ-dKQ" id="gy9-Al-Glf"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="PlaylistArtistModeCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlaylistArtistModeCell" rowHeight="50" id="yww-Hj-f0s" customClass="PlaylistArtistModeCell" customModule="SongDemon" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="PlaylistAlbumTitleCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlaylistAlbumTitleCell" rowHeight="75" id="PEG-Pb-HFB" userLabel="PlaylistAlbumTitleCell" customClass="PlaylistAlbumTitleCell" customModule="SongDemon" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yww-Hj-f0s" id="F4N-II-mlE">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PEG-Pb-HFB" id="aU9-dr-mhP">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="In Deathless Tradition" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="A0G-OO-rG1" userLabel="Song Title">
-                                            <rect key="frame" x="74" y="1" width="200" height="46"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Goatwhore" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mGC-Kn-hPT" userLabel="ArtistTitle">
+                                            <rect key="frame" x="112" y="15" width="200" height="22"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpw-Y6-drL" userLabel="Track">
-                                            <rect key="frame" x="21" y="14" width="42" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sample-album-art.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="NO6-zM-UqA" userLabel="Artwork">
+                                            <rect key="frame" x="20" y="1" width="70" height="70"/>
+                                        </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Blood For The Master" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f7S-0H-coV" userLabel="AlbumTitle">
+                                            <rect key="frame" x="112" y="38" width="200" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QEf-TN-2TE">
-                                            <rect key="frame" x="282" y="13" width="30" height="25"/>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="imgArtwork" destination="NO6-zM-UqA" id="fC2-g5-SCJ"/>
+                                    <outlet property="lblAlbum" destination="f7S-0H-coV" id="fOp-DE-jtp"/>
+                                    <outlet property="lblArtist" destination="mGC-Kn-hPT" id="Zzv-Se-uiU"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="PlaylistAlbumSongCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlaylistAlbumSongCell" rowHeight="40" id="yww-Hj-f0s" userLabel="PlaylistAlbumSongCell" customClass="PlaylistAlbumSongCell" customModule="SongDemon" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yww-Hj-f0s" id="F4N-II-mlE">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QEf-TN-2TE" userLabel="IsPlaying">
+                                            <rect key="frame" x="287" y="6" width="25" height="25"/>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpw-Y6-drL" userLabel="Track">
+                                            <rect key="frame" x="28" y="8" width="31" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="In Deathless Tradition" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="212" translatesAutoresizingMaskIntoConstraints="NO" id="A0G-OO-rG1" userLabel="Song Title">
+                                            <rect key="frame" x="67" y="1" width="212" height="35"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>

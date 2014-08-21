@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MediaPlayer
 
 class PlaylistController: UITableViewController {
 
@@ -68,15 +69,20 @@ class PlaylistController: UITableViewController {
         if Utils.inSimulator {
             return sampleSongs.count
         }
-        
-        return LibraryManager.currentPlaylist.count
+        var count = LibraryManager.currentPlaylist.count
+        switch (LibraryManager.currentPlayMode) {
+            case (.Album), (.Artist) : count++
+            default:""
+        }
+        return count
     }
 
     override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         let mode = LibraryManager.currentPlayMode
         var identifier : String
-        switch mode {
-            case .Artist : identifier = "PlaylistArtistModeCell"
+        switch (mode,indexPath.row) {
+            case (.Artist, 0), (.Album, 0) :  identifier = "PlaylistAlbumTitleCell"
+            case (.Artist, _), (.Album, _)  : identifier = "PlaylistAlbumSongCell"
             default: identifier = "PlaylistCell"
         }
         var cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as UITableViewCell
@@ -91,16 +97,29 @@ class PlaylistController: UITableViewController {
             return cell2
         }
         
-        let song = LibraryManager.currentPlaylist[indexPath.row]
-        let isPlaying = LibraryManager.currentPlaylistIndex == indexPath.row
-    
-        if mode == PlayMode.Artist {
-            let cell2 = cell as PlaylistArtistModeCell
+        var song : MPMediaItem;
+        var isPlaying : Bool
+        switch (mode, indexPath.row) {
+        
+        case (.Artist, 0), (.Album, 0) :
+            song = LibraryManager.currentPlaylist[indexPath.row]
+            let cell2 = cell as PlaylistAlbumTitleCell
+            cell2.lblArtist.text = song.albumArtist
+            cell2.lblAlbum.text = song.albumTitle
+            cell2.imgArtwork.image = song.artwork != nil ? song.artwork.imageWithSize(cell2.imgArtwork.frame.size) : nil
+
+        case (.Artist, _), (.Album, _):
+            song = LibraryManager.currentPlaylist[indexPath.row-1]
+            isPlaying = LibraryManager.currentPlaylistIndex == indexPath.row-1
+            let cell2 = cell as PlaylistAlbumSongCell
             cell2.lblTrack.text = "\(song.albumTrackNumber)"
             cell2.lblTitle.text = song.title
             cell2.imgStatus.image = isPlaying ? playingSongImage : nil
-        } else {
+        
+        default:
             let cell2 = cell as PlaylistCell
+            song = LibraryManager.currentPlaylist[indexPath.row]
+            isPlaying = LibraryManager.currentPlaylistIndex == indexPath.row
             cell2.lblTitle.text = song.title
             cell2.lblArtistAlbum.text =  "\(song.albumArtist) - \(song.albumTitle)"
             cell2.imgStatus.image = isPlaying ? playingSongImage : nil
@@ -111,11 +130,31 @@ class PlaylistController: UITableViewController {
         return cell
     }
     
+    override func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+        let mode = LibraryManager.currentPlayMode
+        switch (mode,indexPath.row) {
+            case (.Artist, 0), (.Album, 0) : return 75.0
+            case (.Artist, _), (.Album, _) : return 40.0
+            default: return 50.0
+        }
+
+    }
+    
     override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-        //println("didSelectRowAtIndexPath called")
-        var song = LibraryManager.currentPlaylist[indexPath.row]
-        MusicPlayer.playSongInPlaylist(song)
-        RootController.switchToMainView()
+        var song : MPMediaItem
+        switch (LibraryManager.currentPlayMode) {
+        case (.Artist), (.Album) :
+            if indexPath.row > 0 {
+                song = LibraryManager.currentPlaylist[indexPath.row-1]
+                MusicPlayer.playSongInPlaylist(song)
+            }
+            RootController.switchToMainView()
+
+        default:
+            song = LibraryManager.currentPlaylist[indexPath.row]
+            MusicPlayer.playSongInPlaylist(song)
+            RootController.switchToMainView()
+        }
     }
     
     /*
