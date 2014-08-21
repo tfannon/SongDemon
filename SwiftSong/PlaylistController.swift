@@ -73,30 +73,41 @@ class PlaylistController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
-        let cell = tableView.dequeueReusableCellWithIdentifier("PlaylistCell", forIndexPath: indexPath) as PlaylistCell
+        let mode = LibraryManager.currentPlayMode
+        var identifier : String
+        switch mode {
+            case .Artist : identifier = "PlaylistArtistModeCell"
+            default: identifier = "PlaylistCell"
+        }
+        var cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as UITableViewCell
         
         if Utils.inSimulator {
-            cell.lblTitle.text = sampleSongs[indexPath.row]
-            cell.lblArtistAlbum.text = "\(sampleArtists[indexPath.row]) - \(sampleAlbums[indexPath.row])"
-            cell.imgArtwork.image = UIImage(named: sampleImages[indexPath.row])
-            cell.imgStatus.tintColor = UIColor.lightGrayColor()
-            cell.imgStatus.image = playingSongImage
-            return cell
+            let cell2 = cell as PlaylistCell
+            cell2.lblTitle.text = sampleSongs[indexPath.row]
+            cell2.lblArtistAlbum.text = "\(sampleArtists[indexPath.row]) - \(sampleAlbums[indexPath.row])"
+            cell2.imgArtwork.image = UIImage(named: sampleImages[indexPath.row])
+            cell2.imgStatus.tintColor = UIColor.lightGrayColor()
+            cell2.imgStatus.image = playingSongImage
+            return cell2
         }
         
         let song = LibraryManager.currentPlaylist[indexPath.row]
-        cell.lblTitle.text = song.title
-        cell.lblArtistAlbum.text = "\(song.albumArtist) - \(song.albumTitle)"
-        if LibraryManager.currentPlaylistIndex == indexPath.row {
-            cell.imgStatus.image = playingSongImage
+        let isPlaying = LibraryManager.currentPlaylistIndex == indexPath.row
+    
+        if mode == PlayMode.Artist {
+            let cell2 = cell as PlaylistArtistModeCell
+            cell2.lblTrack.text = "\(song.albumTrackNumber)"
+            cell2.lblTitle.text = song.title
+            cell2.imgStatus.image = isPlaying ? playingSongImage : nil
         } else {
-            cell.imgStatus.image = nil
+            let cell2 = cell as PlaylistCell
+            cell2.lblTitle.text = song.title
+            cell2.lblArtistAlbum.text =  "\(song.albumArtist) - \(song.albumTitle)"
+            cell2.imgStatus.image = isPlaying ? playingSongImage : nil
+            let image = song.artwork != nil ? song.artwork.imageWithSize(cell2.imgArtwork.frame.size) : nil
+            cell2.imgArtwork.image = image
         }
-        if song.artwork != nil {
-            cell.imgArtwork.image = song.artwork.imageWithSize(cell.imgArtwork.frame.size)
-        } else {
-            cell.imgArtwork.image = nil
-        }
+        
         return cell
     }
     

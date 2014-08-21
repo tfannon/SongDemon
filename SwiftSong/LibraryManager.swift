@@ -12,6 +12,16 @@ enum LikeState {
     case None
 }
 
+enum PlayMode {
+    case Album
+    case Artist
+    case Mix
+    case Liked
+    case New
+    case None
+    case Custom
+}
+
 class LibraryManager {
     //the finals are to get around a performance bug where adding items to a dictionary is very slow
     private final var LikedSongs = Dictionary<String, String>()
@@ -25,6 +35,7 @@ class LibraryManager {
     //playlist 
     private var Playlist = Array<MPMediaItem>()
     private var PlaylistIndex = -1
+    private var PlaylistMode = PlayMode.None
 
 
     init() {
@@ -50,12 +61,16 @@ class LibraryManager {
     }
     
     //MARK: no class properties yet
-    class var currentPlaylist : [MPMediaItem]  {
+    class var currentPlaylist : [MPMediaItem] {
         return LM.Playlist
     }
     
     class var currentPlaylistIndex : Int {
         return LM.PlaylistIndex
+    }
+    
+    class var currentPlayMode : PlayMode {
+        return LM.PlaylistMode
     }
     
     class func changePlaylistIndex(currentSong : MPMediaItem) {
@@ -211,6 +226,7 @@ class LibraryManager {
         }
         LM.Playlist = randomLiked
         LM.PlaylistIndex = 0
+        LM.PlaylistMode = .Liked
         return randomLiked
     }
     
@@ -225,6 +241,7 @@ class LibraryManager {
         }
         LM.Playlist = newSongs
         LM.PlaylistIndex = 0
+        LM.PlaylistMode = .New
         return newSongs
     }
     
@@ -241,6 +258,7 @@ class LibraryManager {
         outputSongs(mixedSongs)
         LM.Playlist = mixedSongs
         LM.PlaylistIndex = 0
+        LM.PlaylistMode = .Mix
         return mixedSongs;
     }
     
@@ -252,12 +270,25 @@ class LibraryManager {
             var pred = MPMediaPropertyPredicate(value: currentSong.albumArtist, forProperty: MPMediaItemPropertyAlbumArtist)
             query.addFilterPredicate(pred)
             var artistSongs = query.items as [MPMediaItem]
-            songs = getRandomSongs(200, sourceSongs: artistSongs)
+            //songs = getRandomSongs(200, sourceSongs: artistSongs)
+            var albumDic = Dictionary<String,Array<MPMediaItem>>()
+            //fill up the dictionary with songs
+            for x in artistSongs {
+                if albumDic.indexForKey(x.albumHashKey) == nil {
+                    albumDic[x.albumHashKey] = Array<MPMediaItem>()
+                }
+                albumDic[x.albumHashKey]?.append(x)
+            }
+            //get them back out by album
+            for (x,y) in albumDic {
+                songs.extend(y)
+            }
         }
         println("Built artist songlist with \(songs.count) songs in \(time)ms")
         outputSongs(songs)
         LM.Playlist = songs
         LM.PlaylistIndex = 0
+        LM.PlaylistMode = .Artist
         return songs
     }
     
@@ -274,6 +305,7 @@ class LibraryManager {
         outputSongs(songs)
         LM.Playlist = songs
         LM.PlaylistIndex = 0
+        LM.PlaylistMode = .Album
         return songs
     }
     
@@ -281,7 +313,14 @@ class LibraryManager {
     class func makePlaylistFromSongs(songs: [MPMediaItem]) {
         LM.Playlist = songs
         LM.PlaylistIndex = 0
+        LM.PlaylistMode = .Custom
     }
+    
+    /*
+    Artist mode -> pull to refresh will shuffle
+    Album mode -> pull to refresh will shuffle
+    Mix mode -> pull to refresh will fetch different songs
+    */
     
     //MARK: private helper functions
 
