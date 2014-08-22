@@ -30,6 +30,19 @@ class Utils {
     }
 }
 
+class Stopwatch {
+    
+    private var timer = NSDate()
+
+    func start() {
+        timer = NSDate()
+    }
+    
+    func stop() -> Double {
+        return NSDate().timeIntervalSinceDate(timer) * 1000
+    }
+}
+
 
 
 

@@ -17,7 +17,7 @@ extension String {
 
 extension MPMediaItem {
     var songInfo: String {
-        return "\(self.albumArtist) - \(self.albumTitle) : \(self.title)"
+        return "\(self.albumArtist) - \(self.albumTitle) : \(self.albumTrackNumber). \(self.title)"
     }
     
     var playTime : TimeStruct {

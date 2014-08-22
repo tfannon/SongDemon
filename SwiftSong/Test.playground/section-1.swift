@@ -64,19 +64,18 @@ shuffle(["hello", "goodbye", "ciao"])    // e.g., ["ciao", "goodbye", "hello"]
 
 
 
+class Foo
+{
+    
+}
 
 
+var songs = Dictionary<String, [Int]>()
+songs["Foo"] = [2,5,1,6]
+songs["Bar"] = [10,3,1,2]
+songs["Ack"] = [1,3,2]
 
 
-
-
-
-
-
-
-
-
-
-
+songs
 
 
