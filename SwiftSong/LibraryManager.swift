@@ -295,6 +295,7 @@ class LibraryManager {
         }
         let time = stopwatch.stop()
         println("Built artist songlist with \(LM.GroupedPlaylist.count) albums and \(songs.count) songs in \(time)ms")
+        LM.Playlist = songs
         LM.PlaylistIndex = 0
         LM.PlaylistMode = .Artist
         return songs
@@ -315,6 +316,7 @@ class LibraryManager {
         }
         let time = stopwatch.stop()
         println("Built album songlist with \(LM.GroupedPlaylist.count) albums and \(songs.count) songs in \(time)ms")
+        LM.Playlist = songs
         LM.PlaylistIndex = 0
         LM.PlaylistMode = .Album
         return songs

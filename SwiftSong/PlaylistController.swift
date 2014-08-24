@@ -30,13 +30,9 @@ class PlaylistController: UITableViewController {
         //empty cells wont create lines
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
         
-        var view = self.tableView.tableHeaderView
-        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.setNeedsStatusBarAppearanceUpdate()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -44,39 +40,52 @@ class PlaylistController: UITableViewController {
         redrawList()
     }
     
-    /*
-    override func scrollViewDidScroll(scrollView: UIScrollView!) {
-        var rect = self.viewHeader.frame
-        rect.origin.y = MIN(0, self.tableView.contentOffset.y)
-        
-        
-    }*/
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.BlackOpaque
+    }
+    
     
     func redrawList() {
+
         tableView.reloadData()
+       
         var artistText : String = ""
+
         if LibraryManager.currentPlaylist.count == 0 {
             artistText = "No playlist selected"
         }
-        else if LibraryManager.currentPlayMode != PlayMode.Album && LibraryManager.currentPlayMode == PlayMode.Artist {
-            artistText = ""
+        else if LibraryManager.currentPlayMode == PlayMode.Album || LibraryManager.currentPlayMode == PlayMode.Artist {
+            artistText = LibraryManager.currentPlaylist[LibraryManager.currentPlaylistIndex].artist
         } else {
-            artistText == LibraryManager.currentPlaylist[LibraryManager.currentPlaylistIndex].artist
+            artistText = ""
         }
         lblHeaderTitle.text = artistText
-        
+        tableView.scrollToRowAtIndexPath(getIndexPath(), atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
+    }
+    
+    func getIndexPath() -> NSIndexPath {
         let index = LibraryManager.currentPlaylistIndex
         var indexPath : NSIndexPath
         if index == 0 {
             indexPath = NSIndexPath(forRow: 0, inSection: 0)
         } else {
-            let section : Int = index / LibraryManager.groupedPlaylist.count
-            let row = index % LibraryManager.groupedPlaylist.count
+            var idx : Int = 0
+            var row = 0
+            var section = 0
+            while (idx < index) {
+                var songsInSection = LibraryManager.groupedPlaylist[section].count
+                if idx + songsInSection > index {
+                    row = index - idx
+                } else {
+                    section++
+                }
+                idx += songsInSection
+            }
+            println("Index:\(index)  Idx:\(idx)  Section:\(section)  Row:\(row)")
             indexPath = NSIndexPath(forRow: row, inSection: section)
         }
-        tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
+        return indexPath
     }
-
 
     // MARK: - Table view data source
 
@@ -116,7 +125,7 @@ class PlaylistController: UITableViewController {
         
         case (.Artist), (.Album):
             song = LibraryManager.groupedPlaylist[indexPath.section][indexPath.row]
-            isPlaying = LibraryManager.currentPlaylistIndex == (indexPath.section * 1) + indexPath.row-1
+            isPlaying = getIndexPath() == indexPath
             let cell2 = cell as PlaylistAlbumSongCell
             cell2.lblTrack.text = "\(song.albumTrackNumber)"
             cell2.lblTitle.text = song.title

@@ -69,6 +69,21 @@ class Foo
     
 }
 
+enum PlayMode {
+    case Album
+    case Artist
+    case Mix
+    case Liked
+    case New
+    case None
+    case Custom
+}
+
+var mode = PlayMode.Artist
+
+println(mode.hashValue)
+
+
 
 var songs = Dictionary<String, [Int]>()
 songs["Foo"] = [2,5,1,6]
