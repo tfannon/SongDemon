@@ -243,19 +243,19 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PEG-Pb-HFB" id="aU9-dr-mhP">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Goatwhore" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mGC-Kn-hPT" userLabel="ArtistTitle">
-                                            <rect key="frame" x="112" y="15" width="200" height="22"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sample-album-art.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="NO6-zM-UqA" userLabel="Artwork">
+                                            <rect key="frame" x="15" y="1" width="70" height="70"/>
+                                        </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Funeral Dirge for the Rotting Sun" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="220" translatesAutoresizingMaskIntoConstraints="NO" id="f7S-0H-coV" userLabel="AlbumTitle">
+                                            <rect key="frame" x="92" y="1" width="220" height="45"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sample-album-art.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="NO6-zM-UqA" userLabel="Artwork">
-                                            <rect key="frame" x="20" y="1" width="70" height="70"/>
-                                        </imageView>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Blood For The Master" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f7S-0H-coV" userLabel="AlbumTitle">
-                                            <rect key="frame" x="112" y="38" width="200" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2007" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1lF-XO-rGl" userLabel="Year">
+                                            <rect key="frame" x="92" y="46" width="173" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -263,8 +263,8 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="imgArtwork" destination="NO6-zM-UqA" id="fC2-g5-SCJ"/>
-                                    <outlet property="lblAlbum" destination="f7S-0H-coV" id="fOp-DE-jtp"/>
-                                    <outlet property="lblArtist" destination="mGC-Kn-hPT" id="Zzv-Se-uiU"/>
+                                    <outlet property="lblAlbum" destination="f7S-0H-coV" id="Ee9-qW-LLW"/>
+                                    <outlet property="lblYear" destination="1lF-XO-rGl" id="1mm-Qj-tcS"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="PlaylistAlbumSongCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlaylistAlbumSongCell" rowHeight="40" id="yww-Hj-f0s" userLabel="PlaylistAlbumSongCell" customClass="PlaylistAlbumSongCell" customModule="SongDemon" customModuleProvider="target">
@@ -304,6 +304,7 @@
                     </tableView>
                     <connections>
                         <outlet property="lblHeaderTitle" destination="tEY-bQ-7Ou" id="hjx-jT-Yuu"/>
+                        <outlet property="viewHeader" destination="VV3-RN-jcI" id="e17-vU-Xeb"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9dA-Oa-nHP" userLabel="First Responder" sceneMemberID="firstResponder"/>

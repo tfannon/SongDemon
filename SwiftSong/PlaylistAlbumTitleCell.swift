@@ -10,8 +10,9 @@ import UIKit
 
 class PlaylistAlbumTitleCell: UITableViewCell {
     
-    @IBOutlet var lblArtist: UILabel!
+
     @IBOutlet var lblAlbum: UILabel!
+    @IBOutlet var lblYear: UILabel!
     @IBOutlet var imgArtwork: UIImageView!
 
     required init(coder aDecoder: NSCoder!) {

@@ -20,6 +20,18 @@ extension MPMediaItem {
         return "\(self.albumArtist) - \(self.albumTitle) : \(self.albumTrackNumber). \(self.title)"
     }
     
+    var year : String {
+        var yearAsNum = self.valueForProperty("year") as NSNumber
+        if yearAsNum != nil && yearAsNum.isKindOfClass(NSNumber) {
+            return "\(yearAsNum.intValue)"
+        }
+        return ""
+    }
+    
+    func getArtworkWithSize(frame : CGSize) -> UIImage? {
+        return self.artwork != nil ? self.artwork.imageWithSize(frame) : nil
+    }
+    
     var playTime : TimeStruct {
         get {
             var totalPlaybackTime = Int(self.playbackDuration)

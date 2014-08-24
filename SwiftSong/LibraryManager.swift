@@ -66,6 +66,10 @@ class LibraryManager {
         return LM.Playlist
     }
     
+    class var groupedPlaylist : [[MPMediaItem]] {
+        return LM.GroupedPlaylist
+    }
+    
     class var currentPlaylistIndex : Int {
         return LM.PlaylistIndex
     }

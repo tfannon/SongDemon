@@ -19,15 +19,19 @@ class PlaylistController: UITableViewController {
     var playingSongImage = UIImage(named: "1241-play-toolbar-selected.png")
     
     @IBOutlet var lblHeaderTitle: UILabel!
+    @IBOutlet var viewHeader: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        //if no image exists dont screw up image
         playingSongImage = playingSongImage.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         self.tableView.backgroundColor = UIColor.blackColor()
-        
+        //empty cells wont create lines
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
-
+        
+        var view = self.tableView.tableHeaderView
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -40,49 +44,58 @@ class PlaylistController: UITableViewController {
         redrawList()
     }
     
+    /*
+    override func scrollViewDidScroll(scrollView: UIScrollView!) {
+        var rect = self.viewHeader.frame
+        rect.origin.y = MIN(0, self.tableView.contentOffset.y)
+        
+        
+    }*/
+    
     func redrawList() {
         tableView.reloadData()
-        var text = LibraryManager.currentPlaylist.count == 0 ? "No playlist selected" : ""
-        lblHeaderTitle.text = text
-        var index = LibraryManager.currentPlaylistIndex
-        if index >= 0 {
-            var indexPath = NSIndexPath(forRow: index, inSection: 0)
-            tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
+        var artistText : String = ""
+        if LibraryManager.currentPlaylist.count == 0 {
+            artistText = "No playlist selected"
         }
+        else if LibraryManager.currentPlayMode != PlayMode.Album && LibraryManager.currentPlayMode == PlayMode.Artist {
+            artistText = ""
+        } else {
+            artistText == LibraryManager.currentPlaylist[LibraryManager.currentPlaylistIndex].artist
+        }
+        lblHeaderTitle.text = artistText
+        
+        let index = LibraryManager.currentPlaylistIndex
+        var indexPath : NSIndexPath
+        if index == 0 {
+            indexPath = NSIndexPath(forRow: 0, inSection: 0)
+        } else {
+            let section : Int = index / LibraryManager.groupedPlaylist.count
+            let row = index % LibraryManager.groupedPlaylist.count
+            indexPath = NSIndexPath(forRow: row, inSection: section)
+        }
+        tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
     }
 
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
-        return 1
+        return LibraryManager.groupedPlaylist.count
     }
 
     override func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
         if Utils.inSimulator {
             return sampleSongs.count
         }
-        var count = LibraryManager.currentPlaylist.count
-        switch (LibraryManager.currentPlayMode) {
-            case (.Album), (.Artist) : count++
-            default:""
-        }
-        return count
+        return LibraryManager.groupedPlaylist[section].count
     }
 
     override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         let mode = LibraryManager.currentPlayMode
         var identifier : String
-        switch (mode,indexPath.row) {
-            case (.Artist, 0), (.Album, 0) :  identifier = "PlaylistAlbumTitleCell"
-            case (.Artist, _), (.Album, _)  : identifier = "PlaylistAlbumSongCell"
+        switch (mode) {
+            case (.Artist), (.Album)  : identifier = "PlaylistAlbumSongCell"
             default: identifier = "PlaylistCell"
         }
         var cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as UITableViewCell
@@ -99,18 +112,11 @@ class PlaylistController: UITableViewController {
         
         var song : MPMediaItem;
         var isPlaying : Bool
-        switch (mode, indexPath.row) {
+        switch (mode) {
         
-        case (.Artist, 0), (.Album, 0) :
-            song = LibraryManager.currentPlaylist[indexPath.row]
-            let cell2 = cell as PlaylistAlbumTitleCell
-            cell2.lblArtist.text = song.albumArtist
-            cell2.lblAlbum.text = song.albumTitle
-            cell2.imgArtwork.image = song.artwork != nil ? song.artwork.imageWithSize(cell2.imgArtwork.frame.size) : nil
-
-        case (.Artist, _), (.Album, _):
-            song = LibraryManager.currentPlaylist[indexPath.row-1]
-            isPlaying = LibraryManager.currentPlaylistIndex == indexPath.row-1
+        case (.Artist), (.Album):
+            song = LibraryManager.groupedPlaylist[indexPath.section][indexPath.row]
+            isPlaying = LibraryManager.currentPlaylistIndex == (indexPath.section * 1) + indexPath.row-1
             let cell2 = cell as PlaylistAlbumSongCell
             cell2.lblTrack.text = "\(song.albumTrackNumber)"
             cell2.lblTitle.text = song.title
@@ -123,8 +129,7 @@ class PlaylistController: UITableViewController {
             cell2.lblTitle.text = song.title
             cell2.lblArtistAlbum.text =  "\(song.albumArtist) - \(song.albumTitle)"
             cell2.imgStatus.image = isPlaying ? playingSongImage : nil
-            let image = song.artwork != nil ? song.artwork.imageWithSize(cell2.imgArtwork.frame.size) : nil
-            cell2.imgArtwork.image = image
+            cell2.imgArtwork.image = song.getArtworkWithSize(cell2.imgArtwork.frame.size)
         }
         
         return cell
@@ -132,87 +137,32 @@ class PlaylistController: UITableViewController {
     
     override func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
         let mode = LibraryManager.currentPlayMode
-        switch (mode,indexPath.row) {
-            case (.Artist, 0), (.Album, 0) : return 75.0
-            case (.Artist, _), (.Album, _) : return 40.0
+        switch (mode) {
+            case (.Artist), (.Album) : return 40.0
             default: return 50.0
         }
-
     }
     
     override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-        var song : MPMediaItem
+        var song = LibraryManager.groupedPlaylist[indexPath.section][indexPath.row]
+        MusicPlayer.playSongInPlaylist(song)
+        RootController.switchToMainView()
+    }
+    
+    override func tableView(tableView: UITableView!, viewForHeaderInSection section: Int) -> UIView! {
         switch (LibraryManager.currentPlayMode) {
-        case (.Artist), (.Album) :
-            if indexPath.row > 0 {
-                song = LibraryManager.currentPlaylist[indexPath.row-1]
-                MusicPlayer.playSongInPlaylist(song)
-            }
-            RootController.switchToMainView()
-
-        default:
-            song = LibraryManager.currentPlaylist[indexPath.row]
-            MusicPlayer.playSongInPlaylist(song)
-            RootController.switchToMainView()
+            case (.Artist), (.Album) :
+                var cell = tableView.dequeueReusableCellWithIdentifier("PlaylistAlbumTitleCell") as PlaylistAlbumTitleCell
+                var song = LibraryManager.groupedPlaylist[section][0]
+                cell.lblAlbum.text = song.albumTitle
+                cell.lblYear.text = song.year
+                cell.imgArtwork.image = song.getArtworkWithSize(cell.imgArtwork.frame.size)
+            return cell.contentView
+            default: return nil
         }
     }
     
-    /*
     override func tableView(tableView: UITableView!, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        return 75
     }
-
-    
-    override func tableView(tableView: UITableView!, willDisplayHeaderView view: UIView!, forSection section: Int) {
-        view.tintColor = UIColor.blackColor()
-    }
-    */
-    
-
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView!, canEditRowAtIndexPath indexPath: NSIndexPath!) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView!, moveRowAtIndexPath fromIndexPath: NSIndexPath!, toIndexPath: NSIndexPath!) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView!, canMoveRowAtIndexPath indexPath: NSIndexPath!) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
