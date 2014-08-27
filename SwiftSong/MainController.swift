@@ -73,10 +73,10 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         //these allow the large system images to scale
         btnPlay.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Fill
         btnPlay.contentVerticalAlignment = UIControlContentVerticalAlignment.Fill
-        //btnPrev.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Fill
-        //btnPrev.contentVerticalAlignment = UIControlContentVerticalAlignment.Fill
-        //btnNext.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Fill
-        //btnNext.contentVerticalAlignment = UIControlContentVerticalAlignment.Fill
+        btnPrev.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Fill
+        btnPrev.contentVerticalAlignment = UIControlContentVerticalAlignment.Fill
+        btnNext.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Fill
+        btnNext.contentVerticalAlignment = UIControlContentVerticalAlignment.Fill
         
         viewArtwork.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleImageTapped"))
 
