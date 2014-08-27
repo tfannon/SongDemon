@@ -251,7 +251,6 @@ class LibraryManager {
     // 20 new, 20 favs, 10 not new and not rated
     class func getMixOfSongs() -> [MPMediaItem] {
         scanLibrary()
-        LM.GroupedPlaylist = [[MPMediaItem]]()
         let start = NSDate()
         var newSongs = getNewSongs(count: 20, dumpSongs:false)
         var ratedSongs = getLikedSongs(count: 20, dumpSongs:false)
@@ -260,6 +259,7 @@ class LibraryManager {
         let time = NSDate().timeIntervalSinceDate(start) * 1000
         println("Built mixed song list with \(mixedSongs.count) songs in \(time)ms")
         outputSongs(mixedSongs)
+        LM.GroupedPlaylist = [[MPMediaItem]]()
         LM.Playlist = mixedSongs
         LM.GroupedPlaylist.append(mixedSongs)
         LM.PlaylistIndex = 0

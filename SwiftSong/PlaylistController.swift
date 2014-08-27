@@ -29,6 +29,7 @@ class PlaylistController: UITableViewController {
         self.tableView.backgroundColor = UIColor.blackColor()
         //empty cells wont create lines
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -77,6 +78,7 @@ class PlaylistController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
+        println("Sections: \(LibraryManager.groupedPlaylist.count)")
         return LibraryManager.groupedPlaylist.count
     }
 
@@ -160,7 +162,7 @@ class PlaylistController: UITableViewController {
             default:
                 var cell = tableView.dequeueReusableCellWithIdentifier("PlaylistAlbumTitleCell") as PlaylistAlbumTitleCell
                 cell.contentView.backgroundColor = UIColor.blackColor()
-                return cell
+                return cell.contentView
         }
     }
     
