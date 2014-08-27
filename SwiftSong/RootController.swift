@@ -30,8 +30,8 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         //set the initial controller to the main one
         let viewControllers : [UIViewController] = [mainController]
         self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
-        // Do any additional setup after loading the view.
     }
+  
     
     /* this code will shift all view controllers down 20px
     override func viewWillAppear(animated: Bool) {

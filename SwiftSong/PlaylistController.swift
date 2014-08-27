@@ -41,7 +41,7 @@ class PlaylistController: UITableViewController {
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.BlackOpaque
+        return UIStatusBarStyle.LightContent
     }
     
     
@@ -81,7 +81,7 @@ class PlaylistController: UITableViewController {
                 }
                 idx += songsInSection
             }
-            println("Index:\(index)  Idx:\(idx)  Section:\(section)  Row:\(row)")
+            //println("Index:\(index)  Idx:\(idx)  Section:\(section)  Row:\(row)")
             indexPath = NSIndexPath(forRow: row, inSection: section)
         }
         return indexPath
@@ -166,6 +166,11 @@ class PlaylistController: UITableViewController {
                 cell.lblAlbum.text = song.albumTitle
                 cell.lblYear.text = song.year
                 cell.imgArtwork.image = song.getArtworkWithSize(cell.imgArtwork.frame.size)
+                cell.contentView.backgroundColor = UIColor.darkGrayColor()
+                //cell.backgroundView = UIView(frame:cell.bounds)
+                //cell.backgroundView.backgroundColor = UIColor.blackColor()
+                //backgroundColor = UIColor.blackColor()
+                //cell.opaque = 1.0
             return cell.contentView
             default: return nil
         }

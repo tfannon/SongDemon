@@ -58,6 +58,11 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         setupAppearance()
         setupNotifications()
         setupSimulator()
+        self.setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
     }
   
     //MARK: setup
