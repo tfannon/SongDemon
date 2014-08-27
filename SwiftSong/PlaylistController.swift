@@ -32,7 +32,6 @@ class PlaylistController: UITableViewController {
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-        self.setNeedsStatusBarAppearanceUpdate()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -40,22 +39,15 @@ class PlaylistController: UITableViewController {
         redrawList()
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.LightContent
-    }
-    
     
     func redrawList() {
-
         tableView.reloadData()
-       
         if LibraryManager.currentPlaylist.count == 0 {
             lblHeaderTitle.text = "No playlist selected"
         } else {
             lblHeaderTitle.text = ""
+            tableView.scrollToRowAtIndexPath(getIndexPath(), atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
         }
-
-        tableView.scrollToRowAtIndexPath(getIndexPath(), atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
     }
     
     func getIndexPath() -> NSIndexPath {
@@ -128,7 +120,7 @@ class PlaylistController: UITableViewController {
         
         default:
             let cell2 = cell as PlaylistCell
-            song = LibraryManager.currentPlaylist[indexPath.row]
+            song = LibraryManager.groupedPlaylist[0][indexPath.row]
             isPlaying = LibraryManager.currentPlaylistIndex == indexPath.row
             cell2.lblTitle.text = song.title
             cell2.lblArtistAlbum.text =  "\(song.albumArtist) - \(song.albumTitle)"
@@ -162,13 +154,20 @@ class PlaylistController: UITableViewController {
                 cell.lblYear.text = song.year
                 cell.lblArtist.text = song.albumArtist
                 cell.imgArtwork.image = song.getArtworkWithSize(cell.imgArtwork.frame.size)
-                cell.contentView.backgroundColor = UIColor.darkGrayColor()
+                //cell.contentView.backgroundColor = UIColor.darkGrayColor()
+                cell.contentView.backgroundColor = UIColor.blackColor()
             return cell.contentView
-            default: return nil
+            default:
+                var cell = tableView.dequeueReusableCellWithIdentifier("PlaylistAlbumTitleCell") as PlaylistAlbumTitleCell
+                cell.contentView.backgroundColor = UIColor.blackColor()
+                return cell
         }
     }
     
     override func tableView(tableView: UITableView!, heightForHeaderInSection section: Int) -> CGFloat {
-        return 125
+        switch (LibraryManager.currentPlayMode) {
+            case (.Artist), (.Album) : return 115
+            default: return 25
+        }
     }
 }

@@ -155,12 +155,6 @@ class LibraryManager {
         return item.persistentID.description
     }
     
-     /*
-    class func getSongInfo(item:MPMediaItem) -> String {
-         return "\(item.albumArtist) - \(item.albumTitle) : \(item.title)"
-    }
-    */
-
 
     class func addToPlaylist(items:[MPMediaItem]) -> Void {
         for item in items {
@@ -198,6 +192,7 @@ class LibraryManager {
         let start = NSDate()
         var allLiked = [MPMediaItem]()
         var randomLiked = [MPMediaItem]()
+        LM.GroupedPlaylist = [[MPMediaItem]]()
         for (x,y) in LM.LikedSongs {
             if let item = ITunesUtils.getSongFrom(x) {
                 allLiked.append(item)
@@ -230,6 +225,7 @@ class LibraryManager {
             outputSongs(randomLiked)
         }
         LM.Playlist = randomLiked
+        LM.GroupedPlaylist.append(randomLiked)
         LM.PlaylistIndex = 0
         LM.PlaylistMode = .Liked
         return randomLiked
@@ -238,6 +234,7 @@ class LibraryManager {
     class func getNewSongs(count : Int = 50, dumpSongs : Bool = true) -> [MPMediaItem] {
         scanLibrary()
         let start = NSDate()
+        LM.GroupedPlaylist = [[MPMediaItem]]()
         var newSongs = getRandomSongs(count, sourceSongs: LM.NotPlayedSongs)
         let time = NSDate().timeIntervalSinceDate(start) * 1000
         if dumpSongs {
@@ -245,6 +242,7 @@ class LibraryManager {
             outputSongs(newSongs)
         }
         LM.Playlist = newSongs
+        LM.GroupedPlaylist.append(newSongs)
         LM.PlaylistIndex = 0
         LM.PlaylistMode = .New
         return newSongs
@@ -253,6 +251,7 @@ class LibraryManager {
     // 20 new, 20 favs, 10 not new and not rated
     class func getMixOfSongs() -> [MPMediaItem] {
         scanLibrary()
+        LM.GroupedPlaylist = [[MPMediaItem]]()
         let start = NSDate()
         var newSongs = getNewSongs(count: 20, dumpSongs:false)
         var ratedSongs = getLikedSongs(count: 20, dumpSongs:false)
@@ -262,6 +261,7 @@ class LibraryManager {
         println("Built mixed song list with \(mixedSongs.count) songs in \(time)ms")
         outputSongs(mixedSongs)
         LM.Playlist = mixedSongs
+        LM.GroupedPlaylist.append(mixedSongs)
         LM.PlaylistIndex = 0
         LM.PlaylistMode = .Mix
         return mixedSongs;
@@ -291,16 +291,12 @@ class LibraryManager {
             for (x,y) in albumDic {
                 var sorted = y.sorted { $0.albumTrackNumber < $1.albumTrackNumber }
                 LM.GroupedPlaylist.append(sorted)
-                //outputSongs(sorted)
-                //songs.extend(sorted)
             }
             //now sort the grouped playlist by year
             LM.GroupedPlaylist.sort { $0[0].year > $1[0].year }
             //now add all the groupplaylist into one big playlist for the media player
             for album in LM.GroupedPlaylist {
-//                for song in album {
-                    songs.extend(album)
-  //              }
+                songs.extend(album)
             }
             outputSongs(songs)
         }
@@ -336,7 +332,9 @@ class LibraryManager {
     
     
     class func makePlaylistFromSongs(songs: [MPMediaItem]) {
+        LM.GroupedPlaylist = [[MPMediaItem]]()
         LM.Playlist = songs
+        LM.GroupedPlaylist.append(songs)
         LM.PlaylistIndex = 0
         LM.PlaylistMode = .Custom
     }
