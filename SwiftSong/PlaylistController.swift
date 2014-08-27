@@ -49,17 +49,12 @@ class PlaylistController: UITableViewController {
 
         tableView.reloadData()
        
-        var artistText : String = ""
-
         if LibraryManager.currentPlaylist.count == 0 {
-            artistText = "No playlist selected"
-        }
-        else if LibraryManager.currentPlayMode == PlayMode.Album || LibraryManager.currentPlayMode == PlayMode.Artist {
-            artistText = LibraryManager.currentPlaylist[LibraryManager.currentPlaylistIndex].artist
+            lblHeaderTitle.text = "No playlist selected"
         } else {
-            artistText = ""
+            lblHeaderTitle.text = ""
         }
-        lblHeaderTitle.text = artistText
+
         tableView.scrollToRowAtIndexPath(getIndexPath(), atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
     }
     
@@ -165,18 +160,15 @@ class PlaylistController: UITableViewController {
                 var song = LibraryManager.groupedPlaylist[section][0]
                 cell.lblAlbum.text = song.albumTitle
                 cell.lblYear.text = song.year
+                cell.lblArtist.text = song.albumArtist
                 cell.imgArtwork.image = song.getArtworkWithSize(cell.imgArtwork.frame.size)
                 cell.contentView.backgroundColor = UIColor.darkGrayColor()
-                //cell.backgroundView = UIView(frame:cell.bounds)
-                //cell.backgroundView.backgroundColor = UIColor.blackColor()
-                //backgroundColor = UIColor.blackColor()
-                //cell.opaque = 1.0
             return cell.contentView
             default: return nil
         }
     }
     
     override func tableView(tableView: UITableView!, heightForHeaderInSection section: Int) -> CGFloat {
-        return 75
+        return 125
     }
 }

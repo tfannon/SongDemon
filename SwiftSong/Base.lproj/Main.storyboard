@@ -193,7 +193,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Goatwhore" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tEY-bQ-7Ou">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No playlist selected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tEY-bQ-7Ou">
                                     <rect key="frame" x="21" y="15" width="291" height="21"/>
                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
@@ -238,24 +238,30 @@
                                     <outlet property="lblTitle" destination="QMH-IQ-dKQ" id="gy9-Al-Glf"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="PlaylistAlbumTitleCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlaylistAlbumTitleCell" rowHeight="75" id="PEG-Pb-HFB" userLabel="PlaylistAlbumTitleCell" customClass="PlaylistAlbumTitleCell" customModule="SongDemon" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="PlaylistAlbumTitleCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlaylistAlbumTitleCell" rowHeight="125" id="PEG-Pb-HFB" userLabel="PlaylistAlbumTitleCell" customClass="PlaylistAlbumTitleCell" customModule="SongDemon" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PEG-Pb-HFB" id="aU9-dr-mhP">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sample-album-art.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="NO6-zM-UqA" userLabel="Artwork">
-                                            <rect key="frame" x="15" y="1" width="70" height="70"/>
+                                            <rect key="frame" x="15" y="26" width="85" height="85"/>
                                         </imageView>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Funeral Dirge for the Rotting Sun" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="220" translatesAutoresizingMaskIntoConstraints="NO" id="f7S-0H-coV" userLabel="AlbumTitle">
-                                            <rect key="frame" x="92" y="1" width="220" height="45"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Funeral Dirge for the Rotting Sun" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="208" translatesAutoresizingMaskIntoConstraints="NO" id="f7S-0H-coV" userLabel="AlbumTitle">
+                                            <rect key="frame" x="104" y="48" width="208" height="45"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2007" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1lF-XO-rGl" userLabel="Year">
-                                            <rect key="frame" x="92" y="46" width="173" height="21"/>
+                                            <rect key="frame" x="104" y="93" width="173" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Goatwhore" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zF6-WF-uKI">
+                                            <rect key="frame" x="104" y="26" width="215" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -264,6 +270,7 @@
                                 <connections>
                                     <outlet property="imgArtwork" destination="NO6-zM-UqA" id="fC2-g5-SCJ"/>
                                     <outlet property="lblAlbum" destination="f7S-0H-coV" id="Ee9-qW-LLW"/>
+                                    <outlet property="lblArtist" destination="zF6-WF-uKI" id="cKO-Mr-CHz"/>
                                     <outlet property="lblYear" destination="1lF-XO-rGl" id="1mm-Qj-tcS"/>
                                 </connections>
                             </tableViewCell>

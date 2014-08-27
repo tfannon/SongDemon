@@ -14,7 +14,8 @@ class PlaylistAlbumTitleCell: UITableViewCell {
     @IBOutlet var lblAlbum: UILabel!
     @IBOutlet var lblYear: UILabel!
     @IBOutlet var imgArtwork: UIImageView!
-
+    @IBOutlet var lblArtist: UILabel!
+    
     required init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
     }
