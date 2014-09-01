@@ -330,6 +330,14 @@
                         <view key="tableHeaderView" contentMode="scaleToFill" id="qFT-Tv-PWk">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Goatwhore - In Deathless Tradition" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xfg-B4-IYe" userLabel="Video Title">
+                                    <rect key="frame" x="8" y="21" width="304" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
@@ -339,22 +347,16 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="VideoCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="VideoCell" rowHeight="115" id="HWx-oY-GmT" customClass="VideoCell" customModule="SongDemon" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="VideoCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="VideoCell" rowHeight="100" id="HWx-oY-GmT" customClass="VideoCell" customModule="SongDemon" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HWx-oY-GmT" id="fEV-63-sgS">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sample-video-image.png" translatesAutoresizingMaskIntoConstraints="NO" id="ibi-TE-ZKX">
-                                            <rect key="frame" x="8" y="23" width="122" height="85"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sample-video-image.png" translatesAutoresizingMaskIntoConstraints="NO" id="ibi-TE-ZKX" userLabel="Video Image">
+                                            <rect key="frame" x="8" y="8" width="122" height="85"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Goatwhore - In Deathless Tradition" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="175" translatesAutoresizingMaskIntoConstraints="NO" id="liN-05-dnR" userLabel="Title">
-                                            <rect key="frame" x="138" y="15" width="175" height="48"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Goatwhore live at Station 4 in St. Paul, MN performing In Deathless Tradition off the 2012 album Blood For The Master." lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="174" translatesAutoresizingMaskIntoConstraints="NO" id="Hgw-jW-eEj" userLabel="Description">
-                                            <rect key="frame" x="138" y="54" width="174" height="64"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Goatwhore live at Station 4 in St. Paul, MN performing In Deathless Tradition off the 2012 album Blood For The Master." lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="174" translatesAutoresizingMaskIntoConstraints="NO" id="Hgw-jW-eEj" userLabel="Description">
+                                            <rect key="frame" x="138" y="2" width="174" height="90"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -366,7 +368,6 @@
                                 <connections>
                                     <outlet property="imgVideo" destination="ibi-TE-ZKX" id="Hl0-Gs-f91"/>
                                     <outlet property="lblDescription" destination="Hgw-jW-eEj" id="Xnd-JG-AVH"/>
-                                    <outlet property="lblTitle" destination="liN-05-dnR" id="bCf-yK-A4N"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -375,6 +376,9 @@
                             <outlet property="delegate" destination="eml-f1-5Qd" id="Z5h-S7-ghr"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="lblHeader" destination="xfg-B4-IYe" id="9fe-WB-1tD"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v5p-Zx-VJy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

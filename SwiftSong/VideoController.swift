@@ -9,9 +9,11 @@
 import UIKit
 
 class VideoController : UITableViewController {
-    var data : [JSONValue]?
     
+    @IBOutlet var lblHeader: UILabel!
     
+    var data : [JSONValue] = [JSONValue]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,7 +32,8 @@ class VideoController : UITableViewController {
     }
     
     func refresh(sender:AnyObject) {
-        redrawList()
+        //redrawList()
+        //TODO: change this to go fetch the next
         self.refreshControl.endRefreshing()
     }
     
@@ -44,14 +47,46 @@ class VideoController : UITableViewController {
     
     
     func redrawList(forceRefresh : Bool = true) {
+        lblHeader.text = ""
         tableView.reloadData()
         if (gVideos.NeedsRefresh || forceRefresh) && gVideos.State == VideoState.Available {
             if let json = gVideos.jsonVideos {
-                data = json["items"].array
+                data = json["items"].array!
                 //println(data!.count)
                 gVideos.NeedsRefresh = false
+                if let song = MusicPlayer.currentSong {
+                    lblHeader.text = "\(song.albumArtist) - \(song.title)"
+                }
             }
         }
+        if Utils.inSimulator {
+            lblHeader.text = "Goatwhore - In Deathless Tradition"
+        }
     }
-
+    
+    override func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
+        return 1
+    }
+    
+    override func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+        return data.count
+    }
+    
+    override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+        let x = self.data[indexPath.row]
+        //let snippet = x["snippet"].object!
+        let title = x["snippet"]["title"].string!
+        let description = x["snippet"]["description"].string!
+        let thumb = x["snippet"]["thumbnails"]["default"]["url"].string!
+        var cell = tableView.dequeueReusableCellWithIdentifier("VideoCell", forIndexPath: indexPath) as VideoCell
+        //cell.lblTitle.text = title
+        cell.lblDescription.text = description
+        //go fetch the image form the thumb
+        
+        return cell
+    }
+    
+    override func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+        return 100
+    }
 }
