@@ -82,7 +82,16 @@ class VideoController : UITableViewController {
         //cell.lblTitle.text = title
         cell.lblDescription.text = description
         //go fetch the image form the thumb
-        
+        var imgURL: NSURL = NSURL(string: thumb)
+        let request: NSURLRequest = NSURLRequest(URL: imgURL)
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
+            if error == nil {
+                cell.imgVideo.image = UIImage(data: data)
+            }
+            else {
+                println("Error: \(error.localizedDescription)")
+            }
+        })
         return cell
     }
     
