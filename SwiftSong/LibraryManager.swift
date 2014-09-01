@@ -278,7 +278,7 @@ class LibraryManager {
             var pred = MPMediaPropertyPredicate(value: currentSong.albumArtist, forProperty: MPMediaItemPropertyAlbumArtist)
             query.addFilterPredicate(pred)
             var artistSongs = query.items as [MPMediaItem]
-            var albumDic = Dictionary<String,Array<MPMediaItem>>()
+            var albumDic = Dictionary<String,Array<MPMediaItem>>(minimumCapacity: artistSongs.count)
             //fill up the dictionary with songs
             for x in artistSongs {
                 if albumDic.indexForKey(x.albumTitle) == nil {

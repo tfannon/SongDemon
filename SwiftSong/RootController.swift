@@ -13,8 +13,8 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     var mainController: UIViewController!
     var lyricsController: UIViewController!
     var playlistController: UITableViewController!
+    var videoController: UITableViewController!
     var controllers : [UIViewController] = []
-  
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,9 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         mainController = self.storyboard.instantiateViewControllerWithIdentifier("MainController") as UIViewController
         lyricsController = self.storyboard.instantiateViewControllerWithIdentifier("LyricsController") as UIViewController
         playlistController = self.storyboard.instantiateViewControllerWithIdentifier("PlaylistController") as UITableViewController
-        controllers = [playlistController, mainController, lyricsController]
+        videoController = self.storyboard.instantiateViewControllerWithIdentifier("VideoController") as UITableViewController
+
+        controllers = [playlistController, mainController, lyricsController, videoController]
 
         //set the initial controller to the main one
         let viewControllers : [UIViewController] = [mainController]

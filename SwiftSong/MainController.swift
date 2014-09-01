@@ -67,9 +67,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
   
     //MARK: setup
     func setupAppearance() {
-
         lblStatus.text = ""
-       
         //these allow the large system images to scale
         btnPlay.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Fill
         btnPlay.contentVerticalAlignment = UIControlContentVerticalAlignment.Fill
@@ -84,24 +82,11 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         var swipeUp = UISwipeGestureRecognizer(target: self, action: "handlePlaylistTapped")
         swipeUp.direction = .Up
         viewArtwork.addGestureRecognizer(swipeUp)
-       
-        /*
-        var gr = UILongPressGestureRecognizer(target: self, action: "handleScrubberLongPress:")
-        gr.delaysTouchesEnded = true
-        scrubber.addGestureRecognizer(gr)
-        */
     }
-    
-    /*
-    func handleScrubberLongPress(gr: UILongPressGestureRecognizer) {
-        if gr.state == UIGestureRecognizerState.Ended {
-            println("Long press detected")
-        }
-    }
-    */
     
     func setupSimulator() {
         updateLyricState()
+        updateVideoState()
     }
     
   
@@ -308,6 +293,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
                 self.updateSongInfo()
                 self.updatePlayState()
                 self.updateLyricState()
+                self.updateVideoState()
         }
         
         center.addObserverForName(MPMusicPlayerControllerPlaybackStateDidChangeNotification,
@@ -333,10 +319,6 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
                 LikeState.Liked : LikeState.None
             changeLikeState(state)
     
-            /* old non-fancy way
-            imgSong.image = (item.artwork != nil) ?
-                item.artwork.imageWithSize(imgSong.frame.size) : nil
-            */
             var newImage = (item.artwork != nil) ?
                 item.artwork.imageWithSize(imgSong.frame.size) : nil
             transitionSongImage(newImage)
@@ -384,6 +366,10 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     
     func updateLyricState() {
         Lyrics.fetchUrlFor(MusicPlayer.currentSong)
+    }
+    
+    func updateVideoState() {
+        Videos.fetchVideosFor(MusicPlayer.currentSong)
     }
     
     
