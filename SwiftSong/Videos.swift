@@ -10,6 +10,7 @@ import MediaPlayer
 
 let gVideos = Videos()
 let apiKey = "AIzaSyDcpJS_v-iEX3eojZ7hsamDVvyrnQAyTdE"
+let maxResults = 25
 
 enum VideoState {
     case Available
@@ -27,16 +28,23 @@ class Videos {
     
     class func fetchVideosFor(item: MPMediaItem?) {
         gLyrics.State = .Fetching
+        var query = ""
+        if Utils.inSimulator {
+            query = "Goatwhore In Deathless Tradition"
+        } else if item != nil {
+            query = "\(item!.albumArtist) \(item!.title)"
+        }
         
-        //if Utils.inSimulator {
-            gLyrics.NeedsRefresh = true
-            let url = NSURL.URLWithString("https://www.googleapis.com/youtube/v3/search?key=\(apiKey)&part=snippet&q='Goatwhore In Deathless Tradition'&order=viewCount".stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding))
+        var urlStr = "https://www.googleapis.com/youtube/v3/search?key=\(apiKey)&part=snippet&q='\(query)'&type=video& order=viewCount&maxResults=\(maxResults)"
+        urlStr = urlStr.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
+        println(urlStr)
+        
+        let url = NSURL.URLWithString(urlStr)
+        let request = NSURLRequest(URL: url)
+
     
-            let request = NSURLRequest(URL: url)
-            //request.setValue ("application/json", forHtt: <#String!#>)
-    
-            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {
-                (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {
+            (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
              
                 if error != nil {
                     println("Error in Connection: \(error)")
@@ -56,14 +64,12 @@ class Videos {
                 }
     
                 var parsedJson = JSONValue(json)
+                println(parsedJson)
                 
                 gVideos.jsonVideos = parsedJson
-                println(gVideos.jsonVideos)
-
                 gVideos.State = .Available
                 gVideos.NeedsRefresh = true
-            })
-        //}
+        })
     }
 }
 

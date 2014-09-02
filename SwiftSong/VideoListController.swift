@@ -13,6 +13,7 @@ class VideoListController : UITableViewController {
     @IBOutlet var lblHeader: UILabel!
     
     var data : [JSONValue] = [JSONValue]()
+    var nextToken : String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +55,9 @@ class VideoListController : UITableViewController {
         tableView.reloadData()
         if (gVideos.NeedsRefresh || forceRefresh) && gVideos.State == VideoState.Available {
             if let json = gVideos.jsonVideos {
+                println(self.nextToken)
                 data = json["items"].array!
+                let n  = json["nextPageToken"]
                 //println(data!.count)
                 gVideos.NeedsRefresh = false
                 if let song = MusicPlayer.currentSong {

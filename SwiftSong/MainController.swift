@@ -42,7 +42,6 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
 
     @IBAction func playlistTapped(AnyObject) { handlePlaylistTapped() }
     @IBAction func searchTapped(sender: AnyObject) { handleSearchTapped() }
-    @IBAction func recordTapped(sender: UIButton) { handleRecordTapped() }
     @IBAction func likeTapped(sender: AnyObject) { handleLikeTapped()}
     @IBAction func dislikeTapped(sender: AnyObject) { handleDislikeTapped()}
 
@@ -154,27 +153,6 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
             self.doneWaiting() })
     }
     
-    func handleRecordTapped() {
-        if MusicPlayer.currentSong == nil && !Utils.inSimulator {
-            return
-        }
-        var image : String
-        var tintColor : UIColor = viewOtherButtons.tintColor
-        if recording {
-            lblStatus.text = ""
-            lblStatus.textColor = UIColor.orangeColor()
-            image = "1244-record.png"
-            
-        } else {
-            lblStatus.text = "Recording Riff"
-            lblStatus.textColor = UIColor.redColor()
-            image = "1244-record-selected.png"
-            tintColor = UIColor.redColor()
-        }
-        recording = !recording
-        btnRecord.tintColor = tintColor
-    }
-    
     func waiting() {
         self.imgSong.hidden = true
     }
@@ -186,12 +164,6 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     
     func handlePlaylistTapped() {
         var alert = UIAlertController(title: "Choose songs to play", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
-
-        //destructive makes it show up in red
-        alert.addAction(UIAlertAction(title: "Riff mode", style: .Destructive, handler: { action in
-            var songs = LibraryManager.getMixOfSongs()
-            self.postPlaylistSelection("Random mix is playing", songs: songs)
-        }))
 
         alert.addAction(UIAlertAction(title: "Random mix", style: .Default, handler: { action in
             var songs = LibraryManager.getMixOfSongs()
@@ -360,7 +332,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
             lblStatus.text = ""
         }
         else {
-            image = UIImage(named:"play.png");
+            image = UIImage(named:"play-75.png");
             fadePlayButtonsIn()
             lblStatus.text = "Paused"
             lblStatus.textColor = UIColor.orangeColor()

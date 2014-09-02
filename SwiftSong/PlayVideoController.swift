@@ -25,7 +25,7 @@ class PlayVideoController : UIViewController, UIWebViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         //TODO: make this dynamic
-        myWeb.frame=CGRectMake(0, 33, 320, 560-33)
+        myWeb.frame=CGRectMake(0, 51, 320, 560-51)
         self.view.addSubview(myWeb)
         
         configureWebView()
@@ -35,7 +35,7 @@ class PlayVideoController : UIViewController, UIWebViewDelegate {
     }
     func configureWebView() {
         myWeb.delegate=self
-        myWeb.backgroundColor = UIColor.redColor()
+        myWeb.backgroundColor = UIColor.blackColor()
         //myWeb.scalesPageToFit = true
         //myWeb.dataDetectorTypes = .All
     }
