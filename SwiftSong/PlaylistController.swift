@@ -16,7 +16,7 @@ class PlaylistController: UITableViewController {
     var sampleSongs = ["In Deathless Tradition", "FBS"]
     var sampleImages = ["sample-album-art.jpg", "sample-album-art2.jpg"]
     
-    var playingSongImage = UIImage(named: "1241-play-toolbar-selected.png")
+    var playingSongImage = UIImage(named: "play-75@2x.png")
     
     @IBOutlet var lblHeaderTitle: UILabel!
     @IBOutlet var viewHeader: UIView!

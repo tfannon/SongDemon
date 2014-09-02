@@ -93,4 +93,21 @@ songs["Ack"] = [1,3,2]
 
 songs
 
+let dirs : [String]? =    NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
+
+
+let file = "htmltemplate.html" // My change to your code - yours is presumably set off-screen
+if (dirs != nil) {
+    let directories = dirs!;
+    let dir = directories[0]; //documents directory
+    let path = dir.stringByAppendingPathComponent(file);
+    
+    //read
+    let content = String.stringWithContentsOfFile(path, encoding: NSUTF8StringEncoding, error: nil)
+    // works...
+}
+
+var content = String.stringWithContentsOfFile("htmltemplate.html", encoding: NSUTF8StringEncoding, error: nil)
+
+
 

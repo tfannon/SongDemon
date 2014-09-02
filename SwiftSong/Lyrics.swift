@@ -23,7 +23,7 @@ class Lyrics {
             gLyrics.Url = NSURL.URLWithString("http://www.darklyrics.com/lyrics/goatwhore/carvingouttheeyesofgod.html#7")
             return
         }
-        if item != nil && item!.artist != nil && item!.albumArtist != nil {
+        if item != nil && item!.albumArtist != nil && item!.albumTitle != nil {
             var artist = item!.albumArtist.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).stringByReplacingOccurrencesOfString(" ", withString: "", options: .LiteralSearch, range: nil)
             var album = item!.albumTitle.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).stringByReplacingOccurrencesOfString(" ", withString: "", options: .LiteralSearch, range: nil)
             var track = String(item!.albumTrackNumber)

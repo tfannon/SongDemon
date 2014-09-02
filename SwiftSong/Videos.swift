@@ -28,14 +28,14 @@ class Videos {
     class func fetchVideosFor(item: MPMediaItem?) {
         gLyrics.State = .Fetching
         
-        if Utils.inSimulator {
+        //if Utils.inSimulator {
             gLyrics.NeedsRefresh = true
             let url = NSURL.URLWithString("https://www.googleapis.com/youtube/v3/search?key=\(apiKey)&part=snippet&q='Goatwhore In Deathless Tradition'&order=viewCount".stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding))
     
             let request = NSURLRequest(URL: url)
-            let queue:NSOperationQueue = NSOperationQueue()
+            //request.setValue ("application/json", forHtt: <#String!#>)
     
-            NSURLConnection.sendAsynchronousRequest(request, queue: queue, completionHandler: {
+            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {
                 (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
              
                 if error != nil {
@@ -63,7 +63,7 @@ class Videos {
                 gVideos.State = .Available
                 gVideos.NeedsRefresh = true
             })
-        }
+        //}
     }
 }
 

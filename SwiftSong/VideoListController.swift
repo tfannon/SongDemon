@@ -8,7 +8,7 @@
 
 import UIKit
 
-class VideoController : UITableViewController {
+class VideoListController : UITableViewController {
     
     @IBOutlet var lblHeader: UILabel!
     
@@ -73,14 +73,18 @@ class VideoController : UITableViewController {
     }
     
     override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+        
         let x = self.data[indexPath.row]
         //let snippet = x["snippet"].object!
         let title = x["snippet"]["title"].string!
         let description = x["snippet"]["description"].string!
         let thumb = x["snippet"]["thumbnails"]["default"]["url"].string!
         var cell = tableView.dequeueReusableCellWithIdentifier("VideoCell", forIndexPath: indexPath) as VideoCell
-        //cell.lblTitle.text = title
         cell.lblDescription.text = description
+        //clear the image before the async fetch
+        if !Utils.inSimulator {
+            cell.imageView.image = nil
+        }
         //go fetch the image form the thumb
         var imgURL: NSURL = NSURL(string: thumb)
         let request: NSURLRequest = NSURLRequest(URL: imgURL)
@@ -94,6 +98,31 @@ class VideoController : UITableViewController {
         })
         return cell
     }
+    
+    override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+        let x = self.data[indexPath.row]
+        let id = x["id"]["videoId"].string!
+        let video = self.storyboard.instantiateViewControllerWithIdentifier("PlayVideoController") as PlayVideoController
+        
+        var path = NSBundle.mainBundle().pathForResource("videotemplate", ofType: "html")
+        if let content = String.stringWithContentsOfFile(path) {
+            let width = "320"
+            let height = "240"
+            var newString = content.stringByReplacingOccurrencesOfString("{0}", withString: width, options: NSStringCompareOptions.LiteralSearch, range: nil)
+            newString = newString.stringByReplacingOccurrencesOfString("{1}", withString: height, options: NSStringCompareOptions.LiteralSearch, range: nil)
+            newString = newString.stringByReplacingOccurrencesOfString("{2}", withString: id, options: NSStringCompareOptions.LiteralSearch, range: nil)
+            println(newString)
+            self.presentViewController(video, animated: true, completion: {
+                video.webviewVideo = UIWebView()
+                video.webviewVideo.loadHTMLString(content, baseURL: nil)
+            })
+        } else {
+            println("Error parsing content at:\(path)")
+        }
+
+        
+    }
+    
     
     override func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
         return 100
