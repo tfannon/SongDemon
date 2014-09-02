@@ -35,6 +35,10 @@ class PlaylistController: UITableViewController {
         // self.clearsSelectionOnViewWillAppear = false
     }
     
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         redrawList()
@@ -78,7 +82,7 @@ class PlaylistController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
-        println("Sections: \(LibraryManager.groupedPlaylist.count)")
+        //println("Sections: \(LibraryManager.groupedPlaylist.count)")
         return LibraryManager.groupedPlaylist.count
     }
 

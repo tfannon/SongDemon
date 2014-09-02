@@ -170,11 +170,11 @@
 				657693B819883069008E25E6 /* LyricsController.swift */,
 				65B1ED7F198F41060024F984 /* PlaylistController.swift */,
 				65587F4219B400BA00375C98 /* VideoListController.swift */,
+				65E119F219B4F98200757B87 /* PlayVideoController.swift */,
 				65B1ED85199016930024F984 /* PlaylistCell.swift */,
 				65D4F0B519A58CB600FB30A2 /* PlaylistAlbumSongCell.swift */,
 				65D4F0B719A59B2100FB30A2 /* PlaylistAlbumTitleCell.swift */,
 				65587F4419B4034100375C98 /* VideoCell.swift */,
-				65E119F219B4F98200757B87 /* PlayVideoController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";

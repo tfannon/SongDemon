@@ -17,6 +17,10 @@ class LyricsController: UIViewController {
         super.viewDidLoad()
     }
     
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
     override func viewDidAppear(animated: Bool) {
         if gLyrics.NeedsRefresh && gLyrics.Url != nil {
             webView.loadRequest(NSURLRequest(URL: gLyrics.Url))

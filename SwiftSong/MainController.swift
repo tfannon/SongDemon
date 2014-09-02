@@ -61,6 +61,10 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         self.setNeedsStatusBarAppearanceUpdate()
     }
     
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
     }

@@ -31,10 +31,8 @@ class VideoListController : UITableViewController {
         // self.clearsSelectionOnViewWillAppear = false
     }
     
-    func refresh(sender:AnyObject) {
-        //redrawList()
-        //TODO: change this to go fetch the next
-        self.refreshControl.endRefreshing()
+    override func shouldAutorotate() -> Bool {
+        return false
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -45,6 +43,11 @@ class VideoListController : UITableViewController {
         redrawList()
     }
     
+    func refresh(sender:AnyObject) {
+        //redrawList()
+        //TODO: change this to go fetch the next
+        self.refreshControl.endRefreshing()
+    }
     
     func redrawList(forceRefresh : Bool = true) {
         lblHeader.text = ""
@@ -104,23 +107,25 @@ class VideoListController : UITableViewController {
         let id = x["id"]["videoId"].string!
         let video = self.storyboard.instantiateViewControllerWithIdentifier("PlayVideoController") as PlayVideoController
         
+        /* keep this crap around in case you want to explore the iframe
+
+
         var path = NSBundle.mainBundle().pathForResource("videotemplate", ofType: "html")
         if let content = String.stringWithContentsOfFile(path) {
             let width = "320"
-            let height = "240"
+            let height = "548"
             var newString = content.stringByReplacingOccurrencesOfString("{0}", withString: width, options: NSStringCompareOptions.LiteralSearch, range: nil)
             newString = newString.stringByReplacingOccurrencesOfString("{1}", withString: height, options: NSStringCompareOptions.LiteralSearch, range: nil)
             newString = newString.stringByReplacingOccurrencesOfString("{2}", withString: id, options: NSStringCompareOptions.LiteralSearch, range: nil)
-            println(newString)
-            self.presentViewController(video, animated: true, completion: {
-                video.webviewVideo = UIWebView()
-                video.webviewVideo.loadHTMLString(content, baseURL: nil)
-            })
-        } else {
-            println("Error parsing content at:\(path)")
-        }
+            //println(newString)
+            //println(id)
+*/
+            let url = "https://www.youtube.com/watch?v=\(id)"
 
-        
+            self.presentViewController(video, animated: true, completion: {
+                //video.loadHtml(newString)
+                video.loadAddressURL(url)
+            })
     }
     
     

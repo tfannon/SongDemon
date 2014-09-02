@@ -16,6 +16,7 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     var videoController: UITableViewController!
     var controllers : [UIViewController] = []
     
+       
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.view.backgroundColor = UIColor.redColor()
@@ -32,6 +33,10 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         //set the initial controller to the main one
         let viewControllers : [UIViewController] = [mainController]
         self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
+    }
+    
+    override func shouldAutorotate() -> Bool {
+        return false
     }
   
     override func didReceiveMemoryWarning() {
@@ -70,6 +75,12 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     class func switchToMainView() {
         var app = UIApplication.sharedApplication().keyWindow.rootViewController as RootController
         let viewControllers : [UIViewController] = [app.mainController]
+        app.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
+    }
+    
+    class func switchToVideoListController() {
+        var app = UIApplication.sharedApplication().keyWindow.rootViewController as RootController
+        let viewControllers : [UIViewController] = [app.videoController]
         app.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
     }
 }
