@@ -389,10 +389,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5bf-TR-R6e" userLabel="HeaderView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ac9-Zl-pIz">
-                                        <rect key="frame" x="8" y="14" width="48" height="37"/>
+                                        <rect key="frame" x="18" y="8" width="48" height="61"/>
                                         <state key="normal" title="Back">
                                             <color key="titleColor" red="0.3219985078" green="0.35715674930000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>

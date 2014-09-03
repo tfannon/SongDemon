@@ -108,7 +108,11 @@ class VideoListController : UITableViewController {
     override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
         let x = self.data[indexPath.row]
         let id = x["id"]["videoId"].string!
-        let video = self.storyboard.instantiateViewControllerWithIdentifier("PlayVideoController") as PlayVideoController
+        
+        let vc = RootController.getPlayVideoController()
+        
+        
+        //let video = self.storyboard.instantiateViewControllerWithIdentifier("PlayVideoController") as PlayVideoController
         
         /* keep this crap around in case you want to explore the iframe
 
@@ -125,9 +129,11 @@ class VideoListController : UITableViewController {
 */
             let url = "https://www.youtube.com/watch?v=\(id)"
 
-            self.presentViewController(video, animated: true, completion: {
-                //video.loadHtml(newString)
-                video.loadAddressURL(url)
+            self.presentViewController(vc, animated: true, completion: {
+                //only load if they have picked something other than the default
+                if indexPath.row > 0 {
+                    vc.loadAddressURL(url)
+                }
             })
     }
     

@@ -16,17 +16,22 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     var videoController: UITableViewController!
     var controllers : [UIViewController] = []
     
+    var playVideoController: UIViewController!
+    
        
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.view.backgroundColor = UIColor.redColor()
+
         self.delegate = self;
         self.dataSource = self;
-        println("root view controller didload")
+
         mainController = self.storyboard.instantiateViewControllerWithIdentifier("MainController") as UIViewController
         lyricsController = self.storyboard.instantiateViewControllerWithIdentifier("LyricsController") as UIViewController
         playlistController = self.storyboard.instantiateViewControllerWithIdentifier("PlaylistController") as UITableViewController
         videoController = self.storyboard.instantiateViewControllerWithIdentifier("VideoListController") as UITableViewController
+        
+        playVideoController = self.storyboard.instantiateViewControllerWithIdentifier("PlayVideoController") as UIViewController
+        
 
         controllers = [playlistController, mainController, lyricsController, videoController]
 
@@ -83,4 +88,10 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         let viewControllers : [UIViewController] = [app.videoController]
         app.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
     }
+    
+    class func getPlayVideoController() -> PlayVideoController {
+        var app = UIApplication.sharedApplication().keyWindow.rootViewController as RootController
+        return app.playVideoController as PlayVideoController
+    }
+    
 }

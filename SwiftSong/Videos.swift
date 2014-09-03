@@ -24,6 +24,7 @@ class Videos {
     var State = VideoState.Fetching
     var jsonVideos : JSONValue? = nil
     var NeedsRefresh = true
+    var CurrentUrl = ""
     
     
     class func fetchVideosFor(item: MPMediaItem?) {
@@ -37,13 +38,15 @@ class Videos {
         
         var urlStr = "https://www.googleapis.com/youtube/v3/search?key=\(apiKey)&part=snippet&q='\(query)'&type=video& order=viewCount&maxResults=\(maxResults)"
         urlStr = urlStr.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
-        println(urlStr)
+        
         
         let url = NSURL.URLWithString(urlStr)
         let request = NSURLRequest(URL: url)
 
-    
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {
+        if gVideos.CurrentUrl.isEmpty || gVideos.CurrentUrl != urlStr {
+            println("Loading json for: \(urlStr)")
+        
+            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {
             (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
              
                 if error != nil {
@@ -69,7 +72,20 @@ class Videos {
                 gVideos.jsonVideos = parsedJson
                 gVideos.State = .Available
                 gVideos.NeedsRefresh = true
-        })
+            
+                var items = parsedJson["items"].array!
+                let currentVid = items[0]
+                let id = currentVid["id"]["videoId"].string!
+
+                let vc = RootController.getPlayVideoController()
+            
+                let url = "https://www.youtube.com/watch?v=\(id)"
+                vc.loadAddressURL(url)
+                gVideos.CurrentUrl = urlStr
+            })
+        } else {
+            println("using cached json")
+        }
     }
 }
 

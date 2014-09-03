@@ -11,6 +11,7 @@ import UIKit
 class PlayVideoController : UIViewController, UIWebViewDelegate {
     
     var myWeb = UIWebView()
+    var currentUrl = ""
 
     @IBOutlet var btnBack: UIButton!
     @IBAction func backTapped(sender: AnyObject) {
@@ -25,14 +26,11 @@ class PlayVideoController : UIViewController, UIWebViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         //TODO: make this dynamic
-        myWeb.frame=CGRectMake(0, 51, 320, 560-51)
+        myWeb.frame=CGRectMake(0, 60, 320, 560-60)
         self.view.addSubview(myWeb)
-        
         configureWebView()
-        //loadAddressURL()
-        
-        // Do any additional setup after loading the view, typically from a nib.
     }
+    
     func configureWebView() {
         myWeb.delegate=self
         myWeb.backgroundColor = UIColor.blackColor()
@@ -42,10 +40,16 @@ class PlayVideoController : UIViewController, UIWebViewDelegate {
     
     
     func loadAddressURL(url : String) {
-        println("loading video:\(url)")
-        let requestURL = NSURL(string: url)
-        let request = NSURLRequest(URL: requestURL)
-        myWeb.loadRequest(request)
+        if !url.isEmpty && url != currentUrl {
+            println("loading video:\(url)")
+            let requestURL = NSURL(string: url)
+            let request = NSURLRequest(URL: requestURL)
+            myWeb.loadRequest(request)
+            currentUrl = url
+        }
+        else {
+            println("video already loaded")
+        }
     }
     
     func loadHtml(html : String) {
