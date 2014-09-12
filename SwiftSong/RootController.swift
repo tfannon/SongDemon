@@ -25,12 +25,12 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         self.delegate = self;
         self.dataSource = self;
 
-        mainController = self.storyboard.instantiateViewControllerWithIdentifier("MainController") as UIViewController
-        lyricsController = self.storyboard.instantiateViewControllerWithIdentifier("LyricsController") as UIViewController
-        playlistController = self.storyboard.instantiateViewControllerWithIdentifier("PlaylistController") as UITableViewController
-        videoController = self.storyboard.instantiateViewControllerWithIdentifier("VideoListController") as UITableViewController
+        mainController = self.storyboard!.instantiateViewControllerWithIdentifier("MainController") as UIViewController
+        lyricsController = self.storyboard!.instantiateViewControllerWithIdentifier("LyricsController") as UIViewController
+        playlistController = self.storyboard!.instantiateViewControllerWithIdentifier("PlaylistController") as UITableViewController
+        videoController = self.storyboard!.instantiateViewControllerWithIdentifier("VideoListController") as UITableViewController
         
-        playVideoController = self.storyboard.instantiateViewControllerWithIdentifier("PlayVideoController") as UIViewController
+        playVideoController = self.storyboard!.instantiateViewControllerWithIdentifier("PlayVideoController") as UIViewController
         
 
         controllers = [playlistController, mainController, lyricsController, videoController]

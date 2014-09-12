@@ -15,7 +15,7 @@ class PlaylistAlbumTitleCell: UITableViewCell {
     @IBOutlet var lblYear: UILabel!
     @IBOutlet var imgArtwork: UIImageView!
     @IBOutlet var lblArtist: UILabel!
-    
+    /*
     required init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
     }
@@ -33,5 +33,6 @@ class PlaylistAlbumTitleCell: UITableViewCell {
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
+*/
     
 }

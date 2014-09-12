@@ -81,19 +81,19 @@ class PlaylistController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         //println("Sections: \(LibraryManager.groupedPlaylist.count)")
         return LibraryManager.groupedPlaylist.count
     }
 
-    override func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if Utils.inSimulator {
             return sampleSongs.count
         }
         return LibraryManager.groupedPlaylist[section].count
     }
 
-    override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let mode = LibraryManager.currentPlayMode
         var identifier : String
         switch (mode) {
@@ -137,7 +137,7 @@ class PlaylistController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let mode = LibraryManager.currentPlayMode
         switch (mode) {
             case (.Artist), (.Album) : return 40.0
@@ -145,13 +145,13 @@ class PlaylistController: UITableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var song = LibraryManager.groupedPlaylist[indexPath.section][indexPath.row]
         MusicPlayer.playSongInPlaylist(song)
         RootController.switchToMainView()
     }
     
-    override func tableView(tableView: UITableView!, viewForHeaderInSection section: Int) -> UIView! {
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView {
         switch (LibraryManager.currentPlayMode) {
             case (.Artist), (.Album) :
                 var cell = tableView.dequeueReusableCellWithIdentifier("PlaylistAlbumTitleCell") as PlaylistAlbumTitleCell
@@ -170,7 +170,7 @@ class PlaylistController: UITableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView!, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch (LibraryManager.currentPlayMode) {
             case (.Artist), (.Album) : return 115
             default: return 25

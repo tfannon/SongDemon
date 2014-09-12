@@ -100,17 +100,17 @@ class LibraryManager {
                         switch (song.rating) {
                         case 0:""
                         case 1:
-                            LM.LowRatedSongs.append(getHashKey(song))
+                            LM.LowRatedSongs.append(song.hashKey)
                         default:
-                            LM.RatedSongs.append(getHashKey(song))
+                            LM.RatedSongs.append(song.hashKey)
                         }
                     }
                     else if song.playCount >= 0 && song.playCount <= 2 {
-                        LM.NotPlayedSongs.append(getHashKey(song))
+                        LM.NotPlayedSongs.append(song.hashKey)
                         unplayed++
                     }
                     else {
-                        LM.OtherSongs.append(getHashKey(song))
+                        LM.OtherSongs.append(song.hashKey)
                     }
                 }
             }
@@ -134,49 +134,43 @@ class LibraryManager {
         removeFromLiked(item)
     }
     
-    private class func addToList(listName:String, inout list:Dictionary<String,String>, item:MPMediaItem) {
+    private class func addToList(listName:String, inout list:Dictionary<String,String>, item:MPMediaItem?) {
         if (item != nil) {
-            list[getHashKey(item)] = item.title
+            list[item!.hashKey] = item!.title
             let userDefaults = NSUserDefaults.standardUserDefaults()
             userDefaults.setObject(list, forKey: listName)
         }
     }
     
-    private class func removeFromList(listName:String, inout list:Dictionary<String,String>, item:MPMediaItem) {
+    private class func removeFromList(listName:String, inout list:Dictionary<String,String>, item:MPMediaItem?) {
         if (item != nil) {
-            list.removeValueForKey(getHashKey(item));
+            list.removeValueForKey(item!.hashKey);
             let userDefaults = NSUserDefaults.standardUserDefaults()
             userDefaults.setObject(list, forKey: listName)
         }
     }
     
-   
-    private class func getHashKey(item:MPMediaItem) -> String {
-        return item.persistentID.description
-    }
-    
-
     class func addToPlaylist(items:[MPMediaItem]) -> Void {
         for item in items {
-           LM.LikedSongs[getHashKey(item)] = item.title
+           LM.LikedSongs[item.hashKey] = item.title
         }
         let userDefaults = NSUserDefaults.standardUserDefaults()
         userDefaults.setObject(LM.LikedSongs, forKey: LIKED_LIST)
         println ("added \(items.count) songs")
     }
     
-    class func isLiked(item:MPMediaItem) -> Bool {
+    class func isLiked(item:MPMediaItem?) -> Bool {
         if item != nil {
-            if let song = LM.LikedSongs[getHashKey(item)] {
+            if let song = LM.LikedSongs[item!.hashKey] {
                 return true;
             }
         }
         return false;
     }
     
-    class func isDisliked(item:MPMediaItem) -> Bool {
+    class func isDisliked(item:MPMediaItem?) -> Bool {
         if item != nil {
-            if let song = LM.DislikedSongs[getHashKey(item)] {
+            if let song = LM.DislikedSongs[item!.hashKey] {
                 return true;
             }
         }
@@ -268,14 +262,14 @@ class LibraryManager {
     }
     
     //grab a bunch of songs by current artist
-    class func getArtistSongs(currentSong : MPMediaItem) -> [MPMediaItem] {
+    class func getArtistSongs(currentSong : MPMediaItem?) -> [MPMediaItem] {
         //album->*song
         let stopwatch = Stopwatch()
         var songs = [MPMediaItem]()
         LM.GroupedPlaylist = [[MPMediaItem]]()
         if currentSong != nil {
             var query = MPMediaQuery.songsQuery()
-            var pred = MPMediaPropertyPredicate(value: currentSong.albumArtist, forProperty: MPMediaItemPropertyAlbumArtist)
+            var pred = MPMediaPropertyPredicate(value: currentSong!.albumArtist, forProperty: MPMediaItemPropertyAlbumArtist)
             query.addFilterPredicate(pred)
             var artistSongs = query.items as [MPMediaItem]
             var albumDic = Dictionary<String,Array<MPMediaItem>>(minimumCapacity: artistSongs.count)
@@ -308,13 +302,13 @@ class LibraryManager {
         return songs
     }
     
-    class func getAlbumSongs(currentSong : MPMediaItem) -> [MPMediaItem] {
+    class func getAlbumSongs(currentSong : MPMediaItem?) -> [MPMediaItem] {
         let stopwatch = Stopwatch()
         var songs = [MPMediaItem]()
         LM.GroupedPlaylist = [[MPMediaItem]]()
         if currentSong != nil {
             var query = MPMediaQuery.songsQuery()
-            var pred = MPMediaPropertyPredicate(value: currentSong.albumTitle, forProperty: MPMediaItemPropertyAlbumTitle)
+            var pred = MPMediaPropertyPredicate(value: currentSong!.albumTitle, forProperty: MPMediaItemPropertyAlbumTitle)
             query.addFilterPredicate(pred)
             var albumSongs = query.items as [MPMediaItem]
             var sorted = albumSongs.sorted { $0.albumTrackNumber < $1.albumTrackNumber }

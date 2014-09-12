@@ -15,6 +15,7 @@ class PlaylistCell: UITableViewCell {
     @IBOutlet var lblArtistAlbum: UILabel!
     @IBOutlet var imgStatus: UIImageView!
     
+    /*
     required init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
     }
@@ -34,6 +35,7 @@ class PlaylistCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    */
 
 }
 

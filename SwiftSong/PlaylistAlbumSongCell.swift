@@ -14,7 +14,7 @@ class PlaylistAlbumSongCell: UITableViewCell {
     @IBOutlet var lblTrack: UILabel!
     @IBOutlet var lblTitle: UILabel!
     @IBOutlet var imgStatus: UIImageView!
-    
+    /*
     required init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
     }
@@ -30,4 +30,5 @@ class PlaylistAlbumSongCell: UITableViewCell {
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
+*/
 }

@@ -24,9 +24,9 @@ class VideoListController : UITableViewController {
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
         self.refreshControl = UIRefreshControl()
-        self.refreshControl.tintColor = UIColor.whiteColor()
-        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl?.tintColor = UIColor.whiteColor()
+        self.refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -47,7 +47,7 @@ class VideoListController : UITableViewController {
     func refresh(sender:AnyObject) {
         //redrawList()
         //TODO: change this to go fetch the next
-        self.refreshControl.endRefreshing()
+        self.refreshControl?.endRefreshing()
     }
     
     func redrawList(forceRefresh : Bool = true) {
@@ -70,15 +70,15 @@ class VideoListController : UITableViewController {
         }
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.count
     }
     
-    override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let x = self.data[indexPath.row]
         //let snippet = x["snippet"].object!
@@ -89,7 +89,7 @@ class VideoListController : UITableViewController {
         cell.lblDescription.text = description
         //clear the image before the async fetch
         if !Utils.inSimulator {
-            cell.imageView.image = nil
+            cell.imageView?.image = nil
         }
         //go fetch the image form the thumb
         var imgURL: NSURL = NSURL(string: thumb)
@@ -105,7 +105,7 @@ class VideoListController : UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let x = self.data[indexPath.row]
         let id = x["id"]["videoId"].string!
         
@@ -138,7 +138,7 @@ class VideoListController : UITableViewController {
     }
     
     
-    override func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 100
     }
 }
