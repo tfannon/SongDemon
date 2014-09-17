@@ -21,10 +21,12 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     @IBOutlet var btnPrev: UIButton!
     @IBOutlet var btnPlay: UIButton!
     @IBOutlet var btnNext: UIButton!
+    @IBOutlet var btnShare: UIButton!
     @IBAction func prevTapped(AnyObject) { handlePrevTapped() }
     @IBAction func playTapped(AnyObject) { handlePlayTapped() }
     @IBAction func nextTapped(AnyObject) { handleNextTapped() }
-
+    @IBAction func shareTapped(sender: AnyObject) { handleShareTapped()}
+    
     @IBOutlet var viewScrubber: UIView!
     @IBOutlet var scrubber: UISlider!
     @IBAction func scrubberChanged(sender: AnyObject) { handleScrubberChanged() }
@@ -74,10 +76,10 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         //these allow the large system images to scale
         btnPlay.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Fill
         btnPlay.contentVerticalAlignment = UIControlContentVerticalAlignment.Fill
-        btnPrev.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Fill
-        btnPrev.contentVerticalAlignment = UIControlContentVerticalAlignment.Fill
-        btnNext.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Fill
-        btnNext.contentVerticalAlignment = UIControlContentVerticalAlignment.Fill
+        //btnPrev.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Fill
+        //btnPrev.contentVerticalAlignment = UIControlContentVerticalAlignment.Fill
+        //btnNext.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Fill
+        //btnNext.contentVerticalAlignment = UIControlContentVerticalAlignment.Fill
         
         viewArtwork.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleImageTapped"))
 
@@ -111,12 +113,8 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     /* we will animate the transition of the background image when buttons fade in and out */
     func fadePlayButtonsIn() {
         NSTimer.scheduledTimerWithTimeInterval(0.1, target:self, selector:"fadeOutImage", userInfo:nil, repeats:false);
-        viewPlayOverlay.alpha = 1.0
+        viewPlayOverlay.alpha = 0.7
         playButtonsVisible = true
-    }
-    
-    func fadeOutImage() {
-        UIView.animateWithDuration(0.25, animations: { self.imgSong.alpha = 0.2 })
     }
     
     func fadePlayButtonsOut() {
@@ -124,6 +122,11 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         viewPlayOverlay.alpha = 0.2  //alpha = 0.0 dont receive touch events
         playButtonsVisible = false
     }
+    
+    func fadeOutImage() {
+        UIView.animateWithDuration(0.25, animations: { self.imgSong.alpha = 0.2 })
+    }
+    
     
     func fadeInImage() {
         UIView.animateWithDuration(0.25, animations: { self.imgSong.alpha = 1.0 })
@@ -142,6 +145,10 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         MusicPlayer.forward()
     }
     
+    func handleShareTapped() {
+    }
+    
+   
     func handleSearchTapped() {
         lblStatus.textColor = UIColor.orangeColor()
         lblStatus.text = "Querying iTunes"

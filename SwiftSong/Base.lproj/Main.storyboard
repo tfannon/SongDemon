@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6205" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="0dw-RJ-QCg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="0dw-RJ-QCg">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6198"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
         <!--MainController-->
@@ -33,15 +33,15 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Apr-UP-LMO" userLabel="Button - Back">
-                                                <rect key="frame" x="8" y="11" width="75" height="75"/>
-                                                <state key="normal" image="rewind.png"/>
+                                                <rect key="frame" x="-3" y="11" width="75" height="75"/>
+                                                <state key="normal" image="765-arrow-left.png"/>
                                                 <connections>
                                                     <action selector="prevTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="tAu-q4-Vyq"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ifu-ai-RdL" userLabel="Button - Next">
-                                                <rect key="frame" x="232" y="11" width="75" height="75"/>
-                                                <state key="normal" image="fast-forward.png"/>
+                                                <rect key="frame" x="246" y="11" width="75" height="75"/>
+                                                <state key="normal" image="766-arrow-right.png"/>
                                                 <connections>
                                                     <action selector="nextTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="aww-9X-0Eu"/>
                                                 </connections>
@@ -86,10 +86,10 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="41" userLabel="View - Other buttons">
-                                <rect key="frame" x="0.0" y="437" width="320" height="50"/>
+                                <rect key="frame" x="0.0" y="437" width="320" height="61"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="76" userLabel="Button - Like">
-                                        <rect key="frame" x="156" y="8" width="45" height="45"/>
+                                        <rect key="frame" x="144" y="8" width="45" height="45"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" title="" image="777-thumbs-up.png"/>
                                         <connections>
@@ -97,7 +97,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="86" userLabel="Button - Dislike">
-                                        <rect key="frame" x="209" y="10" width="45" height="45"/>
+                                        <rect key="frame" x="197" y="11" width="45" height="45"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" title="" image="778-thumbs-down.png"/>
                                         <state key="selected" image="778-thumbs-down.png"/>
@@ -106,17 +106,26 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZR-39-m7B" userLabel="Button - Playlist">
-                                        <rect key="frame" x="66" y="9" width="45" height="45"/>
+                                        <rect key="frame" x="38" y="9" width="45" height="45"/>
                                         <state key="normal" image="1176-bulleted-list.png"/>
                                         <connections>
                                             <action selector="playlistTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="BTc-4f-33H"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QdN-QZ-wnH" userLabel="Button - Search">
-                                        <rect key="frame" x="109" y="11" width="45" height="45"/>
+                                        <rect key="frame" x="91" y="11" width="45" height="45"/>
                                         <state key="normal" image="708-search-toolbar.png"/>
                                         <connections>
                                             <action selector="searchTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="YvE-Gw-P30"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9fb-Fh-eyw">
+                                        <rect key="frame" x="250" y="8" width="45" height="45"/>
+                                        <state key="normal" image="702-share.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="shareTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="mSO-nG-cFe"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -127,7 +136,7 @@
                                 <rect key="frame" x="0.0" y="487" width="320" height="49"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Querying iTunes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gaY-EO-FW8" userLabel="Label - Recording Status">
-                                        <rect key="frame" x="84" y="13" width="152" height="21"/>
+                                        <rect key="frame" x="84" y="13" width="152" height="28"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -147,6 +156,7 @@
                         <outlet property="btnPlaylist" destination="WZR-39-m7B" id="MV4-MQ-KvJ"/>
                         <outlet property="btnPrev" destination="Apr-UP-LMO" id="Osc-8m-k6r"/>
                         <outlet property="btnSearch" destination="QdN-QZ-wnH" id="egI-ku-wNf"/>
+                        <outlet property="btnShare" destination="9fb-Fh-eyw" id="zyc-qh-5pc"/>
                         <outlet property="imgSong" destination="cfx-bf-GNN" id="b8b-4y-1k9"/>
                         <outlet property="lblArtist" destination="38" id="name-outlet-38"/>
                         <outlet property="lblSong" destination="39" id="name-outlet-39"/>
@@ -448,21 +458,19 @@
     <resources>
         <image name="1176-bulleted-list.png" width="28" height="19"/>
         <image name="1241-play-toolbar-selected.png" width="22" height="22"/>
+        <image name="702-share.png" width="21" height="28"/>
         <image name="708-search-toolbar.png" width="22" height="22"/>
+        <image name="765-arrow-left.png" width="14" height="28"/>
+        <image name="766-arrow-right.png" width="14" height="28"/>
         <image name="777-thumbs-up.png" width="26" height="28"/>
         <image name="778-thumbs-down.png" width="26" height="28"/>
-        <image name="fast-forward.png" width="38" height="38"/>
         <image name="play-75.png" width="75" height="75"/>
-        <image name="rewind.png" width="38" height="38"/>
         <image name="sample-album-art.jpg" width="1500" height="1500"/>
         <image name="sample-video-image.png" width="320" height="180"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4">
-            <size key="portraitSize" width="320" height="568"/>
-            <size key="landscapeSize" width="568" height="320"/>
-        </simulatedScreenMetrics>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
 </document>
