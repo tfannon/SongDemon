@@ -216,7 +216,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     
     func postPlaylistSelection(message : String, songs: [MPMediaItem]=[MPMediaItem]()) {
         if songs.count > 0 {
-            MusicPlayer.play(songs)
+            MusicPlayer.play(songs, itemToStart: MusicPlayer.currentSong, timeToStart:MusicPlayer.currentTime)
         }
         if !message.isEmpty {
             ""//UIHelpers.messageBox(message)
@@ -333,7 +333,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     
     func updatePlayState() {
         var image: UIImage;
-        if MusicPlayer.isPlaying() {
+        if MusicPlayer.isPlaying {
             image = UIImage(named:"pause.png");
             fadePlayButtonsOut()
             lblStatus.text = ""
@@ -363,7 +363,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         let items = mediaItems.items as [MPMediaItem]
         if items.count > 0 {
             LibraryManager.makePlaylistFromSongs(items)
-            MusicPlayer.play(items, shuffle:false)
+            MusicPlayer.play(items)
         }
         self.dismissViewControllerAnimated(true, completion: {
             UIHelpers.messageBox("Now playing your \(items.count) songs")

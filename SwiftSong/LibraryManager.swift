@@ -297,7 +297,7 @@ class LibraryManager {
         let time = stopwatch.stop()
         println("Built artist songlist with \(LM.GroupedPlaylist.count) albums and \(songs.count) songs in \(time)ms")
         LM.Playlist = songs
-        LM.PlaylistIndex = 0
+        LM.PlaylistIndex = find(songs, currentSong!)!
         LM.PlaylistMode = .Artist
         return songs
     }
