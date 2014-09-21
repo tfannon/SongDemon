@@ -16,6 +16,7 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     var videoController: UITableViewController!
     var playVideoController: UIViewController!
     var controllers : [UIViewController] = []
+    var currentIndex = 1
     
        
     override func viewDidLoad() {
@@ -52,7 +53,7 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     }
 
     func presentationIndexForPageViewController(pageViewController: UIPageViewController!) -> Int {
-        return 1    }
+        return currentIndex    }
 
 
     //get the controller before the current one displayed
@@ -87,9 +88,10 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     }
     
     class func switchToPlayVideoController() {
-        var app = UIApplication.sharedApplication().keyWindow.rootViewController as RootController
-        let viewControllers : [UIViewController] = [app.playVideoController]
-        app.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
+        var root = UIApplication.sharedApplication().keyWindow.rootViewController as RootController
+        root.currentIndex = 4
+        let viewControllers : [UIViewController] = [root.playVideoController]
+        root.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
     }
     
     class func getPlayVideoController() -> PlayVideoController {
