@@ -43,19 +43,17 @@ class LibraryManager {
         println("storage objects being initialized from NSDefaults\n")
         let userDefaults = NSUserDefaults.standardUserDefaults();
         if let result = userDefaults.objectForKey(LIKED_LIST) as? Dictionary<String,String> {
-            println("all liked songs:")
-            //construct the liked songs from the defaults
+            println("\(result.count) liked songs")
             for (x,y) in result {
                LikedSongs[x] = y
-               println("\(y)")
+               //println("\(y)")
             }
         }
         if let result = userDefaults.objectForKey(DISLIKED_LIST) as? Dictionary<String,String> {
-            println("\nall disliked songs:")
-            //construct the disliked songs from the defaults
+            println("\(result.count) disliked songs")
             for (x,y) in result {
                 DislikedSongs[x] = y
-                println("\(y)")
+                //println("\(y)")
             }
         }
         println()
@@ -384,6 +382,7 @@ class LibraryManager {
         println()
     }
     
+    /*
     func dumpNSUserDefaults(forKey:String) -> Void {
         println("Current dictionary: \(self.LikedSongs)")
         let userDefaults = NSUserDefaults.standardUserDefaults()
@@ -393,4 +392,5 @@ class LibraryManager {
             println("No userDefaults")
         }
     }
+    */
 }

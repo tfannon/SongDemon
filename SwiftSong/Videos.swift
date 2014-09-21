@@ -23,37 +23,40 @@ class Videos {
 
     var State = VideoState.Fetching
     var jsonVideos : JSONValue? = nil
+    //this signals the the catched list has changed and the VideoListController will need to repaint
     var NeedsRefresh = true
+    //we store this because if the one coming in is the same, its a noop
     var CurrentUrl = ""
-    
+  
     
     class func fetchVideosFor(item: MPMediaItem?) {
         gLyrics.State = .Fetching
-        var query = ""
-        if Utils.inSimulator {
-            query = "Goatwhore In Deathless Tradition"
-        } else if item != nil {
-            query = "\(item!.albumArtist) \(item!.title)"
-        }
+        
+        var query = Utils.inSimulator ?
+            "Goatwhore In Deathless Tradition" :
+            "\(item!.albumArtist) \(item!.title)"
+        
         
         var urlStr = "https://www.googleapis.com/youtube/v3/search?key=\(apiKey)&part=snippet&q='\(query)'&type=video& order=viewCount&maxResults=\(maxResults)"
+
         urlStr = urlStr.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
         
-        
-        let url = NSURL.URLWithString(urlStr)
-        let request = NSURLRequest(URL: url)
-
+        //if there is no fetched url yet or the url is different than last one
         if gVideos.CurrentUrl.isEmpty || gVideos.CurrentUrl != urlStr {
-            println("Loading json for: \(urlStr)")
+            println("Loading google json async for: \(query)")
+
+            let url = NSURL.URLWithString(urlStr)
+            let request = NSURLRequest(URL: url)
         
             NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {
             (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
              
                 if error != nil {
-                    println("Error in Connection: \(error)")
+                    println("Error in videos fetch Connection: \(error)")
                     println()
                     gVideos.State = .NotAvailable
                     gVideos.NeedsRefresh = true
+                    return
                 }
     
                 var jsonError: NSError?
@@ -67,7 +70,7 @@ class Videos {
                 }
     
                 var parsedJson = JSONValue(json)
-                println(parsedJson)
+                //println(parsedJson)
                 
                 gVideos.jsonVideos = parsedJson
                 gVideos.State = .Available
@@ -84,7 +87,7 @@ class Videos {
                 gVideos.CurrentUrl = urlStr
             })
         } else {
-            println("using cached json")
+            println("using cached google json")
         }
     }
 }

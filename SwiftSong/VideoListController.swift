@@ -111,30 +111,14 @@ class VideoListController : UITableViewController {
         
         let vc = RootController.getPlayVideoController()
         
-        
-        //let video = self.storyboard.instantiateViewControllerWithIdentifier("PlayVideoController") as PlayVideoController
-        
-        /* keep this crap around in case you want to explore the iframe
+        let url = "https://www.youtube.com/watch?v=\(id)"
 
-
-        var path = NSBundle.mainBundle().pathForResource("videotemplate", ofType: "html")
-        if let content = String.stringWithContentsOfFile(path) {
-            let width = "320"
-            let height = "548"
-            var newString = content.stringByReplacingOccurrencesOfString("{0}", withString: width, options: NSStringCompareOptions.LiteralSearch, range: nil)
-            newString = newString.stringByReplacingOccurrencesOfString("{1}", withString: height, options: NSStringCompareOptions.LiteralSearch, range: nil)
-            newString = newString.stringByReplacingOccurrencesOfString("{2}", withString: id, options: NSStringCompareOptions.LiteralSearch, range: nil)
-            //println(newString)
-            //println(id)
-*/
-            let url = "https://www.youtube.com/watch?v=\(id)"
-
-            self.presentViewController(vc, animated: true, completion: {
-                //only load if they have picked something other than the default
-                if indexPath.row > 0 {
-                    vc.loadAddressURL(url)
-                }
-            })
+        self.presentViewController(vc, animated: true, completion: {
+        //only load if they have picked something other than the default
+            if indexPath.row > 0 {
+                vc.loadAddressURL(url)
+            }
+        })
     }
     
     

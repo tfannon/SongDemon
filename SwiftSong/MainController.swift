@@ -52,14 +52,17 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     var recording = false
     var startRecordTime = 0
     var playButtonsVisible = false
+    var playlistQueued = false;
 
     //MARK: controller methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAppearance()
         setupNotifications()
-        setupSimulator()
         self.setNeedsStatusBarAppearanceUpdate()
+        if Utils.inSimulator {
+            setupSimulator()
+        }
     }
     
     override func shouldAutorotate() -> Bool {
@@ -216,10 +219,19 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     
     func postPlaylistSelection(message : String, songs: [MPMediaItem]=[MPMediaItem]()) {
         if songs.count > 0 {
-            MusicPlayer.play(songs, itemToStart: MusicPlayer.currentSong, timeToStart:MusicPlayer.currentTime)
-        }
-        if !message.isEmpty {
-            ""//UIHelpers.messageBox(message)
+            if let indexOfCurrentSong = find(songs, MusicPlayer.currentSong) {
+                playlistQueued = true
+                var nextSong : MPMediaItem?
+                if indexOfCurrentSong + 1 < songs.count {
+                    nextSong = songs[indexOfCurrentSong + 1]
+                }
+                MusicPlayer.queuePlaylist(songs, itemToStart: nextSong)
+                UIHelpers.messageBox("", message:message)
+            }
+            else {
+                playlistQueued = false
+                MusicPlayer.play(songs)
+            }
         }
         doneWaiting()
     }
@@ -264,14 +276,21 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         
         center.addObserverForName(UIApplicationDidBecomeActiveNotification,
             object: nil, queue: nil, usingBlock: { _ in
+                println("UIApplicationDidBecomeActive")
                 self.updateSongInfo()
                 self.updatePlayState()
         })
        
         center.addObserverForName(MPMusicPlayerControllerNowPlayingItemDidChangeNotification,
             object: nil, queue:nil) { _ in
+                println("NowPlayingItemDidChange")
                 if MusicPlayer.currentSong != nil {
                     println("Song changed to \(MusicPlayer.currentSong.songInfo)")
+                }
+                if self.playlistQueued {
+                    MusicPlayer.playSongsInQueue()
+                    self.playlistQueued = false
+                    return
                 }
                 self.updateSongInfo()
                 self.updatePlayState()
@@ -281,7 +300,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         
         center.addObserverForName(MPMusicPlayerControllerPlaybackStateDidChangeNotification,
             object: nil, queue:nil) { _ in
-                //println ("new playstate event")
+                println ("PlaybackStateDidChange")
                 self.updatePlayState()
         }
     }

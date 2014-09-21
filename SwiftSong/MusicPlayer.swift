@@ -10,6 +10,8 @@ class MusicPlayer {
     
     private let applePlayer = MPMusicPlayerController()
     private var skipToBegin = false
+    private var queuedPlaylist : [MPMediaItem]?
+    private var songToStartOnQueuedPlaylist : MPMediaItem?
     
     class var currentSong : MPMediaItem! {
         get {
@@ -50,31 +52,26 @@ class MusicPlayer {
         }
     }
     
-    /* 
-    right now this is a hack.  the item to start is passed in, it means
-    that we should not automatically change the playing item as the playlist
-    changes.  so we remember the song and the time, set the queue, and then move
-    the queue.  this results in a delay since setting the queue stops the song, loses
-    the position, and updates the slider.   a better fix would be to set a method
-    on the main controller defers the setting of playlist until current song ends.
-    */
-    class func play(items: [MPMediaItem], itemToStart:MPMediaItem?=nil,
-        timeToStart:NSTimeInterval?=nil) {
+    class func play(items: [MPMediaItem]) {
         if items.count > 0 {
-            var coll = MPMediaItemCollection(items: items)
-            MP.applePlayer.shuffleMode = MPMusicShuffleMode.Off
-            MP.applePlayer.setQueueWithItemCollection(coll)
-            var wasPlaying = isPlaying
-            if itemToStart != nil {
-                MP.applePlayer.nowPlayingItem = itemToStart!
-                MP.applePlayer.currentPlaybackTime = timeToStart!
-                if wasPlaying {
-                    MP.applePlayer.play()
-                }
-
-            } else {
-                MP.applePlayer.play()
-            }
+            queuePlaylist(items)
+            playSongsInQueue()
+        }
+    }
+    
+    class func queuePlaylist(items: [MPMediaItem], itemToStart : MPMediaItem? = nil) {
+        MP.queuedPlaylist = items;
+        MP.songToStartOnQueuedPlaylist = itemToStart;
+    }
+    
+    class func playSongsInQueue() {
+        var coll = MPMediaItemCollection(items: MP.queuedPlaylist)
+        MP.applePlayer.shuffleMode = MPMusicShuffleMode.Off
+        MP.applePlayer.setQueueWithItemCollection(coll)
+        if let song = MP.songToStartOnQueuedPlaylist {
+            playSongInPlaylist(song)
+        } else {
+            MP.applePlayer.play()
         }
     }
     

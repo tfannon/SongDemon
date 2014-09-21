@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="0dw-RJ-QCg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="0dw-RJ-QCg">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
@@ -437,17 +437,10 @@
                     <view key="view" contentMode="scaleToFill" id="EcB-FE-Ncj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dDb-Sl-4dT" userLabel="Webview - Lyrics">
-                                <rect key="frame" x="0.0" y="32" width="320" height="505"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <dataDetectorType key="dataDetectorTypes"/>
-                            </webView>
-                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="webView" destination="dDb-Sl-4dT" id="G1s-Y0-GCa"/>
+                        <outlet property="containerView" destination="EcB-FE-Ncj" id="z4h-cF-T3V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CFf-bu-eAV" userLabel="First Responder" sceneMemberID="firstResponder"/>

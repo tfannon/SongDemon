@@ -14,9 +14,8 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     var lyricsController: UIViewController!
     var playlistController: UITableViewController!
     var videoController: UITableViewController!
-    var controllers : [UIViewController] = []
-    
     var playVideoController: UIViewController!
+    var controllers : [UIViewController] = []
     
        
     override func viewDidLoad() {
@@ -90,8 +89,12 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     }
     
     class func getPlayVideoController() -> PlayVideoController {
-        var app = UIApplication.sharedApplication().keyWindow.rootViewController as RootController
-        return app.playVideoController as PlayVideoController
+        var root = UIApplication.sharedApplication().keyWindow.rootViewController as RootController
+        return root.playVideoController as PlayVideoController
     }
     
+    class func getLyricsController() -> LyricsController {
+        var root = UIApplication.sharedApplication().keyWindow.rootViewController as RootController
+        return root.lyricsController as LyricsController
+    }
 }
