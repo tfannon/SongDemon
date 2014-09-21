@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import WebKit
 
-class PlayVideoController : UIViewController, UIWebViewDelegate {
+class PlayVideoController : UIViewController {
     
-    var myWeb = UIWebView()
+    var myWeb = WKWebView()
     var currentUrl = ""
 
     @IBOutlet var btnBack: UIButton!
@@ -25,15 +26,14 @@ class PlayVideoController : UIViewController, UIWebViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //TODO: make this dynamic
         myWeb.frame=CGRectMake(0, 60, 320, 560-60)
         self.view.addSubview(myWeb)
         configureWebView()
     }
     
     func configureWebView() {
-        myWeb.delegate=self
-        myWeb.backgroundColor = UIColor.blackColor()
+        //myWeb.delegate=self
+        //myWeb.backgroundColor = UIColor.blackColor()
         //myWeb.scalesPageToFit = true
         //myWeb.dataDetectorTypes = .All
     }
@@ -51,29 +51,4 @@ class PlayVideoController : UIViewController, UIWebViewDelegate {
             println("video already loaded")
         }
     }
-    
-    func loadHtml(html : String) {
-        myWeb.loadHTMLString(html, baseURL: nil)
-    }
-    
-    
-    func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
-        // Report the error inside the web view.
-        let localizedErrorMessage = NSLocalizedString("An error occured:", comment: "")
-        
-        let errorHTML = "<!doctype html><html><body><div style=\"width: 100%%; text-align: center; font-size: 36pt;\">\(localizedErrorMessage) \(error.localizedDescription)</div></body></html>"
-        
-        webView.loadHTMLString(errorHTML, baseURL: nil)
-        
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-    }
-    
-    func webViewDidStartLoad(_: UIWebView) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-    }
-    
-    func webViewDidFinishLoad(_: UIWebView) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-    }
-    
 }
