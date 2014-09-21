@@ -12,25 +12,27 @@ import WebKit
 class LyricsController: UIViewController {
 
     @IBOutlet var containerView: UIView!
-   
-    var webView : WKWebView?
+
+    var webView = WKWebView()
     var currentUrl = ""
     
     //note: we are setting opaque property to NO so it takes on color of background before loading otherwise it is white
 
+    
     override func loadView() {
         super.loadView()
-        self.webView = WKWebView()
-        self.view = self.webView!
+        //self.webView = WKWebView()
+        //self.view = self.webView!
     }
     
     override func viewDidLoad() {
+        self.view = self.webView
         /*
         super.viewDidLoad()
         var url = NSURL(string:"http://www.kinderas.com/")
         var req = NSURLRequest(URL:url)
         self.webView!.loadRequest(req)
-        /*
+        
         myWeb.frame=CGRectMake(0, 60, 320, 560-60)
         self.view.addSubview(myWeb)
         configureWebView()
@@ -64,7 +66,7 @@ class LyricsController: UIViewController {
             println("loading lyrics:\(url)")
             let requestURL = NSURL(string: url)
             let request = NSURLRequest(URL: requestURL)
-            //myWeb.loadRequest(request)
+            self.webView.loadRequest(request)
             currentUrl = url
         }
         else {

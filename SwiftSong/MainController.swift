@@ -25,7 +25,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     @IBAction func prevTapped(AnyObject) { handlePrevTapped() }
     @IBAction func playTapped(AnyObject) { handlePlayTapped() }
     @IBAction func nextTapped(AnyObject) { handleNextTapped() }
-    @IBAction func shareTapped(sender: AnyObject) { handleShareTapped()}
+    @IBAction func shareTapped(sender: AnyObject) { setupSimulator() }
     
     @IBOutlet var viewScrubber: UIView!
     @IBOutlet var scrubber: UISlider!
@@ -61,7 +61,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         setupNotifications()
         self.setNeedsStatusBarAppearanceUpdate()
         if Utils.inSimulator {
-            setupSimulator()
+            //setupSimulator()
         }
     }
     
