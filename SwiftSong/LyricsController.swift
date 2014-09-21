@@ -11,32 +11,14 @@ import WebKit
 
 class LyricsController: UIViewController {
 
-    @IBOutlet var containerView: UIView!
-
     var webView = WKWebView()
     var currentUrl = ""
     
-    //note: we are setting opaque property to NO so it takes on color of background before loading otherwise it is white
-
-    
-    override func loadView() {
-        super.loadView()
-        //self.webView = WKWebView()
-        //self.view = self.webView!
-    }
-    
     override func viewDidLoad() {
-        self.view = self.webView
-        /*
         super.viewDidLoad()
-        var url = NSURL(string:"http://www.kinderas.com/")
-        var req = NSURLRequest(URL:url)
-        self.webView!.loadRequest(req)
-        
-        myWeb.frame=CGRectMake(0, 60, 320, 560-60)
-        self.view.addSubview(myWeb)
-        configureWebView()
-        */
+        webView.frame=CGRectMake(0, 32, 320, 560-32)
+        self.view.addSubview(webView)
+        //configureWebView()
     }
     
     func configureWebView() {
@@ -48,17 +30,6 @@ class LyricsController: UIViewController {
     
     override func shouldAutorotate() -> Bool {
         return false
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        //if gLyrics.NeedsRefresh && gLyrics.Url != nil {
-        //    webView.loadRequest(NSURLRequest(URL: gLyrics.Url))
-        //}
-        //gLyrics.NeedsRefresh = false
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
     
     func loadAddressUrl(url : String) {
