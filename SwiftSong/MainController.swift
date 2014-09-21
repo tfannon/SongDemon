@@ -399,7 +399,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     func handleScrubberChanged() {
         if let currentSong = MusicPlayer.currentSong {
             if scrubber.timeValue.totalSeconds < currentSong.playTime.totalSeconds {
-                println("scrubber changed: \(scrubber.value)")
+                //println("scrubber changed: \(scrubber.value)")
                 MusicPlayer.playbackTime = scrubber.timeValue.totalSeconds
                 startPlaybackTimer()
             } else {

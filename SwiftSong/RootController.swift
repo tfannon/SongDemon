@@ -18,7 +18,8 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     var controllers : [UIViewController] = []
     var currentIndex = 1
     
-       
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -36,6 +37,18 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         //set the initial controller to the main one
         let viewControllers : [UIViewController] = [mainController]
         self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
+        
+        findScrollView()
+    }
+    
+    //  this will allow the slider to interpret the touch events and NOT pass them onto the underlying scroll view.  without this, the user is required to hold the slider to activate it before scrolling
+    func findScrollView() {
+        for x in self.view.subviews {
+            if x.isKindOfClass(UIScrollView) {
+                var scrollView = x as UIScrollView
+                scrollView.delaysContentTouches = false
+            }
+        }
     }
     
     override func shouldAutorotate() -> Bool {

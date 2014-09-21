@@ -22,7 +22,7 @@ class TimeStruct : Printable {
         hours = rem / 3600
         mins = ((rem / 60) - hours*60)
         seconds = rem % 60
-        println("Timestruct created \(self) from float:\(totalSeconds) seconds")
+        //println("Timestruct created \(self) from float:\(totalSeconds) seconds")
     }
     
     init(totalSeconds:Int) {
@@ -30,7 +30,7 @@ class TimeStruct : Printable {
         hours = rem / 3600
         mins = ((rem / 60) - hours*60)
         seconds = rem % 60
-        println("Timestruct created \(self) from int:\(totalSeconds) seconds")
+        //println("Timestruct created \(self) from int:\(totalSeconds) seconds")
     }
     
     var description : String {
