@@ -14,19 +14,14 @@ class PlayVideoController : UIViewController {
     var myWeb = WKWebView()
     var currentUrl = ""
 
-    @IBOutlet var btnBack: UIButton!
-    @IBAction func backTapped(sender: AnyObject) {
-        self.dismissViewControllerAnimated(false, completion: {})
-        RootController.switchToVideoListController()
-    }
-    
+  
     override func shouldAutorotate() -> Bool {
         return true
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        myWeb.frame=CGRectMake(0, 60, 320, 560-60)
+        myWeb.frame=CGRectMake(0, 32, 320, 560-32)
         self.view.addSubview(myWeb)
         configureWebView()
     }

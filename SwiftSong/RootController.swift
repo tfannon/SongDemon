@@ -28,11 +28,9 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         lyricsController = self.storyboard!.instantiateViewControllerWithIdentifier("LyricsController") as UIViewController
         playlistController = self.storyboard!.instantiateViewControllerWithIdentifier("PlaylistController") as UITableViewController
         videoController = self.storyboard!.instantiateViewControllerWithIdentifier("VideoListController") as UITableViewController
-        
         playVideoController = self.storyboard!.instantiateViewControllerWithIdentifier("PlayVideoController") as UIViewController
-        
 
-        controllers = [playlistController, mainController, lyricsController, videoController]
+        controllers = [playlistController, mainController, lyricsController, videoController, playVideoController]
 
         //set the initial controller to the main one
         let viewControllers : [UIViewController] = [mainController]
@@ -85,6 +83,12 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     class func switchToVideoListController() {
         var app = UIApplication.sharedApplication().keyWindow.rootViewController as RootController
         let viewControllers : [UIViewController] = [app.videoController]
+        app.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
+    }
+    
+    class func switchToPlayVideoController() {
+        var app = UIApplication.sharedApplication().keyWindow.rootViewController as RootController
+        let viewControllers : [UIViewController] = [app.playVideoController]
         app.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
     }
     
