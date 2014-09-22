@@ -147,7 +147,7 @@ class PlaylistController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var song = LibraryManager.groupedPlaylist[indexPath.section][indexPath.row]
-        println(song.songInfo)
+        //println(song.songInfo)
         MusicPlayer.playSongInPlaylist(song)
         RootController.switchToMainView()
     }
