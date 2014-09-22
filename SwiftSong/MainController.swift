@@ -191,18 +191,16 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         }))
         
         if let currentSong = MusicPlayer.currentSong {
-            //var message = "\(currentSong.albumArtist) songs"
             var message = "Songs from this artist"
             alert.addAction(UIAlertAction(title: message, style: .Default, handler: { action in
                 var songs = LibraryManager.getArtistSongs(currentSong);
-                self.postPlaylistSelection("Songs from \(currentSong.albumArtist) are playing", songs: songs)
+                self.postPlaylistSelection("Songs from \(currentSong.albumArtist) are queued", songs: songs, queue:true)
             }))
             
-            //let message = "Songs from \(currentSong.albumTitle)"
             message = "Songs from this album"
             alert.addAction(UIAlertAction(title: message, style: .Default, handler: { action in
                 var songs = LibraryManager.getAlbumSongs(currentSong);
-                self.postPlaylistSelection("Songs from \(currentSong.albumTitle) are playing", songs: songs)
+                self.postPlaylistSelection("Songs from \(currentSong.albumTitle) are queued", songs: songs, queue:true)
             }))
         }
         
@@ -217,10 +215,12 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         })
     }
     
-    func postPlaylistSelection(message : String, songs: [MPMediaItem]=[MPMediaItem]()) {
+    // if the current song is among the songs in the upcoming playlist
+    func postPlaylistSelection(message : String, songs: [MPMediaItem]=[MPMediaItem](), queue: Bool = false) {
         if songs.count > 0 {
-            if let indexOfCurrentSong = find(songs, MusicPlayer.currentSong) {
+            if queue {
                 playlistQueued = true
+                let indexOfCurrentSong = find(songs, MusicPlayer.currentSong)!
                 var nextSong : MPMediaItem?
                 if indexOfCurrentSong + 1 < songs.count {
                     nextSong = songs[indexOfCurrentSong + 1]

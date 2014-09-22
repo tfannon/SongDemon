@@ -89,16 +89,19 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     }
     
     class func switchToMainView() {
-        var app = UIApplication.sharedApplication().keyWindow.rootViewController as RootController
-        let viewControllers : [UIViewController] = [app.mainController]
-        app.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
+        var root = UIApplication.sharedApplication().keyWindow.rootViewController as RootController
+        root.currentIndex = 1
+        let viewControllers : [UIViewController] = [root.mainController]
+        root.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
     }
     
+    /*
     class func switchToVideoListController() {
         var app = UIApplication.sharedApplication().keyWindow.rootViewController as RootController
         let viewControllers : [UIViewController] = [app.videoController]
         app.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
     }
+    */
     
     class func switchToPlayVideoController() {
         var root = UIApplication.sharedApplication().keyWindow.rootViewController as RootController

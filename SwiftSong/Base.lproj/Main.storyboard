@@ -221,7 +221,7 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="1241-play-toolbar-selected.png" translatesAutoresizingMaskIntoConstraints="NO" id="Rd3-Gb-Nrc" userLabel="IsPlaying">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rd3-Gb-Nrc" userLabel="IsPlaying">
                                             <rect key="frame" x="285" y="12" width="25" height="25"/>
                                         </imageView>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="In Deathless Tradition" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QMH-IQ-dKQ" userLabel="Song Title">
@@ -439,7 +439,6 @@
     </scenes>
     <resources>
         <image name="1176-bulleted-list.png" width="28" height="19"/>
-        <image name="1241-play-toolbar-selected.png" width="22" height="22"/>
         <image name="702-share.png" width="21" height="28"/>
         <image name="708-search-toolbar.png" width="22" height="22"/>
         <image name="765-arrow-left.png" width="14" height="28"/>

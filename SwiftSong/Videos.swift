@@ -30,6 +30,8 @@ class Videos {
   
     
     class func fetchVideosFor(item: MPMediaItem?) {
+        if !Utils.inSimulator && item == nil { return }
+        
         gLyrics.State = .Fetching
         
         var query = Utils.inSimulator ?

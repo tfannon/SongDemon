@@ -68,6 +68,8 @@ class MusicPlayer {
         var coll = MPMediaItemCollection(items: MP.queuedPlaylist)
         MP.applePlayer.shuffleMode = MPMusicShuffleMode.Off
         MP.applePlayer.setQueueWithItemCollection(coll)
+        //now that we have grabbed the items off the queue, nil it out
+        MP.queuedPlaylist = nil
         if let song = MP.songToStartOnQueuedPlaylist {
             playSongInPlaylist(song)
         } else {
@@ -75,9 +77,18 @@ class MusicPlayer {
         }
     }
     
+    /* if a request comes in to play a song in the playlist but the playlist 
+        has not actually been queued ( delayed queing for artist and albums )
+        we must first add the playlist into the queue and then set the start item */
     class func playSongInPlaylist(song : MPMediaItem) {
-        MP.applePlayer.nowPlayingItem = song
-        MP.applePlayer.play()
+        if MP.queuedPlaylist != nil {
+            MP.songToStartOnQueuedPlaylist = song
+            playSongsInQueue()
+        }
+        else {
+            MP.applePlayer.nowPlayingItem = song
+            MP.applePlayer.play()
+        }
     }
     
     class var playbackTime : Int {

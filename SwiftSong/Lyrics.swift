@@ -15,6 +15,8 @@ class Lyrics {
     var CurrentUrl = ""
 
     class func fetchUrlFor(item: MPMediaItem?) {
+        if !Utils.inSimulator && item == nil { return }
+        
         gLyrics.State = .Fetching
 
         var query = "";
