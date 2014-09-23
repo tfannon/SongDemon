@@ -39,6 +39,8 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
         
         findScrollView()
+        
+        asyncLibraryScan()
     }
     
     //  this will allow the slider to interpret the touch events and NOT pass them onto the underlying scroll view.  without this, the user is required to hold the slider to activate it before scrolling
@@ -48,6 +50,14 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
                 var scrollView = x as UIScrollView
                 scrollView.delaysContentTouches = false
             }
+        }
+    }
+    
+    func asyncLibraryScan() {
+        Async.background {
+            println("begin lib scan")
+            LibraryManager.scanLibrary()
+            println("ended lib scan")
         }
     }
     

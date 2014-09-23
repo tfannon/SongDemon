@@ -11,9 +11,11 @@ import UIKit
 
 
 class UIHelpers  {
-    class func messageBox(title:String, message:String = "") {
+    class func messageBox(title:String?=nil, message:String = "") {
         let v = UIAlertView()
-        v.title = title
+        if title != nil {
+            v.title = title!
+        }
         v.message = message
         v.addButtonWithTitle("Ok")
         v.show()

@@ -89,7 +89,7 @@
                                 <rect key="frame" x="0.0" y="437" width="320" height="61"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="76" userLabel="Button - Like">
-                                        <rect key="frame" x="144" y="8" width="45" height="45"/>
+                                        <rect key="frame" x="114" y="7" width="45" height="45"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" title="" image="777-thumbs-up.png"/>
                                         <connections>
@@ -97,7 +97,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="86" userLabel="Button - Dislike">
-                                        <rect key="frame" x="197" y="11" width="45" height="45"/>
+                                        <rect key="frame" x="167" y="10" width="45" height="45"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" title="" image="778-thumbs-down.png"/>
                                         <state key="selected" image="778-thumbs-down.png"/>
@@ -106,26 +106,33 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZR-39-m7B" userLabel="Button - Playlist">
-                                        <rect key="frame" x="38" y="9" width="45" height="45"/>
+                                        <rect key="frame" x="8" y="8" width="45" height="45"/>
                                         <state key="normal" image="1176-bulleted-list.png"/>
                                         <connections>
                                             <action selector="playlistTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="BTc-4f-33H"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QdN-QZ-wnH" userLabel="Button - Search">
-                                        <rect key="frame" x="91" y="11" width="45" height="45"/>
+                                        <rect key="frame" x="61" y="10" width="45" height="45"/>
                                         <state key="normal" image="708-search-toolbar.png"/>
                                         <connections>
                                             <action selector="searchTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="YvE-Gw-P30"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9fb-Fh-eyw">
-                                        <rect key="frame" x="250" y="8" width="45" height="45"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9fb-Fh-eyw" userLabel="Button - Share">
+                                        <rect key="frame" x="274" y="7" width="45" height="45"/>
                                         <state key="normal" image="702-share.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="shareTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="mSO-nG-cFe"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o69-A4-xwj" userLabel="Button - Add">
+                                        <rect key="frame" x="221" y="10" width="45" height="45"/>
+                                        <state key="normal" image="709-plus.png"/>
+                                        <connections>
+                                            <action selector="addToQueueTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="4A0-bi-HDg"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -149,6 +156,7 @@
                     </view>
                     <toolbarItems/>
                     <connections>
+                        <outlet property="btnAddToQueue" destination="o69-A4-xwj" id="RFu-Gx-8AC"/>
                         <outlet property="btnDislike" destination="86" id="750-VG-yNm"/>
                         <outlet property="btnLike" destination="76" id="XWh-ct-hNa"/>
                         <outlet property="btnNext" destination="Ifu-ai-RdL" id="HeO-tI-MJ3"/>
@@ -441,6 +449,7 @@
         <image name="1176-bulleted-list.png" width="28" height="19"/>
         <image name="702-share.png" width="21" height="28"/>
         <image name="708-search-toolbar.png" width="22" height="22"/>
+        <image name="709-plus.png" width="28" height="28"/>
         <image name="765-arrow-left.png" width="14" height="28"/>
         <image name="766-arrow-right.png" width="14" height="28"/>
         <image name="777-thumbs-up.png" width="26" height="28"/>

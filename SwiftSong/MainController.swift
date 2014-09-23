@@ -21,11 +21,11 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     @IBOutlet var btnPrev: UIButton!
     @IBOutlet var btnPlay: UIButton!
     @IBOutlet var btnNext: UIButton!
-    @IBOutlet var btnShare: UIButton!
+   
     @IBAction func prevTapped(AnyObject) { handlePrevTapped() }
     @IBAction func playTapped(AnyObject) { handlePlayTapped() }
     @IBAction func nextTapped(AnyObject) { handleNextTapped() }
-    @IBAction func shareTapped(sender: AnyObject) { setupSimulator() }
+   
     
     @IBOutlet var viewScrubber: UIView!
     @IBOutlet var scrubber: UISlider!
@@ -38,15 +38,17 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     @IBOutlet var viewOtherButtons: UIView!
     @IBOutlet var btnPlaylist: UIButton!
     @IBOutlet var btnSearch: UIButton!
-    @IBOutlet var btnRecord: UIButton!
     @IBOutlet var btnLike: UIButton!
     @IBOutlet var btnDislike: UIButton!
+    @IBOutlet var btnShare: UIButton!
+    @IBOutlet var btnAddToQueue: UIButton!
 
     @IBAction func playlistTapped(AnyObject) { handlePlaylistTapped() }
     @IBAction func searchTapped(sender: AnyObject) { handleSearchTapped() }
     @IBAction func likeTapped(sender: AnyObject) { handleLikeTapped()}
     @IBAction func dislikeTapped(sender: AnyObject) { handleDislikeTapped()}
-
+    @IBAction func shareTapped(sender: AnyObject) { setupSimulator() }
+    @IBAction func addToQueueTapped(sender: AnyObject) { handleAddToQueueTapped() }
    
     //MARK: instance variables
     var recording = false
@@ -79,10 +81,6 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         //these allow the large system images to scale
         btnPlay.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Fill
         btnPlay.contentVerticalAlignment = UIControlContentVerticalAlignment.Fill
-        //btnPrev.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Fill
-        //btnPrev.contentVerticalAlignment = UIControlContentVerticalAlignment.Fill
-        //btnNext.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Fill
-        //btnNext.contentVerticalAlignment = UIControlContentVerticalAlignment.Fill
         
         viewArtwork.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleImageTapped"))
 
@@ -130,11 +128,9 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         UIView.animateWithDuration(0.25, animations: { self.imgSong.alpha = 0.2 })
     }
     
-    
     func fadeInImage() {
         UIView.animateWithDuration(0.25, animations: { self.imgSong.alpha = 1.0 })
     }
-
     
     func handlePrevTapped() {
         MusicPlayer.reverse()
@@ -163,6 +159,38 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
             self.doneWaiting() })
     }
     
+    func handleAddToQueueTapped() {
+        if let currentSong = MusicPlayer.currentSong {
+            var alert = UIAlertController(title: "Choose what to play later", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+
+            alert.addAction(UIAlertAction(title: "This song", style: .Default, handler: { action in
+                LibraryManager.addToQueued(currentSong)
+                UIHelpers.messageBox(message:"Song added to Play Later queue")
+            }))
+
+            alert.addAction(UIAlertAction(title: "Songs from this album", style: .Default, handler: { action in
+                var songs = LibraryManager.getAlbumSongsWithoutSettingPlaylist(currentSong);
+                LibraryManager.addToQueued(songs)
+                UIHelpers.messageBox(message:"\(currentSong.albumTitle) was added to Play Later queue")
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Clear my queue", style: .Destructive, handler: { action in
+                LibraryManager.clearQueued()
+                UIHelpers.messageBox(message:"Play Later queue was cleared")
+            }))
+           
+            alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
+            }))
+            
+            self.presentViewController(alert, animated: true, completion: {
+            })
+        }
+        else {
+            UIHelpers.messageBox(message: "A song must be playing in order to queue")
+        }
+    }
+    
+    
     func waiting() {
         self.imgSong.hidden = true
     }
@@ -174,33 +202,38 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     
     func handlePlaylistTapped() {
         var alert = UIAlertController(title: "Choose songs to play", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
-
+        
+        alert.addAction(UIAlertAction(title: "My queue", style: .Default, handler: { action in
+            var songs = LibraryManager.getQueuedSongs()
+            self.postPlaylistSelection(songs: songs)
+        }))
+        
         alert.addAction(UIAlertAction(title: "Random mix", style: .Default, handler: { action in
             var songs = LibraryManager.getMixOfSongs()
-            self.postPlaylistSelection("Random mix is playing", songs: songs)
+            self.postPlaylistSelection(songs: songs)
         }))
         
         alert.addAction(UIAlertAction(title: "Liked", style: .Default, handler: {action in
             var songs = LibraryManager.getLikedSongs()
-            self.postPlaylistSelection("Liked songs are playing", songs: songs)
+            self.postPlaylistSelection(songs: songs)
         }))
         
         alert.addAction(UIAlertAction(title: "New", style: .Default, handler: { action in
             var songs = LibraryManager.getNewSongs()
-            self.postPlaylistSelection("New songs are playing", songs: songs)
+            self.postPlaylistSelection(songs: songs)
         }))
         
         if let currentSong = MusicPlayer.currentSong {
             var message = "Songs from this artist"
             alert.addAction(UIAlertAction(title: message, style: .Default, handler: { action in
                 var songs = LibraryManager.getArtistSongs(currentSong);
-                self.postPlaylistSelection("Songs from \(currentSong.albumArtist) are queued", songs: songs, queue:true)
+                self.postPlaylistSelection(songs: songs, message: "Songs from \(currentSong.albumArtist) are queued", queue:true)
             }))
             
             message = "Songs from this album"
             alert.addAction(UIAlertAction(title: message, style: .Default, handler: { action in
                 var songs = LibraryManager.getAlbumSongs(currentSong);
-                self.postPlaylistSelection("Songs from \(currentSong.albumTitle) are queued", songs: songs, queue:true)
+                self.postPlaylistSelection(songs: songs, message:"Songs from \(currentSong.albumTitle) are queued", queue:true)
             }))
         }
         
@@ -216,22 +249,31 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     }
     
     // if the current song is among the songs in the upcoming playlist
-    func postPlaylistSelection(message : String, songs: [MPMediaItem]=[MPMediaItem](), queue: Bool = false) {
+    // add the songs to the queue without starting a playlist
+    func postPlaylistSelection(songs: [MPMediaItem]=[MPMediaItem](), message : String? = nil, queue: Bool = false) {
         if songs.count > 0 {
             if queue {
                 playlistQueued = true
                 let indexOfCurrentSong = find(songs, MusicPlayer.currentSong)!
                 var nextSong : MPMediaItem?
+                //this keeps the position of the song immediately following current song
+                //so the next itemplayingdidchange notification will trigger the queue to
+                //start and use the correct position
                 if indexOfCurrentSong + 1 < songs.count {
                     nextSong = songs[indexOfCurrentSong + 1]
                 }
                 MusicPlayer.queuePlaylist(songs, itemToStart: nextSong)
-                UIHelpers.messageBox("", message:message)
             }
             else {
                 playlistQueued = false
                 MusicPlayer.play(songs)
             }
+        }
+        else {
+            UIHelpers.messageBox(message:"There are no songs in the playlist")
+        }
+        if message != nil {
+            UIHelpers.messageBox(message:message!)
         }
         doneWaiting()
     }
@@ -385,7 +427,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
             MusicPlayer.play(items)
         }
         self.dismissViewControllerAnimated(true, completion: {
-            UIHelpers.messageBox("Now playing your \(items.count) songs")
+            UIHelpers.messageBox(message: "Now playing your \(items.count) songs")
         });
     }
     

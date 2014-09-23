@@ -3,6 +3,7 @@ import MediaPlayer
 
 let LIKED_LIST = "Liked"
 let DISLIKED_LIST = "Disliked"
+let QUEUED_LIST = "Queued"
 private let LM = LibraryManager()
 
 
@@ -20,12 +21,14 @@ enum PlayMode {
     case New
     case None
     case Custom
+    case Queued
 }
 
 class LibraryManager {
     //the finals are to get around a performance bug where adding items to a dictionary is very slow
-    private final var LikedSongs = Dictionary<String, String>()
-    private final var DislikedSongs = Dictionary<String, String>()
+    private final var LikedSongs = Dictionary<String,String>()
+    private final var DislikedSongs = Dictionary<String,String>()
+    private final var QueuedSongs = Dictionary<String,String>()
     //computed at load
     private final var RatedSongs = Array<String>()
     private final var LowRatedSongs = Array<String>()
@@ -56,6 +59,14 @@ class LibraryManager {
                 //println("\(y)")
             }
         }
+        if let result = userDefaults.objectForKey(QUEUED_LIST) as? Dictionary<String,String> {
+            println("\(result.count) queued songs")
+            for (x,y) in result {
+                QueuedSongs[x] = y
+                //println("\(y)")
+            }
+        }
+        
         println()
     }
     
@@ -84,9 +95,15 @@ class LibraryManager {
         }
     }
     
-    
     class func scanLibrary() {
-        if LM.scanned { return };
+        //this is called on a background thread at app start.  make sure that if the user
+        //quickly triggers an action which starts another scan, it does not get into this code
+        //when it does, the other scan should have flipped the flag so it wont be re-scanned
+        objc_sync_enter(LM.LikedSongs)
+        if LM.scanned {
+            println("lib already scanned")
+            return
+        }
         var unplayed = 0;
         var start = NSDate()
         if let allSongs = ITunesUtils.getAllSongs() {
@@ -116,7 +133,10 @@ class LibraryManager {
             println("Scanned \(allSongs.count) in \(time)ms. \n  \(LM.RatedSongs.count) songs with >1 rating \n  \(LM.LowRatedSongs.count) songs with =1 rating \n  \(unplayed) songs with playcount <2 \n  \(LM.OtherSongs.count) others songs\n")
         }
         LM.scanned = true;
+        objc_sync_exit(LM.LikedSongs)
     }
+    
+    //MARK: typed list functions
 
     class func addToLiked(item:MPMediaItem) {
         addToList(LIKED_LIST, list: &LM.LikedSongs, item: item)
@@ -131,30 +151,20 @@ class LibraryManager {
         //adding it to disliked will remove it from liked
         removeFromLiked(item)
     }
-    
-    private class func addToList(listName:String, inout list:Dictionary<String,String>, item:MPMediaItem?) {
-        if (item != nil) {
-            list[item!.hashKey] = item!.title
-            let userDefaults = NSUserDefaults.standardUserDefaults()
-            userDefaults.setObject(list, forKey: listName)
-        }
+
+    //todo; can't one function get both of these?
+    class func addToQueued(item: MPMediaItem) {
+        addToList(QUEUED_LIST, list: &LM.QueuedSongs, item: item)
+    }
+
+    class func addToQueued(items: [MPMediaItem]) {
+        addToList(QUEUED_LIST, list: &LM.QueuedSongs, items: items)
     }
     
-    private class func removeFromList(listName:String, inout list:Dictionary<String,String>, item:MPMediaItem?) {
-        if (item != nil) {
-            list.removeValueForKey(item!.hashKey);
-            let userDefaults = NSUserDefaults.standardUserDefaults()
-            userDefaults.setObject(list, forKey: listName)
-        }
-    }
-    
-    class func addToPlaylist(items:[MPMediaItem]) -> Void {
-        for item in items {
-           LM.LikedSongs[item.hashKey] = item.title
-        }
+    class func clearQueued() {
+        LM.QueuedSongs.removeAll(keepCapacity: false)
         let userDefaults = NSUserDefaults.standardUserDefaults()
-        userDefaults.setObject(LM.LikedSongs, forKey: LIKED_LIST)
-        println ("added \(items.count) songs")
+        userDefaults.setObject(LM.QueuedSongs as Dictionary<NSObject,AnyObject>, forKey: QUEUED_LIST)
     }
     
     class func isLiked(item:MPMediaItem?) -> Bool {
@@ -175,6 +185,31 @@ class LibraryManager {
         return false;
     }
     
+    //MARK: generic functions which receive their args from public typed functions
+    
+    private class func addToList(listName:String, inout list:Dictionary<String,String>, item:MPMediaItem?) {
+        if (item != nil) {
+            list[item!.hashKey] = item!.title
+            let userDefaults = NSUserDefaults.standardUserDefaults()
+            userDefaults.setObject(list as Dictionary<NSObject,AnyObject>, forKey: listName)
+        }
+    }
+    
+    private class func addToList(listName:String, inout list: Dictionary<String,String>, items:[MPMediaItem]) {
+        for item in items {
+            list[item.hashKey] = item.title
+        }
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        userDefaults.setObject(list as Dictionary<NSObject,AnyObject>, forKey: listName)
+    }
+   
+    private class func removeFromList(listName:String, inout list:Dictionary<String,String>, item:MPMediaItem?) {
+        if (item != nil) {
+            list.removeValueForKey(item!.hashKey);
+            let userDefaults = NSUserDefaults.standardUserDefaults()
+            userDefaults.setObject(list as Dictionary<NSObject,AnyObject>, forKey: listName)
+        }
+    }
     
     //MARK: functions for getting playlists
     
@@ -185,7 +220,7 @@ class LibraryManager {
         var allLiked = [MPMediaItem]()
         var randomLiked = [MPMediaItem]()
         LM.GroupedPlaylist = [[MPMediaItem]]()
-        for (x,y) in LM.LikedSongs {
+        for (x,y) in LM.LikedSongs as Dictionary<String,String> {
             if let item = ITunesUtils.getSongFrom(x) {
                 allLiked.append(item)
             }
@@ -305,14 +340,8 @@ class LibraryManager {
         var songs = [MPMediaItem]()
         LM.GroupedPlaylist = [[MPMediaItem]]()
         if currentSong != nil {
-            var query = MPMediaQuery.songsQuery()
-            var pred = MPMediaPropertyPredicate(value: currentSong!.albumTitle, forProperty: MPMediaItemPropertyAlbumTitle)
-            query.addFilterPredicate(pred)
-            var albumSongs = query.items as [MPMediaItem]
-            var sorted = albumSongs.sorted { $0.albumTrackNumber < $1.albumTrackNumber }
-            LM.GroupedPlaylist.append(sorted)
-            songs = sorted
-            outputSongs(songs)
+            var songs = getAlbumSongsWithoutSettingPlaylist(currentSong)
+            LM.GroupedPlaylist.append(songs)
         }
         let time = stopwatch.stop()
         println("Built album songlist with \(LM.GroupedPlaylist.count) albums and \(songs.count) songs in \(time)ms")
@@ -322,6 +351,33 @@ class LibraryManager {
         return songs
     }
     
+    class func getQueuedSongs() -> [MPMediaItem] {
+        LM.GroupedPlaylist = [[MPMediaItem]]()
+        var songs = [MPMediaItem]()
+        for (x,y) in LM.QueuedSongs {
+            if let item = ITunesUtils.getSongFrom(x) {
+                songs.append(item)
+            }
+        }
+        LM.Playlist = songs
+        LM.GroupedPlaylist.append(songs)
+        LM.PlaylistIndex = 0
+        LM.PlaylistMode = PlayMode.Queued
+        return songs
+    }
+    
+    class func getAlbumSongsWithoutSettingPlaylist(currentSong : MPMediaItem?) -> [MPMediaItem] {
+        var songs = [MPMediaItem]()
+        if currentSong != nil {
+            var query = MPMediaQuery.songsQuery()
+            var pred = MPMediaPropertyPredicate(value: currentSong!.albumTitle, forProperty: MPMediaItemPropertyAlbumTitle)
+            query.addFilterPredicate(pred)
+            var albumSongs = query.items as [MPMediaItem]
+            songs = albumSongs.sorted { $0.albumTrackNumber < $1.albumTrackNumber }
+            outputSongs(songs)
+        }
+        return songs
+    }
     
     class func makePlaylistFromSongs(songs: [MPMediaItem]) {
         LM.GroupedPlaylist = [[MPMediaItem]]()
@@ -357,24 +413,6 @@ class LibraryManager {
         return randomSongs
     }
     
-    private class func getRandomSongs(count : Int, sourceSongs : [MPMediaItem]) -> [MPMediaItem] {
-        var randomSongs = [MPMediaItem]()
-        var songsPicked = 0
-        var i = 0
-        while i < sourceSongs.count && songsPicked < count {
-            var idx = Utils.random(sourceSongs.count-1)
-            var item = sourceSongs[idx]
-            //if it hasnt been disliked or already added
-            if !isDisliked(item) && find(randomSongs, item) == nil {
-                randomSongs.append(item)
-                songsPicked++
-            }
-            i++
-        }
-         return randomSongs
-    }
-    
-    
     private class func outputSongs(songs: [MPMediaItem]) {
         for i in songs {
             println(i.songInfo)
@@ -382,15 +420,13 @@ class LibraryManager {
         println()
     }
     
-    /*
-    func dumpNSUserDefaults(forKey:String) -> Void {
-        println("Current dictionary: \(self.LikedSongs)")
+
+    private class func dumpNSUserDefaults(forList:String) -> Void {
         let userDefaults = NSUserDefaults.standardUserDefaults()
-        if let songsFromDefaults = userDefaults.objectForKey(forKey) as? Dictionary<String,String> {
+        if let songsFromDefaults = userDefaults.objectForKey(forList) as? Dictionary<String,String> {
             println("Current defaults: \(songsFromDefaults)")
         } else {
             println("No userDefaults")
         }
     }
-    */
 }
