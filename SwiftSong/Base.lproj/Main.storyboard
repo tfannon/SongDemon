@@ -129,7 +129,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o69-A4-xwj" userLabel="Button - Add">
-                                        <rect key="frame" x="221" y="10" width="45" height="45"/>
+                                        <rect key="frame" x="221" y="8" width="45" height="45"/>
                                         <state key="normal" image="751-eye.png"/>
                                         <connections>
                                             <action selector="addToQueueTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="4A0-bi-HDg"/>
