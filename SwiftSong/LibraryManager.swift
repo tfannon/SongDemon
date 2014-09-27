@@ -161,6 +161,14 @@ class LibraryManager {
         addToList(QUEUED_LIST, list: &LM.QueuedSongs, items: items)
     }
     
+    class func removeFromQueued(item: MPMediaItem) {
+        removeFromList(QUEUED_LIST, list: &LM.QueuedSongs, item: item)
+    }
+    
+    class func removeFromQueued(items: [MPMediaItem]) {
+        removeFromList(QUEUED_LIST, list: &LM.QueuedSongs, items: items)
+    }
+    
     class func clearQueued() {
         LM.QueuedSongs.removeAll(keepCapacity: false)
         let userDefaults = NSUserDefaults.standardUserDefaults()
@@ -210,6 +218,15 @@ class LibraryManager {
             userDefaults.setObject(list as Dictionary<NSObject,AnyObject>, forKey: listName)
         }
     }
+    
+    private class func removeFromList(listName:String, inout list: Dictionary<String,String>, items:[MPMediaItem]) {
+        for item in items {
+            list.removeValueForKey(item.hashKey)
+        }
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        userDefaults.setObject(list as Dictionary<NSObject,AnyObject>, forKey: listName)
+    }
+    
     
     //MARK: functions for getting playlists
     
@@ -340,7 +357,7 @@ class LibraryManager {
         var songs = [MPMediaItem]()
         LM.GroupedPlaylist = [[MPMediaItem]]()
         if currentSong != nil {
-            var songs = getAlbumSongsWithoutSettingPlaylist(currentSong)
+            songs = getAlbumSongsWithoutSettingPlaylist(currentSong)
             LM.GroupedPlaylist.append(songs)
         }
         let time = stopwatch.stop()

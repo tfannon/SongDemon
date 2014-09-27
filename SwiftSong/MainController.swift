@@ -160,34 +160,50 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     }
     
     func handleAddToQueueTapped() {
-        if let currentSong = MusicPlayer.currentSong {
-            var alert = UIAlertController(title: "Choose what to play later", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        
+        let isSong = MusicPlayer.currentSong != nil
+        let currentSong = MusicPlayer.currentSong;
 
+        var alert = UIAlertController(title: "Choose what to play later", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+
+        if isSong {
             alert.addAction(UIAlertAction(title: "This song", style: .Default, handler: { action in
                 LibraryManager.addToQueued(currentSong)
-                UIHelpers.messageBox(message:"Song added to Play Later queue")
+                self.displayFadingStatus ("Song added to Play later queue")
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Remove this song", style: .Destructive, handler: { action in
+                LibraryManager.removeFromQueued(currentSong)
+                self.displayFadingStatus ("Song removed from queue")
             }))
 
             alert.addAction(UIAlertAction(title: "Songs from this album", style: .Default, handler: { action in
                 var songs = LibraryManager.getAlbumSongsWithoutSettingPlaylist(currentSong);
                 LibraryManager.addToQueued(songs)
-                UIHelpers.messageBox(message:"\(currentSong.albumTitle) was added to Play Later queue")
+                self.displayFadingStatus ("Album added to Play Later queue")
             }))
+       
             
-            alert.addAction(UIAlertAction(title: "Clear my queue", style: .Destructive, handler: { action in
+            alert.addAction(UIAlertAction(title: "Remove this album", style: .Destructive, handler: { action in
+                var songs = LibraryManager.getAlbumSongsWithoutSettingPlaylist(currentSong);
+                LibraryManager.removeFromQueued(songs)
+                self.displayFadingStatus ("Album removed from queue")
+            }))
+        }
+            
+        alert.addAction(UIAlertAction(title: "Clear my queue", style: .Destructive, handler: { action in
                 LibraryManager.clearQueued()
-                UIHelpers.messageBox(message:"Play Later queue was cleared")
-            }))
+                self.displayFadingStatus ("Play later queue was cleared")
+        }))
            
-            alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
-            }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
+        }))
             
-            self.presentViewController(alert, animated: true, completion: {
-            })
-        }
-        else {
-            UIHelpers.messageBox(message: "A song must be playing in order to queue")
-        }
+        self.presentViewController(alert, animated: true, completion: {})
+    }
+    
+    func displayFadingStatus(message : String) {
+        self.lblStatus.text = message
     }
     
     
