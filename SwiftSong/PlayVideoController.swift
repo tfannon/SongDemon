@@ -12,8 +12,8 @@ import WebKit
 class PlayVideoController : UIViewController {
     
     var myWeb = WKWebView()
-    var currentUrl = ""
-
+    var currentVideoUrl = ""
+    var currentArtworkUrl = ""
   
     override func shouldAutorotate() -> Bool {
         return true
@@ -23,24 +23,16 @@ class PlayVideoController : UIViewController {
         super.viewDidLoad()
         myWeb.frame=CGRectMake(0, 32, 320, 560-32)
         self.view.addSubview(myWeb)
-        configureWebView()
     }
     
-    func configureWebView() {
-        //myWeb.delegate=self
-        //myWeb.backgroundColor = UIColor.blackColor()
-        //myWeb.scalesPageToFit = true
-        //myWeb.dataDetectorTypes = .All
-    }
-    
-    
-    func loadAddressURL(url : String) {
-        if !url.isEmpty && url != currentUrl {
-            println("loading video:\(url)")
-            let requestURL = NSURL(string: url)
+    func loadVideo(videoUrl : String, artworkUrl : String) {
+        if !videoUrl.isEmpty && videoUrl != currentVideoUrl {
+            println("loading video:\(videoUrl)")
+            let requestURL = NSURL(string: videoUrl)
             let request = NSURLRequest(URL: requestURL)
             myWeb.loadRequest(request)
-            currentUrl = url
+            currentVideoUrl = videoUrl
+            currentArtworkUrl = artworkUrl
         }
         else {
             println("video already loaded")

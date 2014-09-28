@@ -85,10 +85,12 @@ class Videos {
                 let currentVid = items[0]
                 let id = currentVid["id"]["videoId"].string!
 
+
                 let vc = RootController.getPlayVideoController()
             
                 let url = "https://www.youtube.com/watch?v=\(id)"
-                vc.loadAddressURL(url)
+                let artworkUrl = currentVid["snippet"]["thumbnails"]["default"]["url"].string!
+                vc.loadVideo(url, artworkUrl: artworkUrl)
                 gVideos.CurrentUrl = urlStr
             })
         } else {

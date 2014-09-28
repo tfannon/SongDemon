@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.crazy8dev.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>com.crazy8dev.$(PRODUCT_NAME:rfc1034identifier)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -18,24 +18,21 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb317087868390978</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-    
-    <key>CFBundleURLTypes</key>
-    <array>
-        <dict>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>fb317087868390978</string>
-            </array>
-        </dict>
-    </array>
-    
-    <key>FacebookAppID</key>
-    <string>317087868390978</string>
-    <key>FacebookDisplayName</key>
-    <string>SongDemon</string>
-    
+	<key>FacebookAppID</key>
+	<string>317087868390978</string>
+	<key>FacebookDisplayName</key>
+	<string>SongDemon</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIBackgroundModes</key>

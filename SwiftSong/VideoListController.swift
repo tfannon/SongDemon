@@ -110,18 +110,11 @@ class VideoListController : UITableViewController {
         let id = x["id"]["videoId"].string!
         
         let vc = RootController.getPlayVideoController()
-        let url = "https://www.youtube.com/watch?v=\(id)"
-        vc.loadAddressURL(url)
-        RootController.switchToPlayVideoController()
+        let videoUrl = "https://www.youtube.com/watch?v=\(id)"
+        let artworkUrl = x["snippet"]["thumbnails"]["default"]["url"].string!
 
-        /*
-        self.presentViewController(vc, animated: true, completion: {
-        //only load if they have picked something other than the default
-            if indexPath.row > 0 {
-                vc.loadAddressURL(url)
-            }
-        })
-        */
+        vc.loadVideo(videoUrl, artworkUrl: artworkUrl)
+        RootController.switchToPlayVideoController()
     }
     
     

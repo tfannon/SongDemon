@@ -51,8 +51,6 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     @IBAction func addToQueueTapped(sender: AnyObject) { handleAddToQueueTapped() }
    
     //MARK: instance variables
-    var recording = false
-    var startRecordTime = 0
     var playButtonsVisible = false
     var playlistQueued = false;
 
@@ -145,24 +143,29 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     }
     
     func handleShareTapped() {
-        if true {
+        if Utils.inSimulator {
             
             let artworkUrl = "http://ecx.images-amazon.com/images/I/511pkBGfKcL._SL500_AA280_PJStripe-Robin,TopLeft,0,0_.jpg"
             
             let videoUrl = "https://www.youtube.com/watch?v=j3G0bRUDR6I"
-            FacebookUtils.post("Goatwhore", title: "In Deathless Tradition", artworkUrl:artworkUrl, videoUrl: videoUrl)
+            FacebookUtils.post("Goatwhore", title: "In Deathless Tradition", artworkUrl:artworkUrl, videoUrl: videoUrl, callback: { status in
+                    self.lblStatus.text = status
+                })
             return
         }
         if let currentItem = MusicPlayer.currentSong {
-            let videoUrl = "https://www.youtube.com/watch?v=j3G0bRUDR6I"
-            FacebookUtils.post(currentItem.artist! ,title: currentItem.title!, artworkUrl:ITunesUtils.getArtworkUrl(currentItem), videoUrl: videoUrl)
+            
+            let videoUrl = RootController.getPlayVideoController().currentVideoUrl
+            let artworkUrl = RootController.getPlayVideoController().currentArtworkUrl
+            
+            FacebookUtils.post(currentItem.artist ,title: currentItem.title, artworkUrl:artworkUrl, videoUrl: videoUrl, callback: { status in
+                //set a status
+            })
         }
     }
-    
    
     func handleSearchTapped() {
-        lblStatus.textColor = UIColor.orangeColor()
-        lblStatus.text = "Querying iTunes"
+        displayFadingStatus("Querying iTunes")
         waiting()
         let mediaPicker = MPMediaPickerController(mediaTypes: .Music)
         mediaPicker.delegate = self
@@ -218,7 +221,6 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         self.lblStatus.text = message
     }
     
-    
     func waiting() {
         self.imgSong.hidden = true
     }
@@ -270,8 +272,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         }))
         //no matter what option is chosen switch the window back to main
         self.presentViewController(alert, animated: true, completion: {
-            self.lblStatus.text = "Generating playlist"
-            self.lblStatus.textColor = UIColor.orangeColor()
+            self.displayFadingStatus("Generating playlist")
             self.waiting()
         })
     }
@@ -301,7 +302,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
             UIHelpers.messageBox(message:"There are no songs in the playlist")
         }
         if message != nil {
-            UIHelpers.messageBox(message:message!)
+            displayFadingStatus(message!)
         }
         doneWaiting()
     }
@@ -353,7 +354,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
        
         center.addObserverForName(MPMusicPlayerControllerNowPlayingItemDidChangeNotification,
             object: nil, queue:nil) { _ in
-                println("NowPlayingItemDidChange")
+                //println("NowPlayingItemDidChange")
                 if MusicPlayer.currentSong != nil {
                     println("Song changed to \(MusicPlayer.currentSong.songInfo)")
                 }
@@ -377,7 +378,6 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     
     //MARK: notification handlers
     func updateSongInfo() {
-        recording = false
         lblStatus.text = ""
         
         if Utils.inSimulator {
@@ -431,7 +431,6 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
             image = UIImage(named:"play-75.png");
             fadePlayButtonsIn()
             lblStatus.text = "Paused"
-            lblStatus.textColor = UIColor.orangeColor()
         }
         btnPlay.setImage(image, forState: UIControlState.Normal)
     }
