@@ -37,6 +37,10 @@ class MusicPlayer {
     }
     
     class func forward() {
+        if MP.queuedPlaylist != nil {
+            playSongsInQueue()
+            return
+        }
         MP.applePlayer.skipToNextItem()
         MP.skipToBegin = false
     }
@@ -65,6 +69,10 @@ class MusicPlayer {
     }
     
     class func playSongsInQueue() {
+        if MP.queuedPlaylist == nil {
+            return;
+        }
+        println ("MusicPlayer.playSongsInQueue")
         var coll = MPMediaItemCollection(items: MP.queuedPlaylist)
         MP.applePlayer.shuffleMode = MPMusicShuffleMode.Off
         MP.applePlayer.setQueueWithItemCollection(coll)

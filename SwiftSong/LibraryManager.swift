@@ -315,57 +315,33 @@ class LibraryManager {
     class func getArtistSongs(currentSong : MPMediaItem?) -> [MPMediaItem] {
         //album->*song
         let stopwatch = Stopwatch()
-        var songs = [MPMediaItem]()
+        LM.Playlist = [MPMediaItem]()
         LM.GroupedPlaylist = [[MPMediaItem]]()
         if currentSong != nil {
-            var query = MPMediaQuery.songsQuery()
-            var pred = MPMediaPropertyPredicate(value: currentSong!.albumArtist, forProperty: MPMediaItemPropertyAlbumArtist)
-            query.addFilterPredicate(pred)
-            var artistSongs = query.items as [MPMediaItem]
-            var albumDic = Dictionary<String,Array<MPMediaItem>>(minimumCapacity: artistSongs.count)
-            //fill up the dictionary with songs
-            for x in artistSongs {
-                if albumDic.indexForKey(x.albumTitle) == nil {
-                    albumDic[x.albumTitle] = Array<MPMediaItem>()
-                }
-                albumDic[x.albumTitle]?.append(x)
-            }
-            
-            //get them back out by album and insert into array of arrays
-            for (x,y) in albumDic {
-                var sorted = y.sorted { $0.albumTrackNumber < $1.albumTrackNumber }
-                LM.GroupedPlaylist.append(sorted)
-            }
-            //now sort the grouped playlist by year
-            LM.GroupedPlaylist.sort { $0[0].year > $1[0].year }
-            //now add all the groupplaylist into one big playlist for the media player
-            for album in LM.GroupedPlaylist {
-                songs.extend(album)
-            }
-            outputSongs(songs)
+            var results = getArtistSongsWithoutSettingPlaylist(currentSong)
+            LM.Playlist = results.1
+            LM.GroupedPlaylist = results.0
         }
         let time = stopwatch.stop()
-        println("Built artist songlist with \(LM.GroupedPlaylist.count) albums and \(songs.count) songs in \(time)ms")
-        LM.Playlist = songs
-        LM.PlaylistIndex = find(songs, currentSong!)!
+        println("Built artist songlist with \(LM.GroupedPlaylist.count) albums and \(LM.Playlist.count) songs in \(time)ms")
+        LM.PlaylistIndex = find(LM.Playlist, currentSong!)!
         LM.PlaylistMode = .Artist
-        return songs
+        return LM.Playlist
     }
     
     class func getAlbumSongs(currentSong : MPMediaItem?) -> [MPMediaItem] {
         let stopwatch = Stopwatch()
-        var songs = [MPMediaItem]()
+        LM.Playlist = [MPMediaItem]()
         LM.GroupedPlaylist = [[MPMediaItem]]()
         if currentSong != nil {
-            songs = getAlbumSongsWithoutSettingPlaylist(currentSong)
-            LM.GroupedPlaylist.append(songs)
+            LM.Playlist  = getAlbumSongsWithoutSettingPlaylist(currentSong)
+            LM.GroupedPlaylist.append(LM.Playlist)
         }
         let time = stopwatch.stop()
-        println("Built album songlist with \(LM.GroupedPlaylist.count) albums and \(songs.count) songs in \(time)ms")
-        LM.Playlist = songs
-        LM.PlaylistIndex = find(songs, currentSong!)!
+        println("Built album songlist with \(LM.GroupedPlaylist.count) albums and \(LM.Playlist.count) songs in \(time)ms")
+        LM.PlaylistIndex = find(LM.Playlist, currentSong!)!
         LM.PlaylistMode = .Album
-        return songs
+        return LM.Playlist
     }
     
     class func getQueuedSongs() -> [MPMediaItem] {
@@ -395,6 +371,42 @@ class LibraryManager {
         }
         return songs
     }
+    
+    //return tuple of grouped songs and songs
+    class func getArtistSongsWithoutSettingPlaylist(currentSong : MPMediaItem?) -> ([[MPMediaItem]], [MPMediaItem]) {
+        //album->*song
+        var songs = [MPMediaItem]()
+        var groupedSongs = [[MPMediaItem]]()
+        if currentSong != nil {
+            var query = MPMediaQuery.songsQuery()
+            var pred = MPMediaPropertyPredicate(value: currentSong!.albumArtist, forProperty: MPMediaItemPropertyAlbumArtist)
+            query.addFilterPredicate(pred)
+            var artistSongs = query.items as [MPMediaItem]
+            var albumDic = Dictionary<String,Array<MPMediaItem>>(minimumCapacity: artistSongs.count)
+            //fill up the dictionary with songs
+            for x in artistSongs {
+                if albumDic.indexForKey(x.albumTitle) == nil {
+                    albumDic[x.albumTitle] = Array<MPMediaItem>()
+                }
+                albumDic[x.albumTitle]?.append(x)
+            }
+            
+            //get them back out by album and insert into array of arrays
+            for (x,y) in albumDic {
+                var sorted = y.sorted { $0.albumTrackNumber < $1.albumTrackNumber }
+                groupedSongs.append(sorted)
+            }
+            //now sort the grouped playlist by year
+            groupedSongs.sort { $0[0].year > $1[0].year }
+            //now add all the groupplaylist into one big playlist for the media player
+            for album in groupedSongs {
+                songs.extend(album)
+            }
+            outputSongs(songs)
+        }
+        return (groupedSongs, songs)
+    }
+    
     
     class func makePlaylistFromSongs(songs: [MPMediaItem]) {
         LM.GroupedPlaylist = [[MPMediaItem]]()

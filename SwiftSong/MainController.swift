@@ -52,7 +52,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
    
     //MARK: instance variables
     var playButtonsVisible = false
-    var playlistQueued = false;
+    //var playlistQueued = false;
 
     //MARK: controller methods
     override func viewDidLoad() {
@@ -282,7 +282,6 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     func postPlaylistSelection(songs: [MPMediaItem]=[MPMediaItem](), message : String? = nil, queue: Bool = false) {
         if songs.count > 0 {
             if queue {
-                playlistQueued = true
                 let indexOfCurrentSong = find(songs, MusicPlayer.currentSong)!
                 var nextSong : MPMediaItem?
                 //this keeps the position of the song immediately following current song
@@ -294,7 +293,6 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
                 MusicPlayer.queuePlaylist(songs, itemToStart: nextSong)
             }
             else {
-                playlistQueued = false
                 MusicPlayer.play(songs)
             }
         }
@@ -358,11 +356,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
                 if MusicPlayer.currentSong != nil {
                     println("Song changed to \(MusicPlayer.currentSong.songInfo)")
                 }
-                if self.playlistQueued {
-                    MusicPlayer.playSongsInQueue()
-                    self.playlistQueued = false
-                    return
-                }
+                MusicPlayer.playSongsInQueue()
                 self.updateSongInfo()
                 self.updatePlayState()
                 self.updateLyricState()
