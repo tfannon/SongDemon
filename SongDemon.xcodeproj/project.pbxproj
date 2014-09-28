@@ -10,6 +10,8 @@
 		65164C37196CF62400644EF4 /* UIHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65164C36196CF62400644EF4 /* UIHelpers.swift */; };
 		6522D5BD19D7268000FAB3AD /* 751-eye.png in Resources */ = {isa = PBXBuildFile; fileRef = 6522D5BB19D7268000FAB3AD /* 751-eye.png */; };
 		6522D5BE19D7268000FAB3AD /* 751-eye@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6522D5BC19D7268000FAB3AD /* 751-eye@2x.png */; };
+		6522D5C019D7739900FAB3AD /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6522D5BF19D7739900FAB3AD /* FacebookSDK.framework */; };
+		6522D5C519D7ACD900FAB3AD /* FacebookUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522D5C419D7ACD900FAB3AD /* FacebookUtils.swift */; };
 		65304F0D196CAB9E00F985D3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65304F0C196CAB9E00F985D3 /* Utils.swift */; };
 		6557D9E919971F2800A0A87E /* 1244-record-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 6557D9E519971F2800A0A87E /* 1244-record-selected.png */; };
 		6557D9EA19971F2800A0A87E /* 1244-record-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6557D9E619971F2800A0A87E /* 1244-record-selected@2x.png */; };
@@ -84,9 +86,11 @@
 
 /* Begin PBXFileReference section */
 		65164C36196CF62400644EF4 /* UIHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHelpers.swift; sourceTree = "<group>"; };
-		65164C39196D007E00644EF4 /* Test.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Test.playground; sourceTree = "<group>"; };
 		6522D5BB19D7268000FAB3AD /* 751-eye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "751-eye.png"; sourceTree = "<group>"; };
 		6522D5BC19D7268000FAB3AD /* 751-eye@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "751-eye@2x.png"; sourceTree = "<group>"; };
+		6522D5BF19D7739900FAB3AD /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		6522D5C119D773EB00FAB3AD /* SongDemon-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SongDemon-Bridging-Header.h"; path = "../SongDemon-Bridging-Header.h"; sourceTree = "<group>"; };
+		6522D5C419D7ACD900FAB3AD /* FacebookUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookUtils.swift; sourceTree = "<group>"; };
 		65304F0C196CAB9E00F985D3 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		6557D9E519971F2800A0A87E /* 1244-record-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1244-record-selected.png"; sourceTree = "<group>"; };
 		6557D9E619971F2800A0A87E /* 1244-record-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1244-record-selected@2x.png"; sourceTree = "<group>"; };
@@ -166,6 +170,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6522D5C019D7739900FAB3AD /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,6 +216,7 @@
 				6557D9ED1997412500A0A87E /* TimeStruct.swift */,
 				6557D9EF1997414600A0A87E /* Extensions.swift */,
 				65587F4819B4099A00375C98 /* Videos.swift */,
+				6522D5C419D7ACD900FAB3AD /* FacebookUtils.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -234,11 +240,12 @@
 		65B66DE5195246AB00947DCE /* SongDemon */ = {
 			isa = PBXGroup;
 			children = (
-				6571CCB619CFCFB300ADF07F /* 3rdParty */,
+				6522D5C119D773EB00FAB3AD /* SongDemon-Bridging-Header.h */,
+				6522D5BF19D7739900FAB3AD /* FacebookSDK.framework */,
 				65B66DE7195246AB00947DCE /* Info.plist */,
-				65164C39196D007E00644EF4 /* Test.playground */,
 				65B66DEE195246AB00947DCE /* Main.storyboard */,
 				65B66DE8195246AB00947DCE /* AppDelegate.swift */,
+				6571CCB619CFCFB300ADF07F /* 3rdParty */,
 				657693BB19883510008E25E6 /* Classes */,
 				657693BA198834D4008E25E6 /* Controllers */,
 				65E7743219528D6100DD31DB /* Resources */,
@@ -427,6 +434,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65E0487F1953A5D50080031C /* LibraryManager.swift in Sources */,
+				6522D5C519D7ACD900FAB3AD /* FacebookUtils.swift in Sources */,
 				65B1ED86199016930024F984 /* PlaylistCell.swift in Sources */,
 				65F3BABE198749B7009916C1 /* SongInfo.swift in Sources */,
 				65A9112E196B9C49007B59D6 /* Lyrics.swift in Sources */,
@@ -548,12 +556,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SwiftSong",
+				);
 				INFOPLIST_FILE = SwiftSong/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = SongDemon;
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "SongDemon-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -563,12 +577,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SwiftSong",
+				);
 				INFOPLIST_FILE = SwiftSong/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = SongDemon;
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "SongDemon-Bridging-Header.h";
 			};
 			name = Release;
 		};

@@ -46,8 +46,8 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     @IBAction func playlistTapped(AnyObject) { handlePlaylistTapped() }
     @IBAction func searchTapped(sender: AnyObject) { handleSearchTapped() }
     @IBAction func likeTapped(sender: AnyObject) { handleLikeTapped()}
-    @IBAction func dislikeTapped(sender: AnyObject) { handleDislikeTapped()}
-    @IBAction func shareTapped(sender: AnyObject) { setupSimulator() }
+    @IBAction func dislikeTapped(sender: AnyObject) { handleDislikeTapped() }
+    @IBAction func shareTapped(sender: AnyObject) { handleShareTapped() }
     @IBAction func addToQueueTapped(sender: AnyObject) { handleAddToQueueTapped() }
    
     //MARK: instance variables
@@ -145,6 +145,16 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     }
     
     func handleShareTapped() {
+        if Utils.inSimulator {
+            let artworkUrl = "https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&docid=9Qlpc4H-2TLFtM&tbnid=CspfgTIw8O2WlM:&ved=0CAcQjRw&url=http%3A%2F%2Fwww.amazon.com%2FIn-Deathless-Tradition%2Fdp%2FB006TE2RYI&ei=MnsnVNv-HLLGsQSTloCwDg&bvm=bv.76247554,d.cWc&psig=AFQjCNEghidqWbYMWA6wruIkQTQo_iitnw&ust=1411959990101798"
+            let videoUrl = "https://www.youtube.com/watch?v=j3G0bRUDR6I"
+            FacebookUtils.post("Goatwhore", title: "In Deathless Tradition", artworkUrl:artworkUrl, videoUrl: videoUrl)
+            return
+        }
+        if let currentItem = MusicPlayer.currentSong {
+            let videoUrl = "https://www.youtube.com/watch?v=j3G0bRUDR6I"
+            FacebookUtils.post(currentItem.artist! ,title: currentItem.title!, artworkUrl:ITunesUtils.getArtworkUrl(currentItem), videoUrl: videoUrl)
+        }
     }
     
    

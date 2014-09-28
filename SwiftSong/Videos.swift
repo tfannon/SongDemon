@@ -79,6 +79,9 @@ class Videos {
                 gVideos.NeedsRefresh = true
             
                 var items = parsedJson["items"].array!
+                if items.count == 0 {
+                    return;
+                }
                 let currentVid = items[0]
                 let id = currentVid["id"]["videoId"].string!
 
