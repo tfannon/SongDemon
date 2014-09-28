@@ -32,18 +32,23 @@ class FacebookUtils {
         var message = "I am listening to \(title) by \(artist)"
         var parms = FBLinkShareParams()
         parms.name = message
-        //parms.description = "Click to watch the video"
         parms.picture = artworkNSUrl
         parms.link = videoNSUrl
+        
         if nativeCall {
             FBDialogs.presentShareDialogWithParams(parms, clientState: nil, handler: {(call, results, error) in
                 println(error)
             })
         }
         else {
-            //do nothing without facebook app yet
+            var params =
+                ["name":  message,
+                 "link":  videoUrl!,
+                 "picture":  artworkUrl!] as NSMutableDictionary
+            
+        FBWebDialogs.presentFeedDialogModallyWithSession(FBSession.activeSession(), parameters: params, handler: {(results, resultUrl, error) in
+                println(error)
+            })
         }
-        
-
     }
 }

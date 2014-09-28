@@ -145,8 +145,10 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     }
     
     func handleShareTapped() {
-        if Utils.inSimulator {
-            let artworkUrl = "https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&docid=9Qlpc4H-2TLFtM&tbnid=CspfgTIw8O2WlM:&ved=0CAcQjRw&url=http%3A%2F%2Fwww.amazon.com%2FIn-Deathless-Tradition%2Fdp%2FB006TE2RYI&ei=MnsnVNv-HLLGsQSTloCwDg&bvm=bv.76247554,d.cWc&psig=AFQjCNEghidqWbYMWA6wruIkQTQo_iitnw&ust=1411959990101798"
+        if true {
+            
+            let artworkUrl = "http://ecx.images-amazon.com/images/I/511pkBGfKcL._SL500_AA280_PJStripe-Robin,TopLeft,0,0_.jpg"
+            
             let videoUrl = "https://www.youtube.com/watch?v=j3G0bRUDR6I"
             FacebookUtils.post("Goatwhore", title: "In Deathless Tradition", artworkUrl:artworkUrl, videoUrl: videoUrl)
             return
