@@ -448,7 +448,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
             MusicPlayer.play(items)
         }
         self.dismissViewControllerAnimated(true, completion: {
-            UIHelpers.messageBox(message: "Now playing your \(items.count) songs")
+            self.displayFadingStatus("Now playing your \(items.count) songs")
         });
     }
     
