@@ -85,7 +85,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         //swiping up allows user to select playlist
         var swipeUp = UISwipeGestureRecognizer(target: self, action: "handlePlaylistTapped")
         swipeUp.direction = .Up
-        viewArtwork.addGestureRecognizer(swipeUp)
+        view.addGestureRecognizer(swipeUp)
     }
     
     func setupSimulator() {
@@ -166,12 +166,12 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
    
     func handleSearchTapped() {
         displayFadingStatus("Querying iTunes")
-        waiting()
+        //hideImage()()
         let mediaPicker = MPMediaPickerController(mediaTypes: .Music)
         mediaPicker.delegate = self
         mediaPicker.allowsPickingMultipleItems = true
         presentViewController(mediaPicker, animated: true, completion: {
-            self.doneWaiting() })
+            self.unhideImageAndBlankStatus() })
     }
     
     func handleAddToQueueTapped() {
@@ -221,11 +221,11 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         self.lblStatus.text = message
     }
     
-    func waiting() {
+    func hideImage() {
         self.imgSong.hidden = true
     }
     
-    func doneWaiting() {
+    func unhideImageAndBlankStatus() {
         imgSong.hidden = false
         lblStatus.text = ""
     }
@@ -268,12 +268,12 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         }
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
-            self.doneWaiting()
+            self.unhideImageAndBlankStatus()
         }))
         //no matter what option is chosen switch the window back to main
         self.presentViewController(alert, animated: true, completion: {
             self.displayFadingStatus("Generating playlist")
-            self.waiting()
+            //self.waiting()
         })
     }
     
@@ -302,7 +302,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         if message != nil {
             displayFadingStatus(message!)
         }
-        doneWaiting()
+        unhideImageAndBlankStatus()
     }
     
     func handleLikeTapped() {
