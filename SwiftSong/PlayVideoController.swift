@@ -29,7 +29,7 @@ class PlayVideoController : UIViewController {
         if !videoUrl.isEmpty && videoUrl != currentVideoUrl {
             println("loading video:\(videoUrl)")
             let requestURL = NSURL(string: videoUrl)
-            let request = NSURLRequest(URL: requestURL)
+            let request = NSURLRequest(URL: requestURL!)
             myWeb.loadRequest(request)
             currentVideoUrl = videoUrl
             currentArtworkUrl = artworkUrl

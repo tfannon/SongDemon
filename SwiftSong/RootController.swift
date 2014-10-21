@@ -99,7 +99,7 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     }
     
     class func switchToMainView() {
-        var root = UIApplication.sharedApplication().keyWindow.rootViewController as RootController
+        var root = UIApplication.sharedApplication().keyWindow!.rootViewController as RootController
         root.currentIndex = 1
         let viewControllers : [UIViewController] = [root.mainController]
         root.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
@@ -114,19 +114,19 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     */
     
     class func switchToPlayVideoController() {
-        var root = UIApplication.sharedApplication().keyWindow.rootViewController as RootController
+        var root = UIApplication.sharedApplication().keyWindow!.rootViewController as RootController
         root.currentIndex = 4
         let viewControllers : [UIViewController] = [root.playVideoController]
         root.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
     }
     
     class func getPlayVideoController() -> PlayVideoController {
-        var root = UIApplication.sharedApplication().keyWindow.rootViewController as RootController
+        var root = UIApplication.sharedApplication().keyWindow!.rootViewController as RootController
         return root.playVideoController as PlayVideoController
     }
     
     class func getLyricsController() -> LyricsController {
-        var root = UIApplication.sharedApplication().keyWindow.rootViewController as RootController
+        var root = UIApplication.sharedApplication().keyWindow!.rootViewController as RootController
         return root.lyricsController as LyricsController
     }
 }

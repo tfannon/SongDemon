@@ -417,12 +417,12 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     func updatePlayState() {
         var image: UIImage;
         if MusicPlayer.isPlaying {
-            image = UIImage(named:"pause.png");
+            image = UIImage(named:"pause.png")!;
             fadePlayButtonsOut()
             lblStatus.text = ""
         }
         else {
-            image = UIImage(named:"play-75.png");
+            image = UIImage(named:"play-75.png")!;
             fadePlayButtonsIn()
             lblStatus.text = "Paused"
         }

@@ -31,8 +31,8 @@ class FacebookUtils {
     }
     
     private class func publish(artist:String, title:String, artworkUrl:String?, videoUrl:String?, nativeCall : Bool, callback: (String) -> ()) {
-        var artworkNSUrl = NSURL.URLWithString(artworkUrl!)
-        var videoNSUrl = NSURL.URLWithString(videoUrl!)
+        var artworkNSUrl = NSURL(fileURLWithPath: artworkUrl!)
+        var videoNSUrl = NSURL(fileURLWithPath: videoUrl!)
         var message = "I am listening to \(title) by \(artist)"
         var parms = FBLinkShareParams()
         parms.name = message

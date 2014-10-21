@@ -89,10 +89,10 @@ class VideoListController : UITableViewController {
         cell.lblDescription.text = description
         //clear the image before the async fetch
         if !Utils.inSimulator {
-            cell.imageView?.image = nil
+            cell.imageView.image = nil
         }
         //go fetch the image form the thumb
-        var imgURL: NSURL = NSURL(string: thumb)
+        var imgURL = NSURL(fileURLWithPath: thumb)!
         let request: NSURLRequest = NSURLRequest(URL: imgURL)
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
             if error == nil {

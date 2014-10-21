@@ -22,7 +22,7 @@ extension MPMediaItem {
     
     var year : String {
         var yearAsNum = self.valueForProperty("year") as NSNumber
-        if yearAsNum.isKindOfClass(NSNumber) && yearAsNum > 0 {
+        if yearAsNum.isKindOfClass(NSNumber) {
             return "\(yearAsNum.intValue)"
         }
         return ""

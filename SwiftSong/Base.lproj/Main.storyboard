@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A379a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="0dw-RJ-QCg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="0dw-RJ-QCg">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
         <!--MainController-->
@@ -114,7 +114,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QdN-QZ-wnH" userLabel="Button - Search">
                                         <rect key="frame" x="61" y="10" width="45" height="45"/>
-                                        <state key="normal" image="708-search-toolbar.png"/>
+                                        <state key="normal" image="708-search.png"/>
                                         <connections>
                                             <action selector="searchTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="YvE-Gw-P30"/>
                                         </connections>
@@ -448,7 +448,7 @@
     <resources>
         <image name="1176-bulleted-list.png" width="28" height="19"/>
         <image name="702-share.png" width="21" height="28"/>
-        <image name="708-search-toolbar.png" width="22" height="22"/>
+        <image name="708-search.png" width="28" height="28"/>
         <image name="751-eye.png" width="28" height="15"/>
         <image name="765-arrow-left.png" width="14" height="28"/>
         <image name="766-arrow-right.png" width="14" height="28"/>
