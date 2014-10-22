@@ -18,21 +18,13 @@ class LyricsController: UIViewController {
         super.viewDidLoad()
         webView.frame=CGRectMake(0, 32, 320, 560-32)
         self.view.addSubview(webView)
-        //configureWebView()
-    }
-    
-    func configureWebView() {
-        //myWeb.delegate=self
-        //myWeb.backgroundColor = UIColor.blackColor()
-        //myWeb.scalesPageToFit = true
-        //myWeb.dataDetectorTypes = .All
     }
     
     override func shouldAutorotate() -> Bool {
         return false
     }
     
-    func loadAddressUrl(url : String) {
+    func loadLyrics(url : String) {
         if !url.isEmpty && url != currentUrl {
             println("loading lyrics:\(url)")
             let requestURL = NSURL(string: url)
@@ -44,16 +36,4 @@ class LyricsController: UIViewController {
             println("lyrics already loaded")
         }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

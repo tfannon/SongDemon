@@ -47,9 +47,9 @@ class Videos {
         if gVideos.CurrentUrl.isEmpty || gVideos.CurrentUrl != urlStr {
             println("Loading google json async for: \(query)")
 
-            let url = NSURL(fileURLWithPath: urlStr)
-            let request = NSURLRequest(URL: url!)
-        
+            let url = NSURL(string: urlStr)!
+            let request = NSURLRequest(URL: url)
+            
             NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {
             (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
              
@@ -93,7 +93,8 @@ class Videos {
                 vc.loadVideo(url, artworkUrl: artworkUrl)
                 gVideos.CurrentUrl = urlStr
             })
-        } else {
+        }
+        else {
             println("using cached google json")
         }
     }

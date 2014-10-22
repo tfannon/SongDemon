@@ -13,7 +13,7 @@ class VideoListController : UITableViewController {
     @IBOutlet var lblHeader: UILabel!
     
     var data : [JSONValue] = [JSONValue]()
-    var nextToken : String = ""
+    //var nextToken : String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,14 +50,14 @@ class VideoListController : UITableViewController {
         self.refreshControl?.endRefreshing()
     }
     
-    func redrawList(forceRefresh : Bool = true) {
+    func redrawList(forceRefresh : Bool = false) {
         lblHeader.text = ""
         tableView.reloadData()
         if (gVideos.NeedsRefresh || forceRefresh) && gVideos.State == VideoState.Available {
             if let json = gVideos.jsonVideos {
-                println(self.nextToken)
-                data = json["items"].array!
-                let n  = json["nextPageToken"]
+                //println(self.nextToken)
+                self.data = json["items"].array!
+                //let n  = json["nextPageToken"]
                 //println(data!.count)
                 gVideos.NeedsRefresh = false
                 if let song = MusicPlayer.currentSong {
@@ -92,7 +92,7 @@ class VideoListController : UITableViewController {
             cell.imageView.image = nil
         }
         //go fetch the image form the thumb
-        var imgURL = NSURL(fileURLWithPath: thumb)!
+        var imgURL = NSURL(string: thumb)!
         let request: NSURLRequest = NSURLRequest(URL: imgURL)
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
             if error == nil {

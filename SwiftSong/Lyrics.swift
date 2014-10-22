@@ -39,31 +39,14 @@ class Lyrics {
         }
         
         var urlStr = "http://www.darklyrics.com/lyrics/\(query)"
-        
         if gLyrics.CurrentUrl.isEmpty || gLyrics.CurrentUrl != urlStr {
-            //println("Loading lyrics for: \(query)")
-            
-            RootController.getLyricsController().loadAddressUrl(urlStr)
+            //println("Loading lyrics for: \(item!.songInfo)")
             gLyrics.State = .Available
-
-            /*
-            let url = NSURL.URLWithString(urlStr)
-            let request = NSURLRequest(URL: url)
-            
-            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {
-                (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
-
-                if error != nil {
-                    println("Error in lyrics fetch Connection: \(error)")
-                    println()
-                    gLyrics.State = .NotAvailable
-                    return
-                }
-                gLyrics.State = .Available
-                RootController.getLyricsController().myWeb.loadData(data, MIMEType: "text/html", textEncodingName: "UTF-8", baseURL: nil)
-            })
-            */
-        } else {
+            gLyrics.CurrentUrl = urlStr
+            let vc = RootController.getLyricsController()
+            vc.loadLyrics(urlStr)
+        }
+        else {
             println("using cached lyrics")
         }
     }
