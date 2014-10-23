@@ -43,6 +43,7 @@ class MusicPlayer {
         }
         MP.applePlayer.skipToNextItem()
         MP.skipToBegin = false
+        MP.applePlayer.play()
     }
     
     class func reverse() {

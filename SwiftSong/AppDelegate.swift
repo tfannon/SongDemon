@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String, annotation: AnyObject?) -> Bool {
         
-        var wasHandled = FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication, withSession: FBSession.activeSession())
+        var wasHandled = FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication)
         return wasHandled
     }
     

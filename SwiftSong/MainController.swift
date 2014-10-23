@@ -430,11 +430,15 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     }
     
     func updateLyricState() {
-        Lyrics.fetchUrlFor(MusicPlayer.currentSong)
+        Async.background {
+            Lyrics.fetchUrlFor(MusicPlayer.currentSong)
+        }
     }
     
     func updateVideoState() {
-        Videos.fetchVideosFor(MusicPlayer.currentSong)
+        Async.background {
+            Videos.fetchVideosFor(MusicPlayer.currentSong)
+        }
     }
     
     
