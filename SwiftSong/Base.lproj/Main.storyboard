@@ -120,7 +120,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9fb-Fh-eyw" userLabel="Button - Share">
-                                        <rect key="frame" x="274" y="7" width="45" height="45"/>
+                                        <rect key="frame" x="274" y="5" width="45" height="45"/>
                                         <state key="normal" image="702-share.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -129,7 +129,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o69-A4-xwj" userLabel="Button - Add">
-                                        <rect key="frame" x="221" y="10" width="45" height="45"/>
+                                        <rect key="frame" x="221" y="8" width="45" height="45"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="30"/>
                                         <state key="normal" title="Q"/>
                                         <connections>

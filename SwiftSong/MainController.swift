@@ -179,7 +179,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         let isSong = MusicPlayer.currentSong != nil
         let currentSong = MusicPlayer.currentSong;
 
-        var alert = UIAlertController(title: "Choose what to play later", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        var alert = UIAlertController(title: "Choose what to put in your personal queue to listen to later", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
 
         if isSong {
             alert.addAction(UIAlertAction(title: "This song", style: .Default, handler: { action in
