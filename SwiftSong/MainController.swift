@@ -52,7 +52,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
    
     //MARK: instance variables
     var playButtonsVisible = false
-    //var playlistQueued = false;
+    var lastSongHandledByViewController : MPMediaItem?
 
     //MARK: controller methods
     override func viewDidLoad() {
@@ -361,6 +361,7 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
                 self.updatePlayState()
                 self.updateLyricState()
                 self.updateVideoState()
+                self.lastSongHandledByViewController = MusicPlayer.currentSong
         }
         
         center.addObserverForName(MPMusicPlayerControllerPlaybackStateDidChangeNotification,
@@ -377,7 +378,14 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         if Utils.inSimulator {
             return
         }
-        if let item = MusicPlayer.currentSong {
+        
+        let item = MusicPlayer.currentSong
+        if item == self.lastSongHandledByViewController {
+            println("updateSongInfo called but song has not changed")
+            return
+        }
+            
+        if item != nil {
             lblArtist.text = "\(item.albumArtist) - \(item.albumTitle)"
             lblSong.text = item.title
             //if it was a liked item, change the state
@@ -415,6 +423,9 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     }
     
     func updatePlayState() {
+        if MusicPlayer.currentSong == self.lastSongHandledByViewController {
+            return
+        }
         var image: UIImage;
         if MusicPlayer.isPlaying {
             image = UIImage(named:"pause.png")!;
@@ -430,12 +441,18 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     }
     
     func updateLyricState() {
+        if MusicPlayer.currentSong == self.lastSongHandledByViewController {
+            return
+        }
         Async.background {
             Lyrics.fetchUrlFor(MusicPlayer.currentSong)
         }
     }
     
     func updateVideoState() {
+        if MusicPlayer.currentSong == self.lastSongHandledByViewController {
+            return
+        }
         Async.background {
             Videos.fetchVideosFor(MusicPlayer.currentSong)
         }
