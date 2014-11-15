@@ -165,13 +165,16 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     }
    
     func handleSearchTapped() {
+        /*
         displayFadingStatus("Querying iTunes")
         //hideImage()()
         let mediaPicker = MPMediaPickerController(mediaTypes: .Music)
         mediaPicker.delegate = self
         mediaPicker.allowsPickingMultipleItems = true
-        presentViewController(mediaPicker, animated: true, completion: {
-            self.unhideImageAndBlankStatus() })
+*/
+        var vc = self.storyboard!.instantiateViewControllerWithIdentifier("SongSearchController") as SongSearchController
+        presentViewController(vc, animated: false, completion: {
+             })
     }
     
     func handleAddToQueueTapped() {
