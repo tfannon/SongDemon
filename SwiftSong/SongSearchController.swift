@@ -17,8 +17,11 @@ class SongSearchController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Foo"
-        tableView.registerClass(UITableViewCell.self,
-            forCellReuseIdentifier: "Cell")
+        
+        tableView.registerClass(SearchArtistCell.self,
+            forCellReuseIdentifier: "SearchArtistCell")
+        
+        
 
         // Do any additional setup after loading the view.
     }
@@ -34,10 +37,10 @@ class SongSearchController: UIViewController, UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell =
-        tableView.dequeueReusableCellWithIdentifier("Cell")
-            as UITableViewCell
+        tableView.dequeueReusableCellWithIdentifier("SearchArtistCell")
+            as SearchArtistCell
         
-        cell.textLabel.text = "Testing"
+        //cell.textLabel.text = "Testing"
         
         return cell
     }

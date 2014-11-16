@@ -69,6 +69,8 @@
 		65E7749619528D6100DD31DB /* slider_minimum@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E7746119528D6100DD31DB /* slider_minimum@2x.png */; };
 		65E7749919528D6100DD31DB /* sliderlabel.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E7746419528D6100DD31DB /* sliderlabel.png */; };
 		65E7749A19528D6100DD31DB /* sliderlabel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E7746519528D6100DD31DB /* sliderlabel@2x.png */; };
+		65E7D2AB1A17F01200C430AF /* GoatwhoreLastFM.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E7D2AA1A17F01200C430AF /* GoatwhoreLastFM.png */; };
+		65E7D2AD1A17F2B200C430AF /* SearchArtistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E7D2AC1A17F2B200C430AF /* SearchArtistCell.swift */; };
 		65EFCD1B1A17EA20000ECF93 /* SongSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EFCD1A1A17EA20000ECF93 /* SongSearchController.swift */; };
 		65F3BABE198749B7009916C1 /* SongInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F3BABD198749B7009916C1 /* SongInfo.swift */; };
 		65F3BAF319876E28009916C1 /* RootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F3BAF219876E28009916C1 /* RootController.swift */; };
@@ -143,6 +145,8 @@
 		65E7746119528D6100DD31DB /* slider_minimum@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slider_minimum@2x.png"; sourceTree = "<group>"; };
 		65E7746419528D6100DD31DB /* sliderlabel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sliderlabel.png; sourceTree = "<group>"; };
 		65E7746519528D6100DD31DB /* sliderlabel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sliderlabel@2x.png"; sourceTree = "<group>"; };
+		65E7D2AA1A17F01200C430AF /* GoatwhoreLastFM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GoatwhoreLastFM.png; sourceTree = "<group>"; };
+		65E7D2AC1A17F2B200C430AF /* SearchArtistCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchArtistCell.swift; sourceTree = "<group>"; };
 		65EFCD1A1A17EA20000ECF93 /* SongSearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongSearchController.swift; sourceTree = "<group>"; };
 		65F3BABD198749B7009916C1 /* SongInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongInfo.swift; sourceTree = "<group>"; };
 		65F3BAF219876E28009916C1 /* RootController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootController.swift; sourceTree = "<group>"; };
@@ -186,6 +190,7 @@
 				65D4F0B719A59B2100FB30A2 /* PlaylistAlbumTitleCell.swift */,
 				65587F4419B4034100375C98 /* VideoCell.swift */,
 				65EFCD1A1A17EA20000ECF93 /* SongSearchController.swift */,
+				65E7D2AC1A17F2B200C430AF /* SearchArtistCell.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -245,6 +250,7 @@
 		65E7743219528D6100DD31DB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				65E7D2AA1A17F01200C430AF /* GoatwhoreLastFM.png */,
 				6522D5BB19D7268000FAB3AD /* 751-eye.png */,
 				6522D5BC19D7268000FAB3AD /* 751-eye@2x.png */,
 				65B81BE619C91892005EA079 /* 765-arrow-left.png */,
@@ -393,6 +399,7 @@
 				65E7749419528D6100DD31DB /* slider_maximum@2x.png in Resources */,
 				6522D5BD19D7268000FAB3AD /* 751-eye.png in Resources */,
 				6557D9E919971F2800A0A87E /* 1244-record-selected.png in Resources */,
+				65E7D2AB1A17F01200C430AF /* GoatwhoreLastFM.png in Resources */,
 				65E119F119B4EE2300757B87 /* videotemplate.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -426,6 +433,7 @@
 				65304F0D196CAB9E00F985D3 /* Utils.swift in Sources */,
 				65EFCD1B1A17EA20000ECF93 /* SongSearchController.swift in Sources */,
 				65D4F0B619A58CB600FB30A2 /* PlaylistAlbumSongCell.swift in Sources */,
+				65E7D2AD1A17F2B200C430AF /* SearchArtistCell.swift in Sources */,
 				65D4F0B819A59B2100FB30A2 /* PlaylistAlbumTitleCell.swift in Sources */,
 				65B1ED80198F41060024F984 /* PlaylistController.swift in Sources */,
 				65F3BAF319876E28009916C1 /* RootController.swift in Sources */,
