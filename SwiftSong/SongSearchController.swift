@@ -14,16 +14,10 @@ class SongSearchController: UIViewController, UITableViewDataSource {
     
     @IBOutlet weak var tabBar: UITabBar!
     
+    let cellId = "SearchArtistCell"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Foo"
-        
-        tableView.registerClass(SearchArtistCell.self,
-            forCellReuseIdentifier: "SearchArtistCell")
-        
-        
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,12 +30,10 @@ class SongSearchController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell =
-        tableView.dequeueReusableCellWithIdentifier("SearchArtistCell")
+        var cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath)
             as SearchArtistCell
-        
-        //cell.textLabel.text = "Testing"
-        
+        cell.lblArtist.text = "Goatwhore"
+        cell.lblInformation.text = "10 Albums"
         return cell
     }
     

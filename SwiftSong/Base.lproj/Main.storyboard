@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B23" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="0dw-RJ-QCg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="0dw-RJ-QCg">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
@@ -407,14 +407,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vyq-f9-a4W">
-                                <rect key="frame" x="0.0" y="519" width="320" height="49"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <items>
-                                    <tabBarItem systemItem="favorites" id="xhR-ZB-IZx"/>
-                                    <tabBarItem systemItem="more" id="YjQ-od-86R"/>
-                                </items>
-                            </tabBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Music Search" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fa8-rY-2Gl">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -425,7 +417,7 @@
                                 <rect key="frame" x="0.0" y="40" width="320" height="479"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="SearchArtistCell" selectionStyle="default" indentationWidth="10" id="hFP-oZ-j7R" userLabel="SearchArtistCell" customClass="SearchArtistCell" customModule="SongDemon" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="SearchArtistCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchArtistCell" id="hFP-oZ-j7R" userLabel="SearchArtistCell" customClass="SearchArtistCell" customModule="SongDemon" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hFP-oZ-j7R" id="Km3-0E-UhM">
@@ -448,6 +440,11 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="imgArtist" destination="lKc-Dg-dTm" id="Ana-xN-q6p"/>
+                                            <outlet property="lblArtist" destination="sdy-pE-4K4" id="cHO-ZU-H7B"/>
+                                            <outlet property="lblInformation" destination="tA7-es-HOp" id="Aeu-ob-c09"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -455,6 +452,15 @@
                                     <outlet property="delegate" destination="SKL-bC-meb" id="k2s-rw-Qg6"/>
                                 </connections>
                             </tableView>
+                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vyq-f9-a4W">
+                                <rect key="frame" x="0.0" y="519" width="320" height="49"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <items>
+                                    <tabBarItem title="Cancel" id="YjQ-od-86R"/>
+                                    <tabBarItem title="Artist" id="xhR-ZB-IZx"/>
+                                    <tabBarItem title="Album" id="4en-bg-yad"/>
+                                </items>
+                            </tabBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
