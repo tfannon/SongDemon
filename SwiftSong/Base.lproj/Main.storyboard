@@ -460,6 +460,9 @@
                                     <tabBarItem title="Artist" id="xhR-ZB-IZx"/>
                                     <tabBarItem title="Album" id="4en-bg-yad"/>
                                 </items>
+                                <connections>
+                                    <outlet property="delegate" destination="SKL-bC-meb" id="g8b-hE-631"/>
+                                </connections>
                             </tabBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

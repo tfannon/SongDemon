@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SongSearchController: UIViewController, UITableViewDataSource {
+class SongSearchController: UIViewController, UITableViewDataSource, UITabBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -18,6 +18,12 @@ class SongSearchController: UIViewController, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBar.selectedItem = tabBar.items![1] as? UITabBarItem
+        //todo: remember what is was last time?
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,6 +41,17 @@ class SongSearchController: UIViewController, UITableViewDataSource {
         cell.lblArtist.text = "Goatwhore"
         cell.lblInformation.text = "10 Albums"
         return cell
+    }
+    
+    //MARK: UITabBarDelegate
+    func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem!) {
+        //println(item)
+        switch item.title! {
+        case "Cancel" :
+            self.dismissViewControllerAnimated(false, completion: nil)
+        default:
+            println(item)
+        }
     }
     
 
