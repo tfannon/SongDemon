@@ -413,7 +413,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="j7N-7i-kOR">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="j7N-7i-kOR">
                                 <rect key="frame" x="0.0" y="40" width="320" height="479"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -423,17 +423,17 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hFP-oZ-j7R" id="Km3-0E-UhM">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="GoatwhoreLastFM.png" translatesAutoresizingMaskIntoConstraints="NO" id="lKc-Dg-dTm">
-                                                    <rect key="frame" x="7" y="4" width="85" height="85"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Blank52.png" translatesAutoresizingMaskIntoConstraints="NO" id="lKc-Dg-dTm">
+                                                    <rect key="frame" x="7" y="4" width="60" height="60"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10 Albums, 55 Songs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tA7-es-HOp">
-                                                    <rect key="frame" x="108" y="46" width="204" height="21"/>
+                                                    <rect key="frame" x="101" y="35" width="204" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Goatwhore" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sdy-pE-4K4">
-                                                    <rect key="frame" x="108" y="17" width="204" height="30"/>
+                                                    <rect key="frame" x="101" y="6" width="204" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -535,7 +535,7 @@
         <image name="766-arrow-right.png" width="14" height="28"/>
         <image name="777-thumbs-up.png" width="26" height="28"/>
         <image name="778-thumbs-down.png" width="26" height="28"/>
-        <image name="GoatwhoreLastFM.png" width="500" height="500"/>
+        <image name="Blank52.png" width="52" height="52"/>
         <image name="play-75.png" width="75" height="75"/>
         <image name="sample-album-art.jpg" width="1500" height="1500"/>
         <image name="sample-video-image.png" width="320" height="180"/>

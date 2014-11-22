@@ -24,6 +24,26 @@ class ITunesUtils {
         }
     }
     
+    class func getArtists() -> [String] {
+        var retval = [String]()
+        let query = MPMediaQuery.artistsQuery()
+        let artistsArray = query.collections
+        for artistCollection in artistsArray as [AnyObject] {
+            let collection = artistCollection as MPMediaItemCollection // artists[0] as MPMediaItemCollection
+            let title  = collection.representativeItem.valueForProperty(MPMediaItemPropertyAlbumArtist) as String
+            retval.append(title)
+            //println(title)
+        }
+                /*
+        query.addFilterPredicate(MPMediaPropertyPredicate(value: persistentId, forProperty: MPMediaItemPropertyAlbumArtist))
+
+        for x in query.items as [MPMediaItem] {
+            retval.append(x.title)
+        }
+        */
+        return retval
+    }
+    
     class func getArtworkUrl(currentItem:MPMediaItem?) -> String {
         var artworkUrl = "https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&docid=9Qlpc4H-2TLFtM&tbnid=CspfgTIw8O2WlM:&ved=0CAcQjRw&url=http%3A%2F%2Fwww.amazon.com%2FIn-Deathless-Tradition%2Fdp%2FB006TE2RYI&ei=MnsnVNv-HLLGsQSTloCwDg&bvm=bv.76247554,d.cWc&psig=AFQjCNEghidqWbYMWA6wruIkQTQo_iitnw&ust=1411959990101798"
         /*
