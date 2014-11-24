@@ -372,38 +372,44 @@ class LibraryManager {
         return songs
     }
     
-    //return tuple of grouped songs and songs
     class func getArtistSongsWithoutSettingPlaylist(currentSong : MPMediaItem?) -> ([[MPMediaItem]], [MPMediaItem]) {
+        if currentSong != nil {
+            return getArtistSongsWithoutSettingPlaylist(currentSong!.albumArtist)
+        }
+        return ([[MPMediaItem]](),[MPMediaItem]())
+    }
+    
+    //return tuple of grouped songs and songs
+    class func getArtistSongsWithoutSettingPlaylist(artist : String) -> ([[MPMediaItem]], [MPMediaItem]) {
         //album->*song
         var songs = [MPMediaItem]()
         var groupedSongs = [[MPMediaItem]]()
-        if currentSong != nil {
-            var query = MPMediaQuery.songsQuery()
-            var pred = MPMediaPropertyPredicate(value: currentSong!.albumArtist, forProperty: MPMediaItemPropertyAlbumArtist)
-            query.addFilterPredicate(pred)
-            var artistSongs = query.items as [MPMediaItem]
-            var albumDic = Dictionary<String,Array<MPMediaItem>>(minimumCapacity: artistSongs.count)
-            //fill up the dictionary with songs
-            for x in artistSongs {
-                if albumDic.indexForKey(x.albumTitle) == nil {
-                    albumDic[x.albumTitle] = Array<MPMediaItem>()
-                }
-                albumDic[x.albumTitle]?.append(x)
+        
+        var query = MPMediaQuery.songsQuery()
+        var pred = MPMediaPropertyPredicate(value: artist, forProperty: MPMediaItemPropertyAlbumArtist)
+        query.addFilterPredicate(pred)
+        var artistSongs = query.items as [MPMediaItem]
+        var albumDic = Dictionary<String,Array<MPMediaItem>>(minimumCapacity: artistSongs.count)
+        //fill up the dictionary with songs
+        for x in artistSongs {
+            if albumDic.indexForKey(x.albumTitle) == nil {
+                albumDic[x.albumTitle] = Array<MPMediaItem>()
             }
-            
-            //get them back out by album and insert into array of arrays
-            for (x,y) in albumDic {
-                var sorted = y.sorted { $0.albumTrackNumber < $1.albumTrackNumber }
-                groupedSongs.append(sorted)
-            }
-            //now sort the grouped playlist by year
-            groupedSongs.sort { $0[0].year > $1[0].year }
-            //now add all the groupplaylist into one big playlist for the media player
-            for album in groupedSongs {
-                songs.extend(album)
-            }
-            outputSongs(songs)
+            albumDic[x.albumTitle]?.append(x)
         }
+        
+        //get them back out by album and insert into array of arrays
+        for (x,y) in albumDic {
+            var sorted = y.sorted { $0.albumTrackNumber < $1.albumTrackNumber }
+            groupedSongs.append(sorted)
+        }
+        //now sort the grouped playlist by year
+        groupedSongs.sort { $0[0].year > $1[0].year }
+        //now add all the groupplaylist into one big playlist for the media player
+        for album in groupedSongs {
+            songs.extend(album)
+        }
+        outputSongs(songs)
         return (groupedSongs, songs)
     }
     

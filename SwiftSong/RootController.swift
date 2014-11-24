@@ -129,4 +129,9 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         var root = UIApplication.sharedApplication().keyWindow!.rootViewController as RootController
         return root.lyricsController as LyricsController
     }
+    
+    class func getPlaylistController() -> PlaylistController {
+        var root = UIApplication.sharedApplication().keyWindow!.rootViewController as RootController
+        return root.playlistController as PlaylistController
+    }
 }

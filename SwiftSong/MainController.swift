@@ -172,9 +172,10 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         mediaPicker.delegate = self
         mediaPicker.allowsPickingMultipleItems = true
 */
-        var vc = self.storyboard!.instantiateViewControllerWithIdentifier("SongSearchController") as SongSearchController
-        presentViewController(vc, animated: false, completion: {
-             })
+        //performSegueWithIdentifier(<#identifier: String?#>, sender: <#AnyObject?#>)
+        //var vc = self.storyboard!.instantiateViewControllerWithIdentifier("SearchController") as SearchController
+        //presentViewController(vc, animated: false, completion: {
+             //})
     }
     
     func handleAddToQueueTapped() {

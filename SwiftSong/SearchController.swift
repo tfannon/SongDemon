@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MediaPlayer
 
-class SongSearchController: UIViewController, UITableViewDataSource, UITabBarDelegate {
+class SearchController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITabBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -127,7 +128,8 @@ class SongSearchController: UIViewController, UITableViewDataSource, UITabBarDel
     
     //MARK:  helpers to deal with indexing section
     var _sections: [Section]?
-    let names = ITunesUtils.getArtists()
+    let names = Utils.inSimulator ? ["Goatwhore", "Sleep"] : ITunesUtils.getArtists()
+    
     
     class Artist : NSObject {
         let name: String
@@ -180,17 +182,26 @@ class SongSearchController: UIViewController, UITableViewDataSource, UITabBarDel
         return self._sections!
     }
     
+    
+    /*MARK: UITableViewDelegate
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let artist = self.sections[indexPath.section].artists[indexPath.row]
+        LibraryManager.getArtistSongsWithoutSettingPlaylist(artist)
+    }
+    */
 
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        var seachAlbumController = segue.destinationViewController as SearchAlbumController
+        let indexPath = tableView.indexPathForSelectedRow()!
+        let artist = self.sections[indexPath.section].artists[indexPath.row].name
+        var items = LibraryManager.getArtistSongsWithoutSettingPlaylist(artist)
+        seachAlbumController.Albums = Utils.inSimulator ? [[MPMediaItem]]() : items.0
     }
-    */
 
 }
