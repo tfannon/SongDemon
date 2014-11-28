@@ -24,49 +24,19 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
     }
     
-    
-    var Albums : [([MPMediaItem])]?
-    /*
-    func setArtistAlbums(artistAlbums : [([MPMediaItem])]? = nil) {
-        println("\(artistAlbums!.count)")
-        var albums : [Album] = artistAlbums!.map { item in
-            var album = Album(title: item[0].albumTitle)
-            album.image = item[0].artwork!.description
-            println(album.image)
-            album.year =  item[0].year
-            var songs : [Song] = item.map { songItem in
-                var song = Song(title: songItem.title)
-                song.trackNumber = songItem.albumTrackNumber
-                album.addSong(song)
-                return song
-            }
-            return album
-        }
-        self.Albums = albums
-    }
-    
-    
-    class Album : NSObject {
-        let title : String
-        var image : String?
-        var year: String?
-        var songs = [Song]()
-        func addSong(song : Song) {
-            songs.append(song)
-        }
-        init(title: String) {
-            self.title = title
+    override func viewWillAppear(animated: Bool) {
+        if dirty {
+            self.tableView.reloadData()
         }
     }
     
-    class Song : NSObject {
-        var title : String
-        var trackNumber : Int?
-        init(title: String) {
-            self.title = title
+    var dirty : Bool = false
+    
+    var Albums : [([MPMediaItem])]? {
+        didSet {
+            dirty = true
         }
     }
-    */
     
     var albums =
     [

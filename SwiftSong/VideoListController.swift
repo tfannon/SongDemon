@@ -89,7 +89,7 @@ class VideoListController : UITableViewController {
         cell.lblDescription.text = description
         //clear the image before the async fetch
         if !Utils.inSimulator {
-            cell.imageView.image = nil
+            cell.imageView!.image = nil
         }
         //go fetch the image form the thumb
         var imgURL = NSURL(string: thumb)!

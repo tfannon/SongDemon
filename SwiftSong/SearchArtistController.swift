@@ -9,11 +9,11 @@
 import UIKit
 import MediaPlayer
 
-class SearchController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITabBarDelegate {
+class SearchArtistController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITabBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var tabBar: UITabBar!
+    //@IBOutlet weak var tabBar: UITabBar!
     
     let cellId = "SearchArtistCell"
    
@@ -25,7 +25,7 @@ class SearchController: UIViewController, UITableViewDataSource, UITableViewDele
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        tabBar.selectedItem = tabBar.items![1] as? UITabBarItem
+        //tabBar.selectedItem = tabBar.items![1] as? UITabBarItem
         //todo: remember what is was last time?
         //println(artists)
         /*
@@ -183,12 +183,32 @@ class SearchController: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     
-    /*MARK: UITableViewDelegate
+    //MARK: UITableViewDelegate
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let artist = self.sections[indexPath.section].artists[indexPath.row]
-        LibraryManager.getArtistSongsWithoutSettingPlaylist(artist)
+        let artist = self.sections[indexPath.section].artists[indexPath.row].name
+        var items = LibraryManager.getArtistSongsWithoutSettingPlaylist(artist)
+        //println(self.tabBarController!.viewControllers!.count)
+        var vcs = self.tabBarController!.viewControllers! as [UIViewController]
+        var albumController = vcs[1] as SearchAlbumController
+        //var albumController : SearchAlbumController = self.tabBarController?.viewControllers!
+        
+        /*
+        var albumController = self.storyboard!.instantiateViewControllerWithIdentifier("SearchAlbumController") as SearchAlbumController
+        */
+        albumController.Albums = Utils.inSimulator ? [[MPMediaItem]]() : items.0
+        //presentViewController(albumController, animated: false, completion: nil)
+        self.tabBarController!.selectedIndex = 1
+        
+        
+        /*
+        var seachAlbumController = segue.destinationViewController as SearchAlbumController
+        let indexPath = tableView.indexPathForSelectedRow()!
+        let artist = self.sections[indexPath.section].artists[indexPath.row].name
+        var items = LibraryManager.getArtistSongsWithoutSettingPlaylist(artist)
+        seachAlbumController.Albums = Utils.inSimulator ? [[MPMediaItem]]() : items.0
+*/
     }
-    */
+
 
     
 
