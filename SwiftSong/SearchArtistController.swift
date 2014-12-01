@@ -9,13 +9,15 @@
 import UIKit
 import MediaPlayer
 
-class SearchArtistController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITabBarDelegate {
-
+class SearchArtistController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
     @IBOutlet weak var tableView: UITableView!
-    
-    //@IBOutlet weak var tabBar: UITabBar!
-    
     let cellId = "SearchArtistCell"
+    
+    
+   
+    let names = Utils.inSimulator ? ["Goatwhore", "Sleep"] : ITunesUtils.getArtists()
+
    
     var imageCache = [String : UIImage]()
     
@@ -25,17 +27,25 @@ class SearchArtistController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        //tabBar.selectedItem = tabBar.items![1] as? UITabBarItem
-        //todo: remember what is was last time?
-        //println(artists)
+        var sc = self.tabBarController! as SearchController
+        println("\(self.description) about to appear")
         /*
-        if let song = MusicPlayer.currentSong {
-            var songs = LibraryManager.getArtistSongsWithoutSettingPlaylist(song)
-            println(songs)
-        } else {
-            println("no artist was playing")
+        if sc.dirty {
+            tableView.scrollToRowAtIndexPath(getIndexPath(sc.currentSong!.albumArtist), atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
         }
         */
+    }
+    
+    func getIndexPath(name : String) -> NSIndexPath {
+        var indexPath : NSIndexPath
+        var section = self.collation.sectionForObject(Artist(name: name), collationStringSelector: "name")
+        var x = sections[section]
+        let names : [String] = x.artists.map { artist in
+            return artist.name
+        }
+        let row = find(names, name)!
+        indexPath = NSIndexPath(forRow: row, inSection: section)
+        return indexPath
     }
 
     override func didReceiveMemoryWarning() {
@@ -114,23 +124,8 @@ class SearchArtistController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     
-    //MARK: UITabBarDelegate
-    func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem!) {
-        //println(item)
-        switch item.title! {
-        case "Cancel" :
-            self.dismissViewControllerAnimated(false, completion: nil)
-        default:
-            println(item)
-        }
-    }
-    
     
     //MARK:  helpers to deal with indexing section
-    var _sections: [Section]?
-    let names = Utils.inSimulator ? ["Goatwhore", "Sleep"] : ITunesUtils.getArtists()
-    
-    
     class Artist : NSObject {
         let name: String
         var section: Int?
@@ -150,6 +145,7 @@ class SearchArtistController: UIViewController, UITableViewDataSource, UITableVi
     
     let collation = UILocalizedIndexedCollation.currentCollation() as UILocalizedIndexedCollation
     
+    var _sections: [Section]?
     var sections: [Section] {
         if self._sections != nil {
             return self._sections!;
@@ -182,46 +178,16 @@ class SearchArtistController: UIViewController, UITableViewDataSource, UITableVi
         return self._sections!
     }
     
-    
     //MARK: UITableViewDelegate
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let artist = self.sections[indexPath.section].artists[indexPath.row].name
         var items = LibraryManager.getArtistSongsWithoutSettingPlaylist(artist)
         //println(self.tabBarController!.viewControllers!.count)
         var vcs = self.tabBarController!.viewControllers! as [UIViewController]
+        /*
         var albumController = vcs[1] as SearchAlbumController
-        //var albumController : SearchAlbumController = self.tabBarController?.viewControllers!
-        
-        /*
-        var albumController = self.storyboard!.instantiateViewControllerWithIdentifier("SearchAlbumController") as SearchAlbumController
+            albumController.Albums = Utils.inSimulator ? [[MPMediaItem]]() : items.0
         */
-        albumController.Albums = Utils.inSimulator ? [[MPMediaItem]]() : items.0
-        //presentViewController(albumController, animated: false, completion: nil)
         self.tabBarController!.selectedIndex = 1
-        
-        
-        /*
-        var seachAlbumController = segue.destinationViewController as SearchAlbumController
-        let indexPath = tableView.indexPathForSelectedRow()!
-        let artist = self.sections[indexPath.section].artists[indexPath.row].name
-        var items = LibraryManager.getArtistSongsWithoutSettingPlaylist(artist)
-        seachAlbumController.Albums = Utils.inSimulator ? [[MPMediaItem]]() : items.0
-*/
     }
-
-
-    
-
-    
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var seachAlbumController = segue.destinationViewController as SearchAlbumController
-        let indexPath = tableView.indexPathForSelectedRow()!
-        let artist = self.sections[indexPath.section].artists[indexPath.row].name
-        var items = LibraryManager.getArtistSongsWithoutSettingPlaylist(artist)
-        seachAlbumController.Albums = Utils.inSimulator ? [[MPMediaItem]]() : items.0
-    }
-
 }

@@ -9,7 +9,7 @@
 import UIKit
 import MediaPlayer
 
-class MainController: UIViewController, MPMediaPickerControllerDelegate {
+class MainController: UIViewController {
 
     //MARK: outlets and actions
     @IBOutlet var viewMain: UIView!
@@ -165,17 +165,9 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
     }
    
     func handleSearchTapped() {
-        /*
-        displayFadingStatus("Querying iTunes")
-        //hideImage()()
-        let mediaPicker = MPMediaPickerController(mediaTypes: .Music)
-        mediaPicker.delegate = self
-        mediaPicker.allowsPickingMultipleItems = true
-*/
-        //performSegueWithIdentifier(<#identifier: String?#>, sender: <#AnyObject?#>)
-        //var vc = self.storyboard!.instantiateViewControllerWithIdentifier("SearchController") as SearchController
-        //presentViewController(vc, animated: false, completion: {
-             //})
+       var vc = self.storyboard!.instantiateViewControllerWithIdentifier("SearchController") as SearchController
+        vc.currentSong = MusicPlayer.currentSong
+        presentViewController(vc, animated: false, completion: nil)
     }
     
     func handleAddToQueueTapped() {
@@ -460,25 +452,6 @@ class MainController: UIViewController, MPMediaPickerControllerDelegate {
         Async.background {
             Videos.fetchVideosFor(MusicPlayer.currentSong)
         }
-    }
-    
-    
-    //MARK: MPMediaPickerControllerDelegate
-    
-    func mediaPicker(mediaPicker: MPMediaPickerController, didPickMediaItems  mediaItems:MPMediaItemCollection) -> Void
-    {
-        let items = mediaItems.items as [MPMediaItem]
-        if items.count > 0 {
-            LibraryManager.makePlaylistFromSongs(items)
-            MusicPlayer.play(items)
-        }
-        self.dismissViewControllerAnimated(true, completion: {
-            self.displayFadingStatus("Now playing your \(items.count) songs")
-        });
-    }
-    
-    func mediaPickerDidCancel(mediaPicker: MPMediaPickerController) {
-        self.dismissViewControllerAnimated(true, completion: {});
     }
     
     //MARK: Song scrubber

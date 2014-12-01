@@ -11,7 +11,11 @@ import MediaPlayer
 class SearchAlbumController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var lblArtist: UILabel!
     
+    //vr currentSong : MPMediaItem?
+    var previousArtist : String?
+    var songsByAlbum : [[MPMediaItem]] = []
     
     override func viewDidLoad() {
         self.tableView.dataSource = self
@@ -22,21 +26,31 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
         //empty cells wont create lines
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        reloadCheck()
     }
     
     override func viewWillAppear(animated: Bool) {
-        if dirty {
-            self.tableView.reloadData()
+        reloadCheck()
+    }
+    
+    func reloadCheck() {
+        println ("reload check")
+        if let currentSong = MusicPlayer.currentSong {
+            //the artist has changed.  need to reload
+            if previousArtist == nil || currentSong.albumArtist! != previousArtist! {
+                let artist = currentSong.albumArtist!
+                self.lblArtist.text = artist
+                let songsByAlbum = LibraryManager.getArtistSongsWithoutSettingPlaylist(artist)
+                self.tableView.reloadData()
+            }
+            //otherwise nothing changed.  just
+        }
+            //no current song playing, bounce back to artist picker
+        else {
+            self.tabBarController!.selectedIndex = 0
         }
     }
     
-    var dirty : Bool = false
-    
-    var Albums : [([MPMediaItem])]? {
-        didSet {
-            dirty = true
-        }
-    }
     
     var albums =
     [
@@ -64,16 +78,18 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
     
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return Albums!.count
+        println ("sections: \(songsByAlbum.count)")
+        return songsByAlbum.count
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Albums![section].count
+        println ("rows in \(section): \(songsByAlbum.count)")
+        return songsByAlbum[section].count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("SearchAlbumTrackCell") as SearchAlbumTrackCell
-        let song = Albums![indexPath.section][indexPath.row]
+        let song = songsByAlbum[indexPath.section][indexPath.row]
         cell.lblTitle.text = song.title
         cell.lblTrackNumber.text = "\(song.albumTrackNumber)"
         return cell
@@ -82,7 +98,7 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
     //header
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         var cell = tableView.dequeueReusableCellWithIdentifier("SearchAlbumTitleCell") as SearchAlbumTitleCell
-        let album = Albums![section]
+        let album = songsByAlbum[section]
         cell.lblTitle.text = album[0].albumTitle
         cell.imgAlbum.image = album[0].getArtworkWithSize(cell.imgAlbum.frame.size)
         cell.lblInfo.text = album[0].year

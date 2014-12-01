@@ -7,26 +7,27 @@
 //
 
 import UIKit
+import MediaPlayer
 
 class SearchController: UITabBarController {
 
     @IBOutlet var btnCancel: UIButton!
     
+    var currentSong : MPMediaItem?
+    var previousSong : MPMediaItem?
+    
     @IBAction func handleCancelClicked(sender: AnyObject) {
-        //var root = UIApplication.sharedApplication().keyWindow!.rootViewController as RootController
-        //presentViewController(root, animated: false, completion: nil)
-        //RootController.switchToMainView()
+        self.dismissViewControllerAnimated(false, completion: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         btnCancel.center = self.tabBar.center
         self.view.addSubview(btnCancel)
-        // Do any additional setup after loading the view.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func viewWillAppear(animated: Bool) {
+        println("SearchController about to appear")
+        self.selectedIndex = 1
     }
   }

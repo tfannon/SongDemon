@@ -17,5 +17,4 @@ class NoAnimationSegue: UIStoryboardSegue {
 //            navigation.pushViewController(destinationViewController as UIViewController, animated: false)
 //        }
     }
-    
 }
