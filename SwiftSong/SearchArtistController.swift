@@ -12,47 +12,38 @@ import MediaPlayer
 class SearchArtistController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
-    let cellId = "SearchArtistCell"
-    
-    
-   
-    let names = Utils.inSimulator ? ["Goatwhore", "Sleep"] : ITunesUtils.getArtists()
-
    
     var imageCache = [String : UIImage]()
+    var previousArtist : String! = nil
+    let names = Utils.inSimulator ? ["Goatwhore", "Sleep"] : ITunesUtils.getArtists()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.backgroundColor = UIColor.blackColor()
+        
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        var sc = self.tabBarController! as SearchController
-        println("\(self.description) about to appear")
-        /*
-        if sc.dirty {
-            tableView.scrollToRowAtIndexPath(getIndexPath(sc.currentSong!.albumArtist), atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
+        if MusicPlayer.currentSong != nil {
+            let indexPath = getIndexPathForCurrentSong()
+            tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
         }
-        */
     }
     
-    func getIndexPath(name : String) -> NSIndexPath {
-        var indexPath : NSIndexPath
+    func getIndexPathForCurrentSong() -> NSIndexPath {
+        let name = MusicPlayer.currentSong!.albumArtist
         var section = self.collation.sectionForObject(Artist(name: name), collationStringSelector: "name")
         var x = sections[section]
         let names : [String] = x.artists.map { artist in
             return artist.name
         }
         let row = find(names, name)!
-        indexPath = NSIndexPath(forRow: row, inSection: section)
+        let indexPath = NSIndexPath(forRow: row, inSection: section)
         return indexPath
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return self.sections.count
     }
@@ -64,7 +55,7 @@ class SearchArtistController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let artist = self.sections[indexPath.section].artists[indexPath.row]
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("SearchArtistCell", forIndexPath: indexPath)
             as SearchArtistCell
         
         cell.lblArtist.text = artist.name

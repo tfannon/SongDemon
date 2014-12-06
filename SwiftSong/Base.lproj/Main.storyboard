@@ -411,7 +411,7 @@
                                 <rect key="frame" x="0.0" y="28" width="320" height="479"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="SearchArtistCell" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SearchArtistCell" id="hFP-oZ-j7R" userLabel="SearchArtistCell" customClass="SearchArtistCell" customModule="SongDemon" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="SearchArtistCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchArtistCell" id="hFP-oZ-j7R" userLabel="SearchArtistCell" customClass="SearchArtistCell" customModule="SongDemon" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hFP-oZ-j7R" id="Km3-0E-UhM">
@@ -419,21 +419,23 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Blank52.png" translatesAutoresizingMaskIntoConstraints="NO" id="lKc-Dg-dTm">
                                                     <rect key="frame" x="7" y="4" width="60" height="60"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10 Albums, 55 Songs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tA7-es-HOp">
                                                     <rect key="frame" x="101" y="35" width="204" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Goatwhore" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sdy-pE-4K4">
                                                     <rect key="frame" x="101" y="6" width="204" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="imgArtist" destination="lKc-Dg-dTm" id="Ana-xN-q6p"/>
                                             <outlet property="lblArtist" destination="sdy-pE-4K4" id="cHO-ZU-H7B"/>
@@ -447,7 +449,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Artist" id="UQV-yz-I4E"/>
                     <connections>
@@ -515,28 +517,32 @@
                                             <outlet property="lblTitle" destination="TlP-z7-p7v" id="SLE-RX-r64"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchAlbumTrackCell" rowHeight="40" id="Nw7-ca-nhG" userLabel="SearchAlbumTrackCell" customClass="SearchAlbumTrackCell" customModule="SongDemon" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchAlbumTrackCell" rowHeight="35" id="Nw7-ca-nhG" userLabel="SearchAlbumTrackCell" customClass="SearchAlbumTrackCell" customModule="SongDemon" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Nw7-ca-nhG" id="wcK-d2-G3e">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="01" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yre-qw-jfB" userLabel="TrackNumber">
-                                                    <rect key="frame" x="47" y="8" width="29" height="21"/>
+                                                    <rect key="frame" x="10" y="8" width="29" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="In Deathless Tradition" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fra-xX-z4z" userLabel="TrackName">
-                                                    <rect key="frame" x="91" y="8" width="221" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <rect key="frame" x="43" y="8" width="239" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="animated_music_bars.gif" translatesAutoresizingMaskIntoConstraints="NO" id="1eO-DO-gy2">
+                                                    <rect key="frame" x="290" y="10" width="26" height="18"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
+                                            <outlet property="imgPlaying" destination="1eO-DO-gy2" id="jDY-hu-Hpj"/>
                                             <outlet property="lblTitle" destination="fra-xX-z4z" id="yAO-aS-20w"/>
                                             <outlet property="lblTrackNumber" destination="Yre-qw-jfB" id="Hex-Ky-NJw"/>
                                         </connections>
@@ -646,6 +652,7 @@
         <image name="777-thumbs-up.png" width="26" height="28"/>
         <image name="778-thumbs-down.png" width="26" height="28"/>
         <image name="Blank52.png" width="52" height="52"/>
+        <image name="animated_music_bars.gif" width="700" height="176"/>
         <image name="play-75.png" width="75" height="75"/>
         <image name="sample-album-art.jpg" width="1500" height="1500"/>
         <image name="sample-video-image.png" width="320" height="180"/>

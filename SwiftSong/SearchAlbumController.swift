@@ -12,12 +12,14 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var lblArtist: UILabel!
+
     
-    //vr currentSong : MPMediaItem?
-    var previousArtist : String?
+    var currentSong : MPMediaItem?
+    var previousArtist : String! = nil
     var songsByAlbum : [[MPMediaItem]] = []
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         self.tableView.dataSource = self
         self.tableView.delegate = self
         //if no image exists dont screw up image
@@ -26,14 +28,25 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
         //empty cells wont create lines
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        
     }
     
     override func viewWillAppear(animated: Bool) {
-        reloadCheck()
+        super.viewWillAppear(animated)
+        if reloadCheck() {
+            let indexPath = getIndexPathForCurrentSong()
+            tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
+        }
     }
     
-    func reloadCheck() {
+    func getIndexPathForCurrentSong() -> NSIndexPath {
+        let albums : [String] = songsByAlbum.map { album in return album[0].albumTitle  }
+        let section = albums.find { $0 == self.currentSong!.albumTitle }!
+        let row = songsByAlbum[section].find {  $0.title == self.currentSong!.title }!
+        let indexPath = NSIndexPath(forRow: row, inSection: section)
+        return indexPath
+    }
+    
+    func reloadCheck() -> Bool {
         println ("reload check")
         if let currentSong = MusicPlayer.currentSong {
             //the artist has changed.  need to reload
@@ -42,6 +55,9 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
                 self.lblArtist.text = artist
                 self.songsByAlbum = LibraryManager.getArtistSongsWithoutSettingPlaylist(artist).0
                 self.tableView.reloadData()
+                self.previousArtist = artist
+                self.currentSong = currentSong
+                return true
             }
             //otherwise nothing changed.  just
         }
@@ -49,41 +65,15 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
         else {
             self.tabBarController!.selectedIndex = 0
         }
+        return false
     }
     
     
-    var albums =
-    [
-        "Constricting Rage of the Merciless",
-        "Blood For The Master"
-    ]
-    
-    var songs =
-    [[
-        "Poisonous Existence in Reawakening",
-        "Unraveling Paradise",
-        "Baring Teeth for Revolt",
-        "Reanimated Sacrifice",
-        "Heaven's Crumbling Walls of Pity",
-        "Cold Earth Consumed in Dying Flesh",
-        "FBS",
-        "Nocturnal Conjuration of the Accursed",
-        "Schadenfruede",
-        "Externalize This Hidden Savagery"
-     ],
-     [
-        "Collapse in Eternal Worth",
-        "When Steel and Bone Meet"
-    ]]
-    
-    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        println ("sections: \(songsByAlbum.count)")
         return songsByAlbum.count
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        println ("rows in \(section): \(songsByAlbum[section].count)")
         return songsByAlbum[section].count
     }
     
@@ -92,6 +82,16 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
         let song = songsByAlbum[indexPath.section][indexPath.row]
         cell.lblTitle.text = song.title
         cell.lblTrackNumber.text = "\(song.albumTrackNumber)"
+        if indexPath == getIndexPathForCurrentSong() {
+            cell.imgPlaying.setAnimatableImage(named: "animated_music_bars.gif")
+            if MusicPlayer.isPlaying {
+                cell.imgPlaying.startAnimatingGIF()
+            }
+            cell.imgPlaying.hidden = false
+        } else {
+            cell.imgPlaying.stopAnimatingGIF()
+            cell.imgPlaying.hidden = true
+        }
         return cell
     }
     
@@ -106,7 +106,7 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 40.0
+        return 35.0
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

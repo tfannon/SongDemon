@@ -12,4 +12,6 @@ class SearchAlbumTrackCell: UITableViewCell {
     
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblTrackNumber: UILabel!
+    @IBOutlet weak var imgPlaying : UIImageView!
+    
 }
