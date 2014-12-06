@@ -26,7 +26,7 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
         //empty cells wont create lines
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        reloadCheck()
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -40,7 +40,7 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
             if previousArtist == nil || currentSong.albumArtist! != previousArtist! {
                 let artist = currentSong.albumArtist!
                 self.lblArtist.text = artist
-                let songsByAlbum = LibraryManager.getArtistSongsWithoutSettingPlaylist(artist)
+                self.songsByAlbum = LibraryManager.getArtistSongsWithoutSettingPlaylist(artist).0
                 self.tableView.reloadData()
             }
             //otherwise nothing changed.  just
@@ -83,7 +83,7 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        println ("rows in \(section): \(songsByAlbum.count)")
+        println ("rows in \(section): \(songsByAlbum[section].count)")
         return songsByAlbum[section].count
     }
     
