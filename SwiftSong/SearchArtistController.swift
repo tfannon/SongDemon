@@ -21,7 +21,8 @@ class SearchArtistController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.backgroundColor = UIColor.blackColor()
-        
+        //UITableView.appearance().sectionIndexTrackingBackgroundColor = UIColor.blackColor()
+        UITableView.appearance().sectionIndexBackgroundColor = UIColor.blackColor()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -54,50 +55,96 @@ class SearchArtistController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let artist = self.sections[indexPath.section].artists[indexPath.row]
-        
         let cell = tableView.dequeueReusableCellWithIdentifier("SearchArtistCell", forIndexPath: indexPath)
             as SearchArtistCell
-        
         cell.lblArtist.text = artist.name
-        
-        //cell.lblInformation.text = ""
-        //let image = LastFMUtils.fetchImageForArtist(artist)
-        
-        /* fetch the json from last.fm
-        
-        var image = self.imageCache[urlString]
-        if( image == nil ) {
-            // If the image does not exist, we need to download it
-            var imgURL: NSURL = NSURL(string: urlString)!
-            
-            // Download an NSData representation of the image at the URL
-            let request: NSURLRequest = NSURLRequest(URL: imgURL)
-            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
-                if error == nil {
-                    image = UIImage(data: data)
-                    
-                    // Store the image in to our cache
-                    self.imageCache[urlString] = image
-                    dispatch_async(dispatch_get_main_queue(), {
-                        if let cellToUpdate = tableView.cellForRowAtIndexPath(indexPath) {
-                            cellToUpdate.imageView.image = image
-                        }
-                    })
-                }
-                else {
-                    println("Error: \(error.localizedDescription)")
-                }
-            })
-            
+        cell.imgArtist.image = UIImage(named: "Blank52")
+        let artistInfo = LibraryManager.artistInfo[artist.name]!
+        if let artwork = artistInfo.artwork {
+            cell.imgArtist.image = artwork.imageWithSize(cell.imgArtist.frame.size)
         }
-*/
-
-        
-        //cell. .imageView.image = UIImage(named: "Blank52")
-        //cell.lblArtist.text = "Goatwhore"
-        //cell.lblInformation.text = "10 Albums"
+        let information = "\(artistInfo.songs) songs  \(artistInfo.likedSongs) liked  \(artistInfo.unplayedSongs) unplayed"
+        cell.lblInformation.text = information
         return cell
     }
+    
+        /* LastFM
+
+        var urlStr = "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=\(artist.name)&api_key=\(LastFMAPIKey)&format=json"
+
+        urlStr = urlStr.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+
+        let url = NSURL(string: urlStr)!
+        let request = NSURLRequest(URL: url)
+        //println("requesting \(urlStr)")
+
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {
+            (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+
+            if error != nil {
+                println("Error requesting \(urlStr): \(error.localizedDescription)")
+                return;
+            }
+
+            var jsonError: NSError?
+            var json = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &jsonError) as NSDictionary
+
+            if jsonError != nil {
+                println("Error with LastFM json: \(jsonError)")
+                return
+            }
+            
+            let parsedJson = JSONValue(data)
+            //println(parsedJson)
+            let x = parsedJson["artist"]
+            let images = x["image"].array!
+            println(images)
+            //let med = images[1]["#text"].string
+            let xlrg = images[4]["#text"].string
+        
+            //fetch the json from last.fm
+            if let urlString = xlrg {
+                if urlString.isEmpty {
+                    return
+                }
+                //println("urlstring:\(urlString) lrg:\(lrg)")
+                var image = self.imageCache[urlString]
+                if image == nil {
+                    // If the image does not exist, we need to download it
+                    var imgURL: NSURL = NSURL(string: urlString)!
+                    let request: NSURLRequest = NSURLRequest(URL: imgURL)
+                    NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
+
+                        if error != nil {
+                            println("Error fetching image \(urlString): \(error.localizedDescription)")
+                            return
+                        }
+
+                        image = UIImage(data: data)
+                        image = RBResizeImage(image!, cell.imgArtist.frame.size)
+                        // Store the image in to our cache
+                        self.imageCache[urlString] = image
+                        self.updateCell(cell, image: image!)
+                    })
+                } else {
+                    self.updateCell(cell, image: image!)
+                }
+            }
+        })
+        return cell
+    }
+*/
+
+    func updateCell(cell : SearchArtistCell, image : UIImage) {
+        Async.main {
+            //get the cell to update, resize the image to fit the cell, set it in cell
+            //f let cellToUpdate = tableView.cellForRowAtIndexPath(indexPath) {
+            //    var cell2 = cellToUpdate as SearchArtistCell
+                cell.imgArtist.image = image
+            //}
+        }
+    }
+    
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if !self.sections[section].artists.isEmpty {
@@ -109,6 +156,7 @@ class SearchArtistController: UIViewController, UITableViewDataSource, UITableVi
     func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
         return self.collation.sectionIndexTitles
     }
+    
     
     func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
         return self.collation.sectionForSectionIndexTitleAtIndex(index)

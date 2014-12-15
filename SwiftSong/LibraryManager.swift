@@ -24,11 +24,19 @@ enum PlayMode {
     case Queued
 }
 
+class ArtistInfo {
+    var artwork : MPMediaItemArtwork?
+    var songs : Int = 0
+    var likedSongs : Int = 0
+    var unplayedSongs : Int = 0
+}
+
 class LibraryManager {
     //the finals are to get around a performance bug where adding items to a dictionary is very slow
     private final var LikedSongs = Dictionary<String,String>()
     private final var DislikedSongs = Dictionary<String,String>()
     private final var QueuedSongs = Dictionary<String,String>()
+    private final var ArtistInfos = Dictionary<String,ArtistInfo>()
     //computed at load
     private final var RatedSongs = Array<String>()
     private final var LowRatedSongs = Array<String>()
@@ -75,6 +83,10 @@ class LibraryManager {
         return LM.Playlist
     }
     
+    class var artistInfo : Dictionary<String,ArtistInfo> {
+        return LM.ArtistInfos
+    }
+    
     class var groupedPlaylist : [[MPMediaItem]] {
         return LM.GroupedPlaylist
     }
@@ -108,24 +120,42 @@ class LibraryManager {
         var start = NSDate()
         if let allSongs = ITunesUtils.getAllSongs() {
             for song in allSongs {
-                //an album must have an album artist and title and a rating to make the cut
-                if song.albumArtist != nil && song.title != nil {
-                    if song.rating >= 1 {
-                        //var info = SongInfo(id: song.persistentID.description, rating:song.rating, playCount:song.playCount)
-                        switch (song.rating) {
-                        case 0:""
-                        case 1:
-                            LM.LowRatedSongs.append(song.hashKey)
-                        default:
-                            LM.RatedSongs.append(song.hashKey)
+                //println(song.albumArtist!)
+                if let artist = song.albumArtist {
+                    var info : ArtistInfo? = LM.ArtistInfos[artist]
+                    //grab some artwork
+                    if info == nil {
+                        info = ArtistInfo()
+                        LM.ArtistInfos[artist] = info
+                    }
+                    if info!.artwork == nil {
+                        info!.artwork = song.artwork
+                    }
+                    //increment number of songs in library
+                    info!.songs++
+                    
+                    //an album must have an album artist and title and a rating to make the cut
+                    if song.albumArtist != nil && song.title != nil {
+                        if song.rating >= 1 {
+                            //var info = SongInfo(id: song.persistentID.description, rating:song.rating, playCount:song.playCount)
+                            switch (song.rating) {
+                            case 0:""
+                            case 1:
+                                LM.LowRatedSongs.append(song.hashKey)
+                            default:
+                                LM.RatedSongs.append(song.hashKey)
+                                //increment the artists liked songs
+                                info!.likedSongs++
+                            }
                         }
-                    }
-                    else if song.playCount >= 0 && song.playCount <= 2 {
-                        LM.NotPlayedSongs.append(song.hashKey)
-                        unplayed++
-                    }
-                    else {
-                        LM.OtherSongs.append(song.hashKey)
+                        else if song.playCount >= 0 && song.playCount <= 2 {
+                            LM.NotPlayedSongs.append(song.hashKey)
+                            unplayed++
+                            info!.unplayedSongs++
+                        }
+                        else {
+                            LM.OtherSongs.append(song.hashKey)
+                        }
                     }
                 }
             }
