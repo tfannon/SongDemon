@@ -10,7 +10,7 @@ import UIKit
 
 class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     
-    var mainController: UIViewController!
+    var mainController: MainController!
     var lyricsController: UIViewController!
     var playlistController: UITableViewController!
     var videoController: UITableViewController!
@@ -26,7 +26,7 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         self.delegate = self;
         self.dataSource = self;
 
-        mainController = self.storyboard!.instantiateViewControllerWithIdentifier("MainController") as UIViewController
+        mainController = self.storyboard!.instantiateViewControllerWithIdentifier("MainController") as MainController
         lyricsController = self.storyboard!.instantiateViewControllerWithIdentifier("LyricsController") as UIViewController
         playlistController = self.storyboard!.instantiateViewControllerWithIdentifier("PlaylistController") as UITableViewController
         videoController = self.storyboard!.instantiateViewControllerWithIdentifier("VideoListController") as UITableViewController
@@ -56,6 +56,7 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     func asyncLibraryScan() {
         Async.background {
             println("begin lib scan")
+            LibraryManager.addListener(self.mainController)
             LibraryManager.scanLibrary()
             println("ended lib scan")
         }

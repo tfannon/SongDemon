@@ -9,7 +9,7 @@
 import UIKit
 import MediaPlayer
 
-class MainController: UIViewController {
+class MainController: UIViewController, LibraryScanListener {
 
     //MARK: outlets and actions
     @IBOutlet var viewMain: UIView!
@@ -53,6 +53,7 @@ class MainController: UIViewController {
     //MARK: instance variables
     var playButtonsVisible = false
     var lastSongHandledByViewController : MPMediaItem?
+    var libraryScanCompleted = false
 
     //MARK: controller methods
     override func viewDidLoad() {
@@ -63,6 +64,9 @@ class MainController: UIViewController {
         if Utils.inSimulator {
             //setupSimulator()
         }
+        //search cannot be enabled until the library scan is complete
+        btnSearch.hidden = true
+        //btnSearch.enabled = false
     }
     
     override func shouldAutorotate() -> Bool {
@@ -85,7 +89,9 @@ class MainController: UIViewController {
         //swiping up allows user to select playlist
         var swipeUp = UISwipeGestureRecognizer(target: self, action: "handlePlaylistTapped")
         swipeUp.direction = .Up
-        view.addGestureRecognizer(swipeUp)
+        var swipeDown = UISwipeGestureRecognizer(target: self, action: "handleSearchTapped")
+        swipeDown.direction = .Down
+        view.addGestureRecognizer(swipeDown)
     }
     
     func setupSimulator() {
@@ -478,5 +484,12 @@ class MainController: UIViewController {
         let tot : Int = Int(MusicPlayer.currentSong.playbackDuration)
         let rem : Int = tot - cur
         scrubber.value = Float(cur)
+    }
+
+    //MARK: LibraryScanListener
+    func libraryScanComplete() {
+        Async.main {
+            self.btnSearch.hidden = false
+        }
     }
 }

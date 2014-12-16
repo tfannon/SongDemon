@@ -136,7 +136,7 @@ class SearchArtistController: UIViewController, UITableViewDataSource, UITableVi
         })
         return cell
     }
-*/
+
 
     func updateCell(cell : SearchArtistCell, image : UIImage) {
         Async.main {
@@ -147,6 +147,7 @@ class SearchArtistController: UIViewController, UITableViewDataSource, UITableVi
             //}
         }
     }
+*/
     
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -224,12 +225,7 @@ class SearchArtistController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let artist = self.sections[indexPath.section].artists[indexPath.row].name
         var items = LibraryManager.getArtistSongsWithoutSettingPlaylist(artist)
-        //println(self.tabBarController!.viewControllers!.count)
         var vcs = self.tabBarController!.viewControllers! as [UIViewController]
-        /*
-        var albumController = vcs[1] as SearchAlbumController
-            albumController.Albums = Utils.inSimulator ? [[MPMediaItem]]() : items.0
-        */
         self.tabBarController!.selectedIndex = 1
     }
 }

@@ -110,6 +110,6 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 65.0
+        return 70.0
     }
 }

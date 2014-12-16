@@ -478,7 +478,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="22" sectionHeaderHeight="65" sectionFooterHeight="65" translatesAutoresizingMaskIntoConstraints="NO" id="PIb-ZV-h6o">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="22" sectionHeaderHeight="70" sectionFooterHeight="70" translatesAutoresizingMaskIntoConstraints="NO" id="PIb-ZV-h6o">
                                 <rect key="frame" x="0.0" y="39" width="320" height="591"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <tabBar key="tableFooterView" contentMode="scaleToFill" id="yvo-qS-zfl">
@@ -487,23 +487,23 @@
                                     <items/>
                                 </tabBar>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchAlbumTitleCell" rowHeight="65" id="8J1-41-Imo" userLabel="SearchAlbumTitleCell" customClass="SearchAlbumTitleCell" customModule="SongDemon" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchAlbumTitleCell" rowHeight="70" id="8J1-41-Imo" userLabel="SearchAlbumTitleCell" customClass="SearchAlbumTitleCell" customModule="SongDemon" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8J1-41-Imo" id="qH5-9L-3Ha">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sample-album-art.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="P4o-8d-l5Y" userLabel="Artwork">
-                                                    <rect key="frame" x="8" y="-1" width="65" height="65"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="68" height="68"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Invoking the Majestic Throne of Satan" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TlP-z7-p7v" userLabel="Title">
-                                                    <rect key="frame" x="91" y="8" width="229" height="25"/>
+                                                    <rect key="frame" x="84" y="8" width="229" height="25"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2012" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I9G-jL-hit" userLabel="Info">
-                                                    <rect key="frame" x="91" y="30" width="221" height="16"/>
+                                                    <rect key="frame" x="84" y="30" width="221" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>

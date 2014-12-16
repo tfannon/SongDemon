@@ -31,6 +31,10 @@ class ArtistInfo {
     var unplayedSongs : Int = 0
 }
 
+protocol LibraryScanListener {
+    func libraryScanComplete() -> Void
+}
+
 class LibraryManager {
     //the finals are to get around a performance bug where adding items to a dictionary is very slow
     private final var LikedSongs = Dictionary<String,String>()
@@ -48,6 +52,8 @@ class LibraryManager {
     private var GroupedPlaylist = [[MPMediaItem]]()
     private var PlaylistIndex = -1
     private var PlaylistMode = PlayMode.None
+
+    private var LibraryScanListeners = [LibraryScanListener]()
 
 
     init() {
@@ -105,6 +111,10 @@ class LibraryManager {
             LM.PlaylistIndex = index!
             println("Setting playlist index to: \(currentSong.songInfo))")
         }
+    }
+
+    class func addListener(listener : LibraryScanListener) {
+        LM.LibraryScanListeners.append(listener)
     }
     
     class func scanLibrary() {
@@ -164,6 +174,9 @@ class LibraryManager {
         }
         LM.scanned = true;
         objc_sync_exit(LM.LikedSongs)
+        for x in LM.LibraryScanListeners {
+            x.libraryScanComplete()
+        }
     }
     
     //MARK: typed list functions
