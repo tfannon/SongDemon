@@ -13,11 +13,12 @@ class SearchController: UITabBarController {
 
     @IBOutlet var btnCancel: UIButton!
     
-
     @IBAction func handleCancelClicked(sender: AnyObject) {
         self.dismissViewControllerAnimated(false, completion: nil)
     }
     
+    var currentlyPlayingArtist : String?
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         btnCancel.center = self.tabBar.center
@@ -27,6 +28,13 @@ class SearchController: UITabBarController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.selectedIndex = 1
+        if currentlyPlayingArtist != nil {
+            var searchAlbumController = self.tabBarController!.viewControllers![1] as SearchAlbumController
+            searchAlbumController.selectArtist(currentlyPlayingArtist!)
+            self.selectedIndex = 0
+        }
+        else {
+            self.selectedIndex = 1
+        }
     }
-  }
+}

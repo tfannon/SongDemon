@@ -225,7 +225,8 @@ class SearchArtistController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let artist = self.sections[indexPath.section].artists[indexPath.row].name
         var items = LibraryManager.getArtistSongsWithoutSettingPlaylist(artist)
-        var vcs = self.tabBarController!.viewControllers! as [UIViewController]
+        var searchAlbumController = self.tabBarController!.viewControllers![1] as SearchAlbumController
+        searchAlbumController.selectArtist(artist, manuallySelectedArtist:true)
         self.tabBarController!.selectedIndex = 1
     }
 }

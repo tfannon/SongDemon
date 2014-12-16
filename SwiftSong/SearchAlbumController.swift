@@ -17,7 +17,8 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
     var currentSong : MPMediaItem?
     var previousArtist : String! = nil
     var songsByAlbum : [[MPMediaItem]] = []
-    
+    var manuallySelectedArtist = false
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.dataSource = self
@@ -52,11 +53,7 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
             //the artist has changed.  need to reload
             if previousArtist == nil || currentSong.albumArtist! != previousArtist! {
                 let artist = currentSong.albumArtist!
-                self.lblArtist.text = artist
-                self.songsByAlbum = LibraryManager.getArtistSongsWithoutSettingPlaylist(artist).0
-                self.tableView.reloadData()
-                self.previousArtist = artist
-                self.currentSong = currentSong
+                selectArtist(artist)
                 return true
             }
             //otherwise nothing changed.  just
@@ -67,7 +64,16 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
         }
         return false
     }
-    
+
+    func selectArtist(artist : String, manuallySelectedArtist : Bool = false, forceReload : Bool = false) {
+        self.lblArtist.text = artist
+        self.songsByAlbum = LibraryManager.getArtistSongsWithoutSettingPlaylist(artist).0
+        self.tableView.reloadData()
+        self.previousArtist = artist
+        if forceReload || manuallySelectedArtist {
+            self.tableView.reloadData()
+        }
+    }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return songsByAlbum.count
