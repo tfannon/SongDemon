@@ -81,7 +81,7 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
         let cell = tableView.dequeueReusableCellWithIdentifier("SearchAlbumTrackCell") as SearchAlbumTrackCell
         let song = songsByAlbum[indexPath.section][indexPath.row]
         cell.lblTitle.text = song.title
-        cell.lblTrackNumber.text = "\(song.albumTrackNumber)"
+        cell.lblTrackNumber.text = "\(song.albumTrackNumber)."
         if indexPath == getIndexPathForCurrentSong() {
             cell.imgPlaying.setAnimatableImage(named: "animated_music_bars.gif")
             if MusicPlayer.isPlaying {

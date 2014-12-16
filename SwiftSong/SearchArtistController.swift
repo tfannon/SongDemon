@@ -57,8 +57,11 @@ class SearchArtistController: UIViewController, UITableViewDataSource, UITableVi
         let artist = self.sections[indexPath.section].artists[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier("SearchArtistCell", forIndexPath: indexPath)
             as SearchArtistCell
+        if Utils.inSimulator {
+            return cell
+        }
         cell.lblArtist.text = artist.name
-        cell.imgArtist.image = UIImage(named: "Blank52")
+        cell.imgArtist.image = UIImage(named: "blacklab2")
         let artistInfo = LibraryManager.artistInfo[artist.name]!
         if let artwork = artistInfo.artwork {
             cell.imgArtist.image = artwork.imageWithSize(cell.imgArtist.frame.size)

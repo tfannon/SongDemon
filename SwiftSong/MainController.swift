@@ -165,8 +165,7 @@ class MainController: UIViewController {
     }
    
     func handleSearchTapped() {
-       var vc = self.storyboard!.instantiateViewControllerWithIdentifier("SearchController") as SearchController
-        vc.currentSong = MusicPlayer.currentSong
+        var vc = self.storyboard!.instantiateViewControllerWithIdentifier("SearchController") as SearchController
         presentViewController(vc, animated: false, completion: nil)
     }
     

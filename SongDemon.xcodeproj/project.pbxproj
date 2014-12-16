@@ -13,6 +13,7 @@
 		6522D5C019D7739900FAB3AD /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6522D5BF19D7739900FAB3AD /* FacebookSDK.framework */; };
 		6522D5C519D7ACD900FAB3AD /* FacebookUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522D5C419D7ACD900FAB3AD /* FacebookUtils.swift */; };
 		65304F0D196CAB9E00F985D3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65304F0C196CAB9E00F985D3 /* Utils.swift */; };
+		6552BFF41A3FED7500E77322 /* blacklab2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6552BFF31A3FED7500E77322 /* blacklab2.png */; };
 		6557D9E919971F2800A0A87E /* 1244-record-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 6557D9E519971F2800A0A87E /* 1244-record-selected.png */; };
 		6557D9EA19971F2800A0A87E /* 1244-record-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6557D9E619971F2800A0A87E /* 1244-record-selected@2x.png */; };
 		6557D9EB19971F2800A0A87E /* 1244-record.png in Resources */ = {isa = PBXBuildFile; fileRef = 6557D9E719971F2800A0A87E /* 1244-record.png */; };
@@ -99,6 +100,7 @@
 		6522D5C119D773EB00FAB3AD /* SongDemon-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SongDemon-Bridging-Header.h"; path = "../SongDemon-Bridging-Header.h"; sourceTree = "<group>"; };
 		6522D5C419D7ACD900FAB3AD /* FacebookUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookUtils.swift; sourceTree = "<group>"; };
 		65304F0C196CAB9E00F985D3 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		6552BFF31A3FED7500E77322 /* blacklab2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blacklab2.png; sourceTree = "<group>"; };
 		6557D9E519971F2800A0A87E /* 1244-record-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1244-record-selected.png"; sourceTree = "<group>"; };
 		6557D9E619971F2800A0A87E /* 1244-record-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1244-record-selected@2x.png"; sourceTree = "<group>"; };
 		6557D9E719971F2800A0A87E /* 1244-record.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1244-record.png"; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 		65E7743219528D6100DD31DB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6552BFF31A3FED7500E77322 /* blacklab2.png */,
 				65D614511A19AFE80046E66C /* Blank52.png */,
 				65E7D2AA1A17F01200C430AF /* GoatwhoreLastFM.png */,
 				65E1B2FA1A329FFA00B2C7E0 /* animated_music_bars.gif */,
@@ -418,6 +421,7 @@
 				65587F4719B404A400375C98 /* sample-video-image.png in Resources */,
 				65B81BEC19C91892005EA079 /* 766-arrow-right.png in Resources */,
 				65E7748019528D6100DD31DB /* note120x120.png in Resources */,
+				6552BFF41A3FED7500E77322 /* blacklab2.png in Resources */,
 				65F7085E19981D1A00179340 /* play-75.png in Resources */,
 				65DC55E4198B3D0000ABE255 /* 1176-bulleted-list.png in Resources */,
 				6557D9EB19971F2800A0A87E /* 1244-record.png in Resources */,

@@ -13,9 +13,7 @@ class SearchController: UITabBarController {
 
     @IBOutlet var btnCancel: UIButton!
     
-    var currentSong : MPMediaItem?
-    var previousSong : MPMediaItem?
-    
+
     @IBAction func handleCancelClicked(sender: AnyObject) {
         self.dismissViewControllerAnimated(false, completion: nil)
     }
@@ -23,11 +21,12 @@ class SearchController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         btnCancel.center = self.tabBar.center
+        let f = btnCancel.frame
+        btnCancel.frame = CGRect(x: f.origin.x - 10, y: f.origin.y, width: f.width + 20, height: f.height)
         self.view.addSubview(btnCancel)
     }
     
     override func viewWillAppear(animated: Bool) {
-        println("SearchController about to appear")
         self.selectedIndex = 1
     }
   }
