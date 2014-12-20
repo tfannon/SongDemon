@@ -18,6 +18,7 @@ class SearchArtistController: UIViewController, UITableViewDataSource, UITableVi
     let names = Utils.inSimulator ? ["Goatwhore", "Sleep"] : ITunesUtils.getArtists()
 
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.backgroundColor = UIColor.blackColor()
@@ -229,5 +230,6 @@ class SearchArtistController: UIViewController, UITableViewDataSource, UITableVi
         searchAlbumController.selectedArtist = artist
         searchAlbumController.artistSelectedWithPicker = true
         self.tabBarController!.selectedIndex = 1
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
 }

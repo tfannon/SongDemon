@@ -424,6 +424,7 @@ class LibraryManager {
     
     //return tuple of grouped songs and songs
     class func getArtistSongsWithoutSettingPlaylist(artist : String) -> ([[MPMediaItem]], [MPMediaItem]) {
+        println("getArtistSongs")
         //album->*song
         var songs = [MPMediaItem]()
         var groupedSongs = [[MPMediaItem]]()
@@ -452,7 +453,7 @@ class LibraryManager {
         for album in groupedSongs {
             songs.extend(album)
         }
-        outputSongs(songs)
+        //outputSongs(songs)
         return (groupedSongs, songs)
     }
     
