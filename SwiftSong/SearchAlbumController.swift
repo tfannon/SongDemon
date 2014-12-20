@@ -13,11 +13,10 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var lblArtist: UILabel!
 
-    
-    var currentSong : MPMediaItem?
     var previousArtist : String! = nil
     var songsByAlbum : [[MPMediaItem]] = []
-    var manuallySelectedArtist = false
+    var selectedArtist : String! = nil
+    var artistSelectedWithPicker : Bool = false
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +32,10 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if reloadCheck() {
+        //if the artist changed, reload the table
+        artistCheck()
+        //if there is a song being played and we came in from search button, scroll to playing song
+        if !artistSelectedWithPicker && MusicPlayer.currentSong != nil {
             let indexPath = getIndexPathForCurrentSong()
             tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
         }
@@ -41,37 +43,20 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
     
     func getIndexPathForCurrentSong() -> NSIndexPath {
         let albums : [String] = songsByAlbum.map { album in return album[0].albumTitle  }
-        let section = albums.find { $0 == self.currentSong!.albumTitle }!
-        let row = songsByAlbum[section].find {  $0.title == self.currentSong!.title }!
+        let section = albums.find { $0 == MusicPlayer.currentSong!.albumTitle }!
+        let row = songsByAlbum[section].find {  $0.title == MusicPlayer.currentSong!.title }!
         let indexPath = NSIndexPath(forRow: row, inSection: section)
         return indexPath
     }
     
-    func reloadCheck() -> Bool {
-        println ("reload check")
-        if let currentSong = MusicPlayer.currentSong {
-            //the artist has changed.  need to reload
-            if previousArtist == nil || currentSong.albumArtist! != previousArtist! {
-                let artist = currentSong.albumArtist!
-                selectArtist(artist)
-                return true
-            }
-            //otherwise nothing changed.  just
-        }
-            //no current song playing, bounce back to artist picker
-        else {
-            self.tabBarController!.selectedIndex = 0
-        }
-        return false
-    }
-
-    func selectArtist(artist : String, manuallySelectedArtist : Bool = false, forceReload : Bool = false) {
-        self.lblArtist.text = artist
-        self.songsByAlbum = LibraryManager.getArtistSongsWithoutSettingPlaylist(artist).0
-        self.tableView.reloadData()
-        self.previousArtist = artist
-        if forceReload || manuallySelectedArtist {
+    //returns true if artist changed
+    func artistCheck() {
+        println ("artist check")
+        if previousArtist == nil || selectedArtist != previousArtist {
+            self.lblArtist.text = selectedArtist
+            self.songsByAlbum = LibraryManager.getArtistSongsWithoutSettingPlaylist(selectedArtist).0
             self.tableView.reloadData()
+            self.previousArtist = selectedArtist
         }
     }
     
@@ -88,7 +73,7 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
         let song = songsByAlbum[indexPath.section][indexPath.row]
         cell.lblTitle.text = song.title
         cell.lblTrackNumber.text = "\(song.albumTrackNumber)."
-        if indexPath == getIndexPathForCurrentSong() {
+        if !artistSelectedWithPicker && indexPath == getIndexPathForCurrentSong() {
             cell.imgPlaying.setAnimatableImage(named: "animated_music_bars.gif")
             if MusicPlayer.isPlaying {
                 cell.imgPlaying.startAnimatingGIF()

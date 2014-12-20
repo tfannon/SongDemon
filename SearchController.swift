@@ -30,11 +30,12 @@ class SearchController: UITabBarController {
     override func viewWillAppear(animated: Bool) {
         if currentlyPlayingArtist != nil {
             var searchAlbumController = self.tabBarController!.viewControllers![1] as SearchAlbumController
-            searchAlbumController.selectArtist(currentlyPlayingArtist!)
-            self.selectedIndex = 0
+            searchAlbumController.selectedArtist = currentlyPlayingArtist!
+            searchAlbumController.artistSelectedWithPicker = false
+            self.selectedIndex = 1
         }
         else {
-            self.selectedIndex = 1
+            self.selectedIndex = 0
         }
     }
 }
