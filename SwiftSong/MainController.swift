@@ -52,13 +52,15 @@ class MainController: UIViewController, LibraryScanListener {
    
     //MARK: instance variables
     var playButtonsVisible = false
+    //this is used so the event handlers can decide if they need to do something because song changed
     var lastSongHandledByViewController : MPMediaItem?
-    var libraryScanCompleted = false
+   
 
     //MARK: controller methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAppearance()
+        setupGestures()
         setupNotifications()
         self.setNeedsStatusBarAppearanceUpdate()
         if Utils.inSimulator {
@@ -82,12 +84,18 @@ class MainController: UIViewController, LibraryScanListener {
         //these allow the large system images to scale
         btnPlay.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Fill
         btnPlay.contentVerticalAlignment = UIControlContentVerticalAlignment.Fill
-        
+    }
+    
+    func setupGestures() {
+        //tapping on the artwork pauses/plays
         viewArtwork.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleImageTapped"))
-
-        //swiping up allows user to select playlist
+        
+        //swiping up brings up playlist picker
         var swipeUp = UISwipeGestureRecognizer(target: self, action: "handlePlaylistTapped")
         swipeUp.direction = .Up
+        view.addGestureRecognizer(swipeUp)
+        
+        //swiping down brings up search
         var swipeDown = UISwipeGestureRecognizer(target: self, action: "handleSearchTapped")
         swipeDown.direction = .Down
         view.addGestureRecognizer(swipeDown)
@@ -114,27 +122,6 @@ class MainController: UIViewController, LibraryScanListener {
         */
     }
 
-    /* we will animate the transition of the background image when buttons fade in and out */
-    func fadePlayButtonsIn() {
-        NSTimer.scheduledTimerWithTimeInterval(0.1, target:self, selector:"fadeOutImage", userInfo:nil, repeats:false);
-        viewPlayOverlay.alpha = 0.7
-        playButtonsVisible = true
-    }
-    
-    func fadePlayButtonsOut() {
-        NSTimer.scheduledTimerWithTimeInterval(0.1, target:self, selector:"fadeInImage", userInfo:nil, repeats:false);
-        viewPlayOverlay.alpha = 0.2  //alpha = 0.0 dont receive touch events
-        playButtonsVisible = false
-    }
-    
-    func fadeOutImage() {
-        UIView.animateWithDuration(0.25, animations: { self.imgSong.alpha = 0.2 })
-    }
-    
-    func fadeInImage() {
-        UIView.animateWithDuration(0.25, animations: { self.imgSong.alpha = 1.0 })
-    }
-    
     func handlePrevTapped() {
         MusicPlayer.reverse()
     }
@@ -219,18 +206,6 @@ class MainController: UIViewController, LibraryScanListener {
         self.presentViewController(alert, animated: true, completion: {})
     }
     
-    func displayFadingStatus(message : String) {
-        self.lblStatus.text = message
-    }
-    
-    func hideImage() {
-        self.imgSong.hidden = true
-    }
-    
-    func unhideImageAndBlankStatus() {
-        imgSong.hidden = false
-        lblStatus.text = ""
-    }
     
     func handlePlaylistTapped() {
         var alert = UIAlertController(title: "Choose songs to play", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
@@ -318,6 +293,15 @@ class MainController: UIViewController, LibraryScanListener {
         }
     }
     
+    func handleDislikeTapped() {
+        LibraryManager.addToDisliked(MusicPlayer.currentSong)
+        MusicPlayer.forward()
+        //reset the liked state
+        changeLikeState(.Disliked)
+    }
+
+    
+    //mark helpers
     func changeLikeState(state : LikeState) {
         var image : String
         switch state {
@@ -334,12 +318,50 @@ class MainController: UIViewController, LibraryScanListener {
         }
     }
     
-    func handleDislikeTapped() {
-        LibraryManager.addToDisliked(MusicPlayer.currentSong)
-        MusicPlayer.forward()
-        //reset the liked state
-        changeLikeState(.Disliked)
+    /* we will animate the transition of the background image when buttons fade in and out */
+    func fadePlayButtonsIn() {
+        NSTimer.scheduledTimerWithTimeInterval(0.1, target:self, selector:"fadeOutImage", userInfo:nil, repeats:false);
+        viewPlayOverlay.alpha = 0.7
+        playButtonsVisible = true
     }
+    
+    func fadePlayButtonsOut() {
+        NSTimer.scheduledTimerWithTimeInterval(0.1, target:self, selector:"fadeInImage", userInfo:nil, repeats:false);
+        viewPlayOverlay.alpha = 0.2  //alpha = 0.0 dont receive touch events
+        playButtonsVisible = false
+    }
+    
+    func fadeOutImage() {
+        UIView.animateWithDuration(0.25, animations: { self.imgSong.alpha = 0.2 })
+    }
+    
+    func fadeInImage() {
+        UIView.animateWithDuration(0.25, animations: { self.imgSong.alpha = 1.0 })
+    }
+    
+    
+    func displayFadingStatus(message : String) {
+        self.lblStatus.text = message
+    }
+    
+    func hideImage() {
+        self.imgSong.hidden = true
+    }
+    
+    func unhideImageAndBlankStatus() {
+        imgSong.hidden = false
+        lblStatus.text = ""
+    }
+    
+    func transitionSongImage(toImage : UIImage?) {
+        if toImage != nil {
+            UIView.transitionWithView(imgSong, duration: 1, options: .TransitionCrossDissolve, animations: { self.imgSong.image = toImage }, completion: nil)
+        } else {
+            self.imgSong.image = nil
+        }
+    }
+
+
  
     //MARK: notifications
     func setupNotifications() {
@@ -416,13 +438,6 @@ class MainController: UIViewController, LibraryScanListener {
         fadePlayButtonsOut()
     }
 
-    func transitionSongImage(toImage : UIImage?) {
-        if toImage != nil {
-            UIView.transitionWithView(imgSong, duration: 1, options: .TransitionCrossDissolve, animations: { self.imgSong.image = toImage }, completion: nil)
-        } else {
-            self.imgSong.image = nil
-        }
-    }
     
     func updatePlayState() {
         if MusicPlayer.currentSong == self.lastSongHandledByViewController {
@@ -491,6 +506,7 @@ class MainController: UIViewController, LibraryScanListener {
     func libraryScanComplete() {
         Async.main {
             self.btnSearch.hidden = false
+            self.displayFadingStatus("\(LibraryManager.songCount) songs in library")
         }
     }
 }

@@ -41,6 +41,7 @@ class LibraryManager {
     private final var DislikedSongs = Dictionary<String,String>()
     private final var QueuedSongs = Dictionary<String,String>()
     private final var ArtistInfos = Dictionary<String,ArtistInfo>()
+    private var songCount = 0
     //computed at load
     private final var RatedSongs = Array<String>()
     private final var LowRatedSongs = Array<String>()
@@ -84,7 +85,12 @@ class LibraryManager {
         println()
     }
     
-    //MARK: no class properties yet
+    //MARK: only computed class properties
+    
+    class var songCount : Int {
+        return LM.songCount
+    }
+    
     class var currentPlaylist : [MPMediaItem] {
         return LM.Playlist
     }
@@ -129,6 +135,7 @@ class LibraryManager {
         var unplayed = 0;
         var start = NSDate()
         if let allSongs = ITunesUtils.getAllSongs() {
+            LM.songCount = allSongs.count
             for song in allSongs {
                 //println(song.albumArtist!)
                 if let artist = song.albumArtist {
@@ -179,7 +186,7 @@ class LibraryManager {
         }
     }
     
-    //MARK: typed list functions
+    //MARK: functions for adding to lists
 
     class func addToLiked(item:MPMediaItem) {
         addToList(LIKED_LIST, list: &LM.LikedSongs, item: item)
@@ -195,7 +202,6 @@ class LibraryManager {
         removeFromLiked(item)
     }
 
-    //todo; can't one function get both of these?
     class func addToQueued(item: MPMediaItem) {
         addToList(QUEUED_LIST, list: &LM.QueuedSongs, item: item)
     }
@@ -236,7 +242,8 @@ class LibraryManager {
         return false;
     }
     
-    //MARK: generic functions which receive their args from public typed functions
+    
+    //MARK: private list helpers
     
     private class func addToList(listName:String, inout list:Dictionary<String,String>, item:MPMediaItem?) {
         if (item != nil) {

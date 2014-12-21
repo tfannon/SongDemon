@@ -25,6 +25,12 @@ class SearchController: UITabBarController {
         let f = btnCancel.frame
         btnCancel.frame = CGRect(x: f.origin.x - 10, y: f.origin.y, width: f.width + 20, height: f.height)
         self.view.addSubview(btnCancel)
+        
+        
+        //swiping up allows user to select playlist
+        var swipeUp = UISwipeGestureRecognizer(target: self, action: "handleCancelClicked:")
+        swipeUp.direction = .Up
+        view.addGestureRecognizer(swipeUp)
     }
     
     override func viewWillAppear(animated: Bool) {
