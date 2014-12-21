@@ -361,15 +361,22 @@ class LibraryManager {
         LM.Playlist = [MPMediaItem]()
         LM.GroupedPlaylist = [[MPMediaItem]]()
         if currentSong != nil {
-            var results = getArtistSongsWithoutSettingPlaylist(currentSong)
-            LM.Playlist = results.1
-            LM.GroupedPlaylist = results.0
+            (LM.GroupedPlaylist, LM.Playlist) = getArtistSongsWithoutSettingPlaylist(currentSong)
         }
         let time = stopwatch.stop()
         println("Built artist songlist with \(LM.GroupedPlaylist.count) albums and \(LM.Playlist.count) songs in \(time)ms")
         LM.PlaylistIndex = find(LM.Playlist, currentSong!)!
         LM.PlaylistMode = .Artist
         return LM.Playlist
+    }
+    
+    //this services the search functionality which has selected a song via the artist/album picker
+    class func setPlaylistFromSearch(songsForPlaylist : [[MPMediaItem]], songsForQueue : [MPMediaItem], songToStart : MPMediaItem) {
+        LM.PlaylistMode = .Artist
+        LM.Playlist = songsForQueue
+        LM.GroupedPlaylist = songsForPlaylist
+        LM.PlaylistIndex = find(LM.Playlist, songToStart)!
+        MusicPlayer.queuePlaylist(songsForQueue, songToStart: songToStart, startNow: true)
     }
     
     class func getAlbumSongs(currentSong : MPMediaItem?) -> [MPMediaItem] {

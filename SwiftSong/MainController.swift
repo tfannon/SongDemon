@@ -62,11 +62,10 @@ class MainController: UIViewController, LibraryScanListener {
         setupNotifications()
         self.setNeedsStatusBarAppearanceUpdate()
         if Utils.inSimulator {
-            //setupSimulator()
+            //do anything specific to get simulator working
         }
         //search cannot be enabled until the library scan is complete
         btnSearch.hidden = true
-        //btnSearch.enabled = false
     }
     
     override func shouldAutorotate() -> Bool {
@@ -293,7 +292,7 @@ class MainController: UIViewController, LibraryScanListener {
                 if indexOfCurrentSong + 1 < songs.count {
                     nextSong = songs[indexOfCurrentSong + 1]
                 }
-                MusicPlayer.queuePlaylist(songs, itemToStart: nextSong)
+                MusicPlayer.queuePlaylist(songs, songToStart: nextSong)
             }
             else {
                 MusicPlayer.play(songs)

@@ -15,6 +15,7 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
 
     var previousArtist : String! = nil
     var songsByAlbum : [[MPMediaItem]] = []
+    var songsForPlaylist : [MPMediaItem] = []
     var selectedArtist : String! = nil
     var artistSelectedWithPicker : Bool = false
         
@@ -41,6 +42,7 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
         }
     }
     
+    //MARK: helpers for getting song/artist
     func getIndexPathForCurrentSong() -> NSIndexPath {
         let albums : [String] = songsByAlbum.map { album in return album[0].albumTitle  }
         let section = albums.find { $0 == MusicPlayer.currentSong!.albumTitle }!
@@ -54,11 +56,15 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
         println ("artist check")
         if previousArtist == nil || selectedArtist != previousArtist {
             self.lblArtist.text = selectedArtist
-            self.songsByAlbum = LibraryManager.getArtistSongsWithoutSettingPlaylist(selectedArtist).0
+            //this call returns a tuple,  the first value are the songs grouped by album. 
+            //the second is a straight list of songs that can be sent to media player
+            (self.songsByAlbum, self.songsForPlaylist) = LibraryManager.getArtistSongsWithoutSettingPlaylist(selectedArtist)
             self.tableView.reloadData()
             self.previousArtist = selectedArtist
         }
     }
+    
+    //MARK:  UITableViewDataSource
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return songsByAlbum.count
@@ -102,5 +108,13 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 70.0
+    }
+    
+    //MARK: UITableViewDelegate
+    //selection should put the all the artists songs in playlist, select that song, then return to title screen
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let song = songsByAlbum[indexPath.section][indexPath.row]
+        LibraryManager.setPlaylistFromSearch(self.songsByAlbum, songsForQueue: self.songsForPlaylist, songToStart: song)
+        self.dismissViewControllerAnimated(false, completion: nil)
     }
 }

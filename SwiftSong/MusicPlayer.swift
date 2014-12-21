@@ -64,9 +64,12 @@ class MusicPlayer {
         }
     }
     
-    class func queuePlaylist(items: [MPMediaItem], itemToStart : MPMediaItem? = nil) {
-        MP.queuedPlaylist = items;
-        MP.songToStartOnQueuedPlaylist = itemToStart;
+    class func queuePlaylist(songs: [MPMediaItem], songToStart : MPMediaItem? = nil, startNow : Bool = false) {
+        MP.queuedPlaylist = songs;
+        MP.songToStartOnQueuedPlaylist = songToStart;
+        if startNow {
+            playSongsInQueue()
+        }
     }
     
     class func playSongsInQueue() {
