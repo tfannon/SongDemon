@@ -9,14 +9,16 @@
 import UIKit
 import MediaPlayer
 
+protocol ICellIsPlaying {
+    var imgStatus : UIImageView! { get }
+}
+
 class PlaylistController: UITableViewController {
 
     var sampleArtists = ["Goatwhore", "Goatwhore"]
     var sampleAlbums = ["Blood For The Master", "Constricting Rage of the Merciless"]
     var sampleSongs = ["In Deathless Tradition", "FBS"]
     var sampleImages = ["sample-album-art.jpg", "sample-album-art2.jpg"]
-    
-    var playingSongImage = UIImage(named: "play-75@2x.png")!
     
     @IBOutlet var lblHeaderTitle: UILabel!
     @IBOutlet var viewHeader: UIView!
@@ -25,7 +27,7 @@ class PlaylistController: UITableViewController {
         super.viewDidLoad()
 
         //if no image exists dont screw up image
-        playingSongImage = playingSongImage.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        //playingSongImage = playingSongImage.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         self.tableView.backgroundColor = UIColor.blackColor()
         //empty cells wont create lines
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
@@ -108,33 +110,46 @@ class PlaylistController: UITableViewController {
             cell2.lblArtistAlbum.text = "\(sampleArtists[indexPath.row]) - \(sampleAlbums[indexPath.row])"
             cell2.imgArtwork.image = UIImage(named: sampleImages[indexPath.row])
             cell2.imgStatus.tintColor = UIColor.lightGrayColor()
-            cell2.imgStatus.image = playingSongImage
             return cell2
         }
         
         var song : MPMediaItem;
-        var isPlaying : Bool
+        var isCurrentSong : Bool
         switch (mode) {
         
         case (.Artist), (.Album):
             song = LibraryManager.groupedPlaylist[indexPath.section][indexPath.row]
-            isPlaying = getIndexPath() == indexPath
+            isCurrentSong = getIndexPath() == indexPath
             let cell2 = cell as PlaylistAlbumSongCell
             cell2.lblTrack.text = "\(song.albumTrackNumber)"
             cell2.lblTitle.text = song.title
-            cell2.imgStatus.image = isPlaying ? playingSongImage : nil
-        
+            setIsPlayingImage(cell2, cellIsSelectedSong: isCurrentSong)
+           
         default:
             let cell2 = cell as PlaylistCell
             song = LibraryManager.groupedPlaylist[0][indexPath.row]
-            isPlaying = LibraryManager.currentPlaylistIndex == indexPath.row
+            isCurrentSong = LibraryManager.currentPlaylistIndex == indexPath.row
             cell2.lblTitle.text = song.title
             cell2.lblArtistAlbum.text =  "\(song.albumArtist) - \(song.albumTitle)"
-            cell2.imgStatus.image = isPlaying ? playingSongImage : nil
+            setIsPlayingImage(cell2, cellIsSelectedSong: isCurrentSong)
             cell2.imgArtwork.image = song.getArtworkWithSize(cell2.imgArtwork.frame.size)
         }
         
         return cell
+    }
+    
+    func setIsPlayingImage(cell : ICellIsPlaying, cellIsSelectedSong : Bool) {
+        if cellIsSelectedSong {
+            cell.imgStatus.setAnimatableImage(named: "animated_music_bars.gif")
+            if MusicPlayer.isPlaying {
+                cell.imgStatus.startAnimatingGIF()
+            }
+            cell.imgStatus.hidden = false
+        }
+        else {
+            cell.imgStatus.stopAnimatingGIF()
+            cell.imgStatus.hidden = true
+        }
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

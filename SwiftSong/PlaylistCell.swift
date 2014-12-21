@@ -8,35 +8,13 @@
 
 import UIKit
 
-class PlaylistCell: UITableViewCell {
+class PlaylistCell: UITableViewCell, ICellIsPlaying {
 
     @IBOutlet var imgArtwork: UIImageView!
     @IBOutlet var lblTitle: UILabel!
     @IBOutlet var lblArtistAlbum: UILabel!
     @IBOutlet var imgStatus: UIImageView!
-    
-    /*
-    required init(coder aDecoder: NSCoder!) {
-        super.init(coder: aDecoder)
-    }
-    
-    override init(style: UITableViewCellStyle, reuseIdentifier: String) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        // Initialization code
-    }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    */
-
+   
 }
 
 
