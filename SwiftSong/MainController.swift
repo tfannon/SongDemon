@@ -128,6 +128,7 @@ class MainController: UIViewController, LibraryScanListener {
     
     func handlePlayTapped() {
         MusicPlayer.playPressed()
+        updatePlayButton()
     }
     
     func handleNextTapped() {
@@ -443,6 +444,10 @@ class MainController: UIViewController, LibraryScanListener {
         if MusicPlayer.currentSong == self.lastSongHandledByViewController {
             return
         }
+        updatePlayButton()
+    }
+    
+    func updatePlayButton() {
         var image: UIImage;
         if MusicPlayer.isPlaying {
             image = UIImage(named:"pause.png")!;
