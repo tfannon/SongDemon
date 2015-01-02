@@ -211,6 +211,11 @@ class MainController: UIViewController, LibraryScanListener {
     func handlePlaylistTapped() {
         var alert = UIAlertController(title: "Choose songs to play", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         
+        alert.addAction(UIAlertAction(title: "Recently added", style: .Default, handler: { action in
+            var songs = LibraryManager.getRecentlyAdded()
+            self.postPlaylistSelection(songs: songs)
+        }))
+        
         alert.addAction(UIAlertAction(title: "My queue", style: .Default, handler: { action in
             var songs = LibraryManager.getQueuedSongs()
             self.postPlaylistSelection(songs: songs)

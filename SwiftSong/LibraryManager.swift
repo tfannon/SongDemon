@@ -4,6 +4,8 @@ import MediaPlayer
 let LIKED_LIST = "Liked"
 let DISLIKED_LIST = "Disliked"
 let QUEUED_LIST = "Queued"
+let RECENTLY_ADDED_LIST = "Recently Added"
+
 private let LM = LibraryManager()
 
 
@@ -360,6 +362,25 @@ class LibraryManager {
         LM.PlaylistMode = .Mix
         return mixedSongs;
     }
+    
+    class func getRecentlyAdded() -> [MPMediaItem] {
+        scanLibrary()
+        let start = NSDate()
+        var songs = [MPMediaItem]()
+        let itunesPlaylists = ITunesUtils.getPlaylists(filter: [RECENTLY_ADDED_LIST])
+        if let recent = itunesPlaylists[RECENTLY_ADDED_LIST] {
+            for x in recent {
+                if let song = ITunesUtils.getSongFrom(x) {
+                    songs.append(song)
+                }
+            }
+        }
+        let time = NSDate().timeIntervalSinceDate(start) * 1000
+        println("Built recently added song list with \(songs.count) songs in \(time)ms")
+        makePlaylistFromSongs(songs)
+        return songs
+    }
+
     
     //grab a bunch of songs by current artist
     class func getArtistSongs(currentSong : MPMediaItem?) -> [MPMediaItem] {
