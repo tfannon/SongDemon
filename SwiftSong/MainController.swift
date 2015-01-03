@@ -43,6 +43,7 @@ class MainController: UIViewController, LibraryScanListener {
     @IBOutlet var btnShare: UIButton!
     @IBOutlet var btnAddToQueue: UIButton!
 
+    @IBOutlet weak var imgLikedInITunes: UIImageView!
     @IBAction func playlistTapped(AnyObject) { handlePlaylistTapped() }
     @IBAction func searchTapped(sender: AnyObject) { handleSearchTapped() }
     @IBAction func likeTapped(sender: AnyObject) { handleLikeTapped()}
@@ -84,6 +85,9 @@ class MainController: UIViewController, LibraryScanListener {
         //these allow the large system images to scale
         btnPlay.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Fill
         btnPlay.contentVerticalAlignment = UIControlContentVerticalAlignment.Fill
+        
+        imgLikedInITunes.image = imgLikedInITunes.image?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        imgLikedInITunes.tintColor = UIColor.blackColor()
     }
     
     func setupGestures() {
@@ -311,7 +315,7 @@ class MainController: UIViewController, LibraryScanListener {
     func changeLikeState(state : LikeState) {
         var image : String
         switch state {
-        case (.Liked) :
+        case (.Liked), (.LikedInITunes) :
             image = "777-thumbs-up-selected.png"
         case (.Disliked) :
             image = "777-thumbs-up.png"
@@ -321,6 +325,9 @@ class MainController: UIViewController, LibraryScanListener {
         }
         if !image.isEmpty {
             btnLike.setImage(UIImage(named: image), forState: UIControlState.Normal)
+            if state == .LikedInITunes {
+                imgLikedInITunes.hidden = false
+            }
         }
     }
     
@@ -404,6 +411,7 @@ class MainController: UIViewController, LibraryScanListener {
     //MARK: notification handlers
     func updateSongInfo() {
         lblStatus.text = ""
+        imgLikedInITunes.hidden = true
         
         if Utils.inSimulator {
             return
@@ -419,9 +427,14 @@ class MainController: UIViewController, LibraryScanListener {
             lblArtist.text = "\(item.albumArtist) - \(item.albumTitle)"
             lblSong.text = item.title
             //if it was a liked item, change the state
-            var state = LibraryManager.isLiked(item) ?
-                LikeState.Liked : LikeState.None
-            changeLikeState(state)
+            var likedState : LikeState = .None
+            if LibraryManager.isLikedInITunes(item) {
+                likedState = .LikedInITunes
+            }
+            else if LibraryManager.isLiked(item) {
+                likedState = .Liked
+            }
+            changeLikeState(likedState)
     
             var newImage = (item.artwork != nil) ?
                 item.artwork.imageWithSize(imgSong.frame.size) : nil

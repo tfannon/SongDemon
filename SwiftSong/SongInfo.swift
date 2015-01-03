@@ -7,14 +7,14 @@
 //
 
 
-struct SongInfo {
-    let Id : String
-    let playCount : Int
-    let rating : Int
-
-    init (id : String, rating : Int, playCount : Int) {
-        self.Id = id;
-        self.rating = rating;
-        self.playCount = playCount
-    }
-}
+//struct SongInfo {
+//    let Id : String
+//    let playCount : Int
+//    let rating : Int
+//
+//    init (id : String, rating : Int, playCount : Int) {
+//        self.Id = id;
+//        self.rating = rating;
+//        self.playCount = playCount
+//    }
+//}

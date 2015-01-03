@@ -11,6 +11,7 @@ private let LM = LibraryManager()
 
 enum LikeState {
     case Liked
+    case LikedInITunes
     case Disliked
     case None
 }
@@ -39,10 +40,14 @@ protocol LibraryScanListener {
 
 class LibraryManager {
     //the finals are to get around a performance bug where adding items to a dictionary is very slow
+    //these are really sets but Swift doesnt have a Set type
     private final var LikedSongs = Dictionary<String,String>()
     private final var DislikedSongs = Dictionary<String,String>()
     private final var QueuedSongs = Dictionary<String,String>()
+    
     private final var ArtistInfos = Dictionary<String,ArtistInfo>()
+    private final var LikedInITunes = Dictionary<String,String>()
+    
     private var songCount = 0
     //computed at load
     private final var RatedSongs = Array<String>()
@@ -114,10 +119,9 @@ class LibraryManager {
     }
     
     class func changePlaylistIndex(currentSong : MPMediaItem) {
-        var index = find(LM.Playlist, currentSong)
-        if index != nil {
-            LM.PlaylistIndex = index!
-            println("Setting playlist index to: \(currentSong.songInfo))")
+        if let index = find(LM.Playlist, currentSong) {
+            LM.PlaylistIndex = index
+            //println("Setting playlist index to: \(currentSong.songInfo))")
         }
     }
 
@@ -142,7 +146,7 @@ class LibraryManager {
                 //println(song.albumArtist!)
                 if let artist = song.albumArtist {
                     var info : ArtistInfo? = LM.ArtistInfos[artist]
-                    //grab some artwork
+                    //grab some artwork to be used in the artist picker
                     if info == nil {
                         info = ArtistInfo()
                         LM.ArtistInfos[artist] = info
@@ -155,14 +159,15 @@ class LibraryManager {
                     
                     //an album must have an album artist and title and a rating to make the cut
                     if song.albumArtist != nil && song.title != nil {
+                        
                         if song.rating >= 1 {
-                            //var info = SongInfo(id: song.persistentID.description, rating:song.rating, playCount:song.playCount)
                             switch (song.rating) {
-                            case 0:""
+                           
                             case 1:
                                 LM.LowRatedSongs.append(song.hashKey)
                             default:
                                 LM.RatedSongs.append(song.hashKey)
+                                LM.LikedInITunes[song.hashKey] = song.hashKey
                                 //increment the artists liked songs
                                 info!.likedSongs++
                             }
@@ -233,6 +238,13 @@ class LibraryManager {
             }
         }
         return false;
+    }
+    
+    class func isLikedInITunes(item:MPMediaItem?) -> Bool {
+        if let song = LM.LikedInITunes[item!.hashKey] {
+            return true
+        }
+        return false
     }
     
     class func isDisliked(item:MPMediaItem?) -> Bool {

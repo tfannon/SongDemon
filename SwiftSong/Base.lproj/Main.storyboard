@@ -135,6 +135,11 @@
                                             <action selector="shareTapped:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="mSO-nG-cFe"/>
                                         </connections>
                                     </button>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="1269-itunes.png" translatesAutoresizingMaskIntoConstraints="NO" id="hAY-1g-u0u" userLabel="Image - ITunes ">
+                                        <rect key="frame" x="127" y="27" width="15" height="15"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -165,6 +170,7 @@
                         <outlet property="btnPrev" destination="Apr-UP-LMO" id="Osc-8m-k6r"/>
                         <outlet property="btnSearch" destination="QdN-QZ-wnH" id="egI-ku-wNf"/>
                         <outlet property="btnShare" destination="9fb-Fh-eyw" id="zyc-qh-5pc"/>
+                        <outlet property="imgLikedInITunes" destination="hAY-1g-u0u" id="sxr-wL-Hx9"/>
                         <outlet property="imgSong" destination="cfx-bf-GNN" id="b8b-4y-1k9"/>
                         <outlet property="lblArtist" destination="38" id="name-outlet-38"/>
                         <outlet property="lblSong" destination="39" id="name-outlet-39"/>
@@ -679,6 +685,7 @@
     </scenes>
     <resources>
         <image name="1176-bulleted-list.png" width="28" height="19"/>
+        <image name="1269-itunes.png" width="28" height="28"/>
         <image name="702-share.png" width="21" height="28"/>
         <image name="708-search.png" width="28" height="28"/>
         <image name="765-arrow-left.png" width="14" height="28"/>
