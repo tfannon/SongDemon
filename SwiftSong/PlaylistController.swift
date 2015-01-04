@@ -44,6 +44,7 @@ class PlaylistController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         redrawList()
+        LibraryManager.serializeCurrentPlaylist()
     }
     
     

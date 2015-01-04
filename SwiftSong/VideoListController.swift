@@ -12,7 +12,7 @@ class VideoListController : UITableViewController {
     
     @IBOutlet var lblHeader: UILabel!
     
-    var data : [JSONValue] = [JSONValue]()
+    var data : [JSON] = [JSON]()
     //var nextToken : String = ""
 
     override func viewDidLoad() {

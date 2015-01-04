@@ -7,22 +7,24 @@
 //
 
 import UIKit
+import AVFoundation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
                             
     var window: UIWindow?
+    var audioPlayer : AVAudioPlayer! = nil
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
-        
         setupAppearance()
+        playAudio()
+        
         FBLoginView.self
         return true
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String, annotation: AnyObject?) -> Bool {
-        
         var wasHandled = FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication)
         return wasHandled
     }
@@ -31,10 +33,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     }
+    
+    func playAudio() {
+        var error : NSError?
+        //let fileURL:NSURL = NSBundle.mainBundle().URLForResource("buzz", withExtension: "mp3")!
+        //play background audio to keep app running  
+        let fileURL:NSURL = NSBundle.mainBundle().URLForResource("1sec", withExtension: "mp3")!
+        audioPlayer = AVAudioPlayer(contentsOfURL: fileURL, error: &error)
+        audioPlayer.numberOfLoops = -1
+        AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryAmbient, error:nil)
+        AVAudioSession.sharedInstance().setActive(true, error: nil)
+        audioPlayer.prepareToPlay()
+        audioPlayer.play()
+    }
 
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        println("entering background")
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
@@ -49,6 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        LibraryManager.serializeCurrentPlaylist()
         FBSession.activeSession().close()
     }
     

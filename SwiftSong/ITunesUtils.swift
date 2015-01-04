@@ -24,6 +24,13 @@ class ITunesUtils {
         }
     }
     
+    class func getSongFrom(persistentIds : [String]) -> [MPMediaItem] {
+        let query = MPMediaQuery.songsQuery()
+        query.addFilterPredicate(MPMediaPropertyPredicate(value: persistentIds, forProperty: MPMediaItemPropertyPersistentID))
+        println (query.items)
+        return query.items as [MPMediaItem]
+    }
+
     class func getArtists() -> [String] {
         var retval = [String]()
         let query = MPMediaQuery.artistsQuery()

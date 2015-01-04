@@ -4,6 +4,8 @@ import MediaPlayer
 let LIKED_LIST = "Liked"
 let DISLIKED_LIST = "Disliked"
 let QUEUED_LIST = "Queued"
+let CURRENT_LIST = "Current"
+
 private let LM = LibraryManager()
 
 
@@ -58,7 +60,7 @@ class LibraryManager {
 
 
     init() {
-        println("storage objects being initialized from NSDefaults\n")
+        //println("storage objects being initialized from NSDefaults\n")
         let userDefaults = NSUserDefaults.standardUserDefaults();
         if let result = userDefaults.objectForKey(LIKED_LIST) as? Dictionary<String,String> {
             println("\(result.count) liked songs")
@@ -81,8 +83,42 @@ class LibraryManager {
                 //println("\(y)")
             }
         }
-        
-        println()
+        //println()
+    }
+    
+    class func serializeCurrentPlaylist() {
+        let playlist : [String] = LM.Playlist.map { song in
+            song.hashKey
+        }
+        if playlist.count > 0 {
+            let userDefaults = NSUserDefaults.standardUserDefaults();
+            userDefaults.setObject(playlist, forKey: CURRENT_LIST)
+        }
+        /* we could remember the grouping if we wanted to....
+        let groupedPlaylist : [[String]] = LM.GroupedPlaylist.map { album in
+            album.map { song in song.hashKey }
+        }
+        userDefaults.setObject(groupedPlaylist, forKey: "GroupedPlaylist")
+        */
+    }
+    
+    class func deserializePlaylist() {
+        let userDefaults = NSUserDefaults.standardUserDefaults();
+        //if there is a current song, see if its in the serialized playlist.
+        if let currentSong = MusicPlayer.currentSong {
+            if let playlist = userDefaults.objectForKey("CurrentPlaylist") as? [String]  {
+                println("Deserialized playlist: \(playlist)")
+                let start = NSDate()
+                var songs = [MPMediaItem]()
+                for x in playlist {
+                    if let song = ITunesUtils.getSongFrom(x) {
+                        songs.append(song)
+                    }
+                }
+                let time = NSDate().timeIntervalSinceDate(start) * 1000
+                println("\(time)ms to fetch \(playlist.count) songs")
+            }
+        }
     }
     
     //MARK: only computed class properties
@@ -416,6 +452,15 @@ class LibraryManager {
         return songs
     }
     
+
+    class func makePlaylistFromSongs(songs: [MPMediaItem], currentSong : MPMediaItem?) {
+        LM.GroupedPlaylist = [[MPMediaItem]]()
+        LM.Playlist = songs
+        LM.GroupedPlaylist.append(songs)
+        LM.PlaylistIndex = 0
+        LM.PlaylistMode = .Custom
+    }
+    
     class func getAlbumSongsWithoutSettingPlaylist(currentSong : MPMediaItem?) -> [MPMediaItem] {
         var songs = [MPMediaItem]()
         if currentSong != nil {
@@ -428,6 +473,7 @@ class LibraryManager {
         }
         return songs
     }
+    
     
     class func getArtistSongsWithoutSettingPlaylist(currentSong : MPMediaItem?) -> ([[MPMediaItem]], [MPMediaItem]) {
         if currentSong != nil {
@@ -471,14 +517,6 @@ class LibraryManager {
         return (groupedSongs, songs)
     }
     
-    
-    class func makePlaylistFromSongs(songs: [MPMediaItem]) {
-        LM.GroupedPlaylist = [[MPMediaItem]]()
-        LM.Playlist = songs
-        LM.GroupedPlaylist.append(songs)
-        LM.PlaylistIndex = 0
-        LM.PlaylistMode = .Custom
-    }
     
     /*
     Artist mode -> pull to refresh will shuffle
