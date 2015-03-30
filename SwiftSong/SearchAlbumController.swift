@@ -75,18 +75,20 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("SearchAlbumTrackCell") as SearchAlbumTrackCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("SearchAlbumTrackCell") as! SearchAlbumTrackCell
         let song = songsByAlbum[indexPath.section][indexPath.row]
         cell.lblTitle.text = song.title
         cell.lblTrackNumber.text = "\(song.albumTrackNumber)."
         if !artistSelectedWithPicker && indexPath == getIndexPathForCurrentSong() {
+            /* TODO get gifu working again
             cell.imgPlaying.setAnimatableImage(named: "animated_music_bars.gif")
             if MusicPlayer.isPlaying {
                 cell.imgPlaying.startAnimatingGIF()
             }
+            */
             cell.imgPlaying.hidden = false
         } else {
-            cell.imgPlaying.stopAnimatingGIF()
+            //cell.imgPlaying.stopAnimatingGIF()
             cell.imgPlaying.hidden = true
         }
         return cell
@@ -94,7 +96,7 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
     
     //header
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        var cell = tableView.dequeueReusableCellWithIdentifier("SearchAlbumTitleCell") as SearchAlbumTitleCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("SearchAlbumTitleCell") as! SearchAlbumTitleCell
         let album = songsByAlbum[section]
         cell.lblTitle.text = album[0].albumTitle
         cell.imgAlbum.image = album[0].getArtworkWithSize(cell.imgAlbum.frame.size)

@@ -12,14 +12,14 @@ class ITunesUtils {
 
     class func getAllSongs() -> Array<MPMediaItem>? {
         let query = MPMediaQuery.songsQuery()
-        return query.items as [MPMediaItem]?;
+        return query.items as! [MPMediaItem]?;
     }
     
     class func getSongFrom(persistentId : String) -> MPMediaItem? {
         let query = MPMediaQuery.songsQuery()
         query.addFilterPredicate(MPMediaPropertyPredicate(value: persistentId, forProperty: MPMediaItemPropertyPersistentID))
         if query.items.count > 0 {
-            return (query.items as [MPMediaItem])[0]
+            return (query.items as! [MPMediaItem])[0]
         } else {
             return nil
         }
@@ -30,8 +30,8 @@ class ITunesUtils {
         let query = MPMediaQuery.artistsQuery()
         let artistsArray = query.collections
         for artistCollection in artistsArray as [AnyObject] {
-            let collection = artistCollection as MPMediaItemCollection // artists[0] as MPMediaItemCollection
-            let title  = collection.representativeItem.valueForProperty(MPMediaItemPropertyAlbumArtist) as String
+            let collection = artistCollection as! MPMediaItemCollection // artists[0] as MPMediaItemCollection
+            let title  = collection.representativeItem.valueForProperty(MPMediaItemPropertyAlbumArtist) as! String
             retval.append(title)
             //println(title)
         }
@@ -44,7 +44,7 @@ class ITunesUtils {
         var query = MPMediaQuery.playlistsQuery()
         var playlists = query.collections
         for x in playlists {
-            let playlistTitle = x.valueForProperty(MPMediaPlaylistPropertyName) as String
+            let playlistTitle = x.valueForProperty(MPMediaPlaylistPropertyName) as! String
             var songIds = [String]()
             //println("Playlist: \(playlistTitle)")
             let songs = x.items as NSArray

@@ -12,7 +12,7 @@ class VideoListController : UITableViewController {
     
     @IBOutlet var lblHeader: UILabel!
     
-    var data : [JSONValue] = [JSONValue]()
+    var data : [JSON] = [JSON]()
     //var nextToken : String = ""
 
     override func viewDidLoad() {
@@ -85,7 +85,7 @@ class VideoListController : UITableViewController {
         let title = x["snippet"]["title"].string!
         let description = x["snippet"]["description"].string!
         let thumb = x["snippet"]["thumbnails"]["default"]["url"].string!
-        var cell = tableView.dequeueReusableCellWithIdentifier("VideoCell", forIndexPath: indexPath) as VideoCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("VideoCell", forIndexPath: indexPath) as! VideoCell
         cell.lblDescription.text = description
         //clear the image before the async fetch
         if !Utils.inSimulator {

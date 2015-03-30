@@ -22,7 +22,7 @@ enum VideoState {
 class Videos {
 
     var State = VideoState.Fetching
-    var jsonVideos : JSONValue? = nil
+    var jsonVideos : JSON? = nil
     //this signals the the catched list has changed and the VideoListController will need to repaint
     var NeedsRefresh = true
     //we store this because if the one coming in is the same, its a noop
@@ -62,7 +62,7 @@ class Videos {
                 }
     
                 var jsonError: NSError?
-                var json : AnyObject! = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &jsonError) as NSDictionary
+                var json : AnyObject! = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &jsonError) as! NSDictionary
     
                 if jsonError != nil {
                     println("Error in JSON: \(jsonError)")
@@ -71,7 +71,7 @@ class Videos {
                     return
                 }
     
-                var parsedJson = JSONValue(json)
+                var parsedJson = JSON(json)
                 //println(parsedJson)
                 
                 gVideos.jsonVideos = parsedJson

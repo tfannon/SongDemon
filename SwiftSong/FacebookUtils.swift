@@ -55,7 +55,7 @@ class FacebookUtils {
                  "link":  videoUrl!,
                  "picture":  artworkUrl!] as NSMutableDictionary
             
-        FBWebDialogs.presentFeedDialogModallyWithSession(FBSession.activeSession(), parameters: params, handler: {(results, resultUrl, error) in
+        FBWebDialogs.presentFeedDialogModallyWithSession(FBSession.activeSession(), parameters: params as [NSObject : AnyObject], handler: {(results, resultUrl, error) in
                 if error != nil {
                     UIHelpers.messageBox(message: FacebookFailure)
                 } else {

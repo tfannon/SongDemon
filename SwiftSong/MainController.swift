@@ -162,7 +162,7 @@ class MainController: UIViewController, LibraryScanListener {
     }
    
     func handleSearchTapped() {
-        var vc = self.storyboard!.instantiateViewControllerWithIdentifier("SearchController") as SearchController
+        var vc = self.storyboard!.instantiateViewControllerWithIdentifier("SearchController") as! SearchController
         //if something is in the player, use this to pre-select the artist in the searchController
         vc.currentlyPlayingArtist = MusicPlayer.currentSong != nil ? MusicPlayer.currentSong.albumArtist : nil
         presentViewController(vc, animated: false, completion: nil)

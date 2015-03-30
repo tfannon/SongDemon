@@ -455,7 +455,7 @@ class LibraryManager {
             var query = MPMediaQuery.songsQuery()
             var pred = MPMediaPropertyPredicate(value: currentSong!.albumTitle, forProperty: MPMediaItemPropertyAlbumTitle)
             query.addFilterPredicate(pred)
-            var albumSongs = query.items as [MPMediaItem]
+            var albumSongs = query.items as! [MPMediaItem]
             songs = albumSongs.sorted { $0.albumTrackNumber < $1.albumTrackNumber }
             outputSongs(songs)
         }
@@ -479,7 +479,7 @@ class LibraryManager {
         var query = MPMediaQuery.songsQuery()
         var pred = MPMediaPropertyPredicate(value: artist, forProperty: MPMediaItemPropertyAlbumArtist)
         query.addFilterPredicate(pred)
-        var artistSongs = query.items as [MPMediaItem]
+        var artistSongs = query.items as! [MPMediaItem]
         var albumDic = Dictionary<String,Array<MPMediaItem>>(minimumCapacity: artistSongs.count)
         //fill up the dictionary with songs
         for x in artistSongs {

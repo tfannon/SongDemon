@@ -102,10 +102,10 @@ class PlaylistController: UITableViewController {
             case (.Artist), (.Album)  : identifier = "PlaylistAlbumSongCell"
             default: identifier = "PlaylistCell"
         }
-        var cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as! UITableViewCell
         
         if Utils.inSimulator {
-            let cell2 = cell as PlaylistCell
+            let cell2 = cell as! PlaylistCell
             cell2.lblTitle.text = sampleSongs[indexPath.row]
             cell2.lblArtistAlbum.text = "\(sampleArtists[indexPath.row]) - \(sampleAlbums[indexPath.row])"
             cell2.imgArtwork.image = UIImage(named: sampleImages[indexPath.row])
@@ -120,13 +120,13 @@ class PlaylistController: UITableViewController {
         case (.Artist), (.Album):
             song = LibraryManager.groupedPlaylist[indexPath.section][indexPath.row]
             isCurrentSong = getIndexPath() == indexPath
-            let cell2 = cell as PlaylistAlbumSongCell
+            let cell2 = cell as! PlaylistAlbumSongCell
             cell2.lblTrack.text = "\(song.albumTrackNumber)"
             cell2.lblTitle.text = song.title
             setIsPlayingImage(cell2, cellIsSelectedSong: isCurrentSong)
            
         default:
-            let cell2 = cell as PlaylistCell
+            let cell2 = cell as! PlaylistCell
             song = LibraryManager.groupedPlaylist[0][indexPath.row]
             isCurrentSong = LibraryManager.currentPlaylistIndex == indexPath.row
             cell2.lblTitle.text = song.title
@@ -140,14 +140,14 @@ class PlaylistController: UITableViewController {
     
     func setIsPlayingImage(cell : ICellIsPlaying, cellIsSelectedSong : Bool) {
         if cellIsSelectedSong {
-            cell.imgStatus.setAnimatableImage(named: "animated_music_bars.gif")
+            //cell.imgStatus.setAnimatableImage(named: "animated_music_bars.gif")
             if MusicPlayer.isPlaying {
-                cell.imgStatus.startAnimatingGIF()
+                //cell.imgStatus.startAnimatingGIF()
             }
             cell.imgStatus.hidden = false
         }
         else {
-            cell.imgStatus.stopAnimatingGIF()
+            //cell.imgStatus.stopAnimatingGIF()
             cell.imgStatus.hidden = true
         }
     }
@@ -155,8 +155,8 @@ class PlaylistController: UITableViewController {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let mode = LibraryManager.currentPlayMode
         switch (mode) {
-            case (.Artist), (.Album) : return 40.0
-            default: return 50.0
+            case (.Artist), (.Album) : return 35.0
+            default: return 55.0
         }
     }
     
@@ -170,7 +170,7 @@ class PlaylistController: UITableViewController {
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView {
         switch (LibraryManager.currentPlayMode) {
             case (.Artist), (.Album) :
-                var cell = tableView.dequeueReusableCellWithIdentifier("PlaylistAlbumTitleCell") as PlaylistAlbumTitleCell
+                var cell = tableView.dequeueReusableCellWithIdentifier("PlaylistAlbumTitleCell") as! PlaylistAlbumTitleCell
                 var song = LibraryManager.groupedPlaylist[section][0]
                 cell.lblAlbum.text = song.albumTitle
                 cell.lblYear.text = song.year
@@ -180,15 +180,16 @@ class PlaylistController: UITableViewController {
                 cell.contentView.backgroundColor = UIColor.blackColor()
             return cell.contentView
             default:
-                var cell = tableView.dequeueReusableCellWithIdentifier("PlaylistAlbumTitleCell") as PlaylistAlbumTitleCell
-                cell.contentView.backgroundColor = UIColor.blackColor()
+                var cell = tableView.dequeueReusableCellWithIdentifier("PlaylistAlbumTitleCell") as! PlaylistAlbumTitleCell
+                //cell.contentView.backgroundColor = UIColor.blackColor()
+                cell.contentView.hidden = true
                 return cell.contentView
         }
     }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch (LibraryManager.currentPlayMode) {
-            case (.Artist), (.Album) : return 115
+            case (.Artist), (.Album) : return 70
             default: return 25
         }
     }

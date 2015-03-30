@@ -57,7 +57,7 @@ class SearchArtistController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let artist = self.sections[indexPath.section].artists[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier("SearchArtistCell", forIndexPath: indexPath)
-            as SearchArtistCell
+            as! SearchArtistCell
         if Utils.inSimulator {
             return cell
         }
@@ -153,7 +153,7 @@ class SearchArtistController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if !self.sections[section].artists.isEmpty {
-            return (self.collation.sectionTitles[section] as String)
+            return (self.collation.sectionTitles[section] as! String)
         }
         return ""
     }
@@ -187,7 +187,7 @@ class SearchArtistController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    let collation = UILocalizedIndexedCollation.currentCollation() as UILocalizedIndexedCollation
+    let collation = UILocalizedIndexedCollation.currentCollation() as! UILocalizedIndexedCollation
     
     var _sections: [Section]?
     var sections: [Section] {
@@ -215,7 +215,7 @@ class SearchArtistController: UIViewController, UITableViewDataSource, UITableVi
         
         //sort each section
         for section in sections {
-            section.artists = self.collation.sortedArrayFromArray(section.artists, collationStringSelector: "name") as [Artist]
+            section.artists = self.collation.sortedArrayFromArray(section.artists, collationStringSelector: "name") as! [Artist]
         }
         
         self._sections = sections
@@ -226,7 +226,7 @@ class SearchArtistController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let artist = self.sections[indexPath.section].artists[indexPath.row].name
         var items = LibraryManager.getArtistSongsWithoutSettingPlaylist(artist)
-        var searchAlbumController = self.tabBarController!.viewControllers![1] as SearchAlbumController
+        var searchAlbumController = self.tabBarController!.viewControllers![1] as! SearchAlbumController
         searchAlbumController.selectedArtist = artist
         searchAlbumController.artistSelectedWithPicker = true
         self.tabBarController!.selectedIndex = 1
