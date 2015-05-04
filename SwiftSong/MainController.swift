@@ -70,7 +70,7 @@ class MainController: UIViewController, LibraryScanListener {
         }
         //search cannot be enabled until the library scan is complete
         //playAudio()
-        btnSearch.hidden = true
+        //btnSearch.hidden = true
     }
     
     override func shouldAutorotate() -> Bool {

@@ -17,6 +17,7 @@ class Utils {
         }
     }
     
+    //generates random number between 0 and max-1
     class func random(max : Int) -> Int {
         return Int(arc4random_uniform((UInt32(max))))
     }

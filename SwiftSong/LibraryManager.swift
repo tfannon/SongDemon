@@ -321,42 +321,22 @@ class LibraryManager {
     class func getLikedSongs(count : Int = 50, dumpSongs : Bool = true) -> [MPMediaItem] {
         scanLibrary()
         let start = NSDate()
-        var allLiked = [MPMediaItem]()
-        var randomLiked = [MPMediaItem]()
-        LM.GroupedPlaylist = [[MPMediaItem]]()
-        for (x,y) in LM.LikedSongs as Dictionary<String,String> {
-            if let item = ITunesUtils.getSongFrom(x) {
-                allLiked.append(item)
-            }
-        }
-        for x in LM.RatedSongs {
-            if let item = ITunesUtils.getSongFrom(x) {
-                //if it was in our disliked list do NOT include it even if rated
-                if !isDisliked(item) {
-                    allLiked.append(item)
-                }
-            }
-        }
-        var i = 0
-        while i < allLiked.count && i < count {
-            var idx = Utils.random(allLiked.count-1)
-            var item = allLiked[idx]
-            //make sure it has not already been added
-            if find(randomLiked, item) == nil {
-                randomLiked.append(item)
-                //println(getSongInfo(item))
-                i++
-            } else {
-                //println("dup detected")
-            }
-        }
+        //take all the SongDemon liked songs
+        var allLiked : [String] = LM.LikedSongs.keys.array
+        //add all the iTunes-rated songs
+        allLiked.extend(LM.RatedSongs)
+        //grab n randomly
+        var randomLiked = getRandomSongs(count, sourceSongs: allLiked)
+
         let time = NSDate().timeIntervalSinceDate(start) * 1000
         if dumpSongs {
             println("Built liked list with \(randomLiked.count) songs in \(time)ms")
             outputSongs(randomLiked)
         }
         LM.Playlist = randomLiked
-        LM.GroupedPlaylist.append(randomLiked)
+        //LM.GroupedPlaylist = [[MPMediaItem]]()
+        //LM.GroupedPlaylist.append(randomLiked)
+        LM.GroupedPlaylist = [[MPMediaItem]](arrayLiteral: randomLiked)
         LM.PlaylistIndex = 0
         LM.PlaylistMode = .Liked
         return randomLiked
@@ -379,23 +359,21 @@ class LibraryManager {
         return newSongs
     }
     
-    // 20 new, 20 favs, 10 not new and not rated
-    class func getMixOfSongs() -> [MPMediaItem] {
+    class func getMixOfSongs(count : Int = 50, dumpSongs : Bool = true) -> [MPMediaItem] {
         scanLibrary()
         let start = NSDate()
-        var newSongs = getNewSongs(count: 20, dumpSongs:false)
-        var ratedSongs = getLikedSongs(count: 20, dumpSongs:false)
-        var otherSongs = getRandomSongs(10, sourceSongs: LM.OtherSongs)
-        var mixedSongs = Utils.shuffle(newSongs + ratedSongs + otherSongs)
+        let allSongs = LM.RatedSongs + LM.NotPlayedSongs + LM.OtherSongs
+        let randomSongs = getRandomSongs(50, sourceSongs: allSongs)
         let time = NSDate().timeIntervalSinceDate(start) * 1000
-        println("Built mixed song list with \(mixedSongs.count) songs in \(time)ms")
-        outputSongs(mixedSongs)
-        LM.GroupedPlaylist = [[MPMediaItem]]()
-        LM.Playlist = mixedSongs
-        LM.GroupedPlaylist.append(mixedSongs)
+        if dumpSongs {
+            println("Built random song list with \(randomSongs.count) songs in \(time)ms")
+            outputSongs(randomSongs)
+        }
+        LM.GroupedPlaylist = [[MPMediaItem]](arrayLiteral: randomSongs)
+        LM.Playlist = randomSongs
         LM.PlaylistIndex = 0
         LM.PlaylistMode = .Mix
-        return mixedSongs;
+        return randomSongs;
     }
     
     class func getRecentlyAdded() -> [MPMediaItem] {
@@ -551,7 +529,7 @@ class LibraryManager {
         var songsPicked = 0
         var i = 0
         while i < sourceSongs.count && songsPicked < count {
-            var idx = Utils.random(sourceSongs.count-1)
+            var idx = Utils.random(sourceSongs.count)
             if let item = ITunesUtils.getSongFrom(sourceSongs[idx]) {
                 //if it hasnt been disliked or already added
                 if !isDisliked(item) && find(randomSongs, item) == nil {
