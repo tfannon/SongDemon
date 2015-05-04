@@ -9,9 +9,7 @@ import MediaPlayer
 
 
 extension String {
-    var isEmpty : Bool {
-        return self.utf16Count == 0
-    }
+    var length: Int { return count(self) }  // Swift 1.2
 }
 
 
@@ -21,7 +19,7 @@ extension MPMediaItem {
     }
     
     var year : String {
-        var yearAsNum = self.valueForProperty("year") as NSNumber
+        var yearAsNum = self.valueForProperty("year") as! NSNumber
         if yearAsNum.isKindOfClass(NSNumber) {
             return yearAsNum == 0 ? "" : "\(yearAsNum.intValue)"
         }

@@ -1,6 +1,7 @@
 
 import MediaPlayer
 
+let RECENTLY_ADDED_LIST = "RecentlyAdded"
 let LIKED_LIST = "Liked"
 let DISLIKED_LIST = "Disliked"
 let QUEUED_LIST = "Queued"
@@ -411,7 +412,7 @@ class LibraryManager {
         }
         let time = NSDate().timeIntervalSinceDate(start) * 1000
         println("Built recently added song list with \(songs.count) songs in \(time)ms")
-        makePlaylistFromSongs(songs)
+        //makePlaylistFromSongs(songs, c nil)
         return songs
     }
 
@@ -472,7 +473,7 @@ class LibraryManager {
     }
     
 
-    class func makePlaylistFromSongs(songs: [MPMediaItem], currentSong : MPMediaItem?) {
+    class func makePlaylistFromSongs(songs: [MPMediaItem]) {
         LM.GroupedPlaylist = [[MPMediaItem]]()
         LM.Playlist = songs
         LM.GroupedPlaylist.append(songs)
@@ -486,7 +487,7 @@ class LibraryManager {
             var query = MPMediaQuery.songsQuery()
             var pred = MPMediaPropertyPredicate(value: currentSong!.albumTitle, forProperty: MPMediaItemPropertyAlbumTitle)
             query.addFilterPredicate(pred)
-            var albumSongs = query.items as [MPMediaItem]
+            var albumSongs = query.items as! [MPMediaItem]
             songs = albumSongs.sorted { $0.albumTrackNumber < $1.albumTrackNumber }
             outputSongs(songs)
         }
@@ -511,7 +512,7 @@ class LibraryManager {
         var query = MPMediaQuery.songsQuery()
         var pred = MPMediaPropertyPredicate(value: artist, forProperty: MPMediaItemPropertyAlbumArtist)
         query.addFilterPredicate(pred)
-        var artistSongs = query.items as [MPMediaItem]
+        var artistSongs = query.items as! [MPMediaItem]
         var albumDic = Dictionary<String,Array<MPMediaItem>>(minimumCapacity: artistSongs.count)
         //fill up the dictionary with songs
         for x in artistSongs {

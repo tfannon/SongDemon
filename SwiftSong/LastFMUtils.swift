@@ -24,7 +24,7 @@ class LastFMUtils {
             (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
 
             var jsonError: NSError?
-            var json = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &jsonError) as NSDictionary
+            var json = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &jsonError) as! NSDictionary
             
             if jsonError != nil {
                 println("Error fetching LastFM: \(jsonError)")

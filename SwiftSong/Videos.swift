@@ -62,7 +62,7 @@ class Videos {
                 }
     
                 var jsonError: NSError?
-                var json : AnyObject! = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &jsonError) as NSDictionary
+                var json : AnyObject! = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &jsonError) as! NSDictionary
     
                 if jsonError != nil {
                     println("Error in JSON: \(jsonError)")

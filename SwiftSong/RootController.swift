@@ -26,11 +26,11 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         self.delegate = self;
         self.dataSource = self;
 
-        mainController = self.storyboard!.instantiateViewControllerWithIdentifier("MainController") as MainController
-        lyricsController = self.storyboard!.instantiateViewControllerWithIdentifier("LyricsController") as UIViewController
-        playlistController = self.storyboard!.instantiateViewControllerWithIdentifier("PlaylistController") as UITableViewController
-        videoController = self.storyboard!.instantiateViewControllerWithIdentifier("VideoListController") as UITableViewController
-        playVideoController = self.storyboard!.instantiateViewControllerWithIdentifier("PlayVideoController") as UIViewController
+        mainController = self.storyboard!.instantiateViewControllerWithIdentifier("MainController") as! MainController
+        lyricsController = self.storyboard!.instantiateViewControllerWithIdentifier("LyricsController") as! UIViewController
+        playlistController = self.storyboard!.instantiateViewControllerWithIdentifier("PlaylistController") as! UITableViewController
+        videoController = self.storyboard!.instantiateViewControllerWithIdentifier("VideoListController") as! UITableViewController
+        playVideoController = self.storyboard!.instantiateViewControllerWithIdentifier("PlayVideoController") as! UIViewController
 
         controllers = [playlistController, mainController, lyricsController, videoController, playVideoController]
 
@@ -47,7 +47,7 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     func findScrollView() {
         for x in self.view.subviews {
             if x.isKindOfClass(UIScrollView) {
-                var scrollView = x as UIScrollView
+                var scrollView = x as! UIScrollView
                 scrollView.delaysContentTouches = false
             }
         }
@@ -72,11 +72,11 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     }
     
     // MARK: - Page View Controller Data Source
-    func presentationCountForPageViewController(pageViewController: UIPageViewController!) -> Int {
+    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
         return controllers.count
     }
 
-    func presentationIndexForPageViewController(pageViewController: UIPageViewController!) -> Int {
+    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
         return currentIndex    }
 
 
@@ -100,7 +100,7 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     }
     
     class func switchToMainView() {
-        var root = UIApplication.sharedApplication().keyWindow!.rootViewController as RootController
+        var root = UIApplication.sharedApplication().keyWindow!.rootViewController as! RootController
         root.currentIndex = 1
         let viewControllers : [UIViewController] = [root.mainController]
         root.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
@@ -115,24 +115,24 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     */
     
     class func switchToPlayVideoController() {
-        var root = UIApplication.sharedApplication().keyWindow!.rootViewController as RootController
+        var root = UIApplication.sharedApplication().keyWindow!.rootViewController as! RootController
         root.currentIndex = 4
         let viewControllers : [UIViewController] = [root.playVideoController]
         root.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
     }
     
     class func getPlayVideoController() -> PlayVideoController {
-        var root = UIApplication.sharedApplication().keyWindow!.rootViewController as RootController
-        return root.playVideoController as PlayVideoController
+        var root = UIApplication.sharedApplication().keyWindow!.rootViewController as! RootController
+        return root.playVideoController as! PlayVideoController
     }
     
     class func getLyricsController() -> LyricsController {
-        var root = UIApplication.sharedApplication().keyWindow!.rootViewController as RootController
-        return root.lyricsController as LyricsController
+        var root = UIApplication.sharedApplication().keyWindow!.rootViewController as! RootController
+        return root.lyricsController as! LyricsController
     }
     
     class func getPlaylistController() -> PlaylistController {
-        var root = UIApplication.sharedApplication().keyWindow!.rootViewController as RootController
-        return root.playlistController as PlaylistController
+        var root = UIApplication.sharedApplication().keyWindow!.rootViewController as! RootController
+        return root.playlistController as! PlaylistController
     }
 }
