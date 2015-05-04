@@ -157,7 +157,7 @@ class PlaylistController: UITableViewController {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let mode = LibraryManager.currentPlayMode
         switch (mode) {
-            case (.Artist), (.Album) : return 40.0
+            case (.Artist), (.Album) : return 35.0
             default: return 50.0
         }
     }
