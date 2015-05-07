@@ -25,6 +25,15 @@
 		656BA3321A2295DA0042DD47 /* SearchAlbumTrackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656BA3311A2295DA0042DD47 /* SearchAlbumTrackCell.swift */; };
 		6571CCB819CFCFCD00ADF07F /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6571CCB719CFCFCD00ADF07F /* Async.swift */; };
 		657693B919883069008E25E6 /* LyricsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657693B819883069008E25E6 /* LyricsController.swift */; };
+		657F79091AF86D8900EEE85F /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657F79081AF86D8900EEE85F /* InterfaceController.swift */; };
+		657F790B1AF86D8900EEE85F /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657F790A1AF86D8900EEE85F /* NotificationController.swift */; };
+		657F790D1AF86D8900EEE85F /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657F790C1AF86D8900EEE85F /* GlanceController.swift */; };
+		657F790F1AF86D8900EEE85F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 657F790E1AF86D8900EEE85F /* Images.xcassets */; };
+		657F79131AF86D8900EEE85F /* SongDemon WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 657F79121AF86D8900EEE85F /* SongDemon WatchKit App.app */; };
+		657F791B1AF86D8900EEE85F /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 657F79191AF86D8900EEE85F /* Interface.storyboard */; };
+		657F79201AF86D8900EEE85F /* SongDemon WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 657F79031AF86D8900EEE85F /* SongDemon WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		657F792D1AF8777500EEE85F /* jakegiz.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 657F792C1AF8777500EEE85F /* jakegiz.jpg */; };
+		657F792F1AF879DC00EEE85F /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 657F792E1AF879DC00EEE85F /* Media.xcassets */; };
 		65A9112E196B9C49007B59D6 /* Lyrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A9112D196B9C49007B59D6 /* Lyrics.swift */; };
 		65B1CEEF1AF80E9C00FC4C33 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1CEEE1AF80E9C00FC4C33 /* SwiftyJSON.swift */; };
 		65B1CEF11AF81DEF00FC4C33 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1CEF01AF81DEF00FC4C33 /* FileManager.swift */; };
@@ -91,6 +100,37 @@
 		65FBA09D1A4B7F730037C7E0 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FBA09C1A4B7F730037C7E0 /* SearchController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		657F79141AF86D8900EEE85F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65B66DDB195246AB00947DCE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 657F79111AF86D8900EEE85F;
+			remoteInfo = "SongDemon WatchKit App";
+		};
+		657F791E1AF86D8900EEE85F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65B66DDB195246AB00947DCE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 657F79021AF86D8900EEE85F;
+			remoteInfo = "SongDemon WatchKit Extension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		657F79291AF86D8900EEE85F /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				657F79201AF86D8900EEE85F /* SongDemon WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		65164C36196CF62400644EF4 /* UIHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHelpers.swift; sourceTree = "<group>"; };
 		6522D5BB19D7268000FAB3AD /* 751-eye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "751-eye.png"; sourceTree = "<group>"; };
@@ -111,6 +151,18 @@
 		656BA3311A2295DA0042DD47 /* SearchAlbumTrackCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchAlbumTrackCell.swift; sourceTree = "<group>"; };
 		6571CCB719CFCFCD00ADF07F /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
 		657693B819883069008E25E6 /* LyricsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsController.swift; sourceTree = "<group>"; };
+		657F79031AF86D8900EEE85F /* SongDemon WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "SongDemon WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		657F79061AF86D8900EEE85F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		657F79071AF86D8900EEE85F /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		657F79081AF86D8900EEE85F /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		657F790A1AF86D8900EEE85F /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		657F790C1AF86D8900EEE85F /* GlanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlanceController.swift; sourceTree = "<group>"; };
+		657F790E1AF86D8900EEE85F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		657F79121AF86D8900EEE85F /* SongDemon WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SongDemon WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		657F79181AF86D8900EEE85F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		657F791A1AF86D8900EEE85F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		657F792C1AF8777500EEE85F /* jakegiz.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = jakegiz.jpg; sourceTree = "<group>"; };
+		657F792E1AF879DC00EEE85F /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		65A9112D196B9C49007B59D6 /* Lyrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lyrics.swift; sourceTree = "<group>"; };
 		65B1CEED1AF80E9C00FC4C33 /* SwiftyJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyJSON.h; sourceTree = "<group>"; };
 		65B1CEEE1AF80E9C00FC4C33 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -181,6 +233,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		657F79001AF86D8900EEE85F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		65B66DE0195246AB00947DCE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -244,10 +303,51 @@
 			name = Classes;
 			sourceTree = "<group>";
 		};
+		657F79041AF86D8900EEE85F /* SongDemon WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				657F79081AF86D8900EEE85F /* InterfaceController.swift */,
+				657F790A1AF86D8900EEE85F /* NotificationController.swift */,
+				657F790C1AF86D8900EEE85F /* GlanceController.swift */,
+				657F790E1AF86D8900EEE85F /* Images.xcassets */,
+				657F79051AF86D8900EEE85F /* Supporting Files */,
+			);
+			path = "SongDemon WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		657F79051AF86D8900EEE85F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				657F79061AF86D8900EEE85F /* Info.plist */,
+				657F79071AF86D8900EEE85F /* PushNotificationPayload.apns */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		657F79161AF86D8900EEE85F /* SongDemon WatchKit App */ = {
+			isa = PBXGroup;
+			children = (
+				657F792E1AF879DC00EEE85F /* Media.xcassets */,
+				657F79191AF86D8900EEE85F /* Interface.storyboard */,
+				657F79171AF86D8900EEE85F /* Supporting Files */,
+			);
+			path = "SongDemon WatchKit App";
+			sourceTree = "<group>";
+		};
+		657F79171AF86D8900EEE85F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				657F79181AF86D8900EEE85F /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		65B66DDA195246AB00947DCE = {
 			isa = PBXGroup;
 			children = (
 				65B66DE5195246AB00947DCE /* SongDemon */,
+				657F79041AF86D8900EEE85F /* SongDemon WatchKit Extension */,
+				657F79161AF86D8900EEE85F /* SongDemon WatchKit App */,
 				65B66DE4195246AB00947DCE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -256,6 +356,8 @@
 			isa = PBXGroup;
 			children = (
 				65B66DE3195246AB00947DCE /* SongDemon.app */,
+				657F79031AF86D8900EEE85F /* SongDemon WatchKit Extension.appex */,
+				657F79121AF86D8900EEE85F /* SongDemon WatchKit App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -281,6 +383,8 @@
 		65E7743219528D6100DD31DB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				65F7086C19982E8300179340 /* black-red-note-120.png */,
+				657F792C1AF8777500EEE85F /* jakegiz.jpg */,
 				65F195621A46164700A7539C /* 702-share.png */,
 				65F195631A46164700A7539C /* 702-share@2x.png */,
 				65F195641A46164700A7539C /* 702-share@3x.png */,
@@ -311,7 +415,6 @@
 				65DC55E2198B3D0000ABE255 /* 1176-bulleted-list.png */,
 				65DC55E3198B3D0000ABE255 /* 1176-bulleted-list@2x.png */,
 				65FBA0851A4543D90037C7E0 /* 1176-bulleted-list@3x.png */,
-				65F7086C19982E8300179340 /* black-red-note-120.png */,
 				6552BFF31A3FED7500E77322 /* blacklab2.png */,
 				65E7D2AA1A17F01200C430AF /* GoatwhoreLastFM.png */,
 				65E7744B19528D6100DD31DB /* note120x120.png */,
@@ -344,6 +447,39 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		657F79021AF86D8900EEE85F /* SongDemon WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 657F79281AF86D8900EEE85F /* Build configuration list for PBXNativeTarget "SongDemon WatchKit Extension" */;
+			buildPhases = (
+				657F78FF1AF86D8900EEE85F /* Sources */,
+				657F79001AF86D8900EEE85F /* Frameworks */,
+				657F79011AF86D8900EEE85F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				657F79151AF86D8900EEE85F /* PBXTargetDependency */,
+			);
+			name = "SongDemon WatchKit Extension";
+			productName = "SongDemon WatchKit Extension";
+			productReference = 657F79031AF86D8900EEE85F /* SongDemon WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit-extension";
+		};
+		657F79111AF86D8900EEE85F /* SongDemon WatchKit App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 657F79271AF86D8900EEE85F /* Build configuration list for PBXNativeTarget "SongDemon WatchKit App" */;
+			buildPhases = (
+				657F79101AF86D8900EEE85F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SongDemon WatchKit App";
+			productName = "SongDemon WatchKit App";
+			productReference = 657F79121AF86D8900EEE85F /* SongDemon WatchKit App.app */;
+			productType = "com.apple.product-type.application.watchapp";
+		};
 		65B66DE2195246AB00947DCE /* SongDemon */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 65B66E01195246AB00947DCE /* Build configuration list for PBXNativeTarget "SongDemon" */;
@@ -351,10 +487,12 @@
 				65B66DDF195246AB00947DCE /* Sources */,
 				65B66DE0195246AB00947DCE /* Frameworks */,
 				65B66DE1195246AB00947DCE /* Resources */,
+				657F79291AF86D8900EEE85F /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				657F791F1AF86D8900EEE85F /* PBXTargetDependency */,
 			);
 			name = SongDemon;
 			productName = SwiftSong;
@@ -370,6 +508,13 @@
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = crazy8dev;
 				TargetAttributes = {
+					657F79021AF86D8900EEE85F = {
+						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = K9HP5J9XB3;
+					};
+					657F79111AF86D8900EEE85F = {
+						CreatedOnToolsVersion = 6.3.1;
+					};
 					65B66DE2195246AB00947DCE = {
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = K9HP5J9XB3;
@@ -395,11 +540,31 @@
 			projectRoot = "";
 			targets = (
 				65B66DE2195246AB00947DCE /* SongDemon */,
+				657F79021AF86D8900EEE85F /* SongDemon WatchKit Extension */,
+				657F79111AF86D8900EEE85F /* SongDemon WatchKit App */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		657F79011AF86D8900EEE85F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				657F790F1AF86D8900EEE85F /* Images.xcassets in Resources */,
+				657F79131AF86D8900EEE85F /* SongDemon WatchKit App.app in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		657F79101AF86D8900EEE85F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				657F791B1AF86D8900EEE85F /* Interface.storyboard in Resources */,
+				657F792F1AF879DC00EEE85F /* Media.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		65B66DE1195246AB00947DCE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -453,12 +618,23 @@
 				65E119F119B4EE2300757B87 /* videotemplate.html in Resources */,
 				65FBA0901A4544AA0037C7E0 /* 778-thumbs-down@3x.png in Resources */,
 				65F195661A46164700A7539C /* 702-share@2x.png in Resources */,
+				657F792D1AF8777500EEE85F /* jakegiz.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		657F78FF1AF86D8900EEE85F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				657F790B1AF86D8900EEE85F /* NotificationController.swift in Sources */,
+				657F79091AF86D8900EEE85F /* InterfaceController.swift in Sources */,
+				657F790D1AF86D8900EEE85F /* GlanceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		65B66DDF195246AB00947DCE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -500,7 +676,28 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		657F79151AF86D8900EEE85F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 657F79111AF86D8900EEE85F /* SongDemon WatchKit App */;
+			targetProxy = 657F79141AF86D8900EEE85F /* PBXContainerItemProxy */;
+		};
+		657F791F1AF86D8900EEE85F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 657F79021AF86D8900EEE85F /* SongDemon WatchKit Extension */;
+			targetProxy = 657F791E1AF86D8900EEE85F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
+		657F79191AF86D8900EEE85F /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				657F791A1AF86D8900EEE85F /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
 		65B66DEE195246AB00947DCE /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -564,6 +761,120 @@
 				PRODUCT_NAME = SongDemon;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SongDemon-Bridging-Header.h";
+			};
+			name = Distribution;
+		};
+		657F79211AF86D8900EEE85F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "SongDemon WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = iphoneos8.3;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		657F79221AF86D8900EEE85F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "SongDemon WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = iphoneos8.3;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		657F79231AF86D8900EEE85F /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "SongDemon WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = iphoneos8.3;
+				SKIP_INSTALL = YES;
+			};
+			name = Distribution;
+		};
+		657F79241AF86D8900EEE85F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IBSC_MODULE = SongDemon_WatchKit_Extension;
+				INFOPLIST_FILE = "SongDemon WatchKit App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Debug;
+		};
+		657F79251AF86D8900EEE85F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				IBSC_MODULE = SongDemon_WatchKit_Extension;
+				INFOPLIST_FILE = "SongDemon WatchKit App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Release;
+		};
+		657F79261AF86D8900EEE85F /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				IBSC_MODULE = SongDemon_WatchKit_Extension;
+				INFOPLIST_FILE = "SongDemon WatchKit App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
 			};
 			name = Distribution;
 		};
@@ -688,6 +999,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		657F79271AF86D8900EEE85F /* Build configuration list for PBXNativeTarget "SongDemon WatchKit App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				657F79241AF86D8900EEE85F /* Debug */,
+				657F79251AF86D8900EEE85F /* Release */,
+				657F79261AF86D8900EEE85F /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		657F79281AF86D8900EEE85F /* Build configuration list for PBXNativeTarget "SongDemon WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				657F79211AF86D8900EEE85F /* Debug */,
+				657F79221AF86D8900EEE85F /* Release */,
+				657F79231AF86D8900EEE85F /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		65B66DDE195246AB00947DCE /* Build configuration list for PBXProject "SongDemon" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

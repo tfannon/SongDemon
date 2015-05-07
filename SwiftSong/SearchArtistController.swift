@@ -62,7 +62,7 @@ class SearchArtistController: UIViewController, UITableViewDataSource, UITableVi
             return cell
         }
         cell.lblArtist.text = artist.name
-        cell.imgArtist.image = UIImage(named: "blacklab2")
+        cell.imgArtist.image = UIImage(named: "jakegiz")
         let artistInfo = LibraryManager.artistInfo[artist.name]!
         if let artwork = artistInfo.artwork {
             cell.imgArtist.image = artwork.imageWithSize(cell.imgArtist.frame.size)

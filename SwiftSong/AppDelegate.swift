@@ -18,8 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
         setupAppearance()
-        playAudio()
-        
         FBLoginView.self
         return true
     }
@@ -34,19 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     }
     
-    func playAudio() {
-        var error : NSError?
-        //let fileURL:NSURL = NSBundle.mainBundle().URLForResource("buzz", withExtension: "mp3")!
-        //play background audio to keep app running  
-        let fileURL:NSURL = NSBundle.mainBundle().URLForResource("1sec", withExtension: "mp3")!
-        audioPlayer = AVAudioPlayer(contentsOfURL: fileURL, error: &error)
-        audioPlayer.numberOfLoops = -1
-        AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryAmbient, error:nil)
-        AVAudioSession.sharedInstance().setActive(true, error: nil)
-        audioPlayer.prepareToPlay()
-        audioPlayer.play()
-    }
-
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
