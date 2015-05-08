@@ -5,26 +5,38 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="3737"/>
     </dependencies>
     <scenes>
-        <!--black-red-note-120.png-->
+        <!--Interface Controller-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller backgroundImage="black-red-note-120.png" contentMode="scaleAspectFit" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="SongDemon_WatchKit_App" customModuleProvider="target">
+                <controller contentMode="scaleAspectFit" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="SongDemon_WatchKit_App" customModuleProvider="target">
                     <items>
-                        <label alignment="left" text="SongDemon" id="M2F-eU-mxl">
-                            <color key="textColor" red="1" green="0.0" blue="0.0" alpha="0.70000000000000007" colorSpace="calibratedRGB"/>
-                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                        <group width="1" alignment="left" id="oF9-ym-193">
+                            <items>
+                                <imageView width="32" height="28" alignment="left" verticalAlignment="center" id="oqn-LX-ype"/>
+                                <label width="103" alignment="center" verticalAlignment="center" text="Inquisition" textAlignment="center" id="M2F-eU-mxl">
+                                    <color key="textColor" red="1" green="0.0" blue="0.0" alpha="0.70000000000000007" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                </label>
+                            </items>
+                        </group>
+                        <label width="136" alignment="center" text="Dark Mutilation Rights" textAlignment="center" minimumScaleFactor="1.3877787807814457e-16" id="2tW-RA-wGj">
+                            <color key="textColor" red="1" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
                         </label>
-                        <timer alignment="right" verticalAlignment="bottom" id="GC5-pP-czg"/>
+                        <label width="136" alignment="left" text="Magnificent Glorification of Lucifer" textAlignment="center" numberOfLines="2" minimumScaleFactor="0.30000000000000004" id="Zn4-Wr-YXI">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                        </label>
+                        <slider width="1" alignment="left" verticalAlignment="bottom" value="1" maximum="3" steps="3" id="fhi-e1-zj2"/>
                     </items>
                     <menu key="menu" id="ngA-FN-dDH">
                         <items>
                             <menuItem title="Menu Item" icon="info" id="fUd-JG-heT"/>
                         </items>
                     </menu>
-                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="235" y="347"/>
+            <point key="canvasLocation" x="235" y="341"/>
         </scene>
         <!--Glance Interface Controller-->
         <scene sceneID="BOz-TT-tkC">
@@ -67,4 +79,5 @@
             <point key="canvasLocation" x="553" y="1001"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="0.32000000000000001" colorSpace="calibratedRGB"/>
 </document>
