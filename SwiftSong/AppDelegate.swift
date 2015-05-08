@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import MediaPlayer
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -63,8 +64,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, handleWatchKitExtensionRequest userInfo: [NSObject : AnyObject]?, reply: (([NSObject : AnyObject]!) -> Void)!) {
         println("received a call from watch")
-        let dictionary = ["artist":"Goatwhore","album":"Blood For The Master","song":"In Deathless Tradition","playState":"paused"]
-        reply(dictionary)
+        if let action = userInfo?["action"] as? String {
+            switch (action) {
+            case "playFavorites" :
+                var songs = LibraryManager.getMixOfSongs()
+                var player = MPMusicPlayerController()
+
+                
+            default :""
+            }
+        }
+        //let dictionary = ["artist":"Goatwhore","album":"Blood For The Master","song":"In Deathless Tradition","playState":"paused"]
+        //reply(dictionary)
     }
 }
 

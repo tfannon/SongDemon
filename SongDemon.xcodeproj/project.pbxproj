@@ -14,6 +14,7 @@
 		6522D5C519D7ACD900FAB3AD /* FacebookUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522D5C419D7ACD900FAB3AD /* FacebookUtils.swift */; };
 		65304F0D196CAB9E00F985D3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65304F0C196CAB9E00F985D3 /* Utils.swift */; };
 		6552BFF41A3FED7500E77322 /* blacklab2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6552BFF31A3FED7500E77322 /* blacklab2.png */; };
+		6555712F1AFC8DBF00FF3B2B /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6555712E1AFC8DBF00FF3B2B /* Async.swift */; };
 		6557D9EE1997412500A0A87E /* TimeStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6557D9ED1997412500A0A87E /* TimeStruct.swift */; };
 		6557D9F01997414600A0A87E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6557D9EF1997414600A0A87E /* Extensions.swift */; };
 		65587F4319B400BA00375C98 /* VideoListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65587F4219B400BA00375C98 /* VideoListController.swift */; };
@@ -140,6 +141,7 @@
 		6522D5C419D7ACD900FAB3AD /* FacebookUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookUtils.swift; sourceTree = "<group>"; };
 		65304F0C196CAB9E00F985D3 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		6552BFF31A3FED7500E77322 /* blacklab2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blacklab2.png; sourceTree = "<group>"; };
+		6555712E1AFC8DBF00FF3B2B /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
 		6557D9ED1997412500A0A87E /* TimeStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeStruct.swift; sourceTree = "<group>"; };
 		6557D9EF1997414600A0A87E /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		65587F4219B400BA00375C98 /* VideoListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoListController.swift; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 		657F79041AF86D8900EEE85F /* SongDemon WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				6555712E1AFC8DBF00FF3B2B /* Async.swift */,
 				657F79081AF86D8900EEE85F /* InterfaceController.swift */,
 				657F790A1AF86D8900EEE85F /* NotificationController.swift */,
 				657F790C1AF86D8900EEE85F /* GlanceController.swift */,
@@ -629,6 +632,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6555712F1AFC8DBF00FF3B2B /* Async.swift in Sources */,
 				657F790B1AF86D8900EEE85F /* NotificationController.swift in Sources */,
 				657F79091AF86D8900EEE85F /* InterfaceController.swift in Sources */,
 				657F790D1AF86D8900EEE85F /* GlanceController.swift in Sources */,
@@ -1007,6 +1011,7 @@
 				657F79261AF86D8900EEE85F /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		657F79281AF86D8900EEE85F /* Build configuration list for PBXNativeTarget "SongDemon WatchKit Extension" */ = {
 			isa = XCConfigurationList;
@@ -1016,6 +1021,7 @@
 				657F79231AF86D8900EEE85F /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		65B66DDE195246AB00947DCE /* Build configuration list for PBXProject "SongDemon" */ = {
 			isa = XCConfigurationList;

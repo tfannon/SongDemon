@@ -45,12 +45,29 @@ class InterfaceController: WKInterfaceController {
     
     @IBOutlet weak var artworkImage: WKInterfaceImage!
     
+    @IBAction func favoritesTapped() {
+        let request = ["action":"playFavorites"]
+        WKInterfaceController.openParentApplication(request) { (reply,error) in
+            println(reply)
+            if error == nil {
+                if let replyDict = reply as? [String:String] {
+                    self.updateSongInfo()
+                }
+            }
+        }
+    }
+    
     func updateSongInfo() {
         let player = MPMusicPlayerController()
         if let item = player.nowPlayingItem {
             artistLabel.setText(item.albumArtist)
             songLabel.setText(item.title)
-            artworkImage.setImage(item.artwork.imageWithSize(CGSize(width: 40, height: 40)))
+            /*put the image tio this while we fetch
+            self.artworkImage.setImageNamed("black-red-note")
+            Async.background {
+                self.artworkImage.setImage(item.artwork.imageWithSize(CGSize(width: 40, height: 40)))
+            }
+            */
         }
         else {
             artistLabel.setText("")
