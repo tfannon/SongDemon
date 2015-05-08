@@ -12,6 +12,18 @@ import Foundation
 
 class InterfaceController: WKInterfaceController {
 
+    @IBOutlet weak var prevButton: WKInterfaceButton!
+    @IBAction func prevPressed() {
+    }
+    
+    @IBOutlet weak var playButton: WKInterfaceButton!
+    @IBAction func playPressed() {
+    }
+    
+    @IBOutlet weak var nextButton: WKInterfaceButton!
+    @IBAction func nextPressed() {
+    }
+    
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         

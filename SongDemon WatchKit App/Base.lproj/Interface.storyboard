@@ -12,21 +12,53 @@
                     <items>
                         <group width="1" alignment="left" id="oF9-ym-193">
                             <items>
-                                <imageView width="32" height="28" alignment="left" verticalAlignment="center" id="oqn-LX-ype"/>
-                                <label width="103" alignment="center" verticalAlignment="center" text="Inquisition" textAlignment="center" id="M2F-eU-mxl">
-                                    <color key="textColor" red="1" green="0.0" blue="0.0" alpha="0.70000000000000007" colorSpace="calibratedRGB"/>
+                                <imageView width="32" height="28" alignment="left" verticalAlignment="center" image="black-red-note" id="oqn-LX-ype"/>
+                                <label width="93" height="25" alignment="right" verticalAlignment="center" text="Inquisition" textAlignment="center" id="M2F-eU-mxl">
+                                    <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="font" style="UICTFontTextStyleBody"/>
                                 </label>
                             </items>
+                            <edgeInsets key="margins" left="3" right="0.0" top="0.0" bottom="0.0"/>
                         </group>
                         <label width="136" alignment="center" text="Dark Mutilation Rights" textAlignment="center" minimumScaleFactor="1.3877787807814457e-16" id="2tW-RA-wGj">
-                            <color key="textColor" red="1" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
-                        </label>
-                        <label width="136" alignment="left" text="Magnificent Glorification of Lucifer" textAlignment="center" numberOfLines="2" minimumScaleFactor="0.30000000000000004" id="Zn4-Wr-YXI">
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                         </label>
-                        <slider width="1" alignment="left" verticalAlignment="bottom" value="1" maximum="3" steps="3" id="fhi-e1-zj2"/>
+                        <group width="1" alignment="left" layout="vertical" spacing="5" id="NXw-Xy-2W7" userLabel="Buttons">
+                            <items>
+                                <group width="1" height="40" alignment="left" verticalAlignment="center" id="lgN-OZ-XyZ" userLabel="Top Buttons">
+                                    <items>
+                                        <button width="0.33000000000000002" height="1" alignment="left" backgroundImage="left" id="Ayz-ir-z4h" userLabel="prev">
+                                            <connections>
+                                                <action selector="prevPressed" destination="AgC-eL-Hgc" id="eaA-H3-g33"/>
+                                            </connections>
+                                        </button>
+                                        <button width="0.33000000000000002" height="1" alignment="left" backgroundImage="penta" id="0Fb-0S-Fti">
+                                            <connections>
+                                                <action selector="playPressed" destination="AgC-eL-Hgc" id="5ph-rs-r4e"/>
+                                            </connections>
+                                        </button>
+                                        <button width="0.33000000000000002" height="1" alignment="left" backgroundImage="right" id="b2f-Xt-ND1" userLabel="next">
+                                            <connections>
+                                                <action selector="nextPressed" destination="AgC-eL-Hgc" id="LFl-wX-6Dk"/>
+                                            </connections>
+                                        </button>
+                                    </items>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </group>
+                                <group width="1" height="40" alignment="right" verticalAlignment="bottom" id="HOV-hb-XBc" userLabel="Bottom Buttons">
+                                    <items>
+                                        <button width="0.33000000000000002" height="1" alignment="left" backgroundImage="thumbs-up" id="yKZ-SM-4Yu"/>
+                                        <button width="0.33000000000000002" height="1" alignment="left" backgroundImage="pause" id="7jR-J7-MBc"/>
+                                        <button width="0.33000000000000002" height="1" alignment="left" backgroundImage="thumbs-down" id="VN8-qu-7dH"/>
+                                    </items>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </group>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                        </group>
+                        <slider width="1" alignment="left" verticalAlignment="bottom" value="1" maximum="3" steps="3" id="fhi-e1-zj2">
+                            <color key="color" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </slider>
                     </items>
                     <menu key="menu" id="ngA-FN-dDH">
                         <items>
@@ -34,9 +66,14 @@
                         </items>
                     </menu>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <outlet property="nextButton" destination="b2f-Xt-ND1" id="qCJ-Gy-aoZ"/>
+                        <outlet property="playButton" destination="0Fb-0S-Fti" id="qEF-YO-FXb"/>
+                        <outlet property="prevButton" destination="Ayz-ir-z4h" id="yRe-LX-30S"/>
+                    </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="235" y="341"/>
+            <point key="canvasLocation" x="235" y="339.75"/>
         </scene>
         <!--Glance Interface Controller-->
         <scene sceneID="BOz-TT-tkC">
