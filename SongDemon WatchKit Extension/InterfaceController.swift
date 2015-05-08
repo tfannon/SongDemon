@@ -43,11 +43,14 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet weak var artistLabel: WKInterfaceLabel!
     @IBOutlet weak var songLabel: WKInterfaceLabel!
     
+    @IBOutlet weak var artworkImage: WKInterfaceImage!
+    
     func updateSongInfo() {
         let player = MPMusicPlayerController()
         if let item = player.nowPlayingItem {
             artistLabel.setText(item.albumArtist)
             songLabel.setText(item.title)
+            artworkImage.setImage(item.artwork.imageWithSize(CGSize(width: 40, height: 40)))
         }
         else {
             artistLabel.setText("")
