@@ -67,9 +67,11 @@
                     </menu>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
+                        <outlet property="artistLabel" destination="M2F-eU-mxl" id="OBu-Iy-nrN"/>
                         <outlet property="nextButton" destination="b2f-Xt-ND1" id="qCJ-Gy-aoZ"/>
                         <outlet property="playButton" destination="0Fb-0S-Fti" id="qEF-YO-FXb"/>
                         <outlet property="prevButton" destination="Ayz-ir-z4h" id="yRe-LX-30S"/>
+                        <outlet property="songLabel" destination="2tW-RA-wGj" id="d0p-6O-dF2"/>
                     </connections>
                 </controller>
             </objects>

@@ -13,7 +13,6 @@ import AVFoundation
 class AppDelegate: UIResponder, UIApplicationDelegate {
                             
     var window: UIWindow?
-    var audioPlayer : AVAudioPlayer! = nil
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
@@ -50,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-        LibraryManager.serializeCurrentPlaylist()
+        //LibraryManager.serializeCurrentPlaylist()
         FBSession.activeSession().close()
     }
     
@@ -60,6 +59,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UISlider.appearance().setMaximumTrackImage(UIImage(named: "slider_maximum.png"), forState: .Normal)
         UISlider.appearance().setMinimumTrackImage(UIImage(named: "slider_minimum.png"), forState: .Normal)
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+    }
+    
+    func application(application: UIApplication, handleWatchKitExtensionRequest userInfo: [NSObject : AnyObject]?, reply: (([NSObject : AnyObject]!) -> Void)!) {
+        println("received a call from watch")
+        let dictionary = ["artist":"Goatwhore","album":"Blood For The Master","song":"In Deathless Tradition","playState":"paused"]
+        reply(dictionary)
     }
 }
 
