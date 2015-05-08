@@ -27,8 +27,9 @@ class InterfaceController: WKInterfaceController {
         switch (player.playbackState) {
             case (MPMusicPlaybackState.Playing) : player.pause()
             case (MPMusicPlaybackState.Paused) : player.play()
-        default : ""
+            default : ""
         }
+        updatePlayState()
     }
     
     @IBOutlet weak var nextButton: WKInterfaceButton!
@@ -52,7 +53,17 @@ class InterfaceController: WKInterfaceController {
             artistLabel.setText("")
             songLabel.setText("")
         }
+        updatePlayState()
     }
+    
+    func updatePlayState() {
+        let player = MPMusicPlayerController()
+        switch (player.playbackState) {
+            case (.Playing) : playButton.setBackgroundImageNamed("penta")
+            default: playButton.setBackgroundImageNamed("pause")
+        }
+    }
+    
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
