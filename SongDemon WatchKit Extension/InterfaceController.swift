@@ -69,7 +69,7 @@ class InterfaceController: WKInterfaceController {
             }
             */
         }
-        else {
+        else if !Utils.inSimulator {
             artistLabel.setText("")
             songLabel.setText("")
         }
@@ -79,7 +79,7 @@ class InterfaceController: WKInterfaceController {
     func updatePlayState() {
         let player = MPMusicPlayerController()
         switch (player.playbackState) {
-            case (.Playing) : playButton.setBackgroundImageNamed("penta")
+            case (.Playing) : playButton.setBackgroundImageNamed("note")
             default: playButton.setBackgroundImageNamed("pause")
         }
     }
