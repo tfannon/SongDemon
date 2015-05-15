@@ -19,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
         setupAppearance()
         FBLoginView.self
+        
+        LibraryManager.generatePlaylistsForWatch(false)
+        
         return true
     }
     
@@ -66,14 +69,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         println("received a call from watch")
         if let action = userInfo?["action"] as? String {
             switch (action) {
-            case "playLiked" :
-                var songs = LibraryManager.getMixOfSongs()
-                var player = MPMusicPlayerController()
-
-                
+            case WK_LIKED_PLAYLIST, WK_MIX_PLAYLIST : LibraryManager.generatePlaylistsForWatch(true)
+            case WK_ARTIST_PLAYLIST : ""
             default :""
             }
         }
+        //send empty dictionary back
+        reply([:])
         //let dictionary = ["artist":"Goatwhore","album":"Blood For The Master","song":"In Deathless Tradition","playState":"paused"]
         //reply(dictionary)
     }

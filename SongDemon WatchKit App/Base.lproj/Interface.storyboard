@@ -46,10 +46,13 @@
                                 <group width="1" height="40" alignment="right" verticalAlignment="bottom" id="HOV-hb-XBc" userLabel="Bottom Buttons">
                                     <items>
                                         <button width="0.33000000000000002" height="1" alignment="left" backgroundImage="thumbs-up" id="yKZ-SM-4Yu"/>
-                                        <button width="0.33000000000000002" height="1" alignment="left" title="666" id="7jR-J7-MBc">
+                                        <button width="0.33000000000000002" height="1" alignment="left" backgroundImage="redshuffle" id="7jR-J7-MBc">
                                             <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <fontDescription key="font" type="system" pointSize="9"/>
+                                            <connections>
+                                                <action selector="shufflePressed" destination="AgC-eL-Hgc" id="61e-29-z1J"/>
+                                            </connections>
                                         </button>
                                         <button width="0.33000000000000002" height="1" alignment="left" backgroundImage="thumbs-down" id="VN8-qu-7dH"/>
                                     </items>

@@ -2,10 +2,11 @@
 import MediaPlayer
 
 let RECENTLY_ADDED_LIST = "RecentlyAdded"
-let LIKED_LIST = "Liked"
 let DISLIKED_LIST = "Disliked"
 let QUEUED_LIST = "Queued"
 let CURRENT_LIST = "Current"
+let LIKED_LIST = "Liked"
+
 
 private let LM = LibraryManager()
 
@@ -102,6 +103,8 @@ class LibraryManager {
         userDefaults.setObject(groupedPlaylist, forKey: "GroupedPlaylist")
         */
     }
+    
+    
     
     class func deserializePlaylist() {
         let userDefaults = Utils.AppGroupDefaults;
@@ -558,4 +561,41 @@ class LibraryManager {
             println("No userDefaults")
         }
     }
+    
+  
+    
+    //MARK: functions for generating playlists for watch
+    class func serializePlaylist(serializeKey : String, songs : [MPMediaItem]) {
+        let ids : [String] = songs.map { song in
+            song.hashKey
+        }
+        if ids.count > 0 {
+            let userDefaults = Utils.AppGroupDefaults;
+            userDefaults.setObject(ids, forKey: serializeKey)
+        }
+    }
+    
+    class func generatePlaylistsForWatch(regenerate : Bool) {
+        let defaults = Utils.AppGroupDefaults
+        if regenerate || defaults.objectForKey(WK_MIX_PLAYLIST) == nil {
+            println("Generating mix for the watch")
+            let mix = LibraryManager.getMixOfSongs(count: 100, dumpSongs: true)
+            LibraryManager.serializePlaylist(WK_MIX_PLAYLIST, songs: mix)
+        }
+        
+        if regenerate || defaults.objectForKey(WK_LIKED_PLAYLIST) == nil {
+            println("Generating liked list for the watch")
+            let liked = LibraryManager.getLikedSongs(count: 100, dumpSongs: true)
+            LibraryManager.serializePlaylist(WK_LIKED_PLAYLIST, songs: liked)
+        }
+    }
+    /*
+    class func generateArtistPlaylist(regenerate : Bool) {
+        let defaults = Utils.AppGroupDefaults
+        if regenerate || defaults.objectForKey(WK_MIX_PLAYLIST) == nil {
+            let mix = LibraryManager.getMixOfSongs(count: 100, dumpSongs: false)
+            LibraryManager.serializePlaylist(WK_MIX_PLAYLIST, songs: mix)
+        }
+    }
+    */
 }

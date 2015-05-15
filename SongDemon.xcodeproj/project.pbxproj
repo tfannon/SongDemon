@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6512429F1B065EBE006248A0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6512429E1B065EBE006248A0 /* Constants.swift */; };
+		651242A01B065EBE006248A0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6512429E1B065EBE006248A0 /* Constants.swift */; };
+		651242A11B065F14006248A0 /* ITunesUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B2A5A219529B0E00C3BE89 /* ITunesUtils.swift */; };
+		651242A21B066163006248A0 /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E048811953B1DB0080031C /* MusicPlayer.swift */; };
+		651242A31B069E44006248A0 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6557D9EF1997414600A0A87E /* Extensions.swift */; };
+		651242A41B069E54006248A0 /* TimeStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6557D9ED1997412500A0A87E /* TimeStruct.swift */; };
 		65164C37196CF62400644EF4 /* UIHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65164C36196CF62400644EF4 /* UIHelpers.swift */; };
 		6522D5C019D7739900FAB3AD /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6522D5BF19D7739900FAB3AD /* FacebookSDK.framework */; };
 		6522D5C519D7ACD900FAB3AD /* FacebookUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522D5C419D7ACD900FAB3AD /* FacebookUtils.swift */; };
@@ -131,6 +137,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6512429E1B065EBE006248A0 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		65164C36196CF62400644EF4 /* UIHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHelpers.swift; sourceTree = "<group>"; };
 		6522D5BF19D7739900FAB3AD /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		6522D5C119D773EB00FAB3AD /* SongDemon-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SongDemon-Bridging-Header.h"; path = "../SongDemon-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -298,6 +305,7 @@
 				6522D5C419D7ACD900FAB3AD /* FacebookUtils.swift */,
 				65D614531A19BAC40046E66C /* LastFMUtils.swift */,
 				65B1CEF01AF81DEF00FC4C33 /* FileManager.swift */,
+				6512429E1B065EBE006248A0 /* Constants.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -634,10 +642,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				65E5C03F1B04405700BC955C /* Utils.swift in Sources */,
+				651242A41B069E54006248A0 /* TimeStruct.swift in Sources */,
+				651242A31B069E44006248A0 /* Extensions.swift in Sources */,
 				6555712F1AFC8DBF00FF3B2B /* Async.swift in Sources */,
+				651242A21B066163006248A0 /* MusicPlayer.swift in Sources */,
 				657F790B1AF86D8900EEE85F /* NotificationController.swift in Sources */,
 				657F79091AF86D8900EEE85F /* InterfaceController.swift in Sources */,
 				657F790D1AF86D8900EEE85F /* GlanceController.swift in Sources */,
+				651242A11B065F14006248A0 /* ITunesUtils.swift in Sources */,
+				651242A01B065EBE006248A0 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -668,6 +681,7 @@
 				65B66DE9195246AB00947DCE /* AppDelegate.swift in Sources */,
 				65587F4919B4099A00375C98 /* Videos.swift in Sources */,
 				656BA3321A2295DA0042DD47 /* SearchAlbumTrackCell.swift in Sources */,
+				6512429F1B065EBE006248A0 /* Constants.swift in Sources */,
 				65587F4519B4034100375C98 /* VideoCell.swift in Sources */,
 				65304F0D196CAB9E00F985D3 /* Utils.swift in Sources */,
 				65EFCD1B1A17EA20000ECF93 /* SearchArtistController.swift in Sources */,

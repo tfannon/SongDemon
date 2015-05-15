@@ -10,8 +10,15 @@ import WatchKit
 import Foundation
 import MediaPlayer
 
+enum PlayMode {
+    case Liked
+    case Mix
+    case Artist
+}
 
 class InterfaceController: WKInterfaceController {
+    
+    var playMode = PlayMode.Mix
     
     //MARK: - outlets and actions
     @IBOutlet weak var prevButton: WKInterfaceButton!
@@ -25,6 +32,9 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet weak var playButton: WKInterfaceButton!
     @IBAction func playPressed() {
         let player = MPMusicPlayerController()
+        if player.nowPlayingItem == nil {
+            playMix()
+        }
         switch (player.playbackState) {
             case (MPMusicPlaybackState.Playing) : player.pause()
             case (MPMusicPlaybackState.Paused) : player.play()
@@ -44,29 +54,34 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet weak var artistLabel: WKInterfaceLabel!
     @IBOutlet weak var songLabel: WKInterfaceLabel!
     
+    //this will force a new playlist
+    @IBAction func shufflePressed() {
+        switch playMode {
+        case .Mix : playMix(refreshList: true)
+        //case .Artist: playMix(refreshList: true)
+        case .Liked: playLiked(refreshList: true)
+        default:""
+        }
+    }
+
     
     @IBAction func likeTapped() {
-        let request = ["action":"playLiked"]
-        WKInterfaceController.openParentApplication(request) { (reply,error) in
-            println(reply)
-            if error == nil {
-                if let replyDict = reply as? [String:String] {
-                    self.updateSongInfo()
-                }
-            }
-        }
+        playLiked()
+        /*
+                */
     }
     
     @IBAction func mixTapped() {
-        let request = ["action":"playMix"]
-        WKInterfaceController.openParentApplication(request) { (reply,error) in
-            println(reply)
-            if error == nil {
-                if let replyDict = reply as? [String:String] {
-                    self.updateSongInfo()
-                }
-            }
-        }
+        playMix()
+//        let request = ["action":"playMix"]
+//        WKInterfaceController.openParentApplication(request) { (reply,error) in
+//            println(reply)
+//            if error == nil {
+//                if let replyDict = reply as? [String:String] {
+//                    self.updateSongInfo()
+//                }
+//            }
+//        }
     }
     
     //MARK: helpers
@@ -91,16 +106,6 @@ class InterfaceController: WKInterfaceController {
         }
     }
     
-    func testDefaults() {
-        let groupId = "group.com.crazy8dev.songdemon"
-        let defaults = NSUserDefaults(suiteName: groupId)
-        if let val = defaults?.valueForKey("foo") as? String {
-            println(val)
-        }
-        defaults?.setValue("hello", forKey: "fromWatchkit")
-        defaults?.synchronize()
-    }
-    
     //MARK: WKInterfaceController methods
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
@@ -111,7 +116,6 @@ class InterfaceController: WKInterfaceController {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
-        testDefaults()
         updateSongInfo()
         
         /*
@@ -138,5 +142,41 @@ class InterfaceController: WKInterfaceController {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
     }
-
+    
+    func playMix(refreshList : Bool = false) {
+        playList(WK_MIX_PLAYLIST, refreshList:refreshList)
+    }
+    
+    func playLiked(refreshList : Bool = false) {
+        playList(WK_LIKED_PLAYLIST, refreshList:refreshList)
+    }
+    
+    func playList(listName : String, refreshList : Bool) {
+        if refreshList {
+            refreshListFromPhone(listName)
+        }
+        else {
+            let defaults = Utils.AppGroupDefaults
+            if let ids = defaults.objectForKey(listName) as? [String] {
+                var songs = ITunesUtils.getSongFrom(ids)
+                if songs.count > 0 {
+                    songs.shuffle()
+                    MusicPlayer.queuePlaylist(songs, songToStart: nil, startNow: true)
+                    updateSongInfo()
+                }
+            }
+        }
+    }
+    
+    func refreshListFromPhone(listName : String) {
+        let request = ["action":listName]
+        WKInterfaceController.openParentApplication(request) { (reply,error) in
+            println(reply)
+            if error == nil {
+                self.playList(listName, refreshList: false)
+            }
+        }
+    }
+    
+    
 }

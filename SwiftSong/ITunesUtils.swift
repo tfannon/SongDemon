@@ -26,10 +26,8 @@ class ITunesUtils {
     }
     
     class func getSongFrom(persistentIds : [String]) -> [MPMediaItem] {
-        let query = MPMediaQuery.songsQuery()
-        query.addFilterPredicate(MPMediaPropertyPredicate(value: persistentIds, forProperty: MPMediaItemPropertyPersistentID))
-        println (query.items)
-        return query.items as! [MPMediaItem]
+        let songs = persistentIds.map { ITunesUtils.getSongFrom($0) }
+        return songs.filter { $0 != nil }.map { $0! }
     }
 
     class func getArtists() -> [String] {
