@@ -135,6 +135,8 @@
 		6522D5BF19D7739900FAB3AD /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		6522D5C119D773EB00FAB3AD /* SongDemon-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SongDemon-Bridging-Header.h"; path = "../SongDemon-Bridging-Header.h"; sourceTree = "<group>"; };
 		6522D5C419D7ACD900FAB3AD /* FacebookUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookUtils.swift; sourceTree = "<group>"; };
+		652779B41B045DCA004E0C5A /* SongDemon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SongDemon.entitlements; sourceTree = SOURCE_ROOT; };
+		652779B51B045E4A004E0C5A /* SongDemon WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "SongDemon WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		65304F0C196CAB9E00F985D3 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		6552BFF31A3FED7500E77322 /* blacklab2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blacklab2.png; sourceTree = "<group>"; };
 		6555712E1AFC8DBF00FF3B2B /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 		657F79041AF86D8900EEE85F /* SongDemon WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				652779B51B045E4A004E0C5A /* SongDemon WatchKit Extension.entitlements */,
 				6555712E1AFC8DBF00FF3B2B /* Async.swift */,
 				657F79081AF86D8900EEE85F /* InterfaceController.swift */,
 				657F790A1AF86D8900EEE85F /* NotificationController.swift */,
@@ -363,6 +366,7 @@
 		65B66DE5195246AB00947DCE /* SongDemon */ = {
 			isa = PBXGroup;
 			children = (
+				652779B41B045DCA004E0C5A /* SongDemon.entitlements */,
 				6522D5C119D773EB00FAB3AD /* SongDemon-Bridging-Header.h */,
 				6522D5BF19D7739900FAB3AD /* FacebookSDK.framework */,
 				65B66DE7195246AB00947DCE /* Info.plist */,
@@ -506,6 +510,11 @@
 					657F79021AF86D8900EEE85F = {
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = K9HP5J9XB3;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					657F79111AF86D8900EEE85F = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -514,6 +523,9 @@
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = K9HP5J9XB3;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
@@ -744,6 +756,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = SongDemon.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -761,6 +774,7 @@
 		657F79211AF86D8900EEE85F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "SongDemon WatchKit Extension/SongDemon WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -774,6 +788,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos8.3;
 				SKIP_INSTALL = YES;
 			};
@@ -782,6 +797,7 @@
 		657F79221AF86D8900EEE85F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "SongDemon WatchKit Extension/SongDemon WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -792,6 +808,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos8.3;
 				SKIP_INSTALL = YES;
 			};
@@ -800,6 +817,7 @@
 		657F79231AF86D8900EEE85F /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "SongDemon WatchKit Extension/SongDemon WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -810,6 +828,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos8.3;
 				SKIP_INSTALL = YES;
 			};
@@ -955,6 +974,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = SongDemon.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -976,6 +996,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = SongDemon.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (

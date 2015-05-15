@@ -62,7 +62,7 @@ class LibraryManager {
 
     init() {
         //println("storage objects being initialized from NSDefaults\n")
-        let userDefaults = NSUserDefaults.standardUserDefaults();
+        let userDefaults = Utils.AppGroupDefaults;
         if let result = userDefaults.objectForKey(LIKED_LIST) as? Dictionary<String,String> {
             println("\(result.count) liked songs")
             for (x,y) in result {
@@ -92,7 +92,7 @@ class LibraryManager {
             song.hashKey
         }
         if playlist.count > 0 {
-            let userDefaults = NSUserDefaults.standardUserDefaults();
+            let userDefaults = Utils.AppGroupDefaults;
             userDefaults.setObject(playlist, forKey: CURRENT_LIST)
         }
         /* we could remember the grouping if we wanted to....
@@ -104,7 +104,7 @@ class LibraryManager {
     }
     
     class func deserializePlaylist() {
-        let userDefaults = NSUserDefaults.standardUserDefaults();
+        let userDefaults = Utils.AppGroupDefaults;
         //if there is a current song, see if its in the serialized playlist.
         if let currentSong = MusicPlayer.currentSong {
             if let playlist = userDefaults.objectForKey("CurrentPlaylist") as? [String]  {
@@ -257,7 +257,7 @@ class LibraryManager {
     
     class func clearQueued() {
         LM.QueuedSongs.removeAll(keepCapacity: false)
-        let userDefaults = NSUserDefaults.standardUserDefaults()
+        let userDefaults = Utils.AppGroupDefaults
         userDefaults.setObject(LM.QueuedSongs as Dictionary<NSObject,AnyObject>, forKey: QUEUED_LIST)
     }
     
@@ -285,7 +285,7 @@ class LibraryManager {
     private class func addToList(listName:String, inout list:Dictionary<String,String>, item:MPMediaItem?) {
         if (item != nil) {
             list[item!.hashKey] = item!.title
-            let userDefaults = NSUserDefaults.standardUserDefaults()
+            let userDefaults = Utils.AppGroupDefaults
             userDefaults.setObject(list as Dictionary<NSObject,AnyObject>, forKey: listName)
         }
     }
@@ -294,14 +294,14 @@ class LibraryManager {
         for item in items {
             list[item.hashKey] = item.title
         }
-        let userDefaults = NSUserDefaults.standardUserDefaults()
+        let userDefaults = Utils.AppGroupDefaults
         userDefaults.setObject(list as Dictionary<NSObject,AnyObject>, forKey: listName)
     }
    
     private class func removeFromList(listName:String, inout list:Dictionary<String,String>, item:MPMediaItem?) {
         if (item != nil) {
             list.removeValueForKey(item!.hashKey);
-            let userDefaults = NSUserDefaults.standardUserDefaults()
+            let userDefaults = Utils.AppGroupDefaults
             userDefaults.setObject(list as Dictionary<NSObject,AnyObject>, forKey: listName)
         }
     }
@@ -310,7 +310,7 @@ class LibraryManager {
         for item in items {
             list.removeValueForKey(item.hashKey)
         }
-        let userDefaults = NSUserDefaults.standardUserDefaults()
+        let userDefaults = Utils.AppGroupDefaults
         userDefaults.setObject(list as Dictionary<NSObject,AnyObject>, forKey: listName)
     }
     
@@ -551,7 +551,7 @@ class LibraryManager {
     
 
     private class func dumpNSUserDefaults(forList:String) -> Void {
-        let userDefaults = NSUserDefaults.standardUserDefaults()
+        let userDefaults = Utils.AppGroupDefaults
         if let songsFromDefaults = userDefaults.objectForKey(forList) as? Dictionary<String,String> {
             println("Current defaults: \(songsFromDefaults)")
         } else {

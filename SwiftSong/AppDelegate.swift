@@ -66,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         println("received a call from watch")
         if let action = userInfo?["action"] as? String {
             switch (action) {
-            case "playFavorites" :
+            case "playLiked" :
                 var songs = LibraryManager.getMixOfSongs()
                 var player = MPMusicPlayerController()
 

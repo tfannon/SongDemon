@@ -10,10 +10,29 @@ import UIKit
 
 
 class Utils {
+    static var MIGRATED : String = "Migrated"
+
     class var inSimulator : Bool {
         get {
             let device = UIDevice.currentDevice().model
             return NSString(string:device).containsString("Simulator")
+        }
+    }
+    
+    static var AppGroupDefaults : NSUserDefaults = {
+        let groupId = "group.com.crazy8dev.songdemon"
+        let defaults = NSUserDefaults(suiteName: groupId)
+        return defaults!
+    }()
+    
+    func migrateDefaults() {
+        if !Utils.AppGroupDefaults.boolForKey(Utils.MIGRATED) {
+            var oldDefaults = NSUserDefaults.standardUserDefaults().dictionaryRepresentation() as! [String:AnyObject]
+            for key in oldDefaults.keys {
+                Utils.AppGroupDefaults.setObject(oldDefaults[key], forKey: key)
+            }
+            Utils.AppGroupDefaults.setBool(true, forKey: Utils.MIGRATED)
+            Utils.AppGroupDefaults.synchronize()
         }
     }
     

@@ -12,7 +12,8 @@ import MediaPlayer
 
 
 class InterfaceController: WKInterfaceController {
-
+    
+    //MARK: - outlets and actions
     @IBOutlet weak var prevButton: WKInterfaceButton!
     @IBAction func prevPressed() {
         let player = MPMusicPlayerController()
@@ -43,10 +44,9 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet weak var artistLabel: WKInterfaceLabel!
     @IBOutlet weak var songLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var artworkImage: WKInterfaceImage!
     
-    @IBAction func favoritesTapped() {
-        let request = ["action":"playFavorites"]
+    @IBAction func likeTapped() {
+        let request = ["action":"playLiked"]
         WKInterfaceController.openParentApplication(request) { (reply,error) in
             println(reply)
             if error == nil {
@@ -57,17 +57,24 @@ class InterfaceController: WKInterfaceController {
         }
     }
     
+    @IBAction func mixTapped() {
+        let request = ["action":"playMix"]
+        WKInterfaceController.openParentApplication(request) { (reply,error) in
+            println(reply)
+            if error == nil {
+                if let replyDict = reply as? [String:String] {
+                    self.updateSongInfo()
+                }
+            }
+        }
+    }
+    
+    //MARK: helpers
     func updateSongInfo() {
         let player = MPMusicPlayerController()
         if let item = player.nowPlayingItem {
             artistLabel.setText(item.albumArtist)
             songLabel.setText(item.title)
-            /*put the image tio this while we fetch
-            self.artworkImage.setImageNamed("black-red-note")
-            Async.background {
-                self.artworkImage.setImage(item.artwork.imageWithSize(CGSize(width: 40, height: 40)))
-            }
-            */
         }
         else if !Utils.inSimulator {
             artistLabel.setText("")
@@ -84,7 +91,17 @@ class InterfaceController: WKInterfaceController {
         }
     }
     
+    func testDefaults() {
+        let groupId = "group.com.crazy8dev.songdemon"
+        let defaults = NSUserDefaults(suiteName: groupId)
+        if let val = defaults?.valueForKey("foo") as? String {
+            println(val)
+        }
+        defaults?.setValue("hello", forKey: "fromWatchkit")
+        defaults?.synchronize()
+    }
     
+    //MARK: WKInterfaceController methods
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
@@ -94,6 +111,7 @@ class InterfaceController: WKInterfaceController {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
+        testDefaults()
         updateSongInfo()
         
         /*
