@@ -63,7 +63,7 @@ class LibraryManager {
 
 
     init() {
-        let stopwatch = Stopwatch.getStarted("LibraryManager.init")
+        let stopwatch = Stopwatch.start("LibraryManager.init")
         let userDefaults = Utils.AppGroupDefaults;
         if let result = userDefaults.objectForKey(LIKED_LIST) as? Dictionary<String,String> {
             println("\(result.count) liked songs")
@@ -154,7 +154,7 @@ class LibraryManager {
         var unplayed = 0;
 
         cleanPlaylists()
-        var stopwatch = Stopwatch.getStarted("scanLibrary")
+        var stopwatch = Stopwatch.start("scanLibrary")
         
         if let allSongs = ITunesUtils.getAllSongs() {
             LM.songCount = allSongs.count
@@ -208,13 +208,13 @@ class LibraryManager {
         }
         LM.scanned = true;
         objc_sync_exit(LM.LikedSongs)
-        generatePlaylistsForWatch(false)
         for x in LM.LibraryScanListeners {
             x.libraryScanComplete()
         }
+        generatePlaylistsForWatch(true)
     }
     
-       //MARK: functions for adding to lists
+    //MARK: functions for adding to lists
 
     class func addToLiked(item:MPMediaItem) {
         addToList(LIKED_LIST, list: &LM.LikedSongs, item: item)
@@ -314,7 +314,7 @@ class LibraryManager {
      /* run a query to see all items > 1 star in itunes and merge this with current liked */
     class func getLikedSongs(count : Int = 50, dumpSongs : Bool = false) -> [MPMediaItem] {
         scanLibrary()
-         let sw = Stopwatch.getStarted()
+         let sw = Stopwatch.start()
         //take all the SongDemon liked songs
         var allLiked : [String] = LM.LikedSongs.keys.array
         //add all the iTunes-rated songs
@@ -351,7 +351,7 @@ class LibraryManager {
     
     class func getMixOfSongs(count : Int = 50, dumpSongs : Bool = false) -> [MPMediaItem] {
         scanLibrary()
-        let sw = Stopwatch.getStarted()
+        let sw = Stopwatch.start()
         let allSongs = LM.RatedSongs + LM.NotPlayedSongs + LM.OtherSongs
         let randomSongs = getRandomSongs(count, sourceSongs: allSongs)
         sw.stop("Built mix list with \(randomSongs.count) songs")
@@ -573,24 +573,23 @@ class LibraryManager {
         }
     }
 
-    class func trimList(listName : String, inout list : [String:String], stopwatch : Stopwatch) {
+    class func trimList(listName : String, inout list : [String:String]) {
         let defaults = Utils.AppGroupDefaults
         let trimmed = list.filter { ITunesUtils.getSongFrom($0.0) != nil }
         let missing = list.count - trimmed.count
         defaults.setObject(trimmed, forKey: listName)
-        stopwatch.takeTiming("\(missing) \(listName) songs removed")
     }
     
     class func cleanPlaylists() {
-        let sw = Stopwatch.getStarted("cleanPlaylists")
-        trimList(LIKED_LIST, list: &LM.LikedSongs, stopwatch:sw)
-        trimList(DISLIKED_LIST, list: &LM.DislikedSongs, stopwatch:sw)
-        trimList(QUEUED_LIST, list: &LM.QueuedSongs, stopwatch:sw)
+        let sw = Stopwatch.start("cleanPlaylists")
+        trimList(LIKED_LIST, list: &LM.LikedSongs)
+        trimList(DISLIKED_LIST, list: &LM.DislikedSongs)
+        trimList(QUEUED_LIST, list: &LM.QueuedSongs)
         sw.stop()
     }
     
     class func generatePlaylistsForWatch(regenerate : Bool) {
-        let stopwatch = Stopwatch.getStarted("generatePlaylistsForWatch")
+        let stopwatch = Stopwatch.start("generatePlaylistsForWatch")
         let defaults = Utils.AppGroupDefaults
         if regenerate || defaults.objectForKey(WK_MIX_PLAYLIST) == nil {
             println("Generating mix for the watch")
@@ -603,16 +602,17 @@ class LibraryManager {
             let liked = LibraryManager.getLikedSongs(count: 100)
             LibraryManager.serializePlaylist(WK_LIKED_PLAYLIST, songs: liked)
         }
-        
+        var count = 0
         if regenerate || defaults.objectForKey(WK_LIKED_PLAYLIST) == nil {
             println("Generating artist lists for the watch")
             for (artist,info) in LM.ArtistInfos {
                 if info.songIds.count > 0 {
+                    count++
                     defaults.setObject(info.songIds, forKey: artist)
                 }
             }
         }
-        stopwatch.stop()
+        stopwatch.stop("\(count) artists written")
     }
 
     class func getArtistPlaylistForWatch(artist: String, regenerate : Bool) -> [String] {

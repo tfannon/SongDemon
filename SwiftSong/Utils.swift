@@ -56,11 +56,11 @@ class Stopwatch {
     private var timer = NSDate()
     private var title : String = ""
 
-    class func getStarted() -> Stopwatch {
-        return Stopwatch.getStarted("")
+    class func start() -> Stopwatch {
+        return Stopwatch.start("")
     }
     
-    class func getStarted(title : String) -> Stopwatch {
+    class func start(title : String) -> Stopwatch {
         let sw = Stopwatch()
         sw.title = title
         if !title.isEmpty {
