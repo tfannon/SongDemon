@@ -77,8 +77,11 @@
                                     <action selector="mixTapped" destination="AgC-eL-Hgc" id="8hG-ls-N2J"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Artist" image="microphone" id="bqp-xo-z7r"/>
-                            <menuItem title="Lyrics" icon="info" id="HVs-j6-cev"/>
+                            <menuItem title="Artist" image="microphone" id="bqp-xo-z7r">
+                                <connections>
+                                    <action selector="artistTapped" destination="AgC-eL-Hgc" id="cQM-fa-gQD"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

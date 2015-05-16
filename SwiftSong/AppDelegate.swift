@@ -20,7 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupAppearance()
         FBLoginView.self
         
-        LibraryManager.generatePlaylistsForWatch(false)
+        Async.background {
+            LibraryManager.scanLibrary()
+        }
         
         return true
     }
@@ -65,19 +67,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
     }
     
+    
     func application(application: UIApplication, handleWatchKitExtensionRequest userInfo: [NSObject : AnyObject]?, reply: (([NSObject : AnyObject]!) -> Void)!) {
+        
+        var bgTask : UIBackgroundTaskIdentifier = UIBackgroundTaskInvalid
+        
+        bgTask = UIApplication.sharedApplication().beginBackgroundTaskWithName("bgtask") {
+            bgTask = UIBackgroundTaskInvalid
+        }
+        
         println("received a call from watch")
         if let action = userInfo?["action"] as? String {
             switch (action) {
             case WK_LIKED_PLAYLIST, WK_MIX_PLAYLIST : LibraryManager.generatePlaylistsForWatch(true)
-            case WK_ARTIST_PLAYLIST : ""
+            case WK_ARTIST_PLAYLIST :
+                if let artist = userInfo?["artist"] as? String {
+                    let ids = LibraryManager.getArtistPlaylistForWatch(artist, regenerate: false)
+                    reply(["ids":ids])
+                }
             default :""
             }
         }
-        //send empty dictionary back
-        reply([:])
-        //let dictionary = ["artist":"Goatwhore","album":"Blood For The Master","song":"In Deathless Tradition","playState":"paused"]
-        //reply(dictionary)
+        reply(nil)
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2.0 * Float(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+                UIApplication.sharedApplication().endBackgroundTask(bgTask)
+        }
     }
+    
 }
 

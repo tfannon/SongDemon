@@ -44,7 +44,6 @@ class PlaylistController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         redrawList()
-        LibraryManager.serializeCurrentPlaylist()
     }
     
     
@@ -52,7 +51,8 @@ class PlaylistController: UITableViewController {
         tableView.reloadData()
         if LibraryManager.currentPlaylist.count == 0 {
             lblHeaderTitle.text = "No playlist selected"
-        } else {
+        }
+        else {
             lblHeaderTitle.text = ""
             tableView.scrollToRowAtIndexPath(getIndexPath(), atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
         }

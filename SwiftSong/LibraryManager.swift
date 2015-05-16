@@ -33,6 +33,7 @@ class ArtistInfo {
     var songs : Int = 0
     var likedSongs : Int = 0
     var unplayedSongs : Int = 0
+    var songIds = [String]()
 }
 
 protocol LibraryScanListener {
@@ -62,49 +63,32 @@ class LibraryManager {
 
 
     init() {
-        //println("storage objects being initialized from NSDefaults\n")
+        let stopwatch = Stopwatch.getStarted("LibraryManager.init")
         let userDefaults = Utils.AppGroupDefaults;
         if let result = userDefaults.objectForKey(LIKED_LIST) as? Dictionary<String,String> {
             println("\(result.count) liked songs")
-            for (x,y) in result {
-               LikedSongs[x] = y
-               //println("\(y)")
-            }
+            LikedSongs = result
+            //result.map { println($0) }
         }
         if let result = userDefaults.objectForKey(DISLIKED_LIST) as? Dictionary<String,String> {
             println("\(result.count) disliked songs")
-            for (x,y) in result {
-                DislikedSongs[x] = y
-                //println("\(y)")
-            }
+            DislikedSongs = result
         }
         if let result = userDefaults.objectForKey(QUEUED_LIST) as? Dictionary<String,String> {
             println("\(result.count) queued songs")
-            for (x,y) in result {
-                QueuedSongs[x] = y
-                //println("\(y)")
-            }
+            QueuedSongs = result
         }
-        //println()
+        stopwatch.stop("")
     }
     
+    /*
     class func serializeCurrentPlaylist() {
-        let playlist : [String] = LM.Playlist.map { song in
-            song.hashKey
-        }
+        let playlist : [String] = LM.Playlist.map { $0.hashKey }
         if playlist.count > 0 {
             let userDefaults = Utils.AppGroupDefaults;
             userDefaults.setObject(playlist, forKey: CURRENT_LIST)
         }
-        /* we could remember the grouping if we wanted to....
-        let groupedPlaylist : [[String]] = LM.GroupedPlaylist.map { album in
-            album.map { song in song.hashKey }
-        }
-        userDefaults.setObject(groupedPlaylist, forKey: "GroupedPlaylist")
-        */
     }
-    
-    
     
     class func deserializePlaylist() {
         let userDefaults = Utils.AppGroupDefaults;
@@ -124,8 +108,9 @@ class LibraryManager {
             }
         }
     }
+    */
     
-    //MARK: only computed class properties
+    //MARK: computed class properties
     
     class var songCount : Int {
         return LM.songCount
@@ -151,14 +136,8 @@ class LibraryManager {
         return LM.PlaylistMode
     }
     
-    class func changePlaylistIndex(currentSong : MPMediaItem) {
-        var index = find(LM.Playlist, currentSong)
-        if index != nil {
-            LM.PlaylistIndex = index!
-            println("Setting playlist index to: \(currentSong.songInfo))")
-        }
-    }
-
+    //MARK: library scanning
+    
     class func addListener(listener : LibraryScanListener) {
         LM.LibraryScanListeners.append(listener)
     }
@@ -173,60 +152,69 @@ class LibraryManager {
             return
         }
         var unplayed = 0;
-        var start = NSDate()
+
+        cleanPlaylists()
+        var stopwatch = Stopwatch.getStarted("scanLibrary")
+        
         if let allSongs = ITunesUtils.getAllSongs() {
             LM.songCount = allSongs.count
             for song in allSongs {
-                //println(song.albumArtist!)
                 if let artist = song.albumArtist {
-                    var info : ArtistInfo? = LM.ArtistInfos[artist]
+                    var artistInfo : ArtistInfo? = LM.ArtistInfos[artist]
                     //grab some artwork
-                    if info == nil {
-                        info = ArtistInfo()
-                        LM.ArtistInfos[artist] = info
+                    if artistInfo == nil {
+                        artistInfo = ArtistInfo()
+                        LM.ArtistInfos[artist] = artistInfo
                     }
-                    if info!.artwork == nil {
-                        info!.artwork = song.artwork
+                    if artistInfo!.artwork == nil {
+                        artistInfo!.artwork = song.artwork
                     }
                     //increment number of songs in library
-                    info!.songs++
-                    
+                    artistInfo!.songs++
+
                     //an album must have an album artist and title and a rating to make the cut
                     if song.albumArtist != nil && song.title != nil {
+                        var disliked = LM.DislikedSongs[song.hashKey] != nil
+
                         if song.rating >= 1 {
-                            //var info = SongInfo(id: song.persistentID.description, rating:song.rating, playCount:song.playCount)
                             switch (song.rating) {
                             case 0:""
+                            //we take 1 star to mean disliked in itunes
                             case 1:
+                                disliked = true
                                 LM.LowRatedSongs.append(song.hashKey)
+                            //any rating > 1 qualifies
                             default:
                                 LM.RatedSongs.append(song.hashKey)
-                                //increment the artists liked songs
-                                info!.likedSongs++
+                                artistInfo!.likedSongs++
+
                             }
                         }
                         else if song.playCount >= 0 && song.playCount <= 2 {
                             LM.NotPlayedSongs.append(song.hashKey)
                             unplayed++
-                            info!.unplayedSongs++
+                            artistInfo!.unplayedSongs++
                         }
                         else {
                             LM.OtherSongs.append(song.hashKey)
                         }
+                        if !disliked {
+                            artistInfo!.songIds.append(song.hashKey)
+                        }
                     }
                 }
             }
-            let time = NSDate().timeIntervalSinceDate(start) * 1000
-            println("Scanned \(allSongs.count) in \(time)ms. \n  \(LM.RatedSongs.count) songs with >1 rating \n  \(LM.LowRatedSongs.count) songs with =1 rating \n  \(unplayed) songs with playcount <2 \n  \(LM.OtherSongs.count) others songs\n")
+            stopwatch.stop("Scanned \(allSongs.count) songs\n  \(LM.RatedSongs.count) songs with >1 rating \n  \(LM.LowRatedSongs.count) songs with =1 rating \n  \(unplayed) songs with playcount <2 \n  \(LM.OtherSongs.count) others songs\n")
         }
         LM.scanned = true;
         objc_sync_exit(LM.LikedSongs)
+        generatePlaylistsForWatch(false)
         for x in LM.LibraryScanListeners {
             x.libraryScanComplete()
         }
     }
     
-    //MARK: functions for adding to lists
+       //MARK: functions for adding to lists
 
     class func addToLiked(item:MPMediaItem) {
         addToList(LIKED_LIST, list: &LM.LikedSongs, item: item)
@@ -285,9 +273,12 @@ class LibraryManager {
     
     //MARK: private list helpers
     
+    //key is PersistentId but since persistent id can change we will store the other parts so we can 
+    //do a reverse lookup in the event we need to rebuild the lists
     private class func addToList(listName:String, inout list:Dictionary<String,String>, item:MPMediaItem?) {
-        if (item != nil) {
-            list[item!.hashKey] = item!.title
+        if let song = item {
+            let val = "\(song.albumArtist):\(song.albumTitle):\(song.title)"
+            list[song.hashKey] = val
             let userDefaults = Utils.AppGroupDefaults
             userDefaults.setObject(list as Dictionary<NSObject,AnyObject>, forKey: listName)
         }
@@ -321,31 +312,27 @@ class LibraryManager {
     //MARK: functions for getting playlists
     
      /* run a query to see all items > 1 star in itunes and merge this with current liked */
-    class func getLikedSongs(count : Int = 50, dumpSongs : Bool = true) -> [MPMediaItem] {
+    class func getLikedSongs(count : Int = 50, dumpSongs : Bool = false) -> [MPMediaItem] {
         scanLibrary()
-        let start = NSDate()
+         let sw = Stopwatch.getStarted()
         //take all the SongDemon liked songs
         var allLiked : [String] = LM.LikedSongs.keys.array
         //add all the iTunes-rated songs
         allLiked.extend(LM.RatedSongs)
         //grab n randomly
         var randomLiked = getRandomSongs(count, sourceSongs: allLiked)
-
-        let time = NSDate().timeIntervalSinceDate(start) * 1000
+        sw.stop("Built liked list with \(randomLiked.count) songs")
         if dumpSongs {
-            println("Built liked list with \(randomLiked.count) songs in \(time)ms")
             outputSongs(randomLiked)
         }
         LM.Playlist = randomLiked
-        //LM.GroupedPlaylist = [[MPMediaItem]]()
-        //LM.GroupedPlaylist.append(randomLiked)
         LM.GroupedPlaylist = [[MPMediaItem]](arrayLiteral: randomLiked)
         LM.PlaylistIndex = 0
         LM.PlaylistMode = .Liked
         return randomLiked
     }
     
-    class func getNewSongs(count : Int = 50, dumpSongs : Bool = true) -> [MPMediaItem] {
+    class func getNewSongs(count : Int = 50, dumpSongs : Bool = false) -> [MPMediaItem] {
         scanLibrary()
         let start = NSDate()
         LM.GroupedPlaylist = [[MPMediaItem]]()
@@ -362,14 +349,14 @@ class LibraryManager {
         return newSongs
     }
     
-    class func getMixOfSongs(count : Int = 50, dumpSongs : Bool = true) -> [MPMediaItem] {
+    class func getMixOfSongs(count : Int = 50, dumpSongs : Bool = false) -> [MPMediaItem] {
         scanLibrary()
-        let start = NSDate()
+        let sw = Stopwatch.getStarted()
         let allSongs = LM.RatedSongs + LM.NotPlayedSongs + LM.OtherSongs
-        let randomSongs = getRandomSongs(50, sourceSongs: allSongs)
-        let time = NSDate().timeIntervalSinceDate(start) * 1000
+        let randomSongs = getRandomSongs(count, sourceSongs: allSongs)
+        sw.stop("Built mix list with \(randomSongs.count) songs")
+
         if dumpSongs {
-            println("Built random song list with \(randomSongs.count) songs in \(time)ms")
             outputSongs(randomSongs)
         }
         LM.GroupedPlaylist = [[MPMediaItem]](arrayLiteral: randomSongs)
@@ -518,6 +505,14 @@ class LibraryManager {
         return (groupedSongs, songs)
     }
     
+    class func changePlaylistIndex(currentSong : MPMediaItem) {
+        var index = find(LM.Playlist, currentSong)
+        if index != nil {
+            LM.PlaylistIndex = index!
+            println("Setting playlist index to: \(currentSong.songInfo))")
+        }
+    }
+    
     
     /*
     Artist mode -> pull to refresh will shuffle
@@ -539,6 +534,9 @@ class LibraryManager {
                     randomSongs.append(item)
                     songsPicked++
                 }
+            }
+            else {
+                println("Cannot find \(sourceSongs[idx]) in iTunes")
             }
             i++
         }
@@ -574,28 +572,52 @@ class LibraryManager {
             userDefaults.setObject(ids, forKey: serializeKey)
         }
     }
+
+    class func trimList(listName : String, inout list : [String:String], stopwatch : Stopwatch) {
+        let defaults = Utils.AppGroupDefaults
+        let trimmed = list.filter { ITunesUtils.getSongFrom($0.0) != nil }
+        let missing = list.count - trimmed.count
+        defaults.setObject(trimmed, forKey: listName)
+        stopwatch.takeTiming("\(missing) \(listName) songs removed")
+    }
+    
+    class func cleanPlaylists() {
+        let sw = Stopwatch.getStarted("cleanPlaylists")
+        trimList(LIKED_LIST, list: &LM.LikedSongs, stopwatch:sw)
+        trimList(DISLIKED_LIST, list: &LM.DislikedSongs, stopwatch:sw)
+        trimList(QUEUED_LIST, list: &LM.QueuedSongs, stopwatch:sw)
+        sw.stop()
+    }
     
     class func generatePlaylistsForWatch(regenerate : Bool) {
+        let stopwatch = Stopwatch.getStarted("generatePlaylistsForWatch")
         let defaults = Utils.AppGroupDefaults
         if regenerate || defaults.objectForKey(WK_MIX_PLAYLIST) == nil {
             println("Generating mix for the watch")
-            let mix = LibraryManager.getMixOfSongs(count: 100, dumpSongs: true)
+            let mix = LibraryManager.getMixOfSongs(count: 100)
             LibraryManager.serializePlaylist(WK_MIX_PLAYLIST, songs: mix)
         }
         
         if regenerate || defaults.objectForKey(WK_LIKED_PLAYLIST) == nil {
             println("Generating liked list for the watch")
-            let liked = LibraryManager.getLikedSongs(count: 100, dumpSongs: true)
+            let liked = LibraryManager.getLikedSongs(count: 100)
             LibraryManager.serializePlaylist(WK_LIKED_PLAYLIST, songs: liked)
         }
-    }
-    /*
-    class func generateArtistPlaylist(regenerate : Bool) {
-        let defaults = Utils.AppGroupDefaults
-        if regenerate || defaults.objectForKey(WK_MIX_PLAYLIST) == nil {
-            let mix = LibraryManager.getMixOfSongs(count: 100, dumpSongs: false)
-            LibraryManager.serializePlaylist(WK_MIX_PLAYLIST, songs: mix)
+        
+        if regenerate || defaults.objectForKey(WK_LIKED_PLAYLIST) == nil {
+            println("Generating artist lists for the watch")
+            for (artist,info) in LM.ArtistInfos {
+                if info.songIds.count > 0 {
+                    defaults.setObject(info.songIds, forKey: artist)
+                }
+            }
         }
+        stopwatch.stop()
     }
-    */
+
+    class func getArtistPlaylistForWatch(artist: String, regenerate : Bool) -> [String] {
+        let songs = LibraryManager.getArtistSongsWithoutSettingPlaylist(artist).1
+        let ids = songs.map { $0.hashKey }
+        return ids
+    }
 }

@@ -105,11 +105,10 @@ class MusicPlayer {
     
     class var playbackTime : Int {
         get {
-            return Int(MP.applePlayer.currentPlaybackTime)
+            return MP.applePlayer.currentPlaybackRate.isNormal ? Int(MP.applePlayer.currentPlaybackTime) : 0
         }
         set(seconds) {
             MP.applePlayer.currentPlaybackTime = Double(seconds)
         }
     }
-    
 }

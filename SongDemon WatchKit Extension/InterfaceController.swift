@@ -64,24 +64,15 @@ class InterfaceController: WKInterfaceController {
         }
     }
 
-    
     @IBAction func likeTapped() {
         playLiked()
-        /*
-                */
     }
     
     @IBAction func mixTapped() {
         playMix()
-//        let request = ["action":"playMix"]
-//        WKInterfaceController.openParentApplication(request) { (reply,error) in
-//            println(reply)
-//            if error == nil {
-//                if let replyDict = reply as? [String:String] {
-//                    self.updateSongInfo()
-//                }
-//            }
-//        }
+    }
+    
+    @IBAction func artistTapped() {
     }
     
     //MARK: helpers
@@ -109,33 +100,13 @@ class InterfaceController: WKInterfaceController {
     //MARK: WKInterfaceController methods
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
-        
+        updateSongInfo()
         // Configure interface objects here.
     }
 
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
-        updateSongInfo()
-        
-        /*
-        let request = ["Action":"GetSongInfo"]
-        WKInterfaceController.openParentApplication(request) { (reply,error) in
-            println(reply)
-            if error == nil {
-                if let replyDict = reply as? [String:String] {
-                    self.artistLabel.setText(replyDict["artist"])
-                    self.songLabel.setText(replyDict["song"])
-                    switch (replyDict["playState"]!) {
-                    case ("paused") : ""
-                    case ("playing") : ""
-                    default:""
-                    }
-                }
-                
-            }
-        }
-        */
     }
 
     override func didDeactivate() {
@@ -158,7 +129,7 @@ class InterfaceController: WKInterfaceController {
         else {
             let defaults = Utils.AppGroupDefaults
             if let ids = defaults.objectForKey(listName) as? [String] {
-                var songs = ITunesUtils.getSongFrom(ids)
+                var songs = ITunesUtils.getSongsFrom(ids)
                 if songs.count > 0 {
                     songs.shuffle()
                     MusicPlayer.queuePlaylist(songs, songToStart: nil, startNow: true)
@@ -170,13 +141,12 @@ class InterfaceController: WKInterfaceController {
     
     func refreshListFromPhone(listName : String) {
         let request = ["action":listName]
-        WKInterfaceController.openParentApplication(request) { (reply,error) in
-            println(reply)
+        WKInterfaceController.openParentApplication(request) { reply, error in
+            println("User Info: \(reply)")
+            println("Error: \(error)")
             if error == nil {
                 self.playList(listName, refreshList: false)
             }
         }
     }
-    
-    
 }

@@ -25,7 +25,7 @@ class ITunesUtils {
         }
     }
     
-    class func getSongFrom(persistentIds : [String]) -> [MPMediaItem] {
+    class func getSongsFrom(persistentIds : [String]) -> [MPMediaItem] {
         let songs = persistentIds.map { ITunesUtils.getSongFrom($0) }
         return songs.filter { $0 != nil }.map { $0! }
     }

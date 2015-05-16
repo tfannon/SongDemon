@@ -55,7 +55,6 @@ class MainController: UIViewController, LibraryScanListener {
     var playButtonsVisible = false
     //this is used so the event handlers can decide if they need to do something because song changed
     var lastSongHandledByViewController : MPMediaItem?
-    //var audioPlayer : AVAudioPlayer! = nil
 
 
     //MARK: controller methods
@@ -68,6 +67,7 @@ class MainController: UIViewController, LibraryScanListener {
         if Utils.inSimulator {
             //do anything specific to get simulator working
         }
+        btnSearch.tintColor = UIColor.grayColor()
         //search cannot be enabled until the library scan is complete
         //playAudio()
         //btnSearch.hidden = true
@@ -125,21 +125,6 @@ class MainController: UIViewController, LibraryScanListener {
         */
     }
     
-    /*
-    func playAudio() {
-        var error : NSError?
-        //let fileURL:NSURL = NSBundle.mainBundle().URLForResource("buzz", withExtension: "mp3")!
-        let fileURL:NSURL = NSBundle.mainBundle().URLForResource("1sec", withExtension: "mp3")!
-        self.audioPlayer = AVAudioPlayer(contentsOfURL: fileURL, error: &error)
-        audioPlayer.numberOfLoops = -1
-        AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryAmbient, error:nil)
-        AVAudioSession.sharedInstance().setActive(true, error: nil)
-        audioPlayer.prepareToPlay()
-        audioPlayer.play()
-    }
-    */
-    
-
     func handlePrevTapped() {
         MusicPlayer.reverse()
     }
@@ -533,7 +518,7 @@ class MainController: UIViewController, LibraryScanListener {
     //MARK: LibraryScanListener
     func libraryScanComplete() {
         Async.main {
-            self.btnSearch.hidden = false
+            self.btnSearch.tintColor = UIColor.whiteColor()
             self.displayFadingStatus("\(LibraryManager.songCount) songs in library")
         }
     }

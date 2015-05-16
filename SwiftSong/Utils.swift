@@ -54,14 +54,44 @@ class Utils {
 class Stopwatch {
     
     private var timer = NSDate()
+    private var title : String = ""
+
+    class func getStarted() -> Stopwatch {
+        return Stopwatch.getStarted("")
+    }
+    
+    class func getStarted(title : String) -> Stopwatch {
+        let sw = Stopwatch()
+        sw.title = title
+        if !title.isEmpty {
+            println(title + " started")
+        }
+        sw.start()
+        return sw
+    }
 
     func start() {
         timer = NSDate()
     }
     
     func stop() -> Double {
-        return NSDate().timeIntervalSinceDate(timer) * 1000
+        return stop("")
     }
+    
+    func stop(message : String) -> Double {
+        let ret = NSDate().timeIntervalSinceDate(timer) * 1000
+        if !title.isEmpty {
+            println("\(title): \(message) completed in \(Int(ret))ms")
+        }
+        return ret
+    }
+    
+    func takeTiming(message : String) -> Double {
+        let ret = stop(message)
+        start()
+        return ret
+    }
+    
 }
 
 
