@@ -16,7 +16,7 @@
                                     <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="font" style="UICTFontTextStyleBody"/>
                                 </label>
-                                <label width="136" alignment="left" verticalAlignment="bottom" text="Dark Mutilation Rights" textAlignment="left" minimumScaleFactor="1.3877787807814457e-16" id="2tW-RA-wGj">
+                                <label width="136" alignment="left" verticalAlignment="bottom" text="Dark Mutilation Rights" textAlignment="left" numberOfLines="2" minimumScaleFactor="1.3877787807814457e-16" id="2tW-RA-wGj">
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </label>
                             </items>

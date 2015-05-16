@@ -58,21 +58,25 @@ class InterfaceController: WKInterfaceController {
     @IBAction func shufflePressed() {
         switch playMode {
         case .Mix : playMix(refreshList: true)
-        //case .Artist: playMix(refreshList: true)
+        case .Artist: playArtist()
         case .Liked: playLiked(refreshList: true)
         default:""
         }
     }
 
     @IBAction func likeTapped() {
+        self.playMode = .Liked
         playLiked()
     }
     
     @IBAction func mixTapped() {
+        self.playMode = .Mix
         playMix()
     }
     
     @IBAction func artistTapped() {
+        self.playMode = .Artist
+        playArtist()
     }
     
     //MARK: helpers
@@ -123,12 +127,29 @@ class InterfaceController: WKInterfaceController {
     }
     
     func playList(listName : String, refreshList : Bool) {
-        if refreshList {
+        //prevent going to phone for now because the startup takes too long and times out
+        if 1==2 && refreshList {
             refreshListFromPhone(listName)
         }
         else {
             let defaults = Utils.AppGroupDefaults
             if let ids = defaults.objectForKey(listName) as? [String] {
+                var songs = ITunesUtils.getSongsFrom(ids)
+                if songs.count > 0 {
+                    songs.shuffle()
+                    MusicPlayer.queuePlaylist(songs, songToStart: nil, startNow: true)
+                    updateSongInfo()
+                }
+            }
+        }
+    }
+    
+    func playArtist() {
+        let player = MPMusicPlayerController()
+        let defaults = Utils.AppGroupDefaults
+        
+        if let artist = player.nowPlayingItem?.albumArtist {
+            if let ids = defaults.objectForKey(artist) as? [String] {
                 var songs = ITunesUtils.getSongsFrom(ids)
                 if songs.count > 0 {
                     songs.shuffle()

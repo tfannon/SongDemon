@@ -69,13 +69,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(application: UIApplication, handleWatchKitExtensionRequest userInfo: [NSObject : AnyObject]?, reply: (([NSObject : AnyObject]!) -> Void)!) {
-        
         var bgTask : UIBackgroundTaskIdentifier = UIBackgroundTaskInvalid
-        
         bgTask = UIApplication.sharedApplication().beginBackgroundTaskWithName("bgtask") {
             bgTask = UIBackgroundTaskInvalid
         }
-        
         println("received a call from watch")
         if let action = userInfo?["action"] as? String {
             switch (action) {
@@ -89,11 +86,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         reply(nil)
-        
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2.0 * Float(NSEC_PER_SEC))), dispatch_get_main_queue()) {
                 UIApplication.sharedApplication().endBackgroundTask(bgTask)
         }
     }
-    
 }
 
