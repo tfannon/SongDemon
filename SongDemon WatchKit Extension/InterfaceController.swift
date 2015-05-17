@@ -19,6 +19,7 @@ enum PlayMode {
 class InterfaceController: WKInterfaceController {
     
     var playMode = PlayMode.Mix
+    var simulatorPlaying = true
     
     //MARK: - outlets and actions
     @IBOutlet weak var prevButton: WKInterfaceButton!
@@ -94,6 +95,17 @@ class InterfaceController: WKInterfaceController {
     }
     
     func updatePlayState() {
+        if Utils.inSimulator {
+            simulatorPlaying = !simulatorPlaying
+            if simulatorPlaying {
+                playButton.setBackgroundImageNamed("note")
+            }
+            else {
+               playButton.setBackgroundImageNamed("pause")
+            }
+            return
+        }
+
         let player = MPMusicPlayerController()
         switch (player.playbackState) {
             case (.Playing) : playButton.setBackgroundImageNamed("note")
