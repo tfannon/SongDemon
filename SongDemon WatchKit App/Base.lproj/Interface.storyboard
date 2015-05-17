@@ -31,6 +31,7 @@
                                             </connections>
                                         </button>
                                         <button width="0.33000000000000002" height="1" alignment="left" backgroundImage="note" id="0Fb-0S-Fti">
+                                            <color key="titleColor" red="1" green="0.40000000596046448" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
                                                 <action selector="playPressed" destination="AgC-eL-Hgc" id="5ph-rs-r4e"/>
                                             </connections>
@@ -61,8 +62,11 @@
                             </items>
                             <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                         </group>
-                        <slider width="1" alignment="left" verticalAlignment="bottom" value="1" maximum="3" steps="3" id="fhi-e1-zj2">
+                        <slider width="1" alignment="left" verticalAlignment="bottom" value="1" maximum="5" steps="5" id="fhi-e1-zj2">
                             <color key="color" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="volumeSliderChanged:" destination="AgC-eL-Hgc" id="cP3-Xp-QdA"/>
+                            </connections>
                         </slider>
                     </items>
                     <menu key="menu" id="gCj-qX-2Ht">
@@ -91,6 +95,7 @@
                         <outlet property="nextButton" destination="b2f-Xt-ND1" id="qCJ-Gy-aoZ"/>
                         <outlet property="playButton" destination="0Fb-0S-Fti" id="qEF-YO-FXb"/>
                         <outlet property="prevButton" destination="Ayz-ir-z4h" id="yRe-LX-30S"/>
+                        <outlet property="slider" destination="fhi-e1-zj2" id="JPx-2Y-0l4"/>
                         <outlet property="songLabel" destination="2tW-RA-wGj" id="d0p-6O-dF2"/>
                     </connections>
                 </controller>

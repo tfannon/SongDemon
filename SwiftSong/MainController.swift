@@ -67,10 +67,8 @@ class MainController: UIViewController, LibraryScanListener {
         if Utils.inSimulator {
             //do anything specific to get simulator working
         }
+        //search is gray until the library scan is complete
         btnSearch.tintColor = UIColor.grayColor()
-        //search cannot be enabled until the library scan is complete
-        //playAudio()
-        //btnSearch.hidden = true
     }
     
     override func shouldAutorotate() -> Bool {
@@ -511,7 +509,7 @@ class MainController: UIViewController, LibraryScanListener {
     func updateScrubber() {
         let cur : Int = MusicPlayer.playbackTime;
         let tot : Int = Int(MusicPlayer.currentSong.playbackDuration)
-        let rem : Int = tot - cur
+        //let rem : Int = tot - cur
         scrubber.value = Float(cur)
     }
 

@@ -20,6 +20,7 @@ class InterfaceController: WKInterfaceController {
     
     var playMode = PlayMode.Mix
     var simulatorPlaying = true
+    let STEPS = 5
     
     //MARK: - outlets and actions
     @IBOutlet weak var prevButton: WKInterfaceButton!
@@ -80,12 +81,61 @@ class InterfaceController: WKInterfaceController {
         playArtist()
     }
     
+    @IBOutlet weak var slider: WKInterfaceSlider!
+    var timer = NSTimer()
+    func startPlaybackTimer() {
+        timer.invalidate()
+        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector:"updateScrubber", userInfo:nil, repeats:true)
+    }
+    
+    func updateScrubber() {
+        let cur : Int = Int(MusicPlayer.currentTime)
+        let tot : Int = Int(MusicPlayer.currentSong.playbackDuration)
+        let timePerStep = Int(tot/STEPS)
+        let curStep = Int(cur/timePerStep)+1
+        
+        //110, 30, 10
+            
+        println("Total:\(tot)  Current:\(cur),  TimePerStep:\(timePerStep)  Slot:\(curStep)")
+        slider.setValue(Float(curStep))
+        //let rem : Int = tot - cur
+        //scrubber.value = Float(cur)
+    }
+    
+
+    func getCurrentStep() -> Int {
+        let cur : Int = Int(MusicPlayer.currentTime)
+        let tot : Int = Int(MusicPlayer.currentSong.playbackDuration)
+        let timePerStep = Int(tot/STEPS)
+        let curStep = Int(cur/timePerStep)+1
+        return curStep
+    }
+    
+    @IBAction func volumeSliderChanged(value: Float) {
+        let curStep = getCurrentStep()
+        let nextStep = Int(value)
+        let diff = nextStep - curStep
+        
+        
+        let tot : Int = Int(MusicPlayer.currentSong.playbackDuration)
+        let cur : Int = Int(MusicPlayer.currentTime)  //25   190
+        let timePerStep = Int(tot/STEPS) //200 / 5 = 40
+        let next = cur + (diff * timePerStep) //25 + 40 = 65       190+40 = 235
+        println("Current:\(cur),  diff:\(diff)  next:\(next)")
+
+        if next < tot && next > 0 {
+            MusicPlayer.playbackTime = next
+            startPlaybackTimer()
+        }
+    }
+    
     //MARK: helpers
     func updateSongInfo() {
         let player = MPMusicPlayerController()
         if let item = player.nowPlayingItem {
             artistLabel.setText(item.albumArtist)
             songLabel.setText(item.title)
+            startPlaybackTimer()
         }
         else if !Utils.inSimulator {
             artistLabel.setText("")
@@ -116,6 +166,7 @@ class InterfaceController: WKInterfaceController {
     //MARK: WKInterfaceController methods
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
+        slider.setNumberOfSteps(STEPS)
         updateSongInfo()
         // Configure interface objects here.
     }
