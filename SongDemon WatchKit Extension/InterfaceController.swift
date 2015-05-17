@@ -135,6 +135,12 @@ class InterfaceController: WKInterfaceController {
         if let item = player.nowPlayingItem {
             artistLabel.setText(item.albumArtist)
             songLabel.setText(item.title)
+            if isLiked(item.hashKey) {
+                songLabel.setTextColor(.whiteColor())
+            }
+            else {
+                songLabel.setTextColor(.grayColor())
+            }
             startPlaybackTimer()
         }
         else if !Utils.inSimulator {
@@ -205,6 +211,17 @@ class InterfaceController: WKInterfaceController {
                 }
             }
         }
+    }
+    
+    func isLiked(id : String) -> Bool {
+        let defaults = Utils.AppGroupDefaults
+        if let ids = defaults.objectForKey(WK_LIKED_PLAYLIST) as? [String] {
+            if find(ids, id) != nil {
+                return true
+            }
+        }
+        return false
+ 
     }
     
     func playArtist() {
