@@ -10,18 +10,18 @@
             <objects>
                 <controller contentMode="scaleAspectFit" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="SongDemon_WatchKit_App" customModuleProvider="target">
                     <items>
-                        <group width="1" alignment="left" layout="vertical" id="oF9-ym-193">
+                        <group width="1" height="65" alignment="left" layout="vertical" id="oF9-ym-193">
                             <items>
                                 <label width="135" alignment="left" text="Inquisition" textAlignment="left" minimumScaleFactor="0.40000000000000013" id="M2F-eU-mxl">
                                     <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="font" style="UICTFontTextStyleBody"/>
                                 </label>
-                                <label width="136" alignment="left" verticalAlignment="bottom" text="Dark Mutilation Rights" textAlignment="left" numberOfLines="2" minimumScaleFactor="1.3877787807814457e-16" id="2tW-RA-wGj">
+                                <label width="136" alignment="left" verticalAlignment="center" text="Dark Mutilation Rights" textAlignment="left" numberOfLines="2" minimumScaleFactor="1.3877787807814457e-16" id="2tW-RA-wGj">
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </label>
                             </items>
                         </group>
-                        <group width="1" alignment="left" layout="vertical" spacing="5" id="NXw-Xy-2W7" userLabel="Buttons">
+                        <group width="1" height="0.33000000000000002" alignment="left" layout="vertical" spacing="5" id="NXw-Xy-2W7" userLabel="Buttons">
                             <items>
                                 <group width="1" height="42" alignment="left" verticalAlignment="center" id="lgN-OZ-XyZ" userLabel="Top Buttons">
                                     <items>
@@ -43,7 +43,7 @@
                                     </items>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </group>
-                                <group width="1" height="40" alignment="right" verticalAlignment="bottom" id="HOV-hb-XBc" userLabel="Bottom Buttons">
+                                <group width="1" height="40" alignment="right" verticalAlignment="bottom" hidden="YES" id="HOV-hb-XBc" userLabel="Bottom Buttons">
                                     <items>
                                         <button width="0.33000000000000002" height="1" alignment="left" backgroundImage="thumbs-up" id="yKZ-SM-4Yu"/>
                                         <button width="0.33000000000000002" height="1" alignment="left" backgroundImage="redshuffle" id="7jR-J7-MBc">
@@ -82,6 +82,7 @@
                                     <action selector="artistTapped" destination="AgC-eL-Hgc" id="cQM-fa-gQD"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Shuffle" image="shuffle" id="kHs-sG-hSe" userLabel="Shuffle"/>
                         </items>
                     </menu>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
