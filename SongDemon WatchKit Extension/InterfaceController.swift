@@ -173,13 +173,13 @@ class InterfaceController: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         slider.setNumberOfSteps(STEPS)
-        updateSongInfo()
         // Configure interface objects here.
     }
 
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
+        updateSongInfo()
     }
 
     override func didDeactivate() {
@@ -188,10 +188,12 @@ class InterfaceController: WKInterfaceController {
     }
     
     func playMix(refreshList : Bool = false) {
+        self.setTitle("MIX")
         playList(WK_MIX_PLAYLIST, refreshList:refreshList)
     }
     
     func playLiked(refreshList : Bool = false) {
+        self.setTitle("LIKED")
         playList(WK_LIKED_PLAYLIST, refreshList:refreshList)
     }
     
@@ -225,6 +227,7 @@ class InterfaceController: WKInterfaceController {
     }
     
     func playArtist() {
+        self.setTitle("ARTIST")
         let player = MPMusicPlayerController()
         let defaults = Utils.AppGroupDefaults
         
