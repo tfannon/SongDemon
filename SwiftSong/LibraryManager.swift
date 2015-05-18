@@ -146,13 +146,13 @@ class LibraryManager {
         //this is called on a background thread at app start.  make sure that if the user
         //quickly triggers an action which starts another scan, it does not get into this code
         //when it does, the other scan should have flipped the flag so it wont be re-scanned
-        objc_sync_enter(LM.LikedSongs)
         if LM.scanned {
             println("lib already scanned")
             return
         }
         var unplayed = 0;
 
+        objc_sync_enter(LM.LikedSongs)
         cleanPlaylists()
         var stopwatch = Stopwatch.start("scanLibrary")
         
