@@ -10,29 +10,34 @@
             <objects>
                 <controller title="Mix" contentMode="scaleAspectFit" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="SongDemon_WatchKit_App" customModuleProvider="target">
                     <items>
-                        <group width="1" height="64" alignment="left" layout="vertical" id="oF9-ym-193">
+                        <group width="140" height="66" alignment="left" layout="vertical" id="oF9-ym-193">
                             <items>
-                                <group alignment="left" id="CRg-WG-u2h">
+                                <group width="129" alignment="left" id="CRg-WG-u2h">
                                     <items>
-                                        <label width="0.75" alignment="left" text="Inquisition" textAlignment="left" minimumScaleFactor="0.40000000000000013" id="M2F-eU-mxl">
+                                        <label width="115" alignment="left" text="Inquisition" textAlignment="left" minimumScaleFactor="0.75" id="M2F-eU-mxl">
                                             <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="font" style="UICTFontTextStyleBody"/>
                                         </label>
-                                        <label alignment="right" verticalAlignment="center" text="1000" id="EwV-XZ-63T" userLabel="Plays">
+                                        <label width="23" alignment="right" verticalAlignment="center" text="100" textAlignment="right" id="EwV-XZ-63T" userLabel="Plays">
                                             <color key="textColor" red="0.0" green="0.40153488005050508" blue="0.00012291938069757932" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                         </label>
                                     </items>
+                                    <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                                    <variation key="device=watch42mm" width="149"/>
                                 </group>
-                                <label width="136" alignment="left" text="Parasitic Scriptures of the Sacred Word" textAlignment="left" numberOfLines="2" minimumScaleFactor="0.70000000000000007" id="2tW-RA-wGj">
+                                <label width="136" alignment="left" text="Parasitic Scriptures of the Sacred Word" textAlignment="left" numberOfLines="2" minimumScaleFactor="0.70000000000000007" id="2tW-RA-wGj" userLabel="Song Title">
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                    <variation key="device=watch42mm" width="154"/>
                                 </label>
                             </items>
+                            <edgeInsets key="margins" left="3" right="0.0" top="0.0" bottom="0.0"/>
+                            <variation key="device=watch42mm" width="150"/>
                         </group>
-                        <group width="1" height="50" alignment="left" layout="vertical" spacing="5" id="NXw-Xy-2W7" userLabel="Buttons">
+                        <group width="1" height="52" alignment="left" layout="vertical" spacing="5" id="NXw-Xy-2W7" userLabel="Buttons">
                             <items>
-                                <group width="1" height="42" alignment="left" spacing="6" id="lgN-OZ-XyZ" userLabel="Top Buttons">
+                                <group width="1" height="43" alignment="left" spacing="6" id="lgN-OZ-XyZ" userLabel="Top Buttons">
                                     <items>
                                         <button width="0.33000000000000002" height="34" alignment="left" verticalAlignment="center" backgroundImage="left" id="Ayz-ir-z4h" userLabel="prev">
                                             <connections>
@@ -90,7 +95,7 @@
                     </items>
                     <menu key="menu" id="gCj-qX-2Ht">
                         <items>
-                            <menuItem title="Liked" image="thumbs-up" id="QgL-my-Wv2">
+                            <menuItem title="Liked" image="thumbup" id="QgL-my-Wv2">
                                 <connections>
                                     <action selector="likeTapped" destination="AgC-eL-Hgc" id="pGT-uf-aeq"/>
                                 </connections>
@@ -105,7 +110,11 @@
                                     <action selector="artistTapped" destination="AgC-eL-Hgc" id="cQM-fa-gQD"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Shuffle" image="shuffle" id="kHs-sG-hSe" userLabel="Shuffle"/>
+                            <menuItem title="Discover" icon="maybe" id="kHs-sG-hSe" userLabel="Discover">
+                                <connections>
+                                    <action selector="discoverTapped" destination="AgC-eL-Hgc" id="9tE-Oy-agU"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                     <connections>
@@ -116,12 +125,10 @@
                         <outlet property="prevButton" destination="Ayz-ir-z4h" id="yRe-LX-30S"/>
                         <outlet property="slider" destination="fhi-e1-zj2" id="JPx-2Y-0l4"/>
                         <outlet property="songLabel" destination="2tW-RA-wGj" id="d0p-6O-dF2"/>
-                        <outlet property="thumbsDownButton" destination="HOV-hb-XBc" id="jjr-Yh-MT5"/>
-                        <outlet property="thumbsUpButton" destination="yKZ-SM-4Yu" id="9HT-eZ-aPG"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="235" y="341.25"/>
+            <point key="canvasLocation" x="234.51282051282053" y="340.87179487179492"/>
         </scene>
         <!--Glance Interface Controller-->
         <scene sceneID="BOz-TT-tkC">

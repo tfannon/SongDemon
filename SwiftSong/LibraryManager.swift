@@ -593,17 +593,23 @@ class LibraryManager {
         let defaults = Utils.AppGroupDefaults
         if regenerate || defaults.objectForKey(WK_MIX_PLAYLIST) == nil {
             println("Generating mix for the watch")
-            let mix = LibraryManager.getMixOfSongs(count: 100)
+            let mix = LibraryManager.getMixOfSongs(count: 200)
             LibraryManager.serializePlaylist(WK_MIX_PLAYLIST, songs: mix)
         }
         
         if regenerate || defaults.objectForKey(WK_LIKED_PLAYLIST) == nil {
             println("Generating liked list for the watch")
-            let liked = LibraryManager.getLikedSongs(count: 100)
+            let liked = LibraryManager.getLikedSongs(count: 200)
             LibraryManager.serializePlaylist(WK_LIKED_PLAYLIST, songs: liked)
         }
+        
+        if regenerate || defaults.objectForKey(WK_NEW_PLAYLIST) == nil {
+            println("Generating new list for the watch")
+            let new = LibraryManager.getNewSongs(count: 200)
+            LibraryManager.serializePlaylist(WK_NEW_PLAYLIST, songs: new)
+        }
         var count = 0
-        if regenerate || defaults.objectForKey(WK_LIKED_PLAYLIST) == nil {
+        if regenerate || defaults.objectForKey(WK_ARTIST_PLAYLIST) == nil {
             println("Generating artist lists for the watch")
             for (artist,info) in LM.ArtistInfos {
                 if info.songIds.count > 0 {

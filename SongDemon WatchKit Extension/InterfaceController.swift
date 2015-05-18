@@ -39,6 +39,7 @@ class InterfaceController: WKInterfaceController {
     //MARK: - outlets
     @IBOutlet weak var artistLabel: WKInterfaceLabel!
     @IBOutlet weak var songLabel: WKInterfaceLabel!
+    //this holds the artist songs
     @IBOutlet weak var playCountLabel: WKInterfaceLabel!
 
     
@@ -85,12 +86,13 @@ class InterfaceController: WKInterfaceController {
         skipToNextSong()
     }
     
-
+    //this will force the phone to regenerate the lists
     @IBAction func shufflePressed() {
+        LibraryManager.generatePlaylistsForWatch(true)
         switch playMode {
-        case .Mix : playMix(refreshList: true)
+        case .Mix : playMix()
         case .Artist: playArtist()
-        case .Liked: playLiked(refreshList: true)
+        case .Liked: playLiked()
         default:""
         }
     }
@@ -109,6 +111,11 @@ class InterfaceController: WKInterfaceController {
     @IBAction func artistTapped() {
         self.playMode = .Artist
         playArtist()
+    }
+    
+    @IBAction func discoverTapped() {
+        self.playMode = .New
+        playNew()
     }
     
     //MARK: scrubber
@@ -145,6 +152,11 @@ class InterfaceController: WKInterfaceController {
         let next = cur + (diff * timePerStep) //25 + 40 = 65       190+40 = 235
         println("Current:\(cur),  diff:\(diff)  next:\(next)")
 
+        if next == 0 {
+            let player = MPMusicPlayerController()
+            player.skipToBeginning()
+            startPlaybackTimer()
+        }
         if next < tot && next > 0 {
             MusicPlayer.playbackTime = next
             startPlaybackTimer()
@@ -165,7 +177,7 @@ class InterfaceController: WKInterfaceController {
         if let item = player.nowPlayingItem {
             artistLabel.setText(item.albumArtist)
             songLabel.setText(item.title)
-            playCountLabel.setText("\(item.playCount)")
+            //playCountLabel.setText("\(item.playCount)")
             if isLiked(item.hashKey) {
                 songLabel.setTextColor(.whiteColor())
             }
@@ -211,33 +223,36 @@ class InterfaceController: WKInterfaceController {
     }
     
     
-    func playMix(refreshList : Bool = false) {
+    func playMix() {
         self.setTitle("MIX")
-        playList(WK_MIX_PLAYLIST, refreshList:refreshList)
+        self.playCountLabel.setText("")
+        playList(WK_MIX_PLAYLIST)
     }
     
-    func playLiked(refreshList : Bool = false) {
+    func playLiked() {
         self.setTitle("LIKED")
-        playList(WK_LIKED_PLAYLIST, refreshList:refreshList)
+        self.playCountLabel.setText("")
+        playList(WK_LIKED_PLAYLIST)
     }
     
-    func playList(listName : String, refreshList : Bool) {
-        //prevent going to phone for now because the startup takes too long and times out
-        if 1==2 && refreshList {
-            refreshListFromPhone(listName)
-        }
-        else {
-            let defaults = Utils.AppGroupDefaults
-            if let ids = defaults.objectForKey(listName) as? [String] {
-                var songs = ITunesUtils.getSongsFrom(ids)
-                if songs.count > 0 {
-                    songs.shuffle()
-                    MusicPlayer.queuePlaylist(songs, songToStart: nil, startNow: true)
-                    updateSongInfo()
-                }
+    func playNew() {
+        self.setTitle("NEW")
+        self.playCountLabel.setText("")
+        playList(WK_NEW_PLAYLIST)
+    }
+    
+    func playList(listName : String) {
+        let defaults = Utils.AppGroupDefaults
+        if let ids = defaults.objectForKey(listName) as? [String] {
+            var songs = ITunesUtils.getSongsFrom(ids)
+            if songs.count > 0 {
+                songs.shuffle()
+                MusicPlayer.queuePlaylist(songs, songToStart: nil, startNow: true)
+                updateSongInfo()
             }
         }
     }
+
     
     func playArtist() {
         self.setTitle("ARTIST")
@@ -248,6 +263,7 @@ class InterfaceController: WKInterfaceController {
             if let ids = defaults.objectForKey(artist) as? [String] {
                 var songs = ITunesUtils.getSongsFrom(ids)
                 if songs.count > 0 {
+                    playCountLabel.setText("\(songs.count)")
                     songs.shuffle()
                     MusicPlayer.queuePlaylist(songs, songToStart: nil, startNow: true)
                     updateSongInfo()
@@ -256,14 +272,15 @@ class InterfaceController: WKInterfaceController {
         }
     }
     
-    func refreshListFromPhone(listName : String) {
-        let request = ["action":listName]
-        WKInterfaceController.openParentApplication(request) { reply, error in
-            println("User Info: \(reply)")
-            println("Error: \(error)")
-            if error == nil {
-                self.playList(listName, refreshList: false)
-            }
-        }
-    }
+//    func refreshListFromPhone(listName : String) {
+//        LibraryManager.generatePlaylistsForWatch(true)
+//        let request = ["action":listName]
+//        WKInterfaceController.openParentApplication(request) { reply, error in
+//            println("User Info: \(reply)")
+//            println("Error: \(error)")
+//            if error == nil {
+//                self.playList(listName, refreshList: false)
+//            }
+//        }
+//    }
 }
