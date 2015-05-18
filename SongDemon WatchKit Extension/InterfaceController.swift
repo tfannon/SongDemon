@@ -21,6 +21,7 @@ class InterfaceController: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         slider.setNumberOfSteps(STEPS)
+        self.playCountLabel.setText("")
         // Configure interface objects here.
     }
     
@@ -214,6 +215,8 @@ class InterfaceController: WKInterfaceController {
     
     func isLiked(id : String) -> Bool {
         let defaults = Utils.AppGroupDefaults
+        //this is not quite right because it checks in the playlist that was written to defaults
+        //not the one computed at Library Init
         if let ids = defaults.objectForKey(WK_LIKED_PLAYLIST) as? [String] {
             if find(ids, id) != nil {
                 return true
