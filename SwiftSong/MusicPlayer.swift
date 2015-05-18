@@ -76,7 +76,7 @@ class MusicPlayer {
         if MP.queuedPlaylist == nil {
             return;
         }
-        println ("MusicPlayer.playSongsInQueue")
+        //println ("MusicPlayer.playSongsInQueue")
         var coll = MPMediaItemCollection(items: MP.queuedPlaylist)
         MP.applePlayer.shuffleMode = MPMusicShuffleMode.Off
         MP.applePlayer.setQueueWithItemCollection(coll)

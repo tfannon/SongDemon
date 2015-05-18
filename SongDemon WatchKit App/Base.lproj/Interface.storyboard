@@ -12,10 +12,18 @@
                     <items>
                         <group width="1" height="64" alignment="left" layout="vertical" id="oF9-ym-193">
                             <items>
-                                <label width="135" alignment="left" text="Inquisition" textAlignment="left" minimumScaleFactor="0.40000000000000013" id="M2F-eU-mxl">
-                                    <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <fontDescription key="font" style="UICTFontTextStyleBody"/>
-                                </label>
+                                <group alignment="left" id="CRg-WG-u2h">
+                                    <items>
+                                        <label width="0.75" alignment="left" text="Inquisition" textAlignment="left" minimumScaleFactor="0.40000000000000013" id="M2F-eU-mxl">
+                                            <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                        </label>
+                                        <label alignment="right" verticalAlignment="center" text="1000" id="EwV-XZ-63T" userLabel="Plays">
+                                            <color key="textColor" red="0.0" green="0.40153488005050508" blue="0.00012291938069757932" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                        </label>
+                                    </items>
+                                </group>
                                 <label width="136" alignment="left" text="Parasitic Scriptures of the Sacred Word" textAlignment="left" numberOfLines="2" minimumScaleFactor="0.70000000000000007" id="2tW-RA-wGj">
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
@@ -104,6 +112,7 @@
                         <outlet property="artistLabel" destination="M2F-eU-mxl" id="OBu-Iy-nrN"/>
                         <outlet property="nextButton" destination="b2f-Xt-ND1" id="qCJ-Gy-aoZ"/>
                         <outlet property="playButton" destination="0Fb-0S-Fti" id="qEF-YO-FXb"/>
+                        <outlet property="playCountLabel" destination="EwV-XZ-63T" id="UtA-FJ-crR"/>
                         <outlet property="prevButton" destination="Ayz-ir-z4h" id="yRe-LX-30S"/>
                         <outlet property="slider" destination="fhi-e1-zj2" id="JPx-2Y-0l4"/>
                         <outlet property="songLabel" destination="2tW-RA-wGj" id="d0p-6O-dF2"/>

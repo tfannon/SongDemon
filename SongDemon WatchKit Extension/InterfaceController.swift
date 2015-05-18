@@ -36,11 +36,19 @@ class InterfaceController: WKInterfaceController {
     }
 
     
-    //MARK: - outlets and actions
+    //MARK: - outlets
     @IBOutlet weak var artistLabel: WKInterfaceLabel!
     @IBOutlet weak var songLabel: WKInterfaceLabel!
+    @IBOutlet weak var playCountLabel: WKInterfaceLabel!
+
     
     @IBOutlet weak var prevButton: WKInterfaceButton!
+    @IBOutlet weak var playButton: WKInterfaceButton!
+    @IBOutlet weak var nextButton: WKInterfaceButton!
+    
+    @IBOutlet weak var slider: WKInterfaceSlider!
+
+    //MARK: - actions
     @IBAction func prevPressed() {
         let player = MPMusicPlayerController()
         player.skipToPreviousItem()
@@ -48,7 +56,7 @@ class InterfaceController: WKInterfaceController {
         updateSongInfo()
     }
     
-    @IBOutlet weak var playButton: WKInterfaceButton!
+    
     @IBAction func playPressed() {
         let player = MPMusicPlayerController()
         if player.nowPlayingItem == nil {
@@ -62,14 +70,11 @@ class InterfaceController: WKInterfaceController {
         updatePlayState()
     }
     
-    @IBOutlet weak var nextButton: WKInterfaceButton!
     @IBAction func nextPressed() {
         skipToNextSong()
     }
    
   
-    @IBOutlet weak var slider: WKInterfaceSlider!
-    
     @IBAction func thumbsUpPressed() {
         LibraryManager.addToLiked(MusicPlayer.currentSong)
         songLabel.setTextColor(UIColor.whiteColor())
@@ -80,7 +85,7 @@ class InterfaceController: WKInterfaceController {
         skipToNextSong()
     }
     
-       //this will force a new playlist
+
     @IBAction func shufflePressed() {
         switch playMode {
         case .Mix : playMix(refreshList: true)
@@ -160,6 +165,7 @@ class InterfaceController: WKInterfaceController {
         if let item = player.nowPlayingItem {
             artistLabel.setText(item.albumArtist)
             songLabel.setText(item.title)
+            playCountLabel.setText("\(item.playCount)")
             if isLiked(item.hashKey) {
                 songLabel.setTextColor(.whiteColor())
             }
