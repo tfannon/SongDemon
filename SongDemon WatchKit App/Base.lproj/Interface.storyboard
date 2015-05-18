@@ -22,9 +22,9 @@
                                 </label>
                             </items>
                         </group>
-                        <group width="1" height="0.33000000000000002" alignment="left" layout="vertical" spacing="5" id="NXw-Xy-2W7" userLabel="Buttons">
+                        <group width="1" height="50" alignment="left" layout="vertical" spacing="5" id="NXw-Xy-2W7" userLabel="Buttons">
                             <items>
-                                <group width="1" height="42" alignment="left" verticalAlignment="center" spacing="6" id="lgN-OZ-XyZ" userLabel="Top Buttons">
+                                <group width="1" height="42" alignment="left" spacing="6" id="lgN-OZ-XyZ" userLabel="Top Buttons">
                                     <items>
                                         <button width="0.33000000000000002" height="34" alignment="left" verticalAlignment="center" backgroundImage="left" id="Ayz-ir-z4h" userLabel="prev">
                                             <connections>
@@ -46,21 +46,6 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                 </group>
-                                <group width="1" height="40" alignment="right" verticalAlignment="bottom" hidden="YES" id="HOV-hb-XBc" userLabel="Bottom Buttons">
-                                    <items>
-                                        <button width="0.33000000000000002" height="1" alignment="left" backgroundImage="thumbs-up" id="yKZ-SM-4Yu"/>
-                                        <button width="0.33000000000000002" height="1" alignment="left" backgroundImage="redshuffle" id="7jR-J7-MBc">
-                                            <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <fontDescription key="font" type="system" pointSize="9"/>
-                                            <connections>
-                                                <action selector="shufflePressed" destination="AgC-eL-Hgc" id="61e-29-z1J"/>
-                                            </connections>
-                                        </button>
-                                        <button width="0.33000000000000002" height="1" alignment="left" backgroundImage="thumbs-down" id="VN8-qu-7dH"/>
-                                    </items>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </group>
                             </items>
                             <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                         </group>
@@ -70,6 +55,30 @@
                                 <action selector="volumeSliderChanged:" destination="AgC-eL-Hgc" id="cP3-Xp-QdA"/>
                             </connections>
                         </slider>
+                        <group width="1" widthAdjustment="-2" height="40" alignment="right" verticalAlignment="bottom" id="HOV-hb-XBc" userLabel="Bottom Buttons">
+                            <items>
+                                <button width="34" height="32" alignment="left" verticalAlignment="center" backgroundImage="maroonup" id="yKZ-SM-4Yu">
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <connections>
+                                        <action selector="thumbsUpPressed" destination="AgC-eL-Hgc" id="GzI-Kq-sGk"/>
+                                    </connections>
+                                </button>
+                                <button width="0.33000000000000002" height="1" alignment="center" backgroundImage="redshuffle" id="7jR-J7-MBc">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="font" type="system" pointSize="9"/>
+                                    <connections>
+                                        <action selector="shufflePressed" destination="AgC-eL-Hgc" id="61e-29-z1J"/>
+                                    </connections>
+                                </button>
+                                <button width="34" height="32" alignment="right" verticalAlignment="bottom" backgroundImage="maroondown" id="VN8-qu-7dH">
+                                    <connections>
+                                        <action selector="thumbsDownPressed" destination="AgC-eL-Hgc" id="Lwr-8i-Eqq"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </group>
                     </items>
                     <menu key="menu" id="gCj-qX-2Ht">
                         <items>
@@ -98,10 +107,12 @@
                         <outlet property="prevButton" destination="Ayz-ir-z4h" id="yRe-LX-30S"/>
                         <outlet property="slider" destination="fhi-e1-zj2" id="JPx-2Y-0l4"/>
                         <outlet property="songLabel" destination="2tW-RA-wGj" id="d0p-6O-dF2"/>
+                        <outlet property="thumbsDownButton" destination="HOV-hb-XBc" id="jjr-Yh-MT5"/>
+                        <outlet property="thumbsUpButton" destination="yKZ-SM-4Yu" id="9HT-eZ-aPG"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="235" y="341.75"/>
+            <point key="canvasLocation" x="235" y="341.25"/>
         </scene>
         <!--Glance Interface Controller-->
         <scene sceneID="BOz-TT-tkC">
@@ -144,5 +155,5 @@
             <point key="canvasLocation" x="553" y="1001"/>
         </scene>
     </scenes>
-    <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="0.32000000000000001" colorSpace="calibratedRGB"/>
+    <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
 </document>

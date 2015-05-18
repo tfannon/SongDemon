@@ -86,6 +86,7 @@
 		65E7749A19528D6100DD31DB /* sliderlabel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E7746519528D6100DD31DB /* sliderlabel@2x.png */; };
 		65E7D2AB1A17F01200C430AF /* GoatwhoreLastFM.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E7D2AA1A17F01200C430AF /* GoatwhoreLastFM.png */; };
 		65E7D2AD1A17F2B200C430AF /* SearchArtistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E7D2AC1A17F2B200C430AF /* SearchArtistCell.swift */; };
+		65EB5FC61B094A9500DE9AD9 /* LibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0487E1953A5D50080031C /* LibraryManager.swift */; };
 		65EFCD1B1A17EA20000ECF93 /* SearchArtistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EFCD1A1A17EA20000ECF93 /* SearchArtistController.swift */; };
 		65F195651A46164700A7539C /* 702-share.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F195621A46164700A7539C /* 702-share.png */; };
 		65F195661A46164700A7539C /* 702-share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F195631A46164700A7539C /* 702-share@2x.png */; };
@@ -651,6 +652,7 @@
 				657F790D1AF86D8900EEE85F /* GlanceController.swift in Sources */,
 				651242A11B065F14006248A0 /* ITunesUtils.swift in Sources */,
 				651242A01B065EBE006248A0 /* Constants.swift in Sources */,
+				65EB5FC61B094A9500DE9AD9 /* LibraryManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

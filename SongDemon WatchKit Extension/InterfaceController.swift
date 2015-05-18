@@ -10,11 +10,6 @@ import WatchKit
 import Foundation
 import MediaPlayer
 
-enum PlayMode {
-    case Liked
-    case Mix
-    case Artist
-}
 
 class InterfaceController: WKInterfaceController {
     
@@ -22,7 +17,29 @@ class InterfaceController: WKInterfaceController {
     var simulatorPlaying = true
     let STEPS = 5
     
+    //MARK: WKInterfaceController methods
+    override func awakeWithContext(context: AnyObject?) {
+        super.awakeWithContext(context)
+        slider.setNumberOfSteps(STEPS)
+        // Configure interface objects here.
+    }
+    
+    override func willActivate() {
+        // This method is called when watch view controller is about to be visible to user
+        super.willActivate()
+        updateSongInfo()
+    }
+    
+    override func didDeactivate() {
+        // This method is called when watch view controller is no longer visible
+        super.didDeactivate()
+    }
+
+    
     //MARK: - outlets and actions
+    @IBOutlet weak var artistLabel: WKInterfaceLabel!
+    @IBOutlet weak var songLabel: WKInterfaceLabel!
+    
     @IBOutlet weak var prevButton: WKInterfaceButton!
     @IBAction func prevPressed() {
         let player = MPMusicPlayerController()
@@ -47,16 +64,23 @@ class InterfaceController: WKInterfaceController {
     
     @IBOutlet weak var nextButton: WKInterfaceButton!
     @IBAction func nextPressed() {
-        let player = MPMusicPlayerController()
-        player.skipToNextItem()
-        player.play()
-        updateSongInfo()
+        skipToNextSong()
+    }
+   
+  
+    @IBOutlet weak var slider: WKInterfaceSlider!
+    
+    @IBAction func thumbsUpPressed() {
+        LibraryManager.addToLiked(MusicPlayer.currentSong)
+        songLabel.setTextColor(UIColor.whiteColor())
     }
     
-    @IBOutlet weak var artistLabel: WKInterfaceLabel!
-    @IBOutlet weak var songLabel: WKInterfaceLabel!
+    @IBAction func thumbsDownPressed() {
+        LibraryManager.addToDisliked(MusicPlayer.currentSong)
+        skipToNextSong()
+    }
     
-    //this will force a new playlist
+       //this will force a new playlist
     @IBAction func shufflePressed() {
         switch playMode {
         case .Mix : playMix(refreshList: true)
@@ -65,7 +89,8 @@ class InterfaceController: WKInterfaceController {
         default:""
         }
     }
-
+    
+    //MARK: context menu items
     @IBAction func likeTapped() {
         self.playMode = .Liked
         playLiked()
@@ -81,7 +106,7 @@ class InterfaceController: WKInterfaceController {
         playArtist()
     }
     
-    @IBOutlet weak var slider: WKInterfaceSlider!
+    //MARK: scrubber
     var timer = NSTimer()
     func startPlaybackTimer() {
         timer.invalidate()
@@ -89,20 +114,12 @@ class InterfaceController: WKInterfaceController {
     }
     
     func updateScrubber() {
-        let cur : Int = Int(MusicPlayer.currentTime)
-        let tot : Int = Int(MusicPlayer.currentSong.playbackDuration)
-        let timePerStep = Int(tot/STEPS)
-        let curStep = Int(cur/timePerStep)+1
-        
         //110, 30, 10
-            
-        println("Total:\(tot)  Current:\(cur),  TimePerStep:\(timePerStep)  Slot:\(curStep)")
+        let curStep = getCurrentStep()
+        //println("Total:\(tot)  Current:\(cur),  TimePerStep:\(timePerStep)  Slot:\(curStep)")
         slider.setValue(Float(curStep))
-        //let rem : Int = tot - cur
-        //scrubber.value = Float(cur)
     }
     
-
     func getCurrentStep() -> Int {
         let cur : Int = Int(MusicPlayer.currentTime)
         let tot : Int = Int(MusicPlayer.currentSong.playbackDuration)
@@ -130,6 +147,14 @@ class InterfaceController: WKInterfaceController {
     }
     
     //MARK: helpers
+    func skipToNextSong() {
+        let player = MPMusicPlayerController()
+        player.skipToNextItem()
+        player.play()
+        updateSongInfo()
+    }
+    
+    
     func updateSongInfo() {
         let player = MPMusicPlayerController()
         if let item = player.nowPlayingItem {
@@ -169,23 +194,16 @@ class InterfaceController: WKInterfaceController {
         }
     }
     
-    //MARK: WKInterfaceController methods
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
-        slider.setNumberOfSteps(STEPS)
-        // Configure interface objects here.
+    func isLiked(id : String) -> Bool {
+        let defaults = Utils.AppGroupDefaults
+        if let ids = defaults.objectForKey(WK_LIKED_PLAYLIST) as? [String] {
+            if find(ids, id) != nil {
+                return true
+            }
+        }
+        return false
     }
-
-    override func willActivate() {
-        // This method is called when watch view controller is about to be visible to user
-        super.willActivate()
-        updateSongInfo()
-    }
-
-    override func didDeactivate() {
-        // This method is called when watch view controller is no longer visible
-        super.didDeactivate()
-    }
+    
     
     func playMix(refreshList : Bool = false) {
         self.setTitle("MIX")
@@ -213,17 +231,6 @@ class InterfaceController: WKInterfaceController {
                 }
             }
         }
-    }
-    
-    func isLiked(id : String) -> Bool {
-        let defaults = Utils.AppGroupDefaults
-        if let ids = defaults.objectForKey(WK_LIKED_PLAYLIST) as? [String] {
-            if find(ids, id) != nil {
-                return true
-            }
-        }
-        return false
- 
     }
     
     func playArtist() {
