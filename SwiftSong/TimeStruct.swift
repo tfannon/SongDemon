@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 crazy8dev. All rights reserved.
 //
 
-class TimeStruct : Printable {
+class TimeStruct : CustomStringConvertible {
     var hours : Int
     var mins : Int
     var seconds : Int
@@ -18,7 +18,7 @@ class TimeStruct : Printable {
     }
     
     init(totalSeconds:Float) {
-        var rem = Int(totalSeconds)
+        let rem = Int(totalSeconds)
         hours = rem / 3600
         mins = ((rem / 60) - hours*60)
         seconds = rem % 60
@@ -26,7 +26,7 @@ class TimeStruct : Printable {
     }
     
     init(totalSeconds:Int) {
-        var rem = totalSeconds
+        let rem = totalSeconds
         hours = rem / 3600
         mins = ((rem / 60) - hours*60)
         seconds = rem % 60

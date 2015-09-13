@@ -8,11 +8,11 @@
 
 
 class FileManager {
-    static func getFileURL(fileName: String) -> NSURL {
-        let manager = NSFileManager.defaultManager()
-        let dirURL = manager.URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false, error: nil)
-        return dirURL!.URLByAppendingPathComponent(fileName)
-    }
+//    static func getFileURL(fileName: String) -> NSURL {
+//        let manager = NSFileManager.defaultManager()
+//        let dirURL = try? manager.URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false)
+//        return dirURL!.URLByAppendingPathComponent(fileName)
+//    }
 }
 
 

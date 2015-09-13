@@ -68,7 +68,7 @@ class PlaylistController: UITableViewController {
             var row = 0
             var section = 0
             while (idx < index) {
-                var songsInSection = LibraryManager.groupedPlaylist[section].count
+                let songsInSection = LibraryManager.groupedPlaylist[section].count
                 if idx + songsInSection > index {
                     row = index - idx
                 } else {
@@ -103,7 +103,7 @@ class PlaylistController: UITableViewController {
             case (.Artist), (.Album)  : identifier = "PlaylistAlbumSongCell"
             default: identifier = "PlaylistCell"
         }
-        var cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) 
         
         if Utils.inSimulator {
             let cell2 = cell as! PlaylistCell
@@ -163,7 +163,7 @@ class PlaylistController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var song = LibraryManager.groupedPlaylist[indexPath.section][indexPath.row]
+        let song = LibraryManager.groupedPlaylist[indexPath.section][indexPath.row]
         //println(song.songInfo)
         MusicPlayer.playSongInPlaylist(song)
         RootController.switchToMainView()
@@ -172,8 +172,8 @@ class PlaylistController: UITableViewController {
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView {
         switch (LibraryManager.currentPlayMode) {
             case (.Artist), (.Album) :
-                var cell = tableView.dequeueReusableCellWithIdentifier("PlaylistAlbumTitleCell") as! PlaylistAlbumTitleCell
-                var song = LibraryManager.groupedPlaylist[section][0]
+                let cell = tableView.dequeueReusableCellWithIdentifier("PlaylistAlbumTitleCell") as! PlaylistAlbumTitleCell
+                let song = LibraryManager.groupedPlaylist[section][0]
                 cell.lblAlbum.text = song.albumTitle
                 cell.lblYear.text = song.year
                 cell.lblArtist.text = song.albumArtist
@@ -182,7 +182,7 @@ class PlaylistController: UITableViewController {
                 cell.contentView.backgroundColor = UIColor.blackColor()
             return cell.contentView
             default:
-                var cell = tableView.dequeueReusableCellWithIdentifier("PlaylistAlbumTitleCell") as! PlaylistAlbumTitleCell
+                let cell = tableView.dequeueReusableCellWithIdentifier("PlaylistAlbumTitleCell") as! PlaylistAlbumTitleCell
                 cell.contentView.backgroundColor = UIColor.blackColor()
                 return cell.contentView
         }

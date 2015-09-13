@@ -28,14 +28,14 @@ class SearchController: UITabBarController {
         
         
         //swiping up allows user to select playlist
-        var swipeUp = UISwipeGestureRecognizer(target: self, action: "handleCancelClicked:")
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: "handleCancelClicked:")
         swipeUp.direction = .Up
         view.addGestureRecognizer(swipeUp)
     }
     
     override func viewWillAppear(animated: Bool) {
         if currentlyPlayingArtist != nil {
-            var searchAlbumController = self.viewControllers![1] as! SearchAlbumController
+            let searchAlbumController = self.viewControllers![1] as! SearchAlbumController
             searchAlbumController.selectedArtist = currentlyPlayingArtist!
             searchAlbumController.artistSelectedWithPicker = false
             self.selectedIndex = 1

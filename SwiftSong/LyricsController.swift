@@ -26,14 +26,14 @@ class LyricsController: UIViewController {
     
     func loadLyrics(url : String) {
         if !url.isEmpty && url != currentUrl {
-            println("loading lyrics:\(url)")
+            print("loading lyrics:\(url)")
             let requestURL = NSURL(string: url)
             let request = NSURLRequest(URL: requestURL!)
             self.webView.loadRequest(request)
             currentUrl = url
         }
         else {
-            println("lyrics already loaded")
+            print("lyrics already loaded")
         }
     }
 }

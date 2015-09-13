@@ -27,10 +27,10 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         self.dataSource = self;
 
         mainController = self.storyboard!.instantiateViewControllerWithIdentifier("MainController") as! MainController
-        lyricsController = self.storyboard!.instantiateViewControllerWithIdentifier("LyricsController") as! UIViewController
+        lyricsController = self.storyboard!.instantiateViewControllerWithIdentifier("LyricsController") 
         playlistController = self.storyboard!.instantiateViewControllerWithIdentifier("PlaylistController") as! UITableViewController
         videoController = self.storyboard!.instantiateViewControllerWithIdentifier("VideoListController") as! UITableViewController
-        playVideoController = self.storyboard!.instantiateViewControllerWithIdentifier("PlayVideoController") as! UIViewController
+        playVideoController = self.storyboard!.instantiateViewControllerWithIdentifier("PlayVideoController") 
 
         controllers = [playlistController, mainController, lyricsController, videoController, playVideoController]
 
@@ -47,7 +47,7 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     func findScrollView() {
         for x in self.view.subviews {
             if x.isKindOfClass(UIScrollView) {
-                var scrollView = x as! UIScrollView
+                let scrollView = x as! UIScrollView
                 scrollView.delaysContentTouches = false
             }
         }
@@ -73,7 +73,7 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
 
     //get the controller before the current one displayed
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController : UIViewController) -> UIViewController? {
-        var index = find(controllers, viewControllerBeforeViewController)!
+        var index = controllers.indexOf(viewControllerBeforeViewController)!
         if index == 0  {
             return nil
         }
@@ -82,7 +82,7 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     }
 
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController : UIViewController) -> UIViewController? {
-        var index = find(controllers, viewControllerAfterViewController)!
+        var index = controllers.indexOf(viewControllerAfterViewController)!
         index++
         if index == controllers.count {
             return nil
@@ -91,7 +91,7 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     }
     
     class func switchToMainView() {
-        var root = UIApplication.sharedApplication().keyWindow!.rootViewController as! RootController
+        let root = UIApplication.sharedApplication().keyWindow!.rootViewController as! RootController
         root.currentIndex = 1
         let viewControllers : [UIViewController] = [root.mainController]
         root.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
@@ -106,24 +106,24 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     */
     
     class func switchToPlayVideoController() {
-        var root = UIApplication.sharedApplication().keyWindow!.rootViewController as! RootController
+        let root = UIApplication.sharedApplication().keyWindow!.rootViewController as! RootController
         root.currentIndex = 4
         let viewControllers : [UIViewController] = [root.playVideoController]
         root.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
     }
     
     class func getPlayVideoController() -> PlayVideoController {
-        var root = UIApplication.sharedApplication().keyWindow!.rootViewController as! RootController
+        let root = UIApplication.sharedApplication().keyWindow!.rootViewController as! RootController
         return root.playVideoController as! PlayVideoController
     }
     
     class func getLyricsController() -> LyricsController {
-        var root = UIApplication.sharedApplication().keyWindow!.rootViewController as! RootController
+        let root = UIApplication.sharedApplication().keyWindow!.rootViewController as! RootController
         return root.lyricsController as! LyricsController
     }
     
     class func getPlaylistController() -> PlaylistController {
-        var root = UIApplication.sharedApplication().keyWindow!.rootViewController as! RootController
+        let root = UIApplication.sharedApplication().keyWindow!.rootViewController as! RootController
         return root.playlistController as! PlaylistController
     }
 }

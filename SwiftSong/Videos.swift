@@ -34,68 +34,65 @@ class Videos {
         
         gLyrics.State = .Fetching
         
-        var query = Utils.inSimulator ?
+        let query = Utils.inSimulator ?
             "Goatwhore In Deathless Tradition" :
             "\(item!.albumArtist) \(item!.title)"
         
         
         var urlStr = "https://www.googleapis.com/youtube/v3/search?key=\(apiKey)&part=snippet&q='\(query)'&type=video& order=viewCount&maxResults=\(maxResults)"
 
-        urlStr = urlStr.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+        urlStr = urlStr.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         
         //if there is no fetched url yet or the url is different than last one
         if gVideos.CurrentUrl.isEmpty || gVideos.CurrentUrl != urlStr {
-            println("Loading google json async for: \(query)")
+            print("Loading google json async for: \(query)")
 
             let url = NSURL(string: urlStr)!
             let request = NSURLRequest(URL: url)
             
             NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {
-            (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+                (response, data, error) in
              
                 if error != nil {
-                    println("Error in videos fetch Connection: \(error)")
-                    println()
+                    print("Error in videos fetch Connection: \(error)")
                     gVideos.State = .NotAvailable
                     gVideos.NeedsRefresh = true
                     return
                 }
     
-                var jsonError: NSError?
-                var json : AnyObject! = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &jsonError) as! NSDictionary
-    
-                if jsonError != nil {
-                    println("Error in JSON: \(jsonError)")
+                do {
+                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+                    var parsedJson = JSON(json)
+                    
+                    gVideos.jsonVideos = parsedJson
+                    gVideos.State = .Available
+                    gVideos.NeedsRefresh = true
+                    
+                    var items = parsedJson["items"].array!
+                    if items.count == 0 {
+                        return;
+                    }
+                    let currentVid = items[0]
+                    let id = currentVid["id"]["videoId"].string!
+                    
+                    
+                    let vc = RootController.getPlayVideoController()
+                    
+                    let url = "https://www.youtube.com/watch?v=\(id)"
+                    let artworkUrl = currentVid["snippet"]["thumbnails"]["default"]["url"].string!
+                    vc.loadVideo(url, artworkUrl: artworkUrl)
+                    gVideos.CurrentUrl = urlStr
+                    
+                } catch {
+                    print("Error in JSON: \(error)")
                     gVideos.State = .NotAvailable
                     gVideos.NeedsRefresh = true
                     return
                 }
-    
-                var parsedJson = JSON(json)
-                //println(parsedJson)
-                
-                gVideos.jsonVideos = parsedJson
-                gVideos.State = .Available
-                gVideos.NeedsRefresh = true
-            
-                var items = parsedJson["items"].array!
-                if items.count == 0 {
-                    return;
-                }
-                let currentVid = items[0]
-                let id = currentVid["id"]["videoId"].string!
-
-
-                let vc = RootController.getPlayVideoController()
-            
-                let url = "https://www.youtube.com/watch?v=\(id)"
-                let artworkUrl = currentVid["snippet"]["thumbnails"]["default"]["url"].string!
-                vc.loadVideo(url, artworkUrl: artworkUrl)
-                gVideos.CurrentUrl = urlStr
             })
         }
         else {
-            println("using cached google json")
+            print("using cached google json")
         }
     }
 }

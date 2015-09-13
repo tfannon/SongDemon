@@ -27,7 +27,7 @@ class Utils {
     
     func migrateDefaults() {
         if !Utils.AppGroupDefaults.boolForKey(Utils.MIGRATED) {
-            var oldDefaults = NSUserDefaults.standardUserDefaults().dictionaryRepresentation() as! [String:AnyObject]
+            var oldDefaults = NSUserDefaults.standardUserDefaults().dictionaryRepresentation() 
             for key in oldDefaults.keys {
                 Utils.AppGroupDefaults.setObject(oldDefaults[key], forKey: key)
             }
@@ -64,7 +64,7 @@ class Stopwatch {
         let sw = Stopwatch()
         sw.title = title
         if !title.isEmpty {
-            println(title + " started")
+            print(title + " started")
         }
         sw.start()
         return sw
@@ -81,7 +81,7 @@ class Stopwatch {
     func stop(message : String) -> Double {
         let ret = NSDate().timeIntervalSinceDate(timer) * 1000
         if !title.isEmpty {
-            println("\(title): \(message) completed in \(Int(ret))ms")
+            print("\(title): \(message) completed in \(Int(ret))ms")
         }
         return ret
     }

@@ -9,7 +9,7 @@ import MediaPlayer
 
 
 extension String {
-    var length: Int { return count(self) }  // Swift 1.2
+    var length: Int { return self.characters.count }  // Swift 1.2
 }
 
 
@@ -19,7 +19,7 @@ extension MPMediaItem {
     }
     
     var year : String {
-        var yearAsNum = self.valueForProperty("year") as! NSNumber
+        let yearAsNum = self.valueForProperty("year") as! NSNumber
         if yearAsNum.isKindOfClass(NSNumber) {
             return yearAsNum == 0 ? "" : "\(yearAsNum.intValue)"
         }
@@ -27,12 +27,13 @@ extension MPMediaItem {
     }
     
     func getArtworkWithSize(frame : CGSize) -> UIImage? {
-        return self.artwork != nil ? self.artwork.imageWithSize(frame) : nil
+        //return self.artwork != nil ? self.artwork!.imageWithSize(frame) : nil
+        return self.artwork?.imageWithSize(frame)
     }
     
     var playTime : TimeStruct {
         get {
-            var totalPlaybackTime = Int(self.playbackDuration)
+            let totalPlaybackTime = Int(self.playbackDuration)
             let hours = (totalPlaybackTime / 3600)
             let mins = ((totalPlaybackTime/60) - hours*60)
             let secs = (totalPlaybackTime % 60 )
@@ -62,8 +63,8 @@ extension UISlider {
 }
 
 extension Array {
-    func find(includedElement: T -> Bool) -> Int? {
-        for (idx, element) in enumerate(self) {
+    func find(includedElement: Element -> Bool) -> Int? {
+        for (idx, element) in self.enumerate() {
             if includedElement(element) {
                 return idx
             }
@@ -89,18 +90,18 @@ extension Dictionary {
     }
     
     func map<U>(transform: Value -> U) -> [Key : U] {
-        return Dictionary<Key, U>(Swift.map(self, { (key, value) in (key, transform(value)) }))
+        return Dictionary<Key, U>(self.map({ (key, value) in (key, transform(value)) }))
     }
     
     func map<T : Hashable, U>(transform: (Key, Value) -> (T, U)) -> [T : U] {
-        return Dictionary<T, U>(Swift.map(self, transform))
+        return Dictionary<T, U>(self.map(transform))
     }
     
     func filter(includeElement: Element -> Bool) -> [Key : Value] {
-        return Dictionary(Swift.filter(self, includeElement))
+        return Dictionary(self.filter(includeElement))
     }
     
     func reduce<U>(initial: U, @noescape combine: (U, Element) -> U) -> U {
-        return Swift.reduce(self, initial, combine)
+        return self.reduce(initial, combine: combine)
     }
 }

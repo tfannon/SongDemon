@@ -36,12 +36,12 @@ class SearchArtistController: UIViewController, UITableViewDataSource, UITableVi
     
     func getIndexPathForCurrentSong() -> NSIndexPath {
         let name = MusicPlayer.currentSong!.albumArtist
-        var section = self.collation.sectionForObject(Artist(name: name), collationStringSelector: "name")
-        var x = sections[section]
+        let section = self.collation.sectionForObject(Artist(name: name!), collationStringSelector: "name")
+        let x = sections[section]
         let names : [String] = x.artists.map { artist in
             return artist.name
         }
-        let row = find(names, name)!
+        let row = names.indexOf(name!)!
         let indexPath = NSIndexPath(forRow: row, inSection: section)
         return indexPath
     }
@@ -153,12 +153,12 @@ class SearchArtistController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if !self.sections[section].artists.isEmpty {
-            return (self.collation.sectionTitles[section] as! String)
+            return (self.collation.sectionTitles[section] )
         }
         return ""
     }
     
-    func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
+    func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
         return self.collation.sectionIndexTitles
     }
     
@@ -187,7 +187,7 @@ class SearchArtistController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    let collation = UILocalizedIndexedCollation.currentCollation() as! UILocalizedIndexedCollation
+    let collation = UILocalizedIndexedCollation.currentCollation() 
     
     var _sections: [Section]?
     var sections: [Section] {
@@ -196,15 +196,15 @@ class SearchArtistController: UIViewController, UITableViewDataSource, UITableVi
         }
         
         //create artists from itunes list
-        var artists: [Artist] = names.map { name in
-            var artist = Artist(name: name)
+        let artists: [Artist] = names.map { name in
+            let artist = Artist(name: name)
             artist.section = self.collation.sectionForObject(artist, collationStringSelector: "name")
             return artist
         }
         
         //create empty sections
         var sections = [Section]()
-        for i in 0..<self.collation.sectionIndexTitles.count {
+        for _ in 0..<self.collation.sectionIndexTitles.count {
             sections.append(Section())
         }
         
@@ -225,8 +225,7 @@ class SearchArtistController: UIViewController, UITableViewDataSource, UITableVi
     //MARK: UITableViewDelegate
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let artist = self.sections[indexPath.section].artists[indexPath.row].name
-        var items = LibraryManager.getArtistSongsWithoutSettingPlaylist(artist)
-        var searchAlbumController = self.tabBarController!.viewControllers![1] as! SearchAlbumController
+        let searchAlbumController = self.tabBarController!.viewControllers![1] as! SearchAlbumController
         searchAlbumController.selectedArtist = artist
         searchAlbumController.artistSelectedWithPicker = true
         self.tabBarController!.selectedIndex = 1

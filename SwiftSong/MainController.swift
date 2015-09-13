@@ -23,9 +23,9 @@ class MainController: UIViewController, LibraryScanListener {
     @IBOutlet var btnPlay: UIButton!
     @IBOutlet var btnNext: UIButton!
    
-    @IBAction func prevTapped(AnyObject) { handlePrevTapped() }
-    @IBAction func playTapped(AnyObject) { handlePlayTapped() }
-    @IBAction func nextTapped(AnyObject) { handleNextTapped() }
+    @IBAction func prevTapped(_: AnyObject) { handlePrevTapped() }
+    @IBAction func playTapped(_: AnyObject) { handlePlayTapped() }
+    @IBAction func nextTapped(_: AnyObject) { handleNextTapped() }
    
     
     @IBOutlet var viewScrubber: UIView!
@@ -44,7 +44,7 @@ class MainController: UIViewController, LibraryScanListener {
     @IBOutlet var btnShare: UIButton!
     @IBOutlet var btnAddToQueue: UIButton!
 
-    @IBAction func playlistTapped(AnyObject) { handlePlaylistTapped() }
+    @IBAction func playlistTapped(_: AnyObject) { handlePlaylistTapped() }
     @IBAction func searchTapped(sender: AnyObject) { handleSearchTapped() }
     @IBAction func likeTapped(sender: AnyObject) { handleLikeTapped()}
     @IBAction func dislikeTapped(sender: AnyObject) { handleDislikeTapped() }
@@ -92,12 +92,12 @@ class MainController: UIViewController, LibraryScanListener {
         viewArtwork.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleImageTapped"))
         
         //swiping up brings up playlist picker
-        var swipeUp = UISwipeGestureRecognizer(target: self, action: "handlePlaylistTapped")
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: "handlePlaylistTapped")
         swipeUp.direction = .Up
         view.addGestureRecognizer(swipeUp)
         
         //swiping down brings up search
-        var swipeDown = UISwipeGestureRecognizer(target: self, action: "handleSearchTapped")
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: "handleSearchTapped")
         swipeDown.direction = .Down
         view.addGestureRecognizer(swipeDown)
     }
@@ -152,14 +152,14 @@ class MainController: UIViewController, LibraryScanListener {
             let videoUrl = RootController.getPlayVideoController().currentVideoUrl
             let artworkUrl = RootController.getPlayVideoController().currentArtworkUrl
             
-            FacebookUtils.post(currentItem.artist ,title: currentItem.title, artworkUrl:artworkUrl, videoUrl: videoUrl, callback: { status in
+            FacebookUtils.post(currentItem.artist! ,title: currentItem.title!, artworkUrl:artworkUrl, videoUrl: videoUrl, callback: { status in
                 //set a status
             })
         }
     }
    
     func handleSearchTapped() {
-        var vc = self.storyboard!.instantiateViewControllerWithIdentifier("SearchController") as! SearchController
+        let vc = self.storyboard!.instantiateViewControllerWithIdentifier("SearchController") as! SearchController
         //if something is in the player, use this to pre-select the artist in the searchController
         vc.currentlyPlayingArtist = MusicPlayer.currentSong != nil ? MusicPlayer.currentSong.albumArtist : nil
         presentViewController(vc, animated: false, completion: nil)
@@ -170,7 +170,7 @@ class MainController: UIViewController, LibraryScanListener {
         let isSong = MusicPlayer.currentSong != nil
         let currentSong = MusicPlayer.currentSong;
 
-        var alert = UIAlertController(title: "Choose what to put in your personal queue to listen to later", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let alert = UIAlertController(title: "Choose what to put in your personal queue to listen to later", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
 
         if isSong {
             alert.addAction(UIAlertAction(title: "This song", style: .Default, handler: { action in
@@ -184,14 +184,14 @@ class MainController: UIViewController, LibraryScanListener {
             }))
 
             alert.addAction(UIAlertAction(title: "Songs from this album", style: .Default, handler: { action in
-                var songs = LibraryManager.getAlbumSongsWithoutSettingPlaylist(currentSong);
+                let songs = LibraryManager.getAlbumSongsWithoutSettingPlaylist(currentSong);
                 LibraryManager.addToQueued(songs)
                 self.displayFadingStatus ("Album added to Play Later queue")
             }))
        
             
             alert.addAction(UIAlertAction(title: "Remove this album", style: .Destructive, handler: { action in
-                var songs = LibraryManager.getAlbumSongsWithoutSettingPlaylist(currentSong);
+                let songs = LibraryManager.getAlbumSongsWithoutSettingPlaylist(currentSong);
                 LibraryManager.removeFromQueued(songs)
                 self.displayFadingStatus ("Album removed from queue")
             }))
@@ -210,44 +210,44 @@ class MainController: UIViewController, LibraryScanListener {
     
     
     func handlePlaylistTapped() {
-        var alert = UIAlertController(title: "Choose songs to play", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let alert = UIAlertController(title: "Choose songs to play", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         
         alert.addAction(UIAlertAction(title: "Recently added", style: .Default, handler: { action in
-            var songs = LibraryManager.getRecentlyAdded()
-            self.postPlaylistSelection(songs: songs)
+            let songs = LibraryManager.getRecentlyAdded()
+            self.postPlaylistSelection(songs)
         }))
         
         alert.addAction(UIAlertAction(title: "My queue", style: .Default, handler: { action in
-            var songs = LibraryManager.getQueuedSongs()
-            self.postPlaylistSelection(songs: songs)
+            let songs = LibraryManager.getQueuedSongs()
+            self.postPlaylistSelection(songs)
         }))
         
         alert.addAction(UIAlertAction(title: "Random mix", style: .Default, handler: { action in
-            var songs = LibraryManager.getMixOfSongs()
-            self.postPlaylistSelection(songs: songs)
+            let songs = LibraryManager.getMixOfSongs()
+            self.postPlaylistSelection(songs)
         }))
         
         alert.addAction(UIAlertAction(title: "Liked", style: .Default, handler: {action in
-            var songs = LibraryManager.getLikedSongs()
-            self.postPlaylistSelection(songs: songs)
+            let songs = LibraryManager.getLikedSongs()
+            self.postPlaylistSelection(songs)
         }))
         
         alert.addAction(UIAlertAction(title: "New", style: .Default, handler: { action in
-            var songs = LibraryManager.getNewSongs()
-            self.postPlaylistSelection(songs: songs)
+            let songs = LibraryManager.getNewSongs()
+            self.postPlaylistSelection(songs)
         }))
         
         if let currentSong = MusicPlayer.currentSong {
             var message = "Songs from this artist"
             alert.addAction(UIAlertAction(title: message, style: .Default, handler: { action in
-                var songs = LibraryManager.getArtistSongs(currentSong);
-                self.postPlaylistSelection(songs: songs, message: "Songs from \(currentSong.albumArtist) are queued", queue:true)
+                let songs = LibraryManager.getArtistSongs(currentSong);
+                self.postPlaylistSelection(songs, message: "Songs from \(currentSong.albumArtist) are queued", queue:true)
             }))
             
             message = "Songs from this album"
             alert.addAction(UIAlertAction(title: message, style: .Default, handler: { action in
-                var songs = LibraryManager.getAlbumSongs(currentSong);
-                self.postPlaylistSelection(songs: songs, message:"Songs from \(currentSong.albumTitle) are queued", queue:true)
+                let songs = LibraryManager.getAlbumSongs(currentSong);
+                self.postPlaylistSelection(songs, message:"Songs from \(currentSong.albumTitle) are queued", queue:true)
             }))
         }
         
@@ -266,7 +266,7 @@ class MainController: UIViewController, LibraryScanListener {
     func postPlaylistSelection(songs: [MPMediaItem]=[MPMediaItem](), message : String? = nil, queue: Bool = false) {
         if songs.count > 0 {
             if queue {
-                let indexOfCurrentSong = find(songs, MusicPlayer.currentSong)!
+                let indexOfCurrentSong = songs.indexOf(MusicPlayer.currentSong)!
                 var nextSong : MPMediaItem?
                 //this keeps the position of the song immediately following current song
                 //so the next itemplayingdidchange notification will trigger the queue to
@@ -318,7 +318,6 @@ class MainController: UIViewController, LibraryScanListener {
             image = "777-thumbs-up.png"
         case (.None) :
             image = "777-thumbs-up.png"
-        default: image = ""
         }
         if !image.isEmpty {
             btnLike.setImage(UIImage(named: image), forState: UIControlState.Normal)
@@ -376,7 +375,7 @@ class MainController: UIViewController, LibraryScanListener {
         
         center.addObserverForName(UIApplicationDidBecomeActiveNotification,
             object: nil, queue: nil, usingBlock: { _ in
-                println("UIApplicationDidBecomeActive")
+                print("UIApplicationDidBecomeActive")
                 self.updateSongInfo()
                 self.updatePlayState()
         })
@@ -385,7 +384,7 @@ class MainController: UIViewController, LibraryScanListener {
             object: nil, queue:nil) { _ in
                 //println("NowPlayingItemDidChange")
                 if MusicPlayer.currentSong != nil {
-                    println("Song changed to \(MusicPlayer.currentSong.songInfo)")
+                    print("Song changed to \(MusicPlayer.currentSong.songInfo)")
                 }
                 MusicPlayer.playSongsInQueue()
                 self.updateSongInfo()
@@ -397,7 +396,7 @@ class MainController: UIViewController, LibraryScanListener {
         
         center.addObserverForName(MPMusicPlayerControllerPlaybackStateDidChangeNotification,
             object: nil, queue:nil) { _ in
-                println ("PlaybackStateDidChange")
+                print ("PlaybackStateDidChange")
                 self.updatePlayState()
         }
     }
@@ -412,7 +411,7 @@ class MainController: UIViewController, LibraryScanListener {
         
         let item = MusicPlayer.currentSong
         if item == self.lastSongHandledByViewController {
-            println("updateSongInfo called but song has not changed")
+            print("updateSongInfo called but song has not changed")
             return
         }
             
@@ -420,12 +419,12 @@ class MainController: UIViewController, LibraryScanListener {
             lblArtist.text = "\(item.albumArtist) - \(item.albumTitle)"
             lblSong.text = item.title
             //if it was a liked item, change the state
-            var state = LibraryManager.isLiked(item) ?
+            let state = LibraryManager.isLiked(item) ?
                 LikeState.Liked : LikeState.None
             changeLikeState(state)
     
-            var newImage = (item.artwork != nil) ?
-                item.artwork.imageWithSize(imgSong.frame.size) : nil
+            let newImage = (item.artwork != nil) ?
+                item.artwork!.imageWithSize(imgSong.frame.size) : nil
             transitionSongImage(newImage)
             
             LibraryManager.changePlaylistIndex(item)
@@ -508,8 +507,6 @@ class MainController: UIViewController, LibraryScanListener {
     
     func updateScrubber() {
         let cur : Int = MusicPlayer.playbackTime;
-        let tot : Int = Int(MusicPlayer.currentSong.playbackDuration)
-        //let rem : Int = tot - cur
         scrubber.value = Float(cur)
     }
 

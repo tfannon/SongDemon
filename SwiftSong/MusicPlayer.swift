@@ -77,7 +77,7 @@ class MusicPlayer {
             return;
         }
         //println ("MusicPlayer.playSongsInQueue")
-        var coll = MPMediaItemCollection(items: MP.queuedPlaylist)
+        let coll = MPMediaItemCollection(items: MP.queuedPlaylist!)
         MP.applePlayer.shuffleMode = MPMusicShuffleMode.Off
         MP.applePlayer.setQueueWithItemCollection(coll)
         //now that we have grabbed the items off the queue, nil it out

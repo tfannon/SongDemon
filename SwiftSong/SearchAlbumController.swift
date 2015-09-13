@@ -44,7 +44,8 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
     
     //MARK: helpers for getting song/artist
     func getIndexPathForCurrentSong() -> NSIndexPath {
-        let albums : [String] = songsByAlbum.map { album in return album[0].albumTitle  }
+        //grab the album title from the first song of the album
+        let albums : [String] = songsByAlbum.map { $0[0].albumTitle! }
         let section = albums.find { $0 == MusicPlayer.currentSong!.albumTitle }!
         let row = songsByAlbum[section].find {  $0.title == MusicPlayer.currentSong!.title }!
         let indexPath = NSIndexPath(forRow: row, inSection: section)
@@ -53,7 +54,7 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
     
     //returns true if artist changed
     func artistCheck() {
-        println ("artist check")
+        print ("artist check")
         if previousArtist == nil || selectedArtist != previousArtist {
             self.lblArtist.text = selectedArtist
             //this call returns a tuple,  the first value are the songs grouped by album. 
@@ -95,7 +96,7 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
     
     //header
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        var cell = tableView.dequeueReusableCellWithIdentifier("SearchAlbumTitleCell") as! SearchAlbumTitleCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("SearchAlbumTitleCell") as! SearchAlbumTitleCell
         let album = songsByAlbum[section]
         cell.lblTitle.text = album[0].albumTitle
         cell.imgAlbum.image = album[0].getArtworkWithSize(cell.imgAlbum.frame.size)

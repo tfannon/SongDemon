@@ -82,24 +82,24 @@ class VideoListController : UITableViewController {
         
         let x = self.data[indexPath.row]
         //let snippet = x["snippet"].object!
-        let title = x["snippet"]["title"].string!
+        //let title = x["snippet"]["title"].string!
         let description = x["snippet"]["description"].string!
         let thumb = x["snippet"]["thumbnails"]["default"]["url"].string!
-        var cell = tableView.dequeueReusableCellWithIdentifier("VideoCell", forIndexPath: indexPath) as! VideoCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("VideoCell", forIndexPath: indexPath) as! VideoCell
         cell.lblDescription.text = description
         //clear the image before the async fetch
         if !Utils.inSimulator {
             cell.imageView!.image = nil
         }
         //go fetch the image form the thumb
-        var imgURL = NSURL(string: thumb)!
+        let imgURL = NSURL(string: thumb)!
         let request: NSURLRequest = NSURLRequest(URL: imgURL)
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse?,data: NSData?,error: NSError?) -> Void in
             if error == nil {
-                cell.imgVideo.image = UIImage(data: data)
+                cell.imgVideo.image = UIImage(data: data!)
             }
             else {
-                println("Error: \(error.localizedDescription)")
+                print("Error: \(error!.localizedDescription)")
             }
         })
         return cell

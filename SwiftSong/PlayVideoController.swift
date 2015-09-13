@@ -27,7 +27,7 @@ class PlayVideoController : UIViewController {
     
     func loadVideo(videoUrl : String, artworkUrl : String) {
         if !videoUrl.isEmpty && videoUrl != currentVideoUrl {
-            println("loading video:\(videoUrl)")
+            print("loading video:\(videoUrl)")
             let requestURL = NSURL(string: videoUrl)
             let request = NSURLRequest(URL: requestURL!)
             myWeb.loadRequest(request)
@@ -35,7 +35,7 @@ class PlayVideoController : UIViewController {
             currentArtworkUrl = artworkUrl
         }
         else {
-            println("video already loaded")
+            print("video already loaded")
         }
     }
 }

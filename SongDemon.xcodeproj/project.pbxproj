@@ -8,17 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		6512429F1B065EBE006248A0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6512429E1B065EBE006248A0 /* Constants.swift */; };
-		651242A01B065EBE006248A0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6512429E1B065EBE006248A0 /* Constants.swift */; };
-		651242A11B065F14006248A0 /* ITunesUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B2A5A219529B0E00C3BE89 /* ITunesUtils.swift */; };
-		651242A21B066163006248A0 /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E048811953B1DB0080031C /* MusicPlayer.swift */; };
-		651242A31B069E44006248A0 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6557D9EF1997414600A0A87E /* Extensions.swift */; };
-		651242A41B069E54006248A0 /* TimeStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6557D9ED1997412500A0A87E /* TimeStruct.swift */; };
 		65164C37196CF62400644EF4 /* UIHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65164C36196CF62400644EF4 /* UIHelpers.swift */; };
-		6522D5C019D7739900FAB3AD /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6522D5BF19D7739900FAB3AD /* FacebookSDK.framework */; };
 		6522D5C519D7ACD900FAB3AD /* FacebookUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522D5C419D7ACD900FAB3AD /* FacebookUtils.swift */; };
 		65304F0D196CAB9E00F985D3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65304F0C196CAB9E00F985D3 /* Utils.swift */; };
+		6536DCE11BA517A600085B16 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6536DCE01BA517A600085B16 /* SwiftyJSON.swift */; settings = {ASSET_TAGS = (); }; };
 		6552BFF41A3FED7500E77322 /* blacklab2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6552BFF31A3FED7500E77322 /* blacklab2.png */; };
-		6555712F1AFC8DBF00FF3B2B /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6555712E1AFC8DBF00FF3B2B /* Async.swift */; };
 		6557D9EE1997412500A0A87E /* TimeStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6557D9ED1997412500A0A87E /* TimeStruct.swift */; };
 		6557D9F01997414600A0A87E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6557D9EF1997414600A0A87E /* Extensions.swift */; };
 		65587F4319B400BA00375C98 /* VideoListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65587F4219B400BA00375C98 /* VideoListController.swift */; };
@@ -30,17 +24,8 @@
 		656BA3321A2295DA0042DD47 /* SearchAlbumTrackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656BA3311A2295DA0042DD47 /* SearchAlbumTrackCell.swift */; };
 		6571CCB819CFCFCD00ADF07F /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6571CCB719CFCFCD00ADF07F /* Async.swift */; };
 		657693B919883069008E25E6 /* LyricsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657693B819883069008E25E6 /* LyricsController.swift */; };
-		657F79091AF86D8900EEE85F /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657F79081AF86D8900EEE85F /* InterfaceController.swift */; };
-		657F790B1AF86D8900EEE85F /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657F790A1AF86D8900EEE85F /* NotificationController.swift */; };
-		657F790D1AF86D8900EEE85F /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657F790C1AF86D8900EEE85F /* GlanceController.swift */; };
-		657F790F1AF86D8900EEE85F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 657F790E1AF86D8900EEE85F /* Images.xcassets */; };
-		657F79131AF86D8900EEE85F /* SongDemon WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 657F79121AF86D8900EEE85F /* SongDemon WatchKit App.app */; };
-		657F791B1AF86D8900EEE85F /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 657F79191AF86D8900EEE85F /* Interface.storyboard */; };
-		657F79201AF86D8900EEE85F /* SongDemon WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 657F79031AF86D8900EEE85F /* SongDemon WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		657F792D1AF8777500EEE85F /* jakegiz.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 657F792C1AF8777500EEE85F /* jakegiz.jpg */; };
-		657F792F1AF879DC00EEE85F /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 657F792E1AF879DC00EEE85F /* Media.xcassets */; };
 		65A9112E196B9C49007B59D6 /* Lyrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A9112D196B9C49007B59D6 /* Lyrics.swift */; };
-		65B1CEEF1AF80E9C00FC4C33 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1CEEE1AF80E9C00FC4C33 /* SwiftyJSON.swift */; };
 		65B1CEF11AF81DEF00FC4C33 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1CEF01AF81DEF00FC4C33 /* FileManager.swift */; };
 		65B1ED61198CA3F40024F984 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 65B1ED5F198CA3F40024F984 /* pause.png */; };
 		65B1ED62198CA3F40024F984 /* pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65B1ED60198CA3F40024F984 /* pause@2x.png */; };
@@ -64,14 +49,12 @@
 		65B81BED19C91892005EA079 /* 766-arrow-right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65B81BE919C91892005EA079 /* 766-arrow-right@2x.png */; };
 		65D4F0B619A58CB600FB30A2 /* PlaylistAlbumSongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D4F0B519A58CB600FB30A2 /* PlaylistAlbumSongCell.swift */; };
 		65D4F0B819A59B2100FB30A2 /* PlaylistAlbumTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D4F0B719A59B2100FB30A2 /* PlaylistAlbumTitleCell.swift */; };
-		65D614541A19BAC40046E66C /* LastFMUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D614531A19BAC40046E66C /* LastFMUtils.swift */; };
 		65DC55E4198B3D0000ABE255 /* 1176-bulleted-list.png in Resources */ = {isa = PBXBuildFile; fileRef = 65DC55E2198B3D0000ABE255 /* 1176-bulleted-list.png */; };
 		65DC55E5198B3D0000ABE255 /* 1176-bulleted-list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65DC55E3198B3D0000ABE255 /* 1176-bulleted-list@2x.png */; };
 		65E0487F1953A5D50080031C /* LibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0487E1953A5D50080031C /* LibraryManager.swift */; };
 		65E048821953B1DB0080031C /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E048811953B1DB0080031C /* MusicPlayer.swift */; };
 		65E119F119B4EE2300757B87 /* videotemplate.html in Resources */ = {isa = PBXBuildFile; fileRef = 65E119F019B4EE2300757B87 /* videotemplate.html */; };
 		65E119F319B4F98200757B87 /* PlayVideoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E119F219B4F98200757B87 /* PlayVideoController.swift */; };
-		65E5C03F1B04405700BC955C /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65304F0C196CAB9E00F985D3 /* Utils.swift */; };
 		65E7746C19528D6100DD31DB /* 708-search.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E7743719528D6100DD31DB /* 708-search.png */; };
 		65E7746D19528D6100DD31DB /* 708-search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E7743819528D6100DD31DB /* 708-search@2x.png */; };
 		65E7747A19528D6100DD31DB /* 778-thumbs-down.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E7744519528D6100DD31DB /* 778-thumbs-down.png */; };
@@ -86,7 +69,6 @@
 		65E7749A19528D6100DD31DB /* sliderlabel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E7746519528D6100DD31DB /* sliderlabel@2x.png */; };
 		65E7D2AB1A17F01200C430AF /* GoatwhoreLastFM.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E7D2AA1A17F01200C430AF /* GoatwhoreLastFM.png */; };
 		65E7D2AD1A17F2B200C430AF /* SearchArtistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E7D2AC1A17F2B200C430AF /* SearchArtistCell.swift */; };
-		65EB5FC61B094A9500DE9AD9 /* LibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0487E1953A5D50080031C /* LibraryManager.swift */; };
 		65EFCD1B1A17EA20000ECF93 /* SearchArtistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EFCD1A1A17EA20000ECF93 /* SearchArtistController.swift */; };
 		65F195651A46164700A7539C /* 702-share.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F195621A46164700A7539C /* 702-share.png */; };
 		65F195661A46164700A7539C /* 702-share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F195631A46164700A7539C /* 702-share@2x.png */; };
@@ -106,23 +88,6 @@
 		65FBA09D1A4B7F730037C7E0 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FBA09C1A4B7F730037C7E0 /* SearchController.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		657F79141AF86D8900EEE85F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 65B66DDB195246AB00947DCE /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 657F79111AF86D8900EEE85F;
-			remoteInfo = "SongDemon WatchKit App";
-		};
-		657F791E1AF86D8900EEE85F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 65B66DDB195246AB00947DCE /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 657F79021AF86D8900EEE85F;
-			remoteInfo = "SongDemon WatchKit Extension";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		657F79291AF86D8900EEE85F /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -130,7 +95,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				657F79201AF86D8900EEE85F /* SongDemon WatchKit Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -140,14 +104,12 @@
 /* Begin PBXFileReference section */
 		6512429E1B065EBE006248A0 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		65164C36196CF62400644EF4 /* UIHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHelpers.swift; sourceTree = "<group>"; };
-		6522D5BF19D7739900FAB3AD /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		6522D5C119D773EB00FAB3AD /* SongDemon-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SongDemon-Bridging-Header.h"; path = "../SongDemon-Bridging-Header.h"; sourceTree = "<group>"; };
 		6522D5C419D7ACD900FAB3AD /* FacebookUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookUtils.swift; sourceTree = "<group>"; };
 		652779B41B045DCA004E0C5A /* SongDemon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SongDemon.entitlements; sourceTree = SOURCE_ROOT; };
-		652779B51B045E4A004E0C5A /* SongDemon WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "SongDemon WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		65304F0C196CAB9E00F985D3 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		6536DCE01BA517A600085B16 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		6552BFF31A3FED7500E77322 /* blacklab2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blacklab2.png; sourceTree = "<group>"; };
-		6555712E1AFC8DBF00FF3B2B /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
 		6557D9ED1997412500A0A87E /* TimeStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeStruct.swift; sourceTree = "<group>"; };
 		6557D9EF1997414600A0A87E /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		65587F4219B400BA00375C98 /* VideoListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoListController.swift; sourceTree = "<group>"; };
@@ -159,21 +121,8 @@
 		656BA3311A2295DA0042DD47 /* SearchAlbumTrackCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchAlbumTrackCell.swift; sourceTree = "<group>"; };
 		6571CCB719CFCFCD00ADF07F /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
 		657693B819883069008E25E6 /* LyricsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsController.swift; sourceTree = "<group>"; };
-		657F79031AF86D8900EEE85F /* SongDemon WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "SongDemon WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		657F79061AF86D8900EEE85F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		657F79071AF86D8900EEE85F /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
-		657F79081AF86D8900EEE85F /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
-		657F790A1AF86D8900EEE85F /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
-		657F790C1AF86D8900EEE85F /* GlanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlanceController.swift; sourceTree = "<group>"; };
-		657F790E1AF86D8900EEE85F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		657F79121AF86D8900EEE85F /* SongDemon WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SongDemon WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		657F79181AF86D8900EEE85F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		657F791A1AF86D8900EEE85F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		657F792C1AF8777500EEE85F /* jakegiz.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = jakegiz.jpg; sourceTree = "<group>"; };
-		657F792E1AF879DC00EEE85F /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		65A9112D196B9C49007B59D6 /* Lyrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lyrics.swift; sourceTree = "<group>"; };
-		65B1CEED1AF80E9C00FC4C33 /* SwiftyJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyJSON.h; sourceTree = "<group>"; };
-		65B1CEEE1AF80E9C00FC4C33 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		65B1CEF01AF81DEF00FC4C33 /* FileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		65B1ED5F198CA3F40024F984 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
 		65B1ED60198CA3F40024F984 /* pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause@2x.png"; sourceTree = "<group>"; };
@@ -199,7 +148,6 @@
 		65B81BE919C91892005EA079 /* 766-arrow-right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "766-arrow-right@2x.png"; sourceTree = "<group>"; };
 		65D4F0B519A58CB600FB30A2 /* PlaylistAlbumSongCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistAlbumSongCell.swift; sourceTree = "<group>"; };
 		65D4F0B719A59B2100FB30A2 /* PlaylistAlbumTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistAlbumTitleCell.swift; sourceTree = "<group>"; };
-		65D614531A19BAC40046E66C /* LastFMUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastFMUtils.swift; sourceTree = "<group>"; };
 		65DC55E2198B3D0000ABE255 /* 1176-bulleted-list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1176-bulleted-list.png"; sourceTree = "<group>"; };
 		65DC55E3198B3D0000ABE255 /* 1176-bulleted-list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1176-bulleted-list@2x.png"; sourceTree = "<group>"; };
 		65E0487E1953A5D50080031C /* LibraryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryManager.swift; sourceTree = "<group>"; };
@@ -240,18 +188,10 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		657F79001AF86D8900EEE85F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		65B66DE0195246AB00947DCE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6522D5C019D7739900FAB3AD /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +201,7 @@
 		6571CCB619CFCFB300ADF07F /* 3rdParty */ = {
 			isa = PBXGroup;
 			children = (
+				6536DCE01BA517A600085B16 /* SwiftyJSON.swift */,
 				6571CCB719CFCFCD00ADF07F /* Async.swift */,
 				65FBA0A11A4B7FA60037C7E0 /* Swifty */,
 			);
@@ -304,60 +245,16 @@
 				6557D9EF1997414600A0A87E /* Extensions.swift */,
 				65587F4819B4099A00375C98 /* Videos.swift */,
 				6522D5C419D7ACD900FAB3AD /* FacebookUtils.swift */,
-				65D614531A19BAC40046E66C /* LastFMUtils.swift */,
 				65B1CEF01AF81DEF00FC4C33 /* FileManager.swift */,
 				6512429E1B065EBE006248A0 /* Constants.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
 		};
-		657F79041AF86D8900EEE85F /* SongDemon WatchKit Extension */ = {
-			isa = PBXGroup;
-			children = (
-				652779B51B045E4A004E0C5A /* SongDemon WatchKit Extension.entitlements */,
-				6555712E1AFC8DBF00FF3B2B /* Async.swift */,
-				657F79081AF86D8900EEE85F /* InterfaceController.swift */,
-				657F790A1AF86D8900EEE85F /* NotificationController.swift */,
-				657F790C1AF86D8900EEE85F /* GlanceController.swift */,
-				657F790E1AF86D8900EEE85F /* Images.xcassets */,
-				657F79051AF86D8900EEE85F /* Supporting Files */,
-			);
-			path = "SongDemon WatchKit Extension";
-			sourceTree = "<group>";
-		};
-		657F79051AF86D8900EEE85F /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				657F79061AF86D8900EEE85F /* Info.plist */,
-				657F79071AF86D8900EEE85F /* PushNotificationPayload.apns */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		657F79161AF86D8900EEE85F /* SongDemon WatchKit App */ = {
-			isa = PBXGroup;
-			children = (
-				657F792E1AF879DC00EEE85F /* Media.xcassets */,
-				657F79191AF86D8900EEE85F /* Interface.storyboard */,
-				657F79171AF86D8900EEE85F /* Supporting Files */,
-			);
-			path = "SongDemon WatchKit App";
-			sourceTree = "<group>";
-		};
-		657F79171AF86D8900EEE85F /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				657F79181AF86D8900EEE85F /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		65B66DDA195246AB00947DCE = {
 			isa = PBXGroup;
 			children = (
 				65B66DE5195246AB00947DCE /* SongDemon */,
-				657F79041AF86D8900EEE85F /* SongDemon WatchKit Extension */,
-				657F79161AF86D8900EEE85F /* SongDemon WatchKit App */,
 				65B66DE4195246AB00947DCE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -366,8 +263,6 @@
 			isa = PBXGroup;
 			children = (
 				65B66DE3195246AB00947DCE /* SongDemon.app */,
-				657F79031AF86D8900EEE85F /* SongDemon WatchKit Extension.appex */,
-				657F79121AF86D8900EEE85F /* SongDemon WatchKit App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -377,7 +272,6 @@
 			children = (
 				652779B41B045DCA004E0C5A /* SongDemon.entitlements */,
 				6522D5C119D773EB00FAB3AD /* SongDemon-Bridging-Header.h */,
-				6522D5BF19D7739900FAB3AD /* FacebookSDK.framework */,
 				65B66DE7195246AB00947DCE /* Info.plist */,
 				65B66DEE195246AB00947DCE /* Main.storyboard */,
 				65B66DE8195246AB00947DCE /* AppDelegate.swift */,
@@ -446,8 +340,6 @@
 		65FBA0A11A4B7FA60037C7E0 /* Swifty */ = {
 			isa = PBXGroup;
 			children = (
-				65B1CEED1AF80E9C00FC4C33 /* SwiftyJSON.h */,
-				65B1CEEE1AF80E9C00FC4C33 /* SwiftyJSON.swift */,
 			);
 			name = Swifty;
 			sourceTree = "<group>";
@@ -455,39 +347,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		657F79021AF86D8900EEE85F /* SongDemon WatchKit Extension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 657F79281AF86D8900EEE85F /* Build configuration list for PBXNativeTarget "SongDemon WatchKit Extension" */;
-			buildPhases = (
-				657F78FF1AF86D8900EEE85F /* Sources */,
-				657F79001AF86D8900EEE85F /* Frameworks */,
-				657F79011AF86D8900EEE85F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				657F79151AF86D8900EEE85F /* PBXTargetDependency */,
-			);
-			name = "SongDemon WatchKit Extension";
-			productName = "SongDemon WatchKit Extension";
-			productReference = 657F79031AF86D8900EEE85F /* SongDemon WatchKit Extension.appex */;
-			productType = "com.apple.product-type.watchkit-extension";
-		};
-		657F79111AF86D8900EEE85F /* SongDemon WatchKit App */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 657F79271AF86D8900EEE85F /* Build configuration list for PBXNativeTarget "SongDemon WatchKit App" */;
-			buildPhases = (
-				657F79101AF86D8900EEE85F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "SongDemon WatchKit App";
-			productName = "SongDemon WatchKit App";
-			productReference = 657F79121AF86D8900EEE85F /* SongDemon WatchKit App.app */;
-			productType = "com.apple.product-type.application.watchapp";
-		};
 		65B66DE2195246AB00947DCE /* SongDemon */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 65B66E01195246AB00947DCE /* Build configuration list for PBXNativeTarget "SongDemon" */;
@@ -500,7 +359,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				657F791F1AF86D8900EEE85F /* PBXTargetDependency */,
 			);
 			name = SongDemon;
 			productName = SwiftSong;
@@ -513,21 +371,10 @@
 		65B66DDB195246AB00947DCE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastSwiftMigration = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = crazy8dev;
 				TargetAttributes = {
-					657F79021AF86D8900EEE85F = {
-						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = K9HP5J9XB3;
-						SystemCapabilities = {
-							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
-							};
-						};
-					};
-					657F79111AF86D8900EEE85F = {
-						CreatedOnToolsVersion = 6.3.1;
-					};
 					65B66DE2195246AB00947DCE = {
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = K9HP5J9XB3;
@@ -556,31 +403,11 @@
 			projectRoot = "";
 			targets = (
 				65B66DE2195246AB00947DCE /* SongDemon */,
-				657F79021AF86D8900EEE85F /* SongDemon WatchKit Extension */,
-				657F79111AF86D8900EEE85F /* SongDemon WatchKit App */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		657F79011AF86D8900EEE85F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				657F790F1AF86D8900EEE85F /* Images.xcassets in Resources */,
-				657F79131AF86D8900EEE85F /* SongDemon WatchKit App.app in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		657F79101AF86D8900EEE85F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				657F791B1AF86D8900EEE85F /* Interface.storyboard in Resources */,
-				657F792F1AF879DC00EEE85F /* Media.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		65B66DE1195246AB00947DCE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -638,31 +465,12 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		657F78FF1AF86D8900EEE85F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				65E5C03F1B04405700BC955C /* Utils.swift in Sources */,
-				651242A41B069E54006248A0 /* TimeStruct.swift in Sources */,
-				651242A31B069E44006248A0 /* Extensions.swift in Sources */,
-				6555712F1AFC8DBF00FF3B2B /* Async.swift in Sources */,
-				651242A21B066163006248A0 /* MusicPlayer.swift in Sources */,
-				657F790B1AF86D8900EEE85F /* NotificationController.swift in Sources */,
-				657F79091AF86D8900EEE85F /* InterfaceController.swift in Sources */,
-				657F790D1AF86D8900EEE85F /* GlanceController.swift in Sources */,
-				651242A11B065F14006248A0 /* ITunesUtils.swift in Sources */,
-				651242A01B065EBE006248A0 /* Constants.swift in Sources */,
-				65EB5FC61B094A9500DE9AD9 /* LibraryManager.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		65B66DDF195246AB00947DCE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				65E0487F1953A5D50080031C /* LibraryManager.swift in Sources */,
 				656BA32E1A225E790042DD47 /* SearchAlbumController.swift in Sources */,
-				65D614541A19BAC40046E66C /* LastFMUtils.swift in Sources */,
 				6522D5C519D7ACD900FAB3AD /* FacebookUtils.swift in Sources */,
 				65B1ED86199016930024F984 /* PlaylistCell.swift in Sources */,
 				65F3BABE198749B7009916C1 /* SongInfo.swift in Sources */,
@@ -671,8 +479,8 @@
 				65164C37196CF62400644EF4 /* UIHelpers.swift in Sources */,
 				65587F4319B400BA00375C98 /* VideoListController.swift in Sources */,
 				6557D9EE1997412500A0A87E /* TimeStruct.swift in Sources */,
-				65B1CEEF1AF80E9C00FC4C33 /* SwiftyJSON.swift in Sources */,
 				65E119F319B4F98200757B87 /* PlayVideoController.swift in Sources */,
+				6536DCE11BA517A600085B16 /* SwiftyJSON.swift in Sources */,
 				65B66E7319524A8300947DCE /* MainController.swift in Sources */,
 				65E048821953B1DB0080031C /* MusicPlayer.swift in Sources */,
 				65B2A5A319529B0E00C3BE89 /* ITunesUtils.swift in Sources */,
@@ -698,28 +506,7 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		657F79151AF86D8900EEE85F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 657F79111AF86D8900EEE85F /* SongDemon WatchKit App */;
-			targetProxy = 657F79141AF86D8900EEE85F /* PBXContainerItemProxy */;
-		};
-		657F791F1AF86D8900EEE85F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 657F79021AF86D8900EEE85F /* SongDemon WatchKit Extension */;
-			targetProxy = 657F791E1AF86D8900EEE85F /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
-		657F79191AF86D8900EEE85F /* Interface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				657F791A1AF86D8900EEE85F /* Base */,
-			);
-			name = Interface.storyboard;
-			sourceTree = "<group>";
-		};
 		65B66DEE195246AB00947DCE /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -781,129 +568,10 @@
 				);
 				INFOPLIST_FILE = SwiftSong/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.crazy8dev.songdemon;
 				PRODUCT_NAME = SongDemon;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SongDemon-Bridging-Header.h";
-			};
-			name = Distribution;
-		};
-		657F79211AF86D8900EEE85F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "SongDemon WatchKit Extension/SongDemon WatchKit Extension.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "SongDemon WatchKit Extension/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "";
-				SDKROOT = iphoneos8.3;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		657F79221AF86D8900EEE85F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "SongDemon WatchKit Extension/SongDemon WatchKit Extension.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "SongDemon WatchKit Extension/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "";
-				SDKROOT = iphoneos8.3;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		657F79231AF86D8900EEE85F /* Distribution */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "SongDemon WatchKit Extension/SongDemon WatchKit Extension.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "SongDemon WatchKit Extension/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "";
-				SDKROOT = iphoneos8.3;
-				SKIP_INSTALL = YES;
-			};
-			name = Distribution;
-		};
-		657F79241AF86D8900EEE85F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				IBSC_MODULE = SongDemon_WatchKit_Extension;
-				INFOPLIST_FILE = "SongDemon WatchKit App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
-			};
-			name = Debug;
-		};
-		657F79251AF86D8900EEE85F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_NO_COMMON_BLOCKS = YES;
-				IBSC_MODULE = SongDemon_WatchKit_Extension;
-				INFOPLIST_FILE = "SongDemon WatchKit App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
-			};
-			name = Release;
-		};
-		657F79261AF86D8900EEE85F /* Distribution */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_NO_COMMON_BLOCKS = YES;
-				IBSC_MODULE = SongDemon_WatchKit_Extension;
-				INFOPLIST_FILE = "SongDemon WatchKit App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
 			};
 			name = Distribution;
 		};
@@ -927,6 +595,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -999,6 +668,7 @@
 				);
 				INFOPLIST_FILE = SwiftSong/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.crazy8dev.songdemon;
 				PRODUCT_NAME = SongDemon;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SongDemon-Bridging-Header.h";
@@ -1021,6 +691,7 @@
 				);
 				INFOPLIST_FILE = SwiftSong/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.crazy8dev.songdemon;
 				PRODUCT_NAME = SongDemon;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SongDemon-Bridging-Header.h";
@@ -1030,26 +701,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		657F79271AF86D8900EEE85F /* Build configuration list for PBXNativeTarget "SongDemon WatchKit App" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				657F79241AF86D8900EEE85F /* Debug */,
-				657F79251AF86D8900EEE85F /* Release */,
-				657F79261AF86D8900EEE85F /* Distribution */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		657F79281AF86D8900EEE85F /* Build configuration list for PBXNativeTarget "SongDemon WatchKit Extension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				657F79211AF86D8900EEE85F /* Debug */,
-				657F79221AF86D8900EEE85F /* Release */,
-				657F79231AF86D8900EEE85F /* Distribution */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		65B66DDE195246AB00947DCE /* Build configuration list for PBXProject "SongDemon" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
