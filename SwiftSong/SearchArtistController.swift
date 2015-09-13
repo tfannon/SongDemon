@@ -35,15 +35,16 @@ class SearchArtistController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func getIndexPathForCurrentSong() -> NSIndexPath {
-        let name = MusicPlayer.currentSong!.albumArtist
-        let section = self.collation.sectionForObject(Artist(name: name!), collationStringSelector: "name")
-        let x = sections[section]
-        let names : [String] = x.artists.map { artist in
-            return artist.name
+        if let currentSong = MusicPlayer.currentSong {
+            let name = currentSong.albumArtist!
+            let section = self.collation.sectionForObject(Artist(name: name), collationStringSelector: "name")
+            let x = sections[section]
+            let names: [String] = x.artists.map { $0.name }
+            if let row = names.indexOf(name) {
+                return  NSIndexPath(forRow: row, inSection: section)
+            }
         }
-        let row = names.indexOf(name!)!
-        let indexPath = NSIndexPath(forRow: row, inSection: section)
-        return indexPath
+        return NSIndexPath(forRow: 0, inSection: 0)
     }
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

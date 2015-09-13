@@ -124,6 +124,11 @@ class LibraryManager {
         return LM.ArtistInfos
     }
     
+    static func hasArtist(name: String) -> Bool {
+        return LM.ArtistInfos[name] != nil
+    }
+    
+    
     class var groupedPlaylist : [[MPMediaItem]] {
         return LM.GroupedPlaylist
     }
