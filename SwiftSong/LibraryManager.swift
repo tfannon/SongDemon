@@ -211,7 +211,7 @@ class LibraryManager {
         for x in LM.LibraryScanListeners {
             x.libraryScanComplete()
         }
-        generatePlaylistsForWatch(true)
+        //generatePlaylistsForWatch(true)
     }
     
     //MARK: functions for adding to lists

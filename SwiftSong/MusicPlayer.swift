@@ -13,7 +13,7 @@ class MusicPlayer {
     private var queuedPlaylist : [MPMediaItem]?
     private var songToStartOnQueuedPlaylist : MPMediaItem?
     
-    class var currentSong : MPMediaItem! {
+    class var currentSong : MPMediaItem? {
         get {
             return MP.applePlayer.nowPlayingItem
         }

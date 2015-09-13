@@ -161,18 +161,16 @@ class MainController: UIViewController, LibraryScanListener {
     func handleSearchTapped() {
         let vc = self.storyboard!.instantiateViewControllerWithIdentifier("SearchController") as! SearchController
         //if something is in the player, use this to pre-select the artist in the searchController
-        vc.currentlyPlayingArtist = MusicPlayer.currentSong != nil ? MusicPlayer.currentSong.albumArtist : nil
+        vc.currentlyPlayingArtist = MusicPlayer.currentSong?.albumArtist
         presentViewController(vc, animated: false, completion: nil)
     }
     
     func handleAddToQueueTapped() {
         
-        let isSong = MusicPlayer.currentSong != nil
-        let currentSong = MusicPlayer.currentSong;
-
         let alert = UIAlertController(title: "Choose what to put in your personal queue to listen to later", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
 
-        if isSong {
+        if let currentSong = MusicPlayer.currentSong {
+
             alert.addAction(UIAlertAction(title: "This song", style: .Default, handler: { action in
                 LibraryManager.addToQueued(currentSong)
                 self.displayFadingStatus ("Song added to Play later queue")
@@ -266,7 +264,8 @@ class MainController: UIViewController, LibraryScanListener {
     func postPlaylistSelection(songs: [MPMediaItem]=[MPMediaItem](), message : String? = nil, queue: Bool = false) {
         if songs.count > 0 {
             if queue {
-                let indexOfCurrentSong = songs.indexOf(MusicPlayer.currentSong)!
+                //todo: this is probably going to bomb
+                let indexOfCurrentSong = songs.indexOf(MusicPlayer.currentSong!)!
                 var nextSong : MPMediaItem?
                 //this keeps the position of the song immediately following current song
                 //so the next itemplayingdidchange notification will trigger the queue to
@@ -291,20 +290,25 @@ class MainController: UIViewController, LibraryScanListener {
     
     func handleLikeTapped() {
         //if its already liked this will reset it and unset the selected image
-        if LibraryManager.isLiked(MusicPlayer.currentSong) {
-            LibraryManager.removeFromLiked(MusicPlayer.currentSong)
-            changeLikeState(.None)
-        } else {
-            LibraryManager.addToLiked(MusicPlayer.currentSong)
-            changeLikeState(.Liked)
+        if let currentSong = MusicPlayer.currentSong {
+            if LibraryManager.isLiked(currentSong) {
+                LibraryManager.removeFromLiked(currentSong)
+                changeLikeState(.None)
+            }
+            else {
+                LibraryManager.addToLiked(currentSong)
+                changeLikeState(.Liked)
+            }
         }
     }
     
     func handleDislikeTapped() {
-        LibraryManager.addToDisliked(MusicPlayer.currentSong)
-        MusicPlayer.forward()
-        //reset the liked state
-        changeLikeState(.Disliked)
+        if let currentSong = MusicPlayer.currentSong {
+            LibraryManager.addToDisliked(currentSong)
+            MusicPlayer.forward()
+            //reset the liked state
+            changeLikeState(.Disliked)
+        }
     }
 
     
@@ -382,9 +386,8 @@ class MainController: UIViewController, LibraryScanListener {
        
         center.addObserverForName(MPMusicPlayerControllerNowPlayingItemDidChangeNotification,
             object: nil, queue:nil) { _ in
-                //println("NowPlayingItemDidChange")
-                if MusicPlayer.currentSong != nil {
-                    print("Song changed to \(MusicPlayer.currentSong.songInfo)")
+                if let currentSong = MusicPlayer.currentSong {
+                    print("Song changed to \(currentSong.songInfo)")
                 }
                 MusicPlayer.playSongsInQueue()
                 self.updateSongInfo()
@@ -409,15 +412,14 @@ class MainController: UIViewController, LibraryScanListener {
             return
         }
         
-        let item = MusicPlayer.currentSong
-        if item == self.lastSongHandledByViewController {
-            print("updateSongInfo called but song has not changed")
-            return
-        }
+        if let item = MusicPlayer.currentSong {
+            if item == self.lastSongHandledByViewController {
+                print("updateSongInfo called but song has not changed")
+                return
+            }
             
-        if item != nil {
-            lblArtist.text = "\(item.albumArtist) - \(item.albumTitle)"
-            lblSong.text = item.title
+            lblArtist.text = "\(item.albumArtist!) - \(item.albumTitle!)"
+            lblSong.text = item.title!
             //if it was a liked item, change the state
             let state = LibraryManager.isLiked(item) ?
                 LikeState.Liked : LikeState.None
@@ -481,7 +483,7 @@ class MainController: UIViewController, LibraryScanListener {
             return
         }
         Async.background {
-            Videos.fetchVideosFor(MusicPlayer.currentSong)
+            //Videos.fetchVideosFor(MusicPlayer.currentSong)
         }
     }
     
