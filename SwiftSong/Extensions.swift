@@ -49,6 +49,10 @@ extension MPMediaItem {
     var albumHashKey : String {
         return self.albumPersistentID.description;
     }
+    
+    var artistHashKey: String {
+        return self.artistPersistentID.description
+    }
 }
 
 extension UISlider {

@@ -29,10 +29,11 @@ enum PlayMode {
 }
 
 class ArtistInfo {
-    var artwork : MPMediaItemArtwork?
-    var songs : Int = 0
-    var likedSongs : Int = 0
-    var unplayedSongs : Int = 0
+    //var artwork : MPMediaItemArtwork?
+    var itunesId: String!
+    var songs: Int = 0
+    var likedSongs: Int = 0
+    var unplayedSongs: Int = 0
     var songIds = [String]()
 }
 
@@ -81,35 +82,7 @@ class LibraryManager {
         stopwatch.stop("")
     }
     
-    /*
-    class func serializeCurrentPlaylist() {
-        let playlist : [String] = LM.Playlist.map { $0.hashKey }
-        if playlist.count > 0 {
-            let userDefaults = Utils.AppGroupDefaults;
-            userDefaults.setObject(playlist, forKey: CURRENT_LIST)
-        }
-    }
-    
-    class func deserializePlaylist() {
-        let userDefaults = Utils.AppGroupDefaults;
-        //if there is a current song, see if its in the serialized playlist.
-        if let currentSong = MusicPlayer.currentSong {
-            if let playlist = userDefaults.objectForKey("CurrentPlaylist") as? [String]  {
-                println("Deserialized playlist: \(playlist)")
-                let start = NSDate()
-                var songs = [MPMediaItem]()
-                for x in playlist {
-                    if let song = ITunesUtils.getSongFrom(x) {
-                        songs.append(song)
-                    }
-                }
-                let time = NSDate().timeIntervalSinceDate(start) * 1000
-                println("\(time)ms to fetch \(playlist.count) songs")
-            }
-        }
-    }
-    */
-    
+        
     //MARK: computed class properties
     
     class var songCount : Int {
@@ -169,11 +142,12 @@ class LibraryManager {
                     //grab some artwork
                     if artistInfo == nil {
                         artistInfo = ArtistInfo()
+                        artistInfo?.itunesId = song.artistHashKey
                         LM.ArtistInfos[artist] = artistInfo
                     }
-                    if artistInfo!.artwork == nil {
-                        artistInfo!.artwork = song.artwork
-                    }
+//                    if artistInfo!.artwork == nil {
+//                        artistInfo!.artwork = song.artwork
+//                    }
                     //increment number of songs in library
                     artistInfo!.songs++
 

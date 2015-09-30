@@ -9,6 +9,7 @@
 import UIKit
 import WebKit
 
+//had to put key in plist for NSAppTransportSecurity iOS9.0
 class LyricsController: UIViewController {
 
     var webView = WKWebView()
@@ -16,7 +17,7 @@ class LyricsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        webView.frame=CGRectMake(0, 32, 320, 560-32)
+        webView.frame=CGRectMake(0, 32, self.view.frame.width, self.view.frame.height-32)
         self.view.addSubview(webView)
     }
     

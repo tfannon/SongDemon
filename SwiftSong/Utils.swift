@@ -19,36 +19,19 @@ class Utils {
         }
     }
     
+    //app group has been created in the ios provisioning portal
+    //was using this to communicate with the watch
     static var AppGroupDefaults : NSUserDefaults = {
         let groupId = "group.com.crazy8dev.songdemon"
         let defaults = NSUserDefaults(suiteName: groupId)
         return defaults!
     }()
     
-    func migrateDefaults() {
-        if !Utils.AppGroupDefaults.boolForKey(Utils.MIGRATED) {
-            var oldDefaults = NSUserDefaults.standardUserDefaults().dictionaryRepresentation() 
-            for key in oldDefaults.keys {
-                Utils.AppGroupDefaults.setObject(oldDefaults[key], forKey: key)
-            }
-            Utils.AppGroupDefaults.setBool(true, forKey: Utils.MIGRATED)
-            Utils.AppGroupDefaults.synchronize()
-        }
-    }
-    
     //generates random number between 0 and max-1
     class func random(max : Int) -> Int {
         return Int(arc4random_uniform((UInt32(max))))
     }
-    /*
-    class func shuffle<T>(var list: Array<T>) -> Array<T> {
-        for i in 0..<list.count {
-            let j = Int(arc4random_uniform(UInt32(list.count - i))) + i
-            list.insert(list.removeAtIndex(j), atIndex: i)
-        }
-        return list
-    }
-    */
+   
 }
 
 class Stopwatch {
