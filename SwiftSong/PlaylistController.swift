@@ -131,7 +131,7 @@ class PlaylistController: UITableViewController {
             song = LibraryManager.groupedPlaylist[0][indexPath.row]
             isCurrentSong = LibraryManager.currentPlaylistIndex == indexPath.row
             cell2.lblTitle.text = song.title
-            cell2.lblArtistAlbum.text =  "\(song.albumArtist) - \(song.albumTitle)"
+            cell2.lblArtistAlbum.text =  "\(song.albumArtist!) - \(song.albumTitle!)"
             setIsPlayingImage(cell2, cellIsSelectedSong: isCurrentSong)
             cell2.imgArtwork.image = song.getArtworkWithSize(cell2.imgArtwork.frame.size)
         }
