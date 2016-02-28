@@ -11,7 +11,7 @@
 		65164C37196CF62400644EF4 /* UIHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65164C36196CF62400644EF4 /* UIHelpers.swift */; };
 		6522D5C519D7ACD900FAB3AD /* FacebookUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522D5C419D7ACD900FAB3AD /* FacebookUtils.swift */; };
 		65304F0D196CAB9E00F985D3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65304F0C196CAB9E00F985D3 /* Utils.swift */; };
-		6536DCE11BA517A600085B16 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6536DCE01BA517A600085B16 /* SwiftyJSON.swift */; settings = {ASSET_TAGS = (); }; };
+		6536DCE11BA517A600085B16 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6536DCE01BA517A600085B16 /* SwiftyJSON.swift */; };
 		6552BFF41A3FED7500E77322 /* blacklab2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6552BFF31A3FED7500E77322 /* blacklab2.png */; };
 		6557D9EE1997412500A0A87E /* TimeStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6557D9ED1997412500A0A87E /* TimeStruct.swift */; };
 		6557D9F01997414600A0A87E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6557D9EF1997414600A0A87E /* Extensions.swift */; };
@@ -372,7 +372,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = crazy8dev;
 				TargetAttributes = {
 					65B66DE2195246AB00947DCE = {
