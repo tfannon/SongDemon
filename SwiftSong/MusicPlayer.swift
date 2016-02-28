@@ -76,11 +76,9 @@ class MusicPlayer {
         if MP.queuedPlaylist == nil {
             return;
         }
-        //println ("MusicPlayer.playSongsInQueue")
-        let musicPlayer = MPMusicPlayerController.systemMusicPlayer()
-        musicPlayer.stop()
+        MP.applePlayer.stop()
         let coll = MPMediaItemCollection(items: MP.queuedPlaylist!)
-        musicPlayer.shuffleMode = MPMusicShuffleMode.Off
+        MP.applePlayer.shuffleMode = MPMusicShuffleMode.Off
         MP.applePlayer.setQueueWithItemCollection(coll)
         //now that we have grabbed the items off the queue, nil it out
         MP.queuedPlaylist = nil
@@ -90,7 +88,7 @@ class MusicPlayer {
             playSongInPlaylist(song)
         }
         else {
-            musicPlayer.play()
+            MP.applePlayer.play()
         }
     }
     
