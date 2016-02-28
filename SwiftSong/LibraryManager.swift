@@ -454,10 +454,16 @@ class LibraryManager {
         var albumDic = [String:[MPMediaItem]](minimumCapacity: artistSongs.count)
         //fill up the dictionary with songs
         for x in artistSongs {
-            if albumDic.indexForKey(x.albumTitle!) == nil {
-                albumDic[x.albumTitle!] = [MPMediaItem]()
+            if let albumTitle = x.albumTitle {
+                if albumDic.indexForKey(albumTitle) == nil {
+                    albumDic[albumTitle] = [MPMediaItem]()
+                }
+                albumDic[albumTitle]!.append(x)
+                //print ("adding \(x.songInfo)")
             }
-            albumDic[x.albumTitle!]?.append(x)
+            else {
+                print ("skipping \(x.songInfo) because album title was blank")
+            }
         }
         
         //get them back out by album and insert into array of arrays
@@ -513,9 +519,10 @@ class LibraryManager {
         return randomSongs
     }
     
-    private class func outputSongs(songs: [MPMediaItem]) {
-        for i in songs {
-            print(i.songInfo)
+    internal class func outputSongs(songs: [MPMediaItem]) {
+        var i = 0
+        for s in songs {
+             print ("\(i++)  \(s.songInfo)")
         }
         print("")
     }

@@ -54,8 +54,8 @@ class SearchAlbumController: UIViewController, UITableViewDataSource, UITableVie
     
     //returns true if artist changed
     func artistCheck() {
-        print ("artist check")
         if previousArtist == nil || selectedArtist != previousArtist {
+            print ("switching artist to \(selectedArtist)")
             self.lblArtist.text = selectedArtist
             //this call returns a tuple,  the first value are the songs grouped by album. 
             //the second is a straight list of songs that can be sent to media player

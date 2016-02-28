@@ -8,7 +8,7 @@ class MusicPlayer {
         applePlayer.beginGeneratingPlaybackNotifications()
     }
     
-    private let applePlayer = MPMusicPlayerController()
+    private let applePlayer = MPMusicPlayerController.systemMusicPlayer()
     private var skipToBegin = false
     private var queuedPlaylist : [MPMediaItem]?
     private var songToStartOnQueuedPlaylist : MPMediaItem?
@@ -77,15 +77,20 @@ class MusicPlayer {
             return;
         }
         //println ("MusicPlayer.playSongsInQueue")
+        let musicPlayer = MPMusicPlayerController.systemMusicPlayer()
+        musicPlayer.stop()
         let coll = MPMediaItemCollection(items: MP.queuedPlaylist!)
-        MP.applePlayer.shuffleMode = MPMusicShuffleMode.Off
+        musicPlayer.shuffleMode = MPMusicShuffleMode.Off
         MP.applePlayer.setQueueWithItemCollection(coll)
         //now that we have grabbed the items off the queue, nil it out
         MP.queuedPlaylist = nil
+        
         if let song = MP.songToStartOnQueuedPlaylist {
+            print ("setting selected song: \(song.songInfo)")
             playSongInPlaylist(song)
-        } else {
-            MP.applePlayer.play()
+        }
+        else {
+            musicPlayer.play()
         }
     }
     
