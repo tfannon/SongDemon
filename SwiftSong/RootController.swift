@@ -57,10 +57,6 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         return false
     }
   
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     // MARK: - Page View Controller Data Source
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
@@ -68,7 +64,8 @@ class RootController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     }
 
     func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
-        return currentIndex    }
+        return currentIndex
+    }
 
 
     //get the controller before the current one displayed

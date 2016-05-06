@@ -9,6 +9,7 @@
 import UIKit
 import MediaPlayer
 import AVFoundation
+import RealmSwift
 
 class MainController: UIViewController, LibraryScanListener {
 
@@ -137,25 +138,34 @@ class MainController: UIViewController, LibraryScanListener {
     }
     
     func handleShareTapped() {
-        if Utils.inSimulator {
-            
-            let artworkUrl = "http://ecx.images-amazon.com/images/I/511pkBGfKcL._SL500_AA280_PJStripe-Robin,TopLeft,0,0_.jpg"
-            
-            let videoUrl = "https://www.youtube.com/watch?v=j3G0bRUDR6I"
-            FacebookUtils.post("Goatwhore", title: "In Deathless Tradition", artworkUrl:artworkUrl, videoUrl: videoUrl, callback: { status in
-                    self.lblStatus.text = status
-                })
-            return
-        }
-        if let currentItem = MusicPlayer.currentSong {
-            
-            let videoUrl = RootController.getPlayVideoController().currentVideoUrl
-            let artworkUrl = RootController.getPlayVideoController().currentArtworkUrl
-            
-            FacebookUtils.post(currentItem.artist! ,title: currentItem.title!, artworkUrl:artworkUrl, videoUrl: videoUrl, callback: { status in
-                //set a status
-            })
-        }
+//        if  let song = MusicPlayer.currentSong {
+//            let predicate = MPMediaPropertyPredicate(value: song.hashKey, forProperty: MPMediaItemPropertyPersistentID)
+//            let query = MPMediaQuery(filterPredicates: Set(arrayLiteral: predicate))
+//            for x in query.items! {
+//                print (x)
+//            }
+//        }
+        
+        
+//        if Utils.inSimulator {
+//            
+//            let artworkUrl = "http://ecx.images-amazon.com/images/I/511pkBGfKcL._SL500_AA280_PJStripe-Robin,TopLeft,0,0_.jpg"
+//            
+//            let videoUrl = "https://www.youtube.com/watch?v=j3G0bRUDR6I"
+//            FacebookUtils.post("Goatwhore", title: "In Deathless Tradition", artworkUrl:artworkUrl, videoUrl: videoUrl, callback: { status in
+//                    self.lblStatus.text = status
+//                })
+//            return
+//        }
+//        if let currentItem = MusicPlayer.currentSong {
+//            
+//            let videoUrl = RootController.getPlayVideoController().currentVideoUrl
+//            let artworkUrl = RootController.getPlayVideoController().currentArtworkUrl
+//            
+//            FacebookUtils.post(currentItem.artist! ,title: currentItem.title!, artworkUrl:artworkUrl, videoUrl: videoUrl, callback: { status in
+//                //set a status
+//            })
+//        }
     }
    
     func handleSearchTapped() {
@@ -418,7 +428,7 @@ class MainController: UIViewController, LibraryScanListener {
                 return
             }
             
-            lblArtist.text = "\(item.albumArtist!) - \(item.albumTitle!)"
+            lblArtist.text = "\(item.albumArtist ?? item.artist ?? "") - \(item.albumTitle ?? "")"
             lblSong.text = item.title!
             //if it was a liked item, change the state
             let state = LibraryManager.isLiked(item) ?

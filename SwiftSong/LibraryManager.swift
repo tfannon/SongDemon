@@ -55,7 +55,7 @@ class LibraryManager {
     private final var OtherSongs = Array<String>()
     private var scanned = false
     //playlist 
-    private var Playlist = Array<MPMediaItem>()
+    private var Playlist = [MPMediaItem]()
     private var GroupedPlaylist = [[MPMediaItem]]()
     private var PlaylistIndex = -1
     private var PlaylistMode = PlayMode.None
@@ -190,7 +190,6 @@ class LibraryManager {
         for x in LM.LibraryScanListeners {
             x.libraryScanComplete()
         }
-        //generatePlaylistsForWatch(true)
     }
     
     //MARK: functions for adding to lists
@@ -540,7 +539,7 @@ class LibraryManager {
   
     
     //MARK: functions for generating playlists for watch
-    class func serializePlaylist(serializeKey : String, songs : [MPMediaItem]) {
+    class func serializePlaylist(serializeKey: String, songs : [MPMediaItem]) {
         let ids : [String] = songs.map { song in
             song.hashKey
         }
@@ -562,44 +561,5 @@ class LibraryManager {
         trimList(DISLIKED_LIST, list: &LM.DislikedSongs)
         trimList(QUEUED_LIST, list: &LM.QueuedSongs)
         sw.stop()
-    }
-    
-    class func generatePlaylistsForWatch(regenerate : Bool) {
-        let stopwatch = Stopwatch.start("generatePlaylistsForWatch")
-        let defaults = Utils.AppGroupDefaults
-        if regenerate || defaults.objectForKey(WK_MIX_PLAYLIST) == nil {
-            print("Generating mix for the watch")
-            let mix = LibraryManager.getMixOfSongs(200)
-            LibraryManager.serializePlaylist(WK_MIX_PLAYLIST, songs: mix)
-        }
-        
-        if regenerate || defaults.objectForKey(WK_LIKED_PLAYLIST) == nil {
-            print("Generating liked list for the watch")
-            let liked = LibraryManager.getLikedSongs(200)
-            LibraryManager.serializePlaylist(WK_LIKED_PLAYLIST, songs: liked)
-        }
-        
-        if regenerate || defaults.objectForKey(WK_NEW_PLAYLIST) == nil {
-            print("Generating new list for the watch")
-            let new = LibraryManager.getNewSongs(200)
-            LibraryManager.serializePlaylist(WK_NEW_PLAYLIST, songs: new)
-        }
-        var count = 0
-        if regenerate || defaults.objectForKey(WK_ARTIST_PLAYLIST) == nil {
-            print("Generating artist lists for the watch")
-            for (artist,info) in LM.ArtistInfos {
-                if info.songIds.count > 0 {
-                    count++
-                    defaults.setObject(info.songIds, forKey: artist)
-                }
-            }
-        }
-        stopwatch.stop("\(count) artists written")
-    }
-
-    class func getArtistPlaylistForWatch(artist: String, regenerate : Bool) -> [String] {
-        let songs = LibraryManager.getArtistSongsWithoutSettingPlaylist(artist).1
-        let ids = songs.map { $0.hashKey }
-        return ids
     }
 }
